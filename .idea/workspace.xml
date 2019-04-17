@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5062fca2-4412-4ec4-86b5-8c451d581d30" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/description.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfoenix.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_logging_log4j_log4j_core_2_11_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_kordamp_ikonli_ikonli_fontawesome5_pack_11_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_kordamp_ikonli_ikonli_fontawesome_pack_11_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_kordamp_ikonli_ikonli_javafx_11_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_kordamp_ikonli_ikonli_material_pack_11_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_27_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/mavenServices.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CSCI334.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-console-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-datetime-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-debug-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-errorhandling-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-file-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-file-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-file-l2-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-handle-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-heap-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-interlocked-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-libraryloader-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-localization-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-memory-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-namedpipe-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-processenvironment-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-processthreads-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-processthreads-l1-1-1.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-profile-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-string-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-synch-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-synch-l1-2-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-sysinfo-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-timezone-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-core-util-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-conio-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-convert-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-environment-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-filesystem-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-heap-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-locale-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-math-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-multibyte-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-private-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-process-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-runtime-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-stdio-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-string-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-time-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/api-ms-win-crt-utility-l1-1-0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/concrt140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/decora_sse.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/fxplugins.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/glass.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/glib-lite.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/gstreamer-lite.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/javafx_font.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/javafx_iio.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/jfxmedia.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/jfxwebkit.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/msvcp140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/prism_common.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/prism_d3d.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/prism_sw.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/ucrtbase.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/bin/vcruntime140.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.base/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.base/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.base/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.controls/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.controls/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.fxml/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.fxml/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.graphics/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.graphics/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.graphics/jpeg_fx.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/applecoreaudio.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/glib.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/gstreamer.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.media/libffi.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.swing/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.swing/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/icu_web.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/libxml2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/libxslt.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/legal/javafx.web/webkit.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx/lib/javafx.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/CSCI334/META-INF/CSCI334.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/CSCI334/com/app/main/view/landing/landing_login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/CSCI334/com/app/main/view/landing/landing_wrapper.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/CSCI334/com/app/main/view/main_frame.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/controller/MainFrameViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/controller/landing/LandingLoginViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/AdminModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/CustomerModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/EmployeeModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/SalesModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/ShopModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/StockModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/SupplierModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/model/UserModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/view/landing/landing_login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/view/landing/landing_wrapper.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/main/view/main_frame.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/app/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1">
+              <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/javafx/lib/javafx.graphics.jar!/javafx/scene/Scene.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="258" column="11" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/app/main/view/main_frame.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="20" column="55" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="55" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/app/main/controller/MainFrameViewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Gradle Kotlin DSL Build Script" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+    <option name="SCHEME" value="Project" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>storeName</find>
+      <find>password</find>
+      <find>rasa</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>password</replace>
+      <replace>storeName</replace>
+      <replace>app</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/view/landing/landing_login.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/view/landing/landing_wrapper.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/controller/MainFrameViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/controller/landing/LandingViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/model/ApplicationModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/main/view/main_frame.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.rasa/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/employee/AnEmployeeModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/ApplicationModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/AViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/AChildMainViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/admin/AdminModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/StoreModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/ControllerUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/AChildLandingViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/LandingViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/stock/StockModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/EmployeeModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/AdminModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/model/UserModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/view.main_frame.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/MainFrameViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/view/landing/landing_login.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/LandingLoginViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/controller/LandingWrapperViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/view/landing/landing_wrapper.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/view/main_frame.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/main/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/module-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com.app/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/app/main/view/main_frame.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/app/Main.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-30" />
+    <option name="y" value="90" />
+    <option name="width" value="1565" />
+    <option name="height" value="880" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CSCI334" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CSCI334" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.14910537" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CSCI334\out\production\CSCI334\com\app\main" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.app" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.app.main.controller.landing" />
+      <recent name="com.app.main.controller" />
+      <recent name="com.app.main.model" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CSCI334\src\main\java" />
+      <recent name="D:\CSCI334\src\main\java\com.app\main\view\landing" />
+      <recent name="D:\CSCI334\src\main\java\com.app\main\view" />
+      <recent name="D:\CSCI334\src\main\resources\com.app" />
+      <recent name="D:\CSCI334\src\main\java\com.rasa" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.rasa.Main" />
+      <module name="CSCI334" />
+      <option name="VM_PARAMETERS" value="--module-path=&quot;$ProjectFileDir$\\lib\\javafx\\lib\\&quot; --add-modules ALL-MODULE-PATH --add-modules=javafx.controls,javafx.fxml,de.jensd.fx.fontawesomefx.commons --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/javafx.scene.control=SwingApp --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp --add-exports javafx.graphics/com.sun.javafx.util=SwingApp --add-exports com.rasa/javafx.fxml=SwingApp --add-exports javafx.fxml/com.rasa=SwingApp --add-exports javafx.controls/com.jfoenix=SwingApp --add-exports com.rasa/javafx.controls=SwingApp --add-exports com.rasa/javafx.scene.control.skin=SwingApp --add-exports javafx.base/com.sun.javafx=SwingApp --add-exports javafx.base/com.sun.javafx.collections=SwingApp --add-exports javafx.graphics/com.sun.javafx.css=SwingApp --add-exports javafx.graphics/com.sun.javafx.cursor=SwingApp --add-exports javafx.base/com.sun.javafx.event=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=SwingApp --add-exports javafx.graphics/com.sun.javafx.tk=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control.skin=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.skin=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.app.Main" />
+      <module name="CSCI334" />
+      <option name="VM_PARAMETERS" value="--module-path=&quot;$ProjectFileDir$\\lib\\javafx\\lib\\&quot; --add-modules ALL-MODULE-PATH --add-modules=javafx.controls,javafx.fxml,de.jensd.fx.fontawesomefx.commons --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/javafx.scene.control=SwingApp --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp --add-exports javafx.graphics/com.sun.javafx.util=SwingApp --add-exports com.rasa/javafx.fxml=SwingApp --add-exports javafx.fxml/com.rasa=SwingApp --add-exports javafx.controls/com.jfoenix=SwingApp --add-exports com.rasa/javafx.controls=SwingApp --add-exports com.rasa/javafx.scene.control.skin=SwingApp --add-exports javafx.base/com.sun.javafx=SwingApp --add-exports javafx.base/com.sun.javafx.collections=SwingApp --add-exports javafx.graphics/com.sun.javafx.css=SwingApp --add-exports javafx.graphics/com.sun.javafx.cursor=SwingApp --add-exports javafx.base/com.sun.javafx.event=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=SwingApp --add-exports javafx.graphics/com.sun.javafx.tk=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control.skin=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.skin=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.rasa.Main" />
+      <option name="VM_PARAMETERS" value="--module-path=&quot;$ProjectFileDir$\\lib\\javafx\\lib\\&quot; --add-modules ALL-MODULE-PATH --add-modules=javafx.controls,javafx.fxml,de.jensd.fx.fontawesomefx.commons --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/javafx.scene.control=SwingApp --add-opens javafx.controls/javafx.scene.control.skin=SwingApp --add-opens javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp --add-exports javafx.graphics/com.sun.javafx.util=SwingApp --add-exports com.rasa/javafx.fxml=SwingApp --add-exports javafx.fxml/com.rasa=SwingApp --add-exports javafx.controls/com.jfoenix=SwingApp --add-exports com.rasa/javafx.controls=SwingApp --add-exports com.rasa/javafx.scene.control.skin=SwingApp --add-exports javafx.base/com.sun.javafx=SwingApp --add-exports javafx.base/com.sun.javafx.collections=SwingApp --add-exports javafx.graphics/com.sun.javafx.css=SwingApp --add-exports javafx.graphics/com.sun.javafx.cursor=SwingApp --add-exports javafx.base/com.sun.javafx.event=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=SwingApp --add-exports javafx.graphics/com.sun.javafx.tk=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control.skin=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.skin=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5062fca2-4412-4ec4-86b5-8c451d581d30" name="Default Changelist" comment="" />
+      <created>1555252484740</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1555252484740</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23825504" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32867134" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run Dashboard" order="10" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286119" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CSCI334.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/model/ApplicationModel.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/view/landing/landing_login.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/view/landing/landing_home.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/view/landing/landing_wrapper.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/controller/AChildMainViewController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/controller/MainFrameViewController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/controller/landing/LandingViewController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/view/main_frame.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/main/controller/AViewController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.rasa/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/app/main/TestScript.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/employee/EmployeeModel.java" />
+    <entry file="jar://$PROJECT_DIR$/lib/javafx/lib/javafx.base.jar!/javafx/util/Callback.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/ApplicationModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-35">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com.app/main.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/employee/AnEmployeeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/database/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/StoreModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-361">
+          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/sale/SaleModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/customer/CustomerModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/ControllerUtil.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/supplier/SupplierModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/admin/AdminModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/stock/StockModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/AChildLandingViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/AChildMainViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/AViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/LandingViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="27" column="57" lean-forward="true" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/StockModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/CustomerModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/SupplierModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/SalesModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/EmployeeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="46" lean-forward="true" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/AdminModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/ShopModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/view.main_frame.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/model/UserModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/landing/LandingLoginViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/view/landing/landing_login.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="85" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="85" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/LandingWrapperViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/view/landing/landing_wrapper.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/controller/MainFrameViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/main/view/main_frame.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com.app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#175#176#0" expanded="true" />
+            <element signature="e#191#192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/module-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/app/main/controller/MainFrameViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/javafx/lib/javafx.graphics.jar!/javafx/scene/Scene.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="258" column="11" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="26" column="10" lean-forward="true" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/app/main/view/main_frame.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="55" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CSCI334</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>org.kordamp.ikonli:ikonli-material-pack:11.2.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

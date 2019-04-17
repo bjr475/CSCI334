@@ -3,13 +3,15 @@
 <?import com.jfoenix.controls.*?>
 <?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.app.main.controller.landing.LandingLoginViewController"
-            prefHeight="1080" prefWidth="1920">
+            fx:controller="com.app.main.controller.CatalogueViewController"
+            prefHeight="1080.0" prefWidth="1920.0">
     <top>
         <VBox>
             <padding>
@@ -112,27 +114,25 @@
                         </VBox>
                     </sidePane>
                     <content>
-                        <GridPane alignment="center" hgap="25" vgap="25" style="background: GREY">
-                            <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
-                            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                <graphic>
-                                    <FontIcon iconLiteral="fa-user" iconSize="20"/>
-                                </graphic>
-                            </Label>
-
-                            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-                            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                <graphic>
-                                    <FontIcon iconLiteral="fa-lock" iconSize="20"/>
-                                </graphic>
-                            </Label>
-                            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                            <HBox alignment="center"
-                                  GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                <Button text="Login"/>
-                            </HBox>
-                        </GridPane>
+                        <TableView fx:id="tableView" GridPane.columnIndex="0"
+                                   GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
+                            <columns>
+                                <TableColumn prefWidth="400" text="Item No.">
+                                </TableColumn>
+                                <TableColumn prefWidth="370" text="Name">
+                                </TableColumn>
+                                <TableColumn prefWidth="150" text="Type">
+                                </TableColumn>
+                                <TableColumn prefWidth="150" text="Subject Area">
+                                </TableColumn>
+                                <TableColumn prefWidth="150" text="Retail Price">
+                                </TableColumn>
+                                <TableColumn prefWidth="150" text="Date First Stocked">
+                                </TableColumn>
+                                <TableColumn prefWidth="150" text="Total Stock">
+                                </TableColumn>
+                            </columns>
+                        </TableView>
                     </content>
                 </JFXDrawer>
             </content>

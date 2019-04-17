@@ -1,14 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import org.kordamp.ikonli.javafx.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.app.main.controller.landing.LandingLoginViewController"
             prefHeight="1080" prefWidth="1920">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar>
+                <leftItems>
+                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </StackPane>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+                <rightItems>
+                    <GridPane alignment="center_right" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
+                            </graphic>
+                        </Label>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                            </graphic>
+                        </Label>
+                        <Label GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-filter" iconSize="20"/>
+                            </graphic>
+                        </Label>
+                        <Label GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-search" iconSize="24"/>
+                            </graphic>
+                        </Label>
+                    </GridPane>
+                </rightItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox spacing="20" alignment="BASELINE_LEFT">
+                    <JFXButton fx:id="stock" buttonType="FLAT" prefWidth="450">
+                        <Label>
+                            <graphic>
+                                <FontIcon iconLiteral="fa-book" iconSize="5"/>
+                            </graphic>
+                        </Label>
+                        Catalogue
+                    </JFXButton>
+                    <JFXButton fx:id="customer" buttonType="FLAT" prefWidth="450">
+                        Customers
+                    </JFXButton>
+                    <JFXButton fx:id="sales" buttonType="FLAT" prefWidth="450">
+                        Sales
+                    </JFXButton>
+                    <JFXButton fx:id="suppliers" buttonType="FLAT" prefWidth="450">
+                        Suppliers
+                    </JFXButton>
+                </VBox>
+                <VBox spacing="20" alignment="BOTTOM_LEFT">
+                    <JFXButton fx:id="logout" buttonType="FLAT" prefWidth="450">
+                        <Label>
+                            <graphic>
+                                <FontIcon iconLiteral="fa-book" iconSize="5"/>
+                            </graphic>
+                        </Label>
+                        Logout
+                    </JFXButton>
+                    <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        Settings
+                    </JFXButton>
+                    <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        Help
+                    </JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <JFXDrawer>
+                    <sidePane>
+                        <VBox spacing="20">
 
-</AnchorPane>
+                        </VBox>
+                    </sidePane>
+                    <content>
+                        <GridPane alignment="center" hgap="25" vgap="25" style="background: GREY">
+                            <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-user" iconSize="20"/>
+                                </graphic>
+                            </Label>
+
+                            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-lock" iconSize="20"/>
+                                </graphic>
+                            </Label>
+                            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            <HBox alignment="center"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <Button text="Login"/>
+                            </HBox>
+                        </GridPane>
+                    </content>
+                </JFXDrawer>
+            </content>
+        </JFXDrawer>
+    </center>
+</BorderPane>

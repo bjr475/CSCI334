@@ -2,31 +2,46 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.*?>
+<StackPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.main.controller.MainFrameViewController">
+    <!--    <children>
+            <ToolBar prefHeight="45.0" prefWidth="1920">
+                <items>
+                    <Button mnemonicParsing="false" text="Button"/>
+                </items>
+            </ToolBar>
+            <BorderPane prefHeight="456.0" prefWidth="389.0" AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
+                <left>
+                    <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 
+                    </Pane>
+                </left>
+                <center>
+                    <Pane>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.main.controller.MainFrameViewController">
-    <children>
-        <ToolBar prefHeight="45.0" prefWidth="679.0">
-            <items>
-                <Button mnemonicParsing="false" text="Button"/>
-            </items>
-        </ToolBar>
-        <BorderPane layoutX="283.0" layoutY="112.0" prefHeight="456.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
-            <left>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
-            </left>
-            <right>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <Pane layoutX="31.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0"/>
-                    </children>
-                </Pane>
-            </right>
-        </BorderPane>
-    </children>
-</AnchorPane>
+                    </Pane>
+                </center>
+                <right>
+                    <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <children>
+                            <Pane layoutX="31.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0"/>
+                        </children>
+                    </Pane>
+                </right>
+            </BorderPane>
+        </children>-->
+    <!--    <AnchorPane fx:id="login"></AnchorPane>-->
+
+    <AnchorPane fx:id="catalogue">
+        <fx:include source="catalogue.fxml"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <!--<AnchorPane fx:id="landing_login">
+        <fx:include source="landing/landing_login.fxml"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>-->
+</StackPane>

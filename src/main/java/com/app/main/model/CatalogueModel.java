@@ -1,4 +1,4 @@
 package com.app.main.model;
 
-public class StockModel {
+public class CatalogueModel {
 }

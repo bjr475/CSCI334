@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.app.main.controller.landing.LandingLoginViewController"
+            style="-fx-background-color: #fafafa"
             prefHeight="1080" prefWidth="1920">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar>
+                <leftItems>
+                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </StackPane>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox spacing="20" alignment="BASELINE_LEFT">
+                    <JFXButton fx:id="login" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-sign-in" iconSize="24"/>
+                        </graphic>
+                        Login
+                    </JFXButton>
+                    <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                        </graphic>
+                        Settings
+                    </JFXButton>
+                    <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-question" iconSize="24"/>
+                        </graphic>
+                        Help
+                    </JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <JFXDrawer>
+                    <sidePane>
+                        <VBox spacing="20">
 
-</AnchorPane>
+                        </VBox>
+                    </sidePane>
+                    <content>
+                        <GridPane alignment="center" hgap="25" vgap="25">
+                            <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-user" iconSize="20"/>
+                                </graphic>
+                            </Label>
+
+                            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-lock" iconSize="20"/>
+                                </graphic>
+                            </Label>
+                            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            <HBox alignment="center"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <JFXButton alignment="CENTER" onAction="#handleLogin">
+                                    Login
+                                </JFXButton>
+                            </HBox>
+                            <Text fx:id="messageDisplay"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                        </GridPane>
+                    </content>
+                </JFXDrawer>
+            </content>
+        </JFXDrawer>
+    </center>
+</BorderPane>
+
+

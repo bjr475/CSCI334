@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.*?>
+<?import java.lang.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.main.controller.SuppliersViewController"
+            style="-fx-background-color: white"
+            prefHeight="1080" prefWidth="1920">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar>
+                <leftItems>
+                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </StackPane>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+                <rightItems>
+                    <GridPane alignment="center_right" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <JFXButton fx:id="editButton" buttonType="FLAT"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="addButton" buttonType="FLAT"
+                                   GridPane.columnIndex="1"  GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="filterButton" buttonType="FLAT"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-filter" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="searchButton" buttonType="FLAT"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-search" iconSize="24"/>
+                            </graphic>
+                        </JFXButton>
+                    </GridPane>
+                </rightItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox spacing="20" alignment="BASELINE_LEFT">
+                    <JFXButton fx:id="catalogue" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-book" iconSize="24"/>
+                        </graphic>
+                        Catalogue
+                    </JFXButton>
+                    <JFXButton fx:id="customer" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-address-book" iconSize="24"/>
+                        </graphic>
+                        Customers
+                    </JFXButton>
+                    <JFXButton fx:id="sales" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-shopping-cart" iconSize="24"/>
+                        </graphic>
+                        Sales
+                    </JFXButton>
+                    <JFXButton fx:id="suppliers" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-industry" iconSize="24"/>
+                        </graphic>
+                        Suppliers
+                    </JFXButton>
+                    <JFXButton fx:id="logout" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
+                        </graphic>
+                        Logout
+                    </JFXButton>
+                    <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                        </graphic>
+                        Settings
+                    </JFXButton>
+                    <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-question" iconSize="24"/>
+                        </graphic>
+                        Help
+                    </JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <StackPane>
+                    <BorderPane fx:id="modMenu" layoutX="1920" layoutY="100" prefWidth="500">
+                    <right>
+                        <GridPane alignment="baseline_center" hgap="25" vgap="5">
+                            <style>
+                                -fx-background-color: #fafafa;
+                            </style>
+                            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                            <Text>Add a Supplier</Text>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">Supplier Name</Label>
+                            <TextField fx:id="supplierName" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="8"/>
+
+                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="8" alignment="BASELINE_RIGHT">
+                                <CheckBox fx:id="creditLine"/>
+                                <Label>Existing credit Line</Label>
+                            </HBox>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="3" >Address Line 1</Label>
+                            <TextField fx:id="address1" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="4"/>
+
+                            <Label GridPane.columnIndex="4" GridPane.rowIndex="3" >Address Line 2</Label>
+                            <TextField fx:id="address2" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.columnSpan="4"/>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="5" >Suburb</Label>
+                            <TextField fx:id="suburb" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="4"/>
+
+                            <Label GridPane.columnIndex="4" GridPane.rowIndex="5" >State</Label>
+                            <ChoiceBox fx:id="state" value="State" GridPane.columnIndex="4" GridPane.rowIndex="6" GridPane.columnSpan="2">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="State"/>
+                                        <String fx:value="NSW"/>
+                                        <String fx:value="VIC"/>
+                                        <String fx:value="QLD"/>
+                                        <String fx:value="ACT"/>
+                                        <String fx:value="TAS"/>
+                                        <String fx:value="SA"/>
+                                        <String fx:value="WA"/>
+                                        <String fx:value="NT"/>
+                                    </FXCollections>
+                                </items>
+                            </ChoiceBox>
+
+                            <Label GridPane.columnIndex="6" GridPane.rowIndex="5" >Postcode</Label>
+                            <TextField fx:id="postcode" GridPane.columnIndex="6" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+
+                            <TableView fx:id="contactTable" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="8">
+                                <columns>
+                                    <TableColumn text="Contact Name">
+                                    </TableColumn>
+                                    <TableColumn text="Details">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                            <JFXButton fx:id="addContactButton" buttonType="FLAT"
+                                       GridPane.columnIndex="7"  GridPane.rowIndex="8">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                </graphic>
+                            </JFXButton>
+
+                            <TableView fx:id="itemTable" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="8">
+                                <columns>
+                                    <TableColumn text="Item No.">
+                                    </TableColumn>
+                                    <TableColumn text="Item Name">
+                                    </TableColumn>
+                                    <TableColumn text="Price">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+
+                            <TextField fx:id="itemSearch" promptText="Item Search" GridPane.columnIndex="0" GridPane.rowIndex="11" GridPane.columnSpan="7"/>
+                            <JFXButton fx:id="addItemButton" buttonType="FLAT" alignment="BASELINE_RIGHT"
+                                       GridPane.columnIndex="7"  GridPane.rowIndex="11">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                </graphic>
+                            </JFXButton>
+
+
+                            <!--<VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                <CheckBox fx:id="newCustomer"/>
+                                <Label>New Customer</Label>
+                            </VBox>-->
+
+                            <!--<HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
+
+                            </HBox>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="4">Item List</Label>
+                            <TableView fx:id="itemTable"  GridPane.rowIndex="5" GridPane.columnSpan="5" prefHeight="200" prefWidth="550">
+                                <columns>
+                                    <TableColumn prefWidth="200" text="Item No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Item Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Quantity">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+
+                            <Label GridPane.columnIndex="0" GridPane.rowIndex="6">Item ID</Label>
+                            <TextField fx:id="itemIDView" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2"/>
+                            <Label GridPane.columnIndex="2" GridPane.rowIndex="6">Quantity</Label>
+                            <TextField fx:id="quantityView" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.columnSpan="1"/>
+                            <JFXButton fx:id="addItemButton" buttonType="FLAT"
+                                       GridPane.columnIndex="3"  GridPane.rowIndex="7">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                </graphic>
+                            </JFXButton>
+                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                                <CheckBox fx:id="otherDiscount" />
+                                <Label >Other Discount</Label>
+
+                                <CheckBox fx:id="clubMember" />
+                                <Label >Club Member</Label>
+                            </HBox>
+                            &lt;!&ndash;<CheckBox fx:id="otherDiscount" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                            <Label GridPane.columnIndex="1" GridPane.rowIndex="8">Other Discount</Label>
+
+                            <CheckBox fx:id="clubMember" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                            <Label GridPane.columnIndex="3" GridPane.rowIndex="8">Club Member</Label>&ndash;&gt;
+                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
+
+                                <Text textAlignment="left">Subtotal</Text>
+                                <Text textAlignment="left">Discount</Text>
+                                <Text textAlignment="left">GST</Text>
+                                <Text textAlignment="left">Total</Text>
+                            </VBox>
+                            <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
+                                <Text fx:id="discount" textAlignment="right">-$0.00</Text>
+                                <Text fx:id="GST" textAlignment="right">-$0.00</Text>
+                                <Text fx:id="total" textAlignment="right">$0.00</Text>
+                            </VBox>-->
+                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13" GridPane.columnSpan="8" alignment="center_right">
+                                <JFXButton onAction="#onCancel">
+                                    Cancel
+                                </JFXButton>
+                                <JFXButton >
+                                    Save
+                                </JFXButton>
+                            </HBox>
+
+                        </GridPane>
+                    </right>
+                </BorderPane>
+                    <JFXDrawer fx:id="tableDisplay">
+                        <sidePane>
+                            <VBox spacing="20">
+
+                            </VBox>
+                        </sidePane>
+                        <content>
+                            <TableView fx:id="tableView" GridPane.columnIndex="0"
+                                       GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="200" text="Supplier Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="600" text="Address">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Contact Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="600" text="Details">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                        </content>
+                    </JFXDrawer>
+
+                </StackPane>
+            </content>
+        </JFXDrawer>
+    </center>
+</BorderPane>
+

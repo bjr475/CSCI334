@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.*?>
+<?import java.lang.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.main.controller.CustomersViewController"
+            style="-fx-background-color: white"
+            prefHeight="1080" prefWidth="1920">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar>
+                <leftItems>
+                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </StackPane>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+                <rightItems>
+                    <GridPane alignment="center_right" hgap="25" vgap="0">
+                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                        <JFXButton fx:id="editButton" buttonType="FLAT"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="addButton" buttonType="FLAT"
+                                   GridPane.columnIndex="1"  GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="filterButton" buttonType="FLAT"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-filter" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="searchButton" buttonType="FLAT"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-search" iconSize="24"/>
+                            </graphic>
+                        </JFXButton>
+                    </GridPane>
+                </rightItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox spacing="20" alignment="BASELINE_LEFT">
+                    <JFXButton fx:id="catalogue" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-book" iconSize="24"/>
+                        </graphic>
+                        Catalogue
+                    </JFXButton>
+                    <JFXButton fx:id="customer" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-address-book" iconSize="24"/>
+                        </graphic>
+                        Customers
+                    </JFXButton>
+                    <JFXButton fx:id="sales" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-shopping-cart" iconSize="24"/>
+                        </graphic>
+                        Sales
+                    </JFXButton>
+                    <JFXButton fx:id="suppliers" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-industry" iconSize="24"/>
+                        </graphic>
+                        Suppliers
+                    </JFXButton>
+                    <JFXButton fx:id="logout" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
+                        </graphic>
+                        Logout
+                    </JFXButton>
+                    <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                        </graphic>
+                        Settings
+                    </JFXButton>
+                    <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-question" iconSize="24"/>
+                        </graphic>
+                        Help
+                    </JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <StackPane>
+                    <BorderPane fx:id="modMenu" layoutX="1920" layoutY="100" prefWidth="500">
+                        <center>
+                            <Pane fx:id="outsideMenu">
+
+                            </Pane>
+                        </center>
+                        <right>
+                            <VBox spacing="20">
+                                <style>
+                                    -fx-background-color: #fafafa;
+                                </style>
+                                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                <Text>Add a Customer</Text>
+                                <HBox spacing="20">
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Customer No.</Label>
+                                        <TextField fx:id="customerNo"/>
+                                    </VBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Email</Label>
+                                        <TextField fx:id="customerName"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="20">
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>First Name</Label>
+                                        <TextField fx:id="firstName"/>
+                                    </VBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Last Name</Label>
+                                        <TextField fx:id="lastName"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="20">
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Address Line 1</Label>
+                                        <TextField fx:id="address1"/>
+                                    </VBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Address Line 2</Label>
+                                        <TextField fx:id="address2"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="20">
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <Label>Suburb</Label>
+                                        <TextField fx:id="suburb"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Label>State</Label>
+                                        <ChoiceBox fx:id="state" value="State">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="State"/>
+                                                    <String fx:value="NSW"/>
+                                                    <String fx:value="VIC"/>
+                                                    <String fx:value="QLD"/>
+                                                    <String fx:value="ACT"/>
+                                                    <String fx:value="TAS"/>
+                                                    <String fx:value="SA"/>
+                                                    <String fx:value="WA"/>
+                                                    <String fx:value="NT"/>
+                                                </FXCollections>
+                                            </items>
+                                        </ChoiceBox>
+                                    </VBox>
+                                    <VBox>
+                                        <Label>Postcode</Label>
+                                        <TextField fx:id="postcode"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="50">
+                                    <VBox spacing="10">
+                                        <Label>Existing credit line</Label>
+                                        <HBox spacing="20">
+                                            <JFXRadioButton fx:id="creditLineT">Yes</JFXRadioButton>
+                                            <JFXRadioButton fx:id="creditLineF">No</JFXRadioButton>
+                                        </HBox>
+                                        <TextField fx:id="creditLine" disable="true">$</TextField>
+                                    </VBox>
+                                    <VBox spacing="10">
+                                        <Label>Club Member</Label>
+                                        <HBox spacing="20">
+                                            <JFXRadioButton fx:id="clubMemberT">Yes</JFXRadioButton>
+                                            <JFXRadioButton fx:id="clubMemberF">No</JFXRadioButton>
+                                        </HBox>
+                                    </VBox>
+                                    <!--<VBox spacing="10">
+                                        <Label>Existing credit line</Label>
+                                        <HBox spacing="20" alignment="TOP_RIGHT">
+                                            <fx:define>
+                                                <ToggleGroup fx:id="creditLine"/>
+                                            </fx:define>
+                                            <children>
+                                                <JFXRadioButton text="Yes" toggleGroup="$creditLine"/>
+                                                <JFXRadioButton text="No" toggleGroup="$creditLine"/>
+                                            </children>
+                                        </HBox>
+                                    </VBox>
+                                    <VBox spacing="10">
+                                        <Label>Club Member</Label>
+                                        <HBox spacing="20" alignment="TOP_RIGHT">
+                                            <fx:define>
+                                                <ToggleGroup fx:id="clubMember"/>
+                                            </fx:define>
+                                            <children>
+                                                <JFXRadioButton text="Yes" toggleGroup="$creditLine"/>
+                                                <JFXRadioButton text="No" toggleGroup="$creditLine"/>
+                                            </children>
+                                        </HBox>
+                                    </VBox>-->
+                                </HBox>
+                                <HBox>
+                                    <VBox spacing="10">
+                                        <Label textAlignment="LEFT">Interests</Label>
+                                        <HBox spacing="50">
+                                            <VBox spacing="10">
+                                                <JFXCheckBox fx:id="train" GridPane.columnIndex="0" GridPane.rowIndex="12">Train</JFXCheckBox>
+                                                <JFXCheckBox fx:id="car" GridPane.columnIndex="1" GridPane.rowIndex="12">Car</JFXCheckBox>
+                                                <JFXCheckBox fx:id="other" GridPane.columnIndex="4" GridPane.rowIndex="12">Other</JFXCheckBox>
+                                            </VBox>
+                                            <VBox spacing="10">
+                                                <JFXCheckBox fx:id="boat" GridPane.columnIndex="0" GridPane.rowIndex="13">Boat</JFXCheckBox>
+                                                <JFXCheckBox fx:id="airplane" GridPane.columnIndex="1" GridPane.rowIndex="13">Airplane</JFXCheckBox>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                </HBox>
+                                <HBox>
+                                    <VBox spacing="10">
+                                        <Label textAlignment="LEFT">Model Type</Label>
+                                        <HBox spacing="50">
+                                            <VBox spacing="10">
+                                                <JFXCheckBox fx:id="displayModel" GridPane.columnIndex="0" GridPane.rowIndex="16">Display</JFXCheckBox>
+                                                <JFXCheckBox fx:id="staticModel" GridPane.columnIndex="1" GridPane.rowIndex="16">Static</JFXCheckBox>
+                                            </VBox>
+                                            <VBox>
+                                                <JFXCheckBox fx:id="workingModel" GridPane.columnIndex="0" GridPane.rowIndex="17">Working</JFXCheckBox>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                </HBox>
+
+
+                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="20" GridPane.columnSpan="8" alignment="center_right">
+                                    <Text fx:id="displayResponse"></Text>
+                                    <JFXButton onAction="#onCancel">
+                                        Cancel
+                                    </JFXButton>
+                                    <JFXButton onAction="#onSave">
+                                        Save
+                                    </JFXButton>
+                                </HBox>
+                            </VBox>
+                            <!--<GridPane alignment="baseline_center" hgap="25" vgap="5">
+                                <style>
+                                    -fx-background-color: #fafafa;
+                                </style>
+                                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                <Text>Add a Supplier</Text>
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1">Customer No.</Label>
+                                <TextField fx:id="customerNo" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4"/>
+                                <Label GridPane.columnIndex="4" GridPane.rowIndex="1">Email</Label>
+                                <TextField fx:id="customerName" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.columnSpan="4"/>
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="3">First Name</Label>
+                                <TextField fx:id="firstName" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="4"/>
+                                <Label GridPane.columnIndex="4" GridPane.rowIndex="3">Last Name</Label>
+                                <TextField fx:id="lastName" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.columnSpan="4"/>
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="5">Customer No.</Label>
+                                <TextField fx:id="address1" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="4"/>
+                                <Label GridPane.columnIndex="4" GridPane.rowIndex="5">Email</Label>
+                                <TextField fx:id="address2" GridPane.columnIndex="4" GridPane.rowIndex="6" GridPane.columnSpan="4"/>
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="7">Suburb</Label>
+                                <TextField fx:id="suburb" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="4"/>
+                                <Label GridPane.columnIndex="4" GridPane.rowIndex="7">State</Label>
+                                &lt;!&ndash;<TextField fx:id="state" GridPane.columnIndex="4" GridPane.rowIndex="8" GridPane.columnSpan="2"/>&ndash;&gt;
+                                <ChoiceBox fx:id="state" value="State" GridPane.columnIndex="4" GridPane.rowIndex="8" GridPane.columnSpan="2">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="State"/>
+                                            <String fx:value="NSW"/>
+                                            <String fx:value="VIC"/>
+                                            <String fx:value="QLD"/>
+                                            <String fx:value="ACT"/>
+                                            <String fx:value="TAS"/>
+                                            <String fx:value="SA"/>
+                                            <String fx:value="WA"/>
+                                            <String fx:value="NT"/>
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                                <Label GridPane.columnIndex="6" GridPane.rowIndex="7">Postcode</Label>
+                                <TextField fx:id="postcode" GridPane.columnIndex="6" GridPane.rowIndex="8" GridPane.columnSpan="2"/>
+                                &lt;!&ndash;<VBox>
+                                    <Label>Existing credit line:</Label>
+                                    <HBox spacing="20" alignment="TOP_RIGHT">
+                                        <fx:define>
+                                            <ToggleGroup fx:id="creditLine"/>
+                                        </fx:define>
+                                        <children>
+                                            <RadioButton text="Yes" toggleGroup="$creditLine"/>
+                                            <RadioButton text="No" toggleGroup="$creditLine"/>
+                                        </children>
+                                    </HBox>
+                                </VBox>&ndash;&gt;
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="9">Existing credit line</Label>
+                                <HBox spacing="50" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                                    <JFXRadioButton fx:id="creditLineT">Yes</JFXRadioButton>
+                                    <JFXRadioButton fx:id="creditLineF">No</JFXRadioButton>
+                                </HBox>
+
+                                <Label GridPane.columnIndex="4" GridPane.rowIndex="9">Club Member</Label>
+                                <HBox spacing="50" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                                    <JFXRadioButton fx:id="clubMemberT">Yes</JFXRadioButton>
+                                    <JFXRadioButton fx:id="clubMemberF">No</JFXRadioButton>
+                                </HBox>
+
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="11">Interests</Label>
+                                <JFXCheckBox fx:id="train" GridPane.columnIndex="0" GridPane.rowIndex="12">Train</JFXCheckBox>
+                                <JFXCheckBox fx:id="car" GridPane.columnIndex="1" GridPane.rowIndex="12">Car</JFXCheckBox>
+                                <JFXCheckBox fx:id="other" GridPane.columnIndex="4" GridPane.rowIndex="12">Other</JFXCheckBox>
+                                <JFXCheckBox fx:id="boat" GridPane.columnIndex="0" GridPane.rowIndex="13">Boat</JFXCheckBox>
+                                <JFXCheckBox fx:id="airplane" GridPane.columnIndex="1" GridPane.rowIndex="13">Airplane</JFXCheckBox>
+
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="15">Model Type</Label>
+                                <JFXCheckBox fx:id="displayModel" GridPane.columnIndex="0" GridPane.rowIndex="16">Display</JFXCheckBox>
+                                <JFXCheckBox fx:id="staticModel" GridPane.columnIndex="1" GridPane.rowIndex="16">Static</JFXCheckBox>
+                                <JFXCheckBox fx:id="workingModel" GridPane.columnIndex="0" GridPane.rowIndex="17">Working</JFXCheckBox>
+
+                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="20" GridPane.columnSpan="8" alignment="center_right">
+                                    <Text fx:id="displayResponse"></Text>
+                                    <JFXButton onAction="#onCancel">
+                                        Cancel
+                                    </JFXButton>
+                                    <JFXButton onAction="#onSave">
+                                        Save
+                                    </JFXButton>
+                                </HBox>
+                            </GridPane>-->
+                        </right>
+                    </BorderPane>
+                    <JFXDrawer fx:id="tableDisplay">
+                        <sidePane>
+                            <VBox spacing="20">
+
+                            </VBox>
+                        </sidePane>
+                        <content>
+                            <TableView fx:id="tableView" GridPane.columnIndex="0"
+                                       GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="100" text="Customer No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="300" text="Email">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="First Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Last Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="300" text="Address">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="170" text="Suburb">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="50" text="State">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Postcode">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Credit Line">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Club Member">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                        </content>
+                    </JFXDrawer>
+                </StackPane>
+            </content>
+        </JFXDrawer>
+    </center>
+</BorderPane>

@@ -1,0 +1,6 @@
+.action-button {
+    -fx-background-color: #002171;
+    -fx-text-fill: white;
+    -jfx-button-type: RAISED;
+}
+

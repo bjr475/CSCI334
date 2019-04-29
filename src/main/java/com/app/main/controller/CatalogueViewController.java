@@ -63,25 +63,11 @@ public class CatalogueViewController extends AChildMainViewController {
 
         tableDisplay.toFront();
 
-        /*editButton.setOnMouseClicked(event -> modMenu.toFront());
+        editButton.setOnMouseClicked(event -> modMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
         tableView.setOnMouseClicked(event -> modMenu.toFront());
         outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
 
-        mainDrawer.setOnDrawerOpening(e -> {
-            final Transition transition = mainMenu.getAnimation();
-            transition.setRate(1);
-            transition.play();
-        });
-        mainDrawer.setOnDrawerClosing(event -> {
-            final Transition transition = mainMenu.getAnimation();
-            transition.setRate(-1);
-            transition.play();
-        });
-        mainMenu.setOnMouseClicked(event -> {
-            if (mainDrawer.isClosed() || mainDrawer.isClosing()) mainDrawer.open();
-            else mainDrawer.close();
-        });*/
     }
 
     @FXML

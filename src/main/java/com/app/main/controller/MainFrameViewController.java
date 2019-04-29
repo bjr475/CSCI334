@@ -39,7 +39,7 @@ public class MainFrameViewController extends AViewController {
         salesController.setOwner(this);
         suppliersController.setOwner(this);
 
-        /*catalogueController.customer.setOnMouseClicked(event -> customersPane.toFront());
+        catalogueController.customer.setOnMouseClicked(event -> customersPane.toFront());
         catalogueController.sales.setOnMouseClicked(event -> salesPane.toFront());
         catalogueController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
 
@@ -49,7 +49,7 @@ public class MainFrameViewController extends AViewController {
 
         suppliersController.catalogue.setOnMouseClicked(event -> cataloguePane.toFront());
         suppliersController.customer.setOnMouseClicked(event -> customersPane.toFront());
-        suppliersController.sales.setOnMouseClicked(event -> salesPane.toFront());*/
+        suppliersController.sales.setOnMouseClicked(event -> salesPane.toFront());
     }
 
 }

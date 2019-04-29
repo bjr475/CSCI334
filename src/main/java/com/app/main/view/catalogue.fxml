@@ -349,7 +349,7 @@
                                                 <TextField fx:id="price"/>
                                             </VBox>
                                             <VBox alignment="BOTTOM_RIGHT">
-                                                <JFXButton fx:id="addSupplierButton" onAction="addNewSupplier(addSupplierDialog, catalogueMainPane, newSupplierCheck)" buttonType="FLAT">
+                                                <JFXButton fx:id="addSupplierButton" onAction="addNewDialog(addSupplierDialog, catalogueMainPane, newSupplierCheck)" buttonType="FLAT">
                                                     <graphic>
                                                         <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                                     </graphic>

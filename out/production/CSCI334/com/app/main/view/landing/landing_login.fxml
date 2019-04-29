@@ -5,10 +5,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.app.main.controller.landing.LandingLoginViewController"
+            style="-fx-background-color: #fafafa"
             prefHeight="1080" prefWidth="1920">
     <top>
         <VBox>
@@ -37,31 +39,6 @@
                         </Label>
                     </GridPane>
                 </leftItems>
-                <rightItems>
-                    <GridPane alignment="center_right" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
-                        <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
-                            </graphic>
-                        </Label>
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                            </graphic>
-                        </Label>
-                        <Label GridPane.columnIndex="2" GridPane.rowIndex="0">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-filter" iconSize="20"/>
-                            </graphic>
-                        </Label>
-                        <Label GridPane.columnIndex="3" GridPane.rowIndex="0">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-search" iconSize="24"/>
-                            </graphic>
-                        </Label>
-                    </GridPane>
-                </rightItems>
             </JFXToolbar>
         </VBox>
     </top>
@@ -69,37 +46,22 @@
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
                 <VBox spacing="20" alignment="BASELINE_LEFT">
-                    <JFXButton fx:id="stock" buttonType="FLAT" prefWidth="450">
-                        <Label>
-                            <graphic>
-                                <FontIcon iconLiteral="fa-book" iconSize="5"/>
-                            </graphic>
-                        </Label>
-                        Catalogue
-                    </JFXButton>
-                    <JFXButton fx:id="customer" buttonType="FLAT" prefWidth="450">
-                        Customers
-                    </JFXButton>
-                    <JFXButton fx:id="sales" buttonType="FLAT" prefWidth="450">
-                        Sales
-                    </JFXButton>
-                    <JFXButton fx:id="suppliers" buttonType="FLAT" prefWidth="450">
-                        Suppliers
-                    </JFXButton>
-                </VBox>
-                <VBox spacing="20" alignment="BOTTOM_LEFT">
-                    <JFXButton fx:id="logout" buttonType="FLAT" prefWidth="450">
-                        <Label>
-                            <graphic>
-                                <FontIcon iconLiteral="fa-book" iconSize="5"/>
-                            </graphic>
-                        </Label>
-                        Logout
+                    <JFXButton fx:id="login" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-sign-in" iconSize="24"/>
+                        </graphic>
+                        Login
                     </JFXButton>
                     <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                        </graphic>
                         Settings
                     </JFXButton>
                     <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-question" iconSize="24"/>
+                        </graphic>
                         Help
                     </JFXButton>
                 </VBox>
@@ -112,7 +74,7 @@
                         </VBox>
                     </sidePane>
                     <content>
-                        <GridPane alignment="center" hgap="25" vgap="25" style="background: GREY">
+                        <GridPane alignment="center" hgap="25" vgap="25">
                             <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
                             <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
                                 <graphic>
@@ -120,7 +82,7 @@
                                 </graphic>
                             </Label>
 
-                            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
                             <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
                                 <graphic>
@@ -130,8 +92,12 @@
                             <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                             <HBox alignment="center"
                                   GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                <Button text="Login"/>
+                                <JFXButton alignment="CENTER" onAction="#handleLogin">
+                                    Login
+                                </JFXButton>
                             </HBox>
+                            <Text fx:id="messageDisplay"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                         </GridPane>
                     </content>
                 </JFXDrawer>
@@ -139,3 +105,5 @@
         </JFXDrawer>
     </center>
 </BorderPane>
+
+

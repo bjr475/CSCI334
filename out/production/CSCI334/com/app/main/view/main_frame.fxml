@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 <StackPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.main.controller.MainFrameViewController">
     <!--    <children>
@@ -33,14 +32,33 @@
             </BorderPane>
         </children>-->
     <!--    <AnchorPane fx:id="login"></AnchorPane>-->
-
-    <AnchorPane fx:id="catalogue">
-        <fx:include source="catalogue.fxml"
+    <AnchorPane fx:id="settingsPane">
+    <fx:include source="settings.fxml" fx:id="settings"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <AnchorPane fx:id="suppliersPane">
+        <fx:include source="suppliers.fxml" fx:id="suppliers"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>
-    <!--<AnchorPane fx:id="landing_login">
-        <fx:include source="landing/landing_login.fxml"
+    <AnchorPane fx:id="salesPane">
+        <fx:include source="sales.fxml" fx:id="sales"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <AnchorPane fx:id="customersPane">
+        <fx:include source="customers.fxml" fx:id="customers"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <AnchorPane fx:id="cataloguePane">
+        <fx:include source="catalogue.fxml" fx:id="catalogue"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <!--<AnchorPane fx:id="landingLoginPane">
+        <fx:include source="landing/landing_login.fxml" fx:id="landing"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>-->

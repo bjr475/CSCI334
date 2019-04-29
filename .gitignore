@@ -21,3 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+!/lib/ikonli/*.jar
+!/lib/javafaker/*.jar
+!/lib/javafx/lib/*.jar
+!/lib/jetbrains/*.jar
+!/lib/jfoenix/*.jar
+!/lib/junit/*.jar
+!/lib/log4j/*.jar
+!/lib/sqlite/*.jar

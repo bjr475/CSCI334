@@ -9,13 +9,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="ikonli" level="project" />
+    <orderEntry type="library" name="javafaker" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
-    <orderEntry type="library" name="org.kordamp.ikonli:ikonli-material-pack:11.2.0" level="project" />
-    <orderEntry type="library" name="org.apache.logging.log4j:log4j-core:2.11.2" level="project" />
-    <orderEntry type="library" name="org.kordamp.ikonli:ikonli-fontawesome-pack:11.2.0" level="project" />
-    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.27.2.1" level="project" />
-    <orderEntry type="library" name="org.kordamp.ikonli:ikonli-fontawesome5-pack:11.2.0" level="project" />
-    <orderEntry type="library" name="jfoenix" level="project" />
-    <orderEntry type="library" name="org.kordamp.ikonli:ikonli-javafx:11.2.0" level="project" />
+    <orderEntry type="library" name="annotations" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.8-javadoc" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="log4j" level="project" />
+    <orderEntry type="library" name="sqlite" level="project" />
   </component>
 </module>

@@ -13,6 +13,7 @@ public abstract class UserModel {
     private StringProperty lastName;
     private StringProperty mobile;
     private StringProperty password;
+    private StringProperty permissions;
 
     public UserModel() {
         userID = "UNKNOWN";
@@ -22,10 +23,11 @@ public abstract class UserModel {
         lastName = new SimpleStringProperty();
         mobile = new SimpleStringProperty();
         password = new SimpleStringProperty();
+        permissions = new SimpleStringProperty();
     }
 
     public UserModel(String userID, Date createdTime, String email, String firstName, String lastName, String mobile,
-                     String password) {
+                     String password, String permissions) {
         this.userID = userID;
         this.createdTime = createdTime;
         this.email = new SimpleStringProperty(email);
@@ -33,6 +35,7 @@ public abstract class UserModel {
         this.lastName = new SimpleStringProperty(lastName);
         this.mobile = new SimpleStringProperty(mobile);
         this.password = new SimpleStringProperty(password);
+        this.permissions = new SimpleStringProperty();
     }
 
     public String getUserID() {
@@ -105,6 +108,18 @@ public abstract class UserModel {
 
     public StringProperty passwordProperty() {
         return password;
+    }
+
+    public String getPermissions() {
+        return permissions.get();
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions.set(permissions);
+    }
+
+    public StringProperty permissionsProperty() {
+        return permissions;
     }
 
 }

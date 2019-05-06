@@ -217,7 +217,6 @@
                 <StackPane fx:id="catalogueStackPane">
                     <BorderPane fx:id="viewMenu">
                         <center>
-                          
                                 <TableView fx:id="viewTableView"
                                            prefWidth="1920" prefHeight="1080">
                                     <columns>
@@ -479,8 +478,25 @@
 
                     <BorderPane fx:id="modMenu">
                         <center>
-                            <Pane fx:id="outsideMenu">
-                            </Pane>
+                            <TableView fx:id="modTableView" onMouseClicked="#handleClickTableView"
+                                       prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="400" text="Item No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="370" text="Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Type">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Subject Area">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Retail Price">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Date First Stocked">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Total Stock">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
                         </center>
                         <right>
                             <ScrollPane fx:id="modMenuScroll">

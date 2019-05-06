@@ -37,7 +37,7 @@ public class CustomersViewController extends AChildMainViewController{
     public SalesViewController salesController;
 
     @FXML
-    public BorderPane modMenu;
+    public BorderPane modMenu, viewMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -71,7 +71,7 @@ public class CustomersViewController extends AChildMainViewController{
         clubMemberF.setToggleGroup(clubMember);
 
         addButton.setOnMouseClicked(event -> modMenu.toFront());
-        tableView.setOnMouseClicked(event -> modMenu.toFront());
+        tableView.setOnMouseClicked(event -> viewMenu.toFront());
         outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
 
     }

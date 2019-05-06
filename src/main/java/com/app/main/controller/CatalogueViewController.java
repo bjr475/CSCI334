@@ -71,7 +71,6 @@ public class CatalogueViewController extends AChildMainViewController {
         editButton.setOnMouseClicked(event -> viewMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
-        outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
 
     }
 

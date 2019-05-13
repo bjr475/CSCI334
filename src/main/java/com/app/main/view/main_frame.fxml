@@ -37,7 +37,11 @@
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>
-
+    <AnchorPane fx:id="suppliersPane">
+        <fx:include source="employee/suppliers.fxml" fx:id="suppliers"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
     <AnchorPane fx:id="salesPane">
         <fx:include source="employee/sales.fxml" fx:id="sales"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -50,11 +54,6 @@
     </AnchorPane>
     <AnchorPane fx:id="cataloguePane">
         <fx:include source="employee/catalogue.fxml" fx:id="catalogue"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="suppliersPane">
-        <fx:include source="employee/suppliers.fxml" fx:id="suppliers"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>

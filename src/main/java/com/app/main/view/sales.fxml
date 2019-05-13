@@ -280,6 +280,23 @@
                         </right>
                     </BorderPane>
                     <BorderPane fx:id="viewMenu">
+                        <center>
+                            <TableView fx:id="viewTableView" GridPane.columnIndex="0"
+                                       GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="200" text="Sale No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Customer No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Club Member">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Discount">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Total">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                        </center>
                         <right>
                             <GridPane alignment="baseline_center" hgap="25" vgap="5">
                                 <style>

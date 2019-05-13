@@ -123,6 +123,44 @@
             </sidePane>
             <content>
                 <StackPane>
+                    <BorderPane fx:id="viewMenu">
+                        <center>
+                            <TableView fx:id="viewTableView" GridPane.columnIndex="0"
+                                       GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="100" text="Customer No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="300" text="Email">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="First Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Last Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="300" text="Address">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="170" text="Suburb">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="50" text="State">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Postcode">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Credit Line">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Club Member">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                        </center>
+                        <right>
+                            <ScrollPane fx:id="viewMenuScroll">
+                                <content>
+                                    <VBox spacing="20">
+
+                                    </VBox>
+                                </content>
+                            </ScrollPane>
+                        </right>
+                    </BorderPane>
                     <BorderPane fx:id="modMenu" layoutX="1920" layoutY="100" prefWidth="500">
                         <center>
                             <Pane fx:id="outsideMenu">

@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import java.math.BigInteger;
 
 public class CatalogueModel {
+    private String itemID;
     private StringProperty itemName;
     private StringProperty modelType;
     private StringProperty subjectArea;
@@ -17,6 +18,7 @@ public class CatalogueModel {
     private MapProperty<SupplierModel, BigInteger> supplierItems;
 
     public CatalogueModel() {
+        itemID = "UNKNOWN";
         itemName = new SimpleStringProperty();
         modelType = new SimpleStringProperty("Model Type");
         subjectArea = new SimpleStringProperty("Subject Area");
@@ -28,12 +30,21 @@ public class CatalogueModel {
     }
 
     public void reset() {
+        //itemID.setValue(generateID());
         itemName.setValue("");
         modelType.setValue("Model Type");
         subjectArea.setValue("Subject Area");
         retailPrice.setValue("");
         dateFirstStocked.setValue("");
         description.setValue("");
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String userID) {
+        this.itemID = itemID;
     }
 
     public String getitemName() {

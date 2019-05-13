@@ -5,7 +5,9 @@ import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -33,7 +35,7 @@ public class CatalogueViewController extends AChildMainViewController {
     public JFXButton editButton, addButton, filterButton, searchButton;
 
     @FXML
-    public BorderPane modMenu;
+    public BorderPane modMenu, viewMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -53,6 +55,9 @@ public class CatalogueViewController extends AChildMainViewController {
     @FXML
     public JFXDialog addSupplierDialog;
 
+    @FXML
+    public ScrollPane modMenuScroll;
+
     public CatalogueViewController(ApplicationModel model) {
         super(model);
     }
@@ -63,10 +68,9 @@ public class CatalogueViewController extends AChildMainViewController {
 
         tableDisplay.toFront();
 
-        editButton.setOnMouseClicked(event -> modMenu.toFront());
+        editButton.setOnMouseClicked(event -> viewMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
-        tableView.setOnMouseClicked(event -> modMenu.toFront());
-        outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
+        tableView.setOnMouseClicked(event -> viewMenu.toFront());
 
     }
 
@@ -74,6 +78,7 @@ public class CatalogueViewController extends AChildMainViewController {
     protected void onCancel(ActionEvent event) {
         tableDisplay.toFront();
         displayResponse.setText("");
+        resetMenu();
     }
 
     @FXML
@@ -86,9 +91,26 @@ public class CatalogueViewController extends AChildMainViewController {
         modMenu.toFront();
     }
 
-    @FXML
+/*    @FXML
     protected void onAddSupplier(ActionEvent event) {
         addSupplierDialog.toFront();
+    }*/
+
+    @FXML
+    public void resetMenu() {
+        modMenuScroll.setVvalue(0);
+    }
+
+
+    @FXML
+    private void handleClickTableView(MouseEvent click) {
+        /*UserList userlist = tableUser.getSelectionModel().getSelectedItem();
+        if (userlist != null) {
+            usr.username = userlist.getUsername();
+            dal.getUserId(usr);
+            txtUsername.setText(usr.username);
+            txtFullname.setText(usr.fullname);
+        }*/
     }
 
     public void confirmAddSupplier() {
@@ -97,8 +119,7 @@ public class CatalogueViewController extends AChildMainViewController {
         addSupplierDialog.close();
     }
 
-    /*public void newVehicleDialogReset() {
-        supplierModel.reset();
-    }*/
-
+    public void addSupplierDialogReset() {
+        //supplierModel.reset();
+    }
 }

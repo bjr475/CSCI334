@@ -15,7 +15,9 @@ module ToyShop {
 
     // Database
     requires java.sql;
-    requires sqlite.jdbc;
+//    requires sqlite.jdbc;
+
+    // Logging
     requires org.apache.logging.log4j;
 
     // View Controllers

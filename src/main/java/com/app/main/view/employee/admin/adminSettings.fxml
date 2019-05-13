@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.main.controller.AdminSettingsViewController"
+            style="-fx-background-color: white"
+            prefHeight="1080.0" prefWidth="1920.0">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar>
+                <leftItems>
+                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                        <padding>
+                            <Insets top="0" right="20" bottom="0" left="20"/>
+                        </padding>
+                        <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </StackPane>
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+                <rightItems>
+                    <GridPane alignment="center_right" hgap="25" vgap="0">
+                        <padding>
+                            <Insets top="0" right="20" bottom="0" left="20"/>
+                        </padding>
+                        <JFXButton fx:id="editButton" buttonType="FLAT"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="addButton" buttonType="FLAT"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="filterButton" buttonType="FLAT"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-filter" iconSize="20"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="searchButton" buttonType="FLAT"
+                                   GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-search" iconSize="24"/>
+                            </graphic>
+                        </JFXButton>
+                    </GridPane>
+                </rightItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox spacing="20" alignment="BASELINE_LEFT">
+                    <JFXButton fx:id="catalogue" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-book" iconSize="24"/>
+                        </graphic>
+                        Catalogue
+                    </JFXButton>
+                    <JFXButton fx:id="customer" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-address-book" iconSize="24"/>
+                        </graphic>
+                        Customers
+                    </JFXButton>
+                    <JFXButton fx:id="sales" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-shopping-cart" iconSize="24"/>
+                        </graphic>
+                        Sales
+                    </JFXButton>
+                    <JFXButton fx:id="suppliers" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-industry" iconSize="24"/>
+                        </graphic>
+                        Suppliers
+                    </JFXButton>
+                    <JFXButton fx:id="logout" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
+                        </graphic>
+                        Logout
+                    </JFXButton>
+                    <JFXButton fx:id="settings" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                        </graphic>
+                        Settings
+                    </JFXButton>
+                    <JFXButton fx:id="help" buttonType="FLAT" prefWidth="450">
+                        <graphic>
+                            <FontIcon iconLiteral="fa-question" iconSize="24"/>
+                        </graphic>
+                        Help
+                    </JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <StackPane fx:id="settingsMainPane">
+                    <style>
+                        -fx-background-colour: #fafafa;
+                    </style>
+                    <JFXDrawer fx:id="tableDisplay">
+                        <sidePane>
+                            <VBox spacing="20">
+
+                            </VBox>
+                        </sidePane>
+                        <content>
+                            <ScrollPane>
+                                <padding>
+                                    <Insets>
+                                        <top>24</top>
+                                        <bottom>24</bottom>
+                                        <left>24</left>
+                                        <right>24</right>
+                                    </Insets>
+                                </padding>
+                                <style>
+                                    -fx-background-colour: #fafafa;
+                                </style>
+                                <VBox spacing="24">
+
+                                    <TitledPane text="Account Settings" expanded="true">
+                                        <content>
+                                            <VBox spacing="8">
+                                                <Label>Username:</Label>
+                                                <Label>Username display</Label>
+                                                <Label>Current Password</Label>
+                                                <PasswordField fx:id="password"/>
+                                                <Label>New Password</Label>
+                                                <PasswordField fx:id="newPassword"/>
+                                                <Label>Repeat new password</Label>
+                                                <PasswordField fx:id="repeatNewPassword"/>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+
+                                    <TitledPane text="Stores" expanded="true">
+                                        <content>
+                                            <VBox spacing="8">
+                                                <TableView>
+                                                    <columns>
+                                                        <TableColumn text="Name"/>
+                                                        <TableColumn text="Address"/>
+                                                    </columns>
+                                                </TableView>
+                                                <HBox spacing="16">
+                                                    <JFXButton>
+                                                        Edit
+                                                    </JFXButton>
+                                                    <JFXButton>
+                                                        Add
+                                                    </JFXButton>
+                                                </HBox>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                                    <TitledPane text="Accounts" expanded="true">
+                                        <content>
+                                            <VBox spacing="8">
+                                                <TableView>
+                                                    <columns>
+                                                        <TableColumn text="Username"/>
+                                                        <TableColumn text="Permissions"/>
+                                                    </columns>
+                                                </TableView>
+                                                <HBox spacing="16">
+                                                    <JFXButton>
+                                                        Edit
+                                                    </JFXButton>
+                                                    <JFXButton>
+                                                        Add
+                                                    </JFXButton>
+                                                </HBox>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                                </VBox>
+                            </ScrollPane>
+                        </content>
+                    </JFXDrawer>
+                </StackPane>
+            </content>
+        </JFXDrawer>
+    </center>
+
+</BorderPane>

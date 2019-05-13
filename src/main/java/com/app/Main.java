@@ -76,7 +76,8 @@ public class Main extends Application {
                 1920,
                 800
         );
-        //primary.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
+        primary.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
+        //primary.getStylesheets().add("stylesheet.css");
 
         primaryStage.setTitle("Tim's Hobby Shop");
         primaryStage.setScene(primary);

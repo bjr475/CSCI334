@@ -33,7 +33,7 @@ public class SalesViewController extends AChildMainViewController{
     public JFXButton editButton, addButton, filterButton, searchButton;
 
     @FXML
-    public BorderPane modMenu, viewMenu;
+    public BorderPane modMenu, viewMenu, searchMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -49,21 +49,27 @@ public class SalesViewController extends AChildMainViewController{
     public void initialize() {
         ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
-        tableDisplay.toFront();
+        tableView.toFront();
 
         editButton.setOnMouseClicked(event -> modMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());
     }
 
     @FXML
     protected void onCancel(ActionEvent event) {
-        tableDisplay.toFront();
+        tableView.toFront();
     }
 
     @FXML
     protected void onSave(ActionEvent event) {
 
+    }
+
+    @FXML
+    protected void onClose(ActionEvent event) {
+        tableView.toFront();
     }
 
     @FXML

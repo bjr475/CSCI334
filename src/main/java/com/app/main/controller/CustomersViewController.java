@@ -37,7 +37,7 @@ public class CustomersViewController extends AChildMainViewController{
     public SalesViewController salesController;
 
     @FXML
-    public BorderPane modMenu, viewMenu;
+    public BorderPane modMenu, viewMenu, searchMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -73,7 +73,7 @@ public class CustomersViewController extends AChildMainViewController{
         addButton.setOnMouseClicked(event -> modMenu.toFront());
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
         outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
-
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());
     }
 
 
@@ -91,5 +91,10 @@ public class CustomersViewController extends AChildMainViewController{
     @FXML
     protected void onEdit(ActionEvent event) {
         modMenu.toFront();
+    }
+
+    @FXML
+    protected void onClose(ActionEvent event) {
+        tableView.toFront();
     }
 }

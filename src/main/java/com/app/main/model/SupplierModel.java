@@ -1,35 +1,35 @@
 package com.app.main.model;
 
+import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class SupplierModel {
     private StringProperty supplierName;
     private AddressModel address;
     private StringProperty creditLine;
-    private Hashtable<StringProperty, StringProperty> contactDetails;
+    private SimpleMapProperty<StringProperty, StringProperty> contactDetails;
     private ArrayList<CatalogueModel> modelList;
 
     public SupplierModel() {
         supplierName = new SimpleStringProperty();
         address = new AddressModel();
         creditLine = new SimpleStringProperty();
-        contactDetails = new Hashtable<StringProperty, StringProperty>();
-        modelList = new ArrayList<CatalogueModel>();
+        contactDetails = new SimpleMapProperty<>();
+        modelList = new ArrayList<>();
     }
 
     public SupplierModel(String supplierName,
-                         String addressLine1, String addressLine2, String addressSuburb, String addressState,
-                         String addressPostcode, String creditLine, Hashtable<StringProperty,
+                         String addressLine, String addressSuburb, String addressState,
+                         String addressPostcode, String creditLine, SimpleMapProperty<StringProperty,
             StringProperty> contactDetails, ArrayList<CatalogueModel> modelList) {
         this.supplierName = new SimpleStringProperty(supplierName);
-        this.address = new AddressModel(addressLine1, addressLine2, addressSuburb, addressState, addressPostcode);
+        this.address = new AddressModel(addressLine, addressSuburb, addressState, addressPostcode);
         this.creditLine = new SimpleStringProperty(creditLine);
-        this.contactDetails = new Hashtable<StringProperty, StringProperty>(contactDetails);
-        this.modelList = new ArrayList<CatalogueModel>(modelList);
+        this.contactDetails = new SimpleMapProperty<>(contactDetails);
+        this.modelList = new ArrayList<>(modelList);
     }
 
 
@@ -61,13 +61,20 @@ public class SupplierModel {
         return creditLine;
     }
 
-    public Hashtable<StringProperty, StringProperty> getcontactDetails() {
+    public SimpleMapProperty<StringProperty, StringProperty> getcontactDetails() {
         return contactDetails;
     }
 
-    public void setclubMember(StringProperty contactName, StringProperty contactMethod) {
+    public void setcontactDetails(StringProperty contactName, StringProperty contactMethod) {
         this.contactDetails.put(contactName, contactMethod);
     }
 
+    public ArrayList<CatalogueModel> getmodelList() {
+        return modelList;
+    }
+
+    public void setmodelList(StringProperty contactName, StringProperty contactMethod) {
+        this.contactDetails.put(contactName, contactMethod);
+    }
     // modelList
 }

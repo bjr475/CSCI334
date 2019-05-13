@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SettingsViewController extends AChildMainViewController{
+public class AdminSettingsViewController extends AChildMainViewController{
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -20,7 +20,7 @@ public class SettingsViewController extends AChildMainViewController{
     @FXML
     private TextField password, newPassword, repeatNewPassword;
 
-    public SettingsViewController(ApplicationModel model) {
+    public AdminSettingsViewController(ApplicationModel model) {
         super(model);
     }
 
@@ -29,3 +29,4 @@ public class SettingsViewController extends AChildMainViewController{
         ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
     }
 }
+

@@ -33,27 +33,28 @@
         </children>-->
     <!--    <AnchorPane fx:id="login"></AnchorPane>-->
     <AnchorPane fx:id="settingsPane">
-    <fx:include source="settings.fxml" fx:id="settings"
-                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="suppliersPane">
-        <fx:include source="suppliers.fxml" fx:id="suppliers"
+        <fx:include source="employee/settings.fxml" fx:id="settings"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>
+
     <AnchorPane fx:id="salesPane">
-        <fx:include source="sales.fxml" fx:id="sales"
+        <fx:include source="employee/sales.fxml" fx:id="sales"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>
     <AnchorPane fx:id="customersPane">
-        <fx:include source="customers.fxml" fx:id="customers"
+        <fx:include source="employee/customers.fxml" fx:id="customers"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>
     <AnchorPane fx:id="cataloguePane">
-        <fx:include source="catalogue.fxml" fx:id="catalogue"
+        <fx:include source="employee/catalogue.fxml" fx:id="catalogue"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
+    <AnchorPane fx:id="suppliersPane">
+        <fx:include source="employee/suppliers.fxml" fx:id="suppliers"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
     </AnchorPane>

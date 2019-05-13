@@ -20,7 +20,7 @@ public class CustomerModel {
     private AddressModel address;
     private StringProperty creditLine;
     private StringProperty clubMember;
-    private ObjectProperty<ObservableList<SubjectListCellModel>> subjectArea;
+    private ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas;
     private ArrayList<String> modelTypes;
     private ObjectProperty<ObservableList<SalesModel>> sales;
 
@@ -33,32 +33,44 @@ public class CustomerModel {
         address = new AddressModel();
         creditLine = new SimpleStringProperty();
         clubMember = new SimpleStringProperty();
-        subjectArea = new SimpleObjectProperty<>((FXCollections.observableArrayList()));
+        subjectAreas = new SimpleObjectProperty<>((FXCollections.observableArrayList()));
         modelTypes = new ArrayList<String>();
         sales = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
 
     public CustomerModel(String customerID, Date createdTime, String email, String firstName, String lastName,
-                         String addressLine1, String addressLine2, String addressSuburb, String addressState,
+                         String addressLine, String addressSuburb, String addressState,
                          String addressPostcode, String creditLine,
-                         String clubMember, ObjectProperty<ObservableList<SubjectListCellModel>> subjectArea, ArrayList<String> modelTypes) {
+                         String clubMember, ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas, ArrayList<String> modelTypes) {
         this.customerID = customerID;
         this.createdTime = createdTime;
         this.email = new SimpleStringProperty(email);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
-        this.address = new AddressModel(addressLine1, addressLine2, addressSuburb, addressState, addressPostcode);
+        this.address = new AddressModel(addressLine, addressSuburb, addressState, addressPostcode);
         this.creditLine = new SimpleStringProperty(creditLine);
-        this.creditLine = new SimpleStringProperty(clubMember);
-        this.subjectArea = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        this.clubMember = new SimpleStringProperty(clubMember);
+        this.subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
         this.modelTypes = new ArrayList<String>();
     }
 
-    public String getcustomerID() {
+    public void reset() {
+        customerID = "UNKNOWN";
+        email.setValue("");
+        firstName.setValue("");
+        lastName.setValue("");
+        //address
+        creditLine.setValue("");
+        clubMember.setValue("");
+        //subject area
+        //model types
+    }
+
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setcustomerID(String customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 
@@ -106,11 +118,11 @@ public class CustomerModel {
         return address;
     }
 
-    public String getcreditLine() {
+    public String getCreditLine() {
         return creditLine.get();
     }
 
-    public void setcreditLine(String creditLine) {
+    public void setCreditLine(String creditLine) {
         this.creditLine.set(creditLine);
     }
 
@@ -122,7 +134,7 @@ public class CustomerModel {
         return clubMember.get();
     }
 
-    public void setclubMember(String clubMember) {
+    public void setClubMember(String clubMember) {
         this.clubMember.set(clubMember);
     }
 
@@ -130,7 +142,7 @@ public class CustomerModel {
         return clubMember;
     }
 
-    //subjectArea
+    //subjectAreas
 
     //model types
 }

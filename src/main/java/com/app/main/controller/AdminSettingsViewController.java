@@ -1,6 +1,5 @@
 package com.app.main.controller;
 
-import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -8,7 +7,7 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SettingsViewController extends AChildEmployeeViewController {
+public class AdminSettingsViewController extends AChildMainViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -21,12 +20,13 @@ public class SettingsViewController extends AChildEmployeeViewController {
     @FXML
     private TextField password, newPassword, repeatNewPassword;
 
-    public SettingsViewController(ApplicationModel model) {
+    public AdminSettingsViewController(ApplicationModel model) {
         super(model);
     }
 
     @FXML
     public void initialize() {
-        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+
     }
 }
+

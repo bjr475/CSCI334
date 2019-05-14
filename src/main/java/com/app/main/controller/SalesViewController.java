@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
@@ -10,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-public class SalesViewController extends AChildMainViewController{
+public class SalesViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -33,7 +34,7 @@ public class SalesViewController extends AChildMainViewController{
     public JFXButton editButton, addButton, filterButton, searchButton;
 
     @FXML
-    public BorderPane modMenu, viewMenu;
+    public BorderPane modMenu, viewMenu, searchMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -47,23 +48,29 @@ public class SalesViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
-        tableDisplay.toFront();
+        tableView.toFront();
 
         editButton.setOnMouseClicked(event -> modMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());
     }
 
     @FXML
     protected void onCancel(ActionEvent event) {
-        tableDisplay.toFront();
+        tableView.toFront();
     }
 
     @FXML
     protected void onSave(ActionEvent event) {
 
+    }
+
+    @FXML
+    protected void onClose(ActionEvent event) {
+        tableView.toFront();
     }
 
     @FXML

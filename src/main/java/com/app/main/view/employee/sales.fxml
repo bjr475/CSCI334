@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
-<?import java.net.URL?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.SalesViewController"
-            style="-fx-background-color: white"
-            prefHeight="1080" prefWidth="1920">
+            prefHeight="1080" prefWidth="1520">
     <top>
         <VBox>
             <padding>
@@ -24,9 +21,11 @@
                 </Insets>
             </padding>
             <JFXToolbar>
-                <leftItems>
-                    <GridPane alignment="center_left" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                <!--<leftItems>
+                    <GridPane alignment="center_left" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <JFXHamburger fx:id="mainMenu">
                                 <HamburgerSlideCloseTransition/>
@@ -39,10 +38,12 @@
                             Tim's Hobby Shop
                         </Label>
                     </GridPane>
-                </leftItems>
+                </leftItems>-->
                 <rightItems>
-                    <GridPane alignment="center_right" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                    <GridPane alignment="center_right" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <JFXButton fx:id="editButton" buttonType="FLAT"
                                    GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <graphic>
@@ -50,7 +51,7 @@
                             </graphic>
                         </JFXButton>
                         <JFXButton fx:id="addButton" buttonType="FLAT"
-                                   GridPane.columnIndex="1"  GridPane.rowIndex="0">
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <graphic>
                                 <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                             </graphic>
@@ -122,94 +123,113 @@
             </sidePane>
             <content>
                 <StackPane>
-                    <!--<BorderPane fx:id="modMenu">
+                    <BorderPane fx:id="searchMenu">
+                        <center>
+                            <ScrollPane>
+                                <content>
+                                    <TableView fx:id="searchTableView"
+                                               prefWidth="1920" prefHeight="1080">
+                                        <columns>
+                                            <TableColumn prefWidth="200" text="Supplier Name">
+                                            </TableColumn>
+                                            <TableColumn prefWidth="600" text="Address">
+                                            </TableColumn>
+                                            <TableColumn prefWidth="200" text="Contact Name">
+                                            </TableColumn>
+                                            <TableColumn prefWidth="600" text="Details">
+                                            </TableColumn>
+                                        </columns>
+                                    </TableView>
+                                </content>
+                            </ScrollPane>
+                        </center>
                         <right>
-                            <GridPane alignment="baseline_center" hgap="25" vgap="5">
-                                <style>
-                                    -fx-background-color: #fafafa;
-                                </style>
-                                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-                                <Text>Add a Sale</Text>
+                            <BorderPane>
+                                <top>
+                                    <JFXToolbar styleClass="default-background">
+                                        <padding>
+                                            <Insets top="8" right="20" bottom="8" left="20"/>
+                                        </padding>
+                                        <rightItems>
+                                            <VBox HBox.hgrow="ALWAYS">
+                                                <JFXButton buttonType="FLAT"
+                                                           alignment="BASELINE_RIGHT"
+                                                           onAction="#onCancel">
+                                                    <graphic>
+                                                        <FontIcon iconLiteral="fa-times" iconSize="20"/>
+                                                    </graphic>
+                                                </JFXButton>
+                                            </VBox>
+                                        </rightItems>
+                                        <leftItems>
+                                            <Text>Search</Text>
+                                        </leftItems>
+                                    </JFXToolbar>
+                                </top>
+                                <center>
+                                    <ScrollPane fx:id="searchMenuScroll" maxWidth="600">
+                                        <style>
+                                            -fx-background-color: #fafafa;
+                                        </style>
+                                        <content>
+                                            <VBox spacing="20">
+                                                <padding>
+                                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                                </padding>
 
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer ID</Label>
-                                <TextField fx:id="customerID" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="5"/>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <Label>Keywords</Label>
+                                                    <TextField fx:id="search"/>
+                                                </VBox>
 
-                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                                    <CheckBox fx:id="newCustomer"/>
-                                    <Label>New Customer</Label>
-                                </HBox>
+                                                <HBox spacing="16">
+                                                    <VBox spacing="8">
+                                                        <JFXCheckBox fx:id="allSearch" text="All"/>
+                                                    </VBox>
+                                                    <VBox spacing="8">
+                                                        <JFXCheckBox fx:id="stockSearch" text="Stock"/>
+                                                        <JFXCheckBox fx:id="customersSearch" text="Customers"/>
+                                                    </VBox>
+                                                    <VBox spacing="8">
+                                                        <JFXCheckBox fx:id="salesSearch" text="Sales"/>
+                                                        <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
+                                                    </VBox>
+                                                </HBox>
+                                                <TitledPane fx:id="filter" text="Filter">
+                                                    <content>
 
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="4">Item List</Label>
-                                <TableView fx:id="itemTable"  GridPane.rowIndex="5" GridPane.columnSpan="5">
-                                    <columns>
-                                        <TableColumn prefWidth="200" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="200" text="Item Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="100" text="Quantity">
-                                        </TableColumn>
-                                    </columns>
-                                </TableView>
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="6">Item ID</Label>
-                                <TextField fx:id="itemID" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="3"/>
-
-                                <Label GridPane.columnIndex="3" GridPane.rowIndex="6">Quantity</Label>
-                                <TextField fx:id="quantity" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                <JFXButton fx:id="addItemButton" buttonType="FLAT"
-                                           GridPane.columnIndex="4"  GridPane.rowIndex="7">
-                                    <graphic>
-                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                    </graphic>
-                                </JFXButton>
-                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                                    <CheckBox fx:id="otherDiscount" />
-                                    <Label >Other Discount</Label>
-
-                                    <CheckBox fx:id="clubMember" />
-                                    <Label >Club Member</Label>
-                                </HBox>
-                                &lt;!&ndash;<Region GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="5" style="-fx-background-color: slategray; -fx-background-insets: 2 5 2 5 ; -fx-padding: 3 0 2 0  ;"/>
-                                <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
-
-                                    <Text textAlignment="left">Subtotal</Text>
-                                    <Text textAlignment="left">Discount</Text>
-                                    <Text textAlignment="left">GST</Text>
-                                    <Text textAlignment="left">Total</Text>
-                                </VBox>
-                                <VBox spacing="20" GridPane.columnIndex="4" GridPane.rowIndex="10">
-                                    <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
-                                    <Text fx:id="discount" textAlignment="right">-$0.00</Text>
-                                    <Text fx:id="GST" textAlignment="right">-$0.00</Text>
-                                    <Text fx:id="total" textAlignment="right">$0.00</Text>
-                                </VBox>
-                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5" alignment="center_right">
-                                    <JFXButton onAction="#onCancel">
-                                        Cancel
-                                    </JFXButton>
-                                    <JFXButton onAction="#onSave">
-                                        Save
-                                    </JFXButton>
-                                </HBox>&ndash;&gt;
-                                &lt;!&ndash;<CheckBox fx:id="otherDiscount" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-                                <Label GridPane.columnIndex="1" GridPane.rowIndex="8">Other Discount</Label>
-
-                                <CheckBox fx:id="clubMember" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
-                                <Label GridPane.columnIndex="3" GridPane.rowIndex="8">Club Member</Label>&ndash;&gt;
-
-                            </GridPane>
+                                                    </content>
+                                                </TitledPane>
+                                                <HBox>
+                                                    <Pane HBox.hgrow="ALWAYS"/>
+                                                    <JFXButton>
+                                                        Search
+                                                    </JFXButton>
+                                                </HBox>
+                                            </VBox>
+                                        </content>
+                                    </ScrollPane>
+                                </center>
+                            </BorderPane>
                         </right>
-                    </BorderPane>-->
+                    </BorderPane>
+
                     <BorderPane fx:id="modMenu">
                         <right>
                             <GridPane alignment="baseline_center" hgap="25" vgap="5">
                                 <style>
                                     -fx-background-color: #fafafa;
                                 </style>
-                                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
                                 <Text>Add a Sale</Text>
 
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer ID</Label>
-                                <TextField fx:id="customerID" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="5"/>
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer
+                                    ID
+                                </Label>
+                                <TextField fx:id="customerID" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                           GridPane.columnSpan="5"/>
 
                                 <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
                                     <CheckBox fx:id="newCustomer"/>
@@ -221,7 +241,8 @@
                                 </HBox>
 
                                 <Label GridPane.columnIndex="0" GridPane.rowIndex="4">Item List</Label>
-                                <TableView fx:id="itemTable"  GridPane.rowIndex="5" GridPane.columnSpan="5" prefHeight="200" prefWidth="550">
+                                <TableView fx:id="itemTable" GridPane.rowIndex="5" GridPane.columnSpan="5"
+                                           prefHeight="200" prefWidth="550">
                                     <columns>
                                         <TableColumn prefWidth="200" text="Item No.">
                                         </TableColumn>
@@ -233,21 +254,23 @@
                                 </TableView>
 
                                 <Label GridPane.columnIndex="0" GridPane.rowIndex="6">Item ID</Label>
-                                <TextField fx:id="itemIDView" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2"/>
+                                <TextField fx:id="itemIDView" GridPane.columnIndex="0" GridPane.rowIndex="7"
+                                           GridPane.columnSpan="2"/>
                                 <Label GridPane.columnIndex="2" GridPane.rowIndex="6">Quantity</Label>
-                                <TextField fx:id="quantityView" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.columnSpan="1"/>
+                                <TextField fx:id="quantityView" GridPane.columnIndex="2" GridPane.rowIndex="7"
+                                           GridPane.columnSpan="1"/>
                                 <JFXButton fx:id="addItemButton" buttonType="FLAT"
-                                           GridPane.columnIndex="3"  GridPane.rowIndex="7">
+                                           GridPane.columnIndex="3" GridPane.rowIndex="7">
                                     <graphic>
                                         <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                     </graphic>
                                 </JFXButton>
                                 <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                                    <CheckBox fx:id="otherDiscount" />
-                                    <Label >Other Discount</Label>
+                                    <CheckBox fx:id="otherDiscount"/>
+                                    <Label>Other Discount</Label>
 
-                                    <CheckBox fx:id="clubMember" />
-                                    <Label >Club Member</Label>
+                                    <CheckBox fx:id="clubMember"/>
+                                    <Label>Club Member</Label>
                                 </HBox>
                                 <!--<CheckBox fx:id="otherDiscount" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
                                 <Label GridPane.columnIndex="1" GridPane.rowIndex="8">Other Discount</Label>
@@ -267,7 +290,8 @@
                                     <Text fx:id="GST" textAlignment="right">-$0.00</Text>
                                     <Text fx:id="total" textAlignment="right">$0.00</Text>
                                 </VBox>
-                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5" alignment="center_right">
+                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12"
+                                      GridPane.columnSpan="5" alignment="center_right">
                                     <JFXButton onAction="#onCancel">
                                         Cancel
                                     </JFXButton>
@@ -302,33 +326,42 @@
                                 <style>
                                     -fx-background-color: #fafafa;
                                 </style>
-                                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                <padding>
+                                    <Insets top="20" right="20" bottom="20" left="20"/>
+                                </padding>
                                 <Text>Add a Sale</Text>
 
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer ID</Label>
-                                <Text fx:id="customerIDView" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="5">c3948734</Text>
+                                <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer
+                                    ID
+                                </Label>
+                                <Text fx:id="customerIDView" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                      GridPane.columnSpan="5">c3948734
+                                </Text>
 
                                 <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
 
                                 </HBox>
 
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="4">Item List</Label>
-                                <TableView fx:id="itemTableView"  GridPane.rowIndex="5" GridPane.columnSpan="5" prefHeight="200" prefWidth="550">
-                                    <columns>
-                                        <TableColumn prefWidth="200" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="200" text="Item Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="100" text="Quantity">
-                                        </TableColumn>
-                                    </columns>
-                                </TableView>
-
+                                <TitledPane text="Item List" expanded="false"
+                                            GridPane.rowIndex="5" GridPane.columnSpan="5">
+                                    <content>
+                                        <TableView fx:id="itemTableView" prefWidth="550">
+                                            <columns>
+                                                <TableColumn prefWidth="200" text="Item No.">
+                                                </TableColumn>
+                                                <TableColumn prefWidth="200" text="Item Name">
+                                                </TableColumn>
+                                                <TableColumn prefWidth="100" text="Quantity">
+                                                </TableColumn>
+                                            </columns>
+                                        </TableView>
+                                    </content>
+                                </TitledPane>
                                 <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                                    <Label >Other Discount</Label>
+                                    <Label>Other Discount</Label>
                                     <Text fx:id="otherDiscountView">No</Text>
 
-                                    <Label >Club Member</Label>
+                                    <Label>Club Member</Label>
                                     <Text fx:id="clubMemberView">No</Text>
                                 </HBox>
 
@@ -345,7 +378,8 @@
                                     <Text fx:id="GSTView" textAlignment="right">-$0.00</Text>
                                     <Text fx:id="totalView" textAlignment="right">$0.00</Text>
                                 </VBox>
-                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5" alignment="center_right">
+                                <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12"
+                                      GridPane.columnSpan="5" alignment="center_right">
                                     <JFXButton onAction="#onCancel">
                                         Close
                                     </JFXButton>
@@ -356,12 +390,14 @@
                             </GridPane>
                         </right>
                     </BorderPane>
-                    <JFXDrawer fx:id="tableDisplay">
+                    <!--<JFXDrawer fx:id="tableDisplay">
                         <sidePane>
                             <VBox spacing="20">
 
                             </VBox>
                         </sidePane>
+                        <content>-->
+                    <ScrollPane>
                         <content>
                             <TableView fx:id="tableView" GridPane.columnIndex="0"
                                        GridPane.rowIndex="1" prefWidth="1920" prefHeight="1080">
@@ -379,25 +415,28 @@
                                 </columns>
                             </TableView>
                         </content>
-                    </JFXDrawer>
+                    </ScrollPane>
+
+                    <!--</content>
+                </JFXDrawer>-->
                 </StackPane>
             </content>
         </JFXDrawer>
     </center>
 </BorderPane>
-<!--
-<center>
-        <JFXDrawer fx:id="modMenu">
-            <sidePane>
-                <VBox spacing="20" alignment="CENTER">
-                    <GridPane alignment="center" hgap="25" vgap="25">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
-                        <TextField fx:id="saleID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="Quantity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    </GridPane>
-                </VBox>
-            </sidePane>
-        </JFXDrawer>
-    </center>
--->
+        <!--
+        <center>
+                <JFXDrawer fx:id="modMenu">
+                    <sidePane>
+                        <VBox spacing="20" alignment="CENTER">
+                            <GridPane alignment="center" hgap="25" vgap="25">
+                                <padding><Insets right="20" left="20"/></padding>
+                                <TextField fx:id="saleID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <TextField fx:id="Quantity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            </GridPane>
+                        </VBox>
+                    </sidePane>
+                </JFXDrawer>
+            </center>
+        -->

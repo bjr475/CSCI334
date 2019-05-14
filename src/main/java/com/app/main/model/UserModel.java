@@ -35,7 +35,18 @@ public abstract class UserModel {
         this.lastName = new SimpleStringProperty(lastName);
         this.mobile = new SimpleStringProperty(mobile);
         this.password = new SimpleStringProperty(password);
-        this.permissions = new SimpleStringProperty();
+        this.permissions = new SimpleStringProperty(permissions);
+    }
+
+    public UserModel(UserModel model) {
+        this.userID = model.userID;
+        this.createdTime = model.createdTime;
+        this.email = new SimpleStringProperty(model.email.get());
+        this.firstName = new SimpleStringProperty(model.firstName.get());
+        this.lastName = new SimpleStringProperty(model.lastName.get());
+        this.mobile = new SimpleStringProperty(model.mobile.get());
+        this.password = new SimpleStringProperty(model.password.get());
+        this.permissions = new SimpleStringProperty(model.permissions.get());
     }
 
     public String getUserID() {

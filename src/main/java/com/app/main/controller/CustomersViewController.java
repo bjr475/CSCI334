@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
@@ -14,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class CustomersViewController extends AChildMainViewController{
+public class CustomersViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -60,7 +61,7 @@ public class CustomersViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
         ToggleGroup creditLine = new ToggleGroup();
         creditLineT.setToggleGroup(creditLine);

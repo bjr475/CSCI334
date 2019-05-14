@@ -5,12 +5,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class SalesModel {
-    private String saleID = "UNKNOWN";
+    private String saleID;
     private CustomerModel customer;
     private SimpleMapProperty<CatalogueModel, Integer> items;
     private StringProperty discount;
     private StringProperty total;
-    
+
     public SalesModel(String saleID, SimpleMapProperty<CatalogueModel, Integer> items,
                       String discount, String total) {
         this.saleID = saleID;
@@ -30,7 +30,7 @@ public class SalesModel {
     public CustomerModel getAddress() {
         return customer;
     }
-    
+
     //items
 
     public String getDiscount() {

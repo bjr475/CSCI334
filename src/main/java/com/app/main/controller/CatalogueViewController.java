@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.CatalogueModel;
@@ -14,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-public class CatalogueViewController extends AChildMainViewController {
+public class CatalogueViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -63,7 +64,7 @@ public class CatalogueViewController extends AChildMainViewController {
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
         //tableDisplay.toFront();
 
@@ -72,8 +73,8 @@ public class CatalogueViewController extends AChildMainViewController {
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
         searchButton.setOnMouseClicked(event -> searchMenu.toFront());
 
-        tableView.selectionModelProperty().addListener((observer, oldValue, newValue)-> {
-            if(newValue != null) {
+        tableView.selectionModelProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue != null) {
                 String rowID = tableView.getSelectionModel().getSelectedItem().toString();
             }
         });

@@ -25,7 +25,6 @@ public class CustomerModel {
     private ObjectProperty<ObservableList<SalesModel>> sales;
 
     public CustomerModel() {
-        customerID = "UNKNOWN";
         createdTime = new Date();
         email = new SimpleStringProperty();
         firstName = new SimpleStringProperty();

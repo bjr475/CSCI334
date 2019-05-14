@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AdminSettingsViewController extends AChildMainViewController{
+public class AdminSettingsViewController extends AChildMainViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -26,7 +26,7 @@ public class AdminSettingsViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+
     }
 }
 

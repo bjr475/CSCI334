@@ -1,7 +1,5 @@
 package com.app.main.controller.landing;
 
-import com.app.main.controller.AChildMainViewController;
-import com.app.main.controller.ControllerUtil;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -11,15 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class LandingLoginViewController extends AChildMainViewController {
+public class LandingLoginViewController extends AChildLandingViewController {
+
+
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
     @FXML
     public AnchorPane cataloguePane;
-
-    @FXML
-    public AnchorPane landingLoginPane;
 
     @FXML
     public JFXButton loginButton;
@@ -37,7 +34,6 @@ public class LandingLoginViewController extends AChildMainViewController {
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
     }
 
     @FXML

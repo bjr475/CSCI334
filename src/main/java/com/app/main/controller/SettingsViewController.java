@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -7,7 +8,7 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SettingsViewController extends AChildMainViewController{
+public class SettingsViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -26,6 +27,6 @@ public class SettingsViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
     }
 }

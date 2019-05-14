@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
-<?import javafx.scene.text.Text?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.SettingsViewController"
-            style="-fx-background-color: white"
             prefHeight="1080.0" prefWidth="1920.0">
     <top>
         <VBox>
@@ -23,10 +20,10 @@
                 </Insets>
             </padding>
             <JFXToolbar>
-                <leftItems>
-                    <GridPane alignment="center_left" hgap="25" vgap="0">
+                <!--<leftItems>
+                    <GridPane alignment="center_left" hgap="25">
                         <padding>
-                            <Insets top="0" right="20" bottom="0" left="20"/>
+                            <Insets right="20" left="20"/>
                         </padding>
                         <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <JFXHamburger fx:id="mainMenu">
@@ -40,11 +37,11 @@
                             Tim's Hobby Shop
                         </Label>
                     </GridPane>
-                </leftItems>
+                </leftItems>-->
                 <rightItems>
-                    <GridPane alignment="center_right" hgap="25" vgap="0">
+                    <GridPane alignment="center_right" hgap="25">
                         <padding>
-                            <Insets top="0" right="20" bottom="0" left="20"/>
+                            <Insets right="20" left="20"/>
                         </padding>
                         <JFXButton fx:id="editButton" buttonType="FLAT"
                                    GridPane.columnIndex="0" GridPane.rowIndex="0">

@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.*;
@@ -10,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class SuppliersViewController extends AChildMainViewController{
+public class SuppliersViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -39,7 +40,7 @@ public class SuppliersViewController extends AChildMainViewController{
     public JFXDrawer tableDisplay;
 
     @FXML
-    public ScrollPane sTableView;
+    public ScrollPane supplierMainScroll;
 
     @FXML
     public TableView tableView;
@@ -59,7 +60,7 @@ public class SuppliersViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
         editButton.setOnMouseClicked(event -> modMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
@@ -79,12 +80,12 @@ public class SuppliersViewController extends AChildMainViewController{
 
     @FXML
     protected void onCancel(ActionEvent event) {
-        sTableView.toFront();
+        supplierMainScroll.toFront();
     }
 
     @FXML
     protected void onClose(ActionEvent event) {
-        sTableView.toFront();
+        supplierMainScroll.toFront();
     }
 
     public void confirmAddItemDialog() {

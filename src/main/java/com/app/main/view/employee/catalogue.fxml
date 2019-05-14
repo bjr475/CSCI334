@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?language javascript?>
 
-<?import com.app.main.model.CatalogueModel?>
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -11,11 +9,10 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 <?import java.lang.*?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.CatalogueViewController"
-            style="-fx-background-color: white"
-            prefHeight="1080.0" prefWidth="1920.0">
+            prefHeight="1080.0" prefWidth="1520.0">
     <fx:script source="../add_dialog.js"/>
     <top>
         <VBox>
@@ -28,9 +25,11 @@
                 </Insets>
             </padding>
             <JFXToolbar>
-                <leftItems>
-                    <GridPane alignment="center_left" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                <!--<leftItems>
+                    <GridPane alignment="center_left" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <JFXHamburger fx:id="mainMenu">
                                 <HamburgerSlideCloseTransition/>
@@ -43,10 +42,12 @@
                             Tim's Hobby Shop
                         </Label>
                     </GridPane>
-                </leftItems>
+                </leftItems>-->
                 <rightItems>
-                    <GridPane alignment="center_right" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                    <GridPane alignment="center_right" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <JFXButton fx:id="editButton" buttonType="FLAT"
                                    GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <graphic>
@@ -54,7 +55,7 @@
                             </graphic>
                         </JFXButton>
                         <JFXButton fx:id="addButton" buttonType="FLAT"
-                                   GridPane.columnIndex="1"  GridPane.rowIndex="0">
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <graphic>
                                 <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                             </graphic>
@@ -147,7 +148,7 @@
                                         <Label>Address Line 1</Label>
                                         <TextField fx:id="address1"/>
                                     </VBox>
-                                    <VBox  HBox.hgrow="ALWAYS">
+                                    <VBox HBox.hgrow="ALWAYS">
                                         <Label>Address Line 2</Label>
                                         <TextField fx:id="address2"/>
                                     </VBox>
@@ -287,7 +288,7 @@
                                                         <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
                                                     </VBox>
                                                 </HBox>
-                                                <TitledPane  fx:id="filter" text="Filter">
+                                                <TitledPane fx:id="filter" text="Filter">
                                                     <content>
 
                                                     </content>
@@ -308,34 +309,36 @@
 
                     <BorderPane fx:id="viewMenu">
                         <center>
-                                <TableView fx:id="viewTableView"
-                                           prefWidth="1920" prefHeight="1080">
-                                    <columns>
-                                        <TableColumn prefWidth="400" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="370" text="Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="150" text="Type">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="150" text="Subject Area">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="150" text="Retail Price">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="150" text="Date First Stocked">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="150" text="Total Stock">
-                                        </TableColumn>
-                                    </columns>
-                                </TableView>
+                            <TableView fx:id="viewTableView"
+                                       prefWidth="1920" prefHeight="1080">
+                                <columns>
+                                    <TableColumn prefWidth="400" text="Item No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="370" text="Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Type">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Subject Area">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Retail Price">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Date First Stocked">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="150" text="Total Stock">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
                         </center>
                         <right>
                             <ScrollPane fx:id="viewMenuScroll" maxWidth="600">
                                 <style>
-                                -fx-background-color: #fafafa;
+                                    -fx-background-color: #fafafa;
                                 </style>
                                 <content>
                                     <VBox spacing="20">
-                                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                        <padding>
+                                            <Insets top="20" right="20" bottom="20" left="20"/>
+                                        </padding>
                                         <Text>View Item</Text>
                                         <HBox spacing="20" prefWidth="400">
                                             <VBox HBox.hgrow="ALWAYS">
@@ -392,13 +395,14 @@
                                         </VBox>
                                         <VBox>
                                             <Label>Description</Label>
-                                            <TextArea fx:id="description" prefWidth="500" wrapText="true" disable="true">
+                                            <Label fx:id="description" prefWidth="500" wrapText="true"
+                                                   disable="true">
                                                 display text display text display text display text
                                                 display text display text display text display text
                                                 display text display text display text display text
                                                 display text display text display text display text
                                                 display text display text display text display text
-                                            </TextArea>
+                                            </Label>
                                         </VBox>
                                         <VBox>
                                             <TitledPane text="Suppliers" expanded="false">
@@ -598,7 +602,9 @@
                                         <style>
                                             -fx-background-color: #fafafa;
                                         </style>
-                                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                                        <padding>
+                                            <Insets top="20" right="20" bottom="20" left="20"/>
+                                        </padding>
                                         <Text>Add an Item</Text>
                                         <HBox spacing="20">
                                             <VBox HBox.hgrow="ALWAYS">
@@ -701,7 +707,8 @@
                                         </VBox>
                                         <VBox>
                                             <Label>Suppliers</Label>
-                                            <TableView fx:id="suppliersTable" prefHeight="100"> <!-- Hide in an accordion-->
+                                            <TableView fx:id="suppliersTable"
+                                                       prefHeight="100"> <!-- Hide in an accordion-->
                                                 <columns>
                                                     <TableColumn prefWidth="300" text="Supplier Name">
                                                     </TableColumn>
@@ -720,7 +727,9 @@
                                                 <TextField fx:id="price"/>
                                             </VBox>
                                             <VBox alignment="BOTTOM_RIGHT">
-                                                <JFXButton fx:id="addSupplierButton" onAction="addNewDialogCheck(addSupplierDialog, catalogueStackPane, newSupplierCheck)" buttonType="FLAT">
+                                                <JFXButton fx:id="addSupplierButton"
+                                                           onAction="addNewDialogCheck(addSupplierDialog, catalogueStackPane, newSupplierCheck)"
+                                                           buttonType="FLAT">
                                                     <graphic>
                                                         <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                                     </graphic>
@@ -750,32 +759,32 @@
                             </sidePane>
                         </JFXDrawer>
                         <content>-->
-                            <TableView fx:id="tableView" onMouseClicked="#handleClickTableView"
-                                       prefWidth="1920" prefHeight="1080">
-                                <!--<columns>
-                                    <TableColumn prefWidth="400" text="Item No.">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="370" text="Name">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="150" text="Type">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="150" text="Subject Area">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="150" text="Retail Price">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="150" text="Date First Stocked">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="150" text="Total Stock">
-                                    </TableColumn>
-                                </columns>-->
-                                <!--<items>
-                                    <FXCollections fx:factory="observableArrayList">
+                    <TableView fx:id="tableView" onMouseClicked="#handleClickTableView"
+                               prefWidth="1920" prefHeight="1080">
+                        <columns>
+                            <TableColumn prefWidth="400" text="Item No.">
+                            </TableColumn>
+                            <TableColumn prefWidth="370" text="Name">
+                            </TableColumn>
+                            <TableColumn prefWidth="150" text="Type">
+                            </TableColumn>
+                            <TableColumn prefWidth="150" text="Subject Area">
+                            </TableColumn>
+                            <TableColumn prefWidth="150" text="Retail Price">
+                            </TableColumn>
+                            <TableColumn prefWidth="150" text="Date First Stocked">
+                            </TableColumn>
+                            <TableColumn prefWidth="150" text="Total Stock">
+                            </TableColumn>
+                        </columns>
+                        <!--<items>
+                            <FXCollections fx:factory="observableArrayList">
 
-                                    </FXCollections>
-                                </items>-->
-                            </TableView>
-                        <!--</content>
-                    </JFXDrawer>-->
+                            </FXCollections>
+                        </items>-->
+                    </TableView>
+                    <!--</content>
+                </JFXDrawer>-->
                 </StackPane>
             </content>
         </JFXDrawer>
@@ -783,15 +792,4 @@
 </BorderPane>
 
 
-<!--
-        <JFXDrawer fx:id="modDrawer">
-            <sidePane>
-            <VBox spacing="20" alignment="CENTER">
-                <GridPane alignment="center" hgap="25" vgap="25">
-                    <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
-                    <TextField fx:id="itemID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                </GridPane>
-            </VBox>
-            </sidePane>
-        </JFXDrawer>
--->
+

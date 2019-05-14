@@ -20,7 +20,6 @@ public class CatalogueModel {
     private MapProperty<SupplierModel, BigInteger> supplierItems;
 
     public CatalogueModel() {
-        itemID = "UNKNOWN";
         itemName = new SimpleStringProperty();
         modelType = new SimpleStringProperty("Model Type");
         subjectArea = new SimpleStringProperty("Subject Area");
@@ -32,14 +31,14 @@ public class CatalogueModel {
     }
 
     public CatalogueModel(String itemID,
-             String name,
-             String model,
-             String subject,
-             String price,
-             Date date,
-             MapProperty<ShopModel, Integer> storeStock,
-             String description,
-             MapProperty<SupplierModel, BigInteger> supplierItems) {
+                          String name,
+                          String model,
+                          String subject,
+                          String price,
+                          Date date,
+                          MapProperty<ShopModel, Integer> storeStock,
+                          String description,
+                          MapProperty<SupplierModel, BigInteger> supplierItems) {
         this.itemID = itemID;
         this.itemName = new SimpleStringProperty(name);
         this.subjectArea = new SimpleStringProperty(model);
@@ -136,12 +135,12 @@ public class CatalogueModel {
         this.storeStock.put(shop, quantity);
     }
 
-    public void setDescription(StringProperty description) {
-        this.description = description;
-    }
-
     public String getDescription() {
         return description.get();
+    }
+
+    public void setDescription(StringProperty description) {
+        this.description = description;
     }
 
     public StringProperty descriptionProperty() {

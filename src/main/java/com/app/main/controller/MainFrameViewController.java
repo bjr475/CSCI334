@@ -1,33 +1,20 @@
 package com.app.main.controller;
 
-import com.app.main.controller.landing.LandingLoginViewController;
+import com.app.main.controller.landing.LandingViewController;
 import com.app.main.model.ApplicationModel;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class MainFrameViewController extends AViewController {
 
     @FXML
-    public CatalogueViewController catalogueController;
+    public LandingViewController landingController;
 
     @FXML
-    public CustomersViewController customersController;
+    public EmployeeViewController employeeController;
 
     @FXML
-    public SalesViewController salesController;
-
-    @FXML
-    public SuppliersViewController suppliersController;
-
-    @FXML
-    public SettingsViewController settingsController;
-
-    @FXML
-    public LandingLoginViewController landingLoginController;
-
-    @FXML
-    public AnchorPane landingLoginPane, cataloguePane, customersPane, salesPane, suppliersPane, settingsPane;
-
+    public Pane landingPane, employeePane;
 
 
     public MainFrameViewController(ApplicationModel model) {
@@ -38,14 +25,13 @@ public class MainFrameViewController extends AViewController {
     @FXML
     private void initialize() {
 
-        catalogueController.setOwner(this);
-        customersController.setOwner(this);
-        salesController.setOwner(this);
-        suppliersController.setOwner(this);
-        settingsController.setOwner(this);
-//      landingLoginController.setOwner(this);
+        landingController.setOwner(this);
+        employeeController.setOwner(this);
 
-        catalogueController.customer.setOnMouseClicked(event -> customersPane.toFront());
+        employeePane.toFront();
+
+
+        /*catalogueController.customer.setOnMouseClicked(event -> customersPane.toFront());
         catalogueController.sales.setOnMouseClicked(event -> salesPane.toFront());
         catalogueController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
         catalogueController.settings.setOnMouseClicked(event -> settingsPane.toFront());
@@ -68,7 +54,13 @@ public class MainFrameViewController extends AViewController {
         settingsController.customer.setOnMouseClicked(event -> customersPane.toFront());
         settingsController.catalogue.setOnMouseClicked(event -> salesPane.toFront());
         settingsController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        settingsController.sales.setOnMouseClicked(event -> suppliersPane.toFront());
+        settingsController.sales.setOnMouseClicked(event -> suppliersPane.toFront());*/
+
+
     }
 
+    public void logout() {
+        employeePane.toBack();
+        landingPane.toFront();
+    }
 }

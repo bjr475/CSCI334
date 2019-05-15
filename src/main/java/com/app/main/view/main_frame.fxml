@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="1080.0" prefWidth="1920.0"
-           xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="com.app.main.controller.MainFrameViewController">
-    <Pane fx:id="landingPane">
-        <fx:include source="landing/landing.fxml" fx:id="landing"/>
-    </Pane>
-    <Pane fx:id="employeePane">
-        <fx:include source="employee/employee.fxml" fx:id="employee"/>
-    </Pane>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+           fx:controller="com.app.main.controller.MainFrameViewController">
+    <VBox fx:id="landingPane">
+        <fx:include source="landing/landing.fxml" fx:id="landing" VBox.vgrow="ALWAYS"/>
+    </VBox>
+    <VBox fx:id="employeePane">
+        <fx:include source="employee/employee.fxml" fx:id="employee" VBox.vgrow="ALWAYS"/>
+    </VBox>
 </StackPane>

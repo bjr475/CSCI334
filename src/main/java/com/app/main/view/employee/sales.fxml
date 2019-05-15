@@ -8,7 +8,7 @@
 <?import org.kordamp.ikonli.javafx.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
-            fx:controller="com.app.main.controller.SalesViewController"
+            fx:controller="com.app.main.controller.employee.SalesViewController"
             prefHeight="980" prefWidth="1520" layoutY="45">
 <!--
     <top>

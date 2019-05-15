@@ -1,7 +1,6 @@
 package com.app.main.controller.employee;
 
 import com.app.main.controller.AViewController;
-import com.app.main.controller.EmployeeViewController;
 import com.app.main.model.ApplicationModel;
 
 public abstract class AChildEmployeeViewController extends AViewController {

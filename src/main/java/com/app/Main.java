@@ -3,9 +3,7 @@ package com.app;
 import com.app.main.model.ApplicationModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -74,23 +72,15 @@ public class Main extends Application {
         Scene primary = new Scene(
                 loader.load(),
                 1920,
-                800
+                1080
         );
         primary.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
-        //primary.getStylesheets().add("stylesheet.css");
-
         primaryStage.setTitle("Tim's Hobby Shop");
         primaryStage.setScene(primary);
-
-
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
-        //set Stage boundaries to visible bounds of the main screen
-        primaryStage.setX(primaryScreenBounds.getMinX());
-        primaryStage.setY(primaryScreenBounds.getMinY());
-        primaryStage.setWidth(primaryScreenBounds.getWidth());
-        primaryStage.setHeight(primaryScreenBounds.getHeight());
-//        primaryStage.setResizable(false);
+        primaryStage.setX(0);
+        primaryStage.setY(0);
+        primaryStage.setWidth(1600);
+        primaryStage.setHeight(900);
         primaryStage.show();
     }
 }

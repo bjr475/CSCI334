@@ -26,3 +26,15 @@ out/*
 .idea/dataSources/*
 .idea/workspace.xml
 .idea/httpRequests/*
+
+!lib/*
+!/lib/gson/*
+!/lib/ikonli/*
+!/lib/javafaker/*
+!/lib/javafx/*
+!/lib/jetbrains/*
+!/lib/jfoenix/*
+!/lib/junit/*
+!/lib/log4j/*
+!/lib/sqlite/*
+

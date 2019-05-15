@@ -17,18 +17,12 @@ module ToyShop {
     requires java.sql;
     requires sqlite.jdbc;
     requires org.apache.logging.log4j;
+    requires org.jetbrains.annotations;
 
     // View Controllers
-//    opens com.app.component to javafx.fxml, javafx.controls;
     opens com.app.main.controller to javafx.fxml, javafx.controls;
-//    opens com.app.component.controller to javafx.fxml, javafx.controls;
     opens com.app.main.controller.landing to javafx.fxml, javafx.controls;
-//    opens com.app.main.controller.manager to javafx.view, javafx.controls;
-//    opens com.app.main.controller.customer to javafx.fxml, javafx.controls;
-//    opens com.app.component.controller.service to javafx.fxml, javafx.controls;
-//    opens com.app.main.controller.professional to javafx.fxml, javafx.controls;
-//    opens com.app.main.controller.customer.service to javafx.fxml, javafx.controls;
-//    opens com.app.main.controller.landing.register to javafx.fxml, javafx.controls;
+    opens com.app.main.controller.employee to javafx.fxml, javafx.controls;
 
     exports com.app;
 }

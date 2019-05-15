@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.EmployeeViewController;
 import com.app.main.controller.landing.LandingViewController;
 import com.app.main.model.ApplicationModel;
 import javafx.fxml.FXML;

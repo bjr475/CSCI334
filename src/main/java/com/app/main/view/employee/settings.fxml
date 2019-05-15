@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.SettingsViewController"
-            style="-fx-background-color: white"
-            prefHeight="1080.0" prefWidth="1920.0">
+            prefHeight="980.0" prefWidth="1920.0" layoutY="45">
+<!--
     <top>
         <VBox>
             <padding>
@@ -22,9 +21,11 @@
                 </Insets>
             </padding>
             <JFXToolbar>
-                <leftItems>
-                    <GridPane alignment="center_left" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                &lt;!&ndash;<leftItems>
+                    <GridPane alignment="center_left" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <JFXHamburger fx:id="mainMenu">
                                 <HamburgerSlideCloseTransition/>
@@ -37,10 +38,12 @@
                             Tim's Hobby Shop
                         </Label>
                     </GridPane>
-                </leftItems>
+                </leftItems>&ndash;&gt;
                 <rightItems>
-                    <GridPane alignment="center_right" hgap="25" vgap="0">
-                        <padding><Insets top="0" right="20" bottom="0" left="20"/></padding>
+                    <GridPane alignment="center_right" hgap="25">
+                        <padding>
+                            <Insets right="20" left="20"/>
+                        </padding>
                         <JFXButton fx:id="editButton" buttonType="FLAT"
                                    GridPane.columnIndex="0" GridPane.rowIndex="0">
                             <graphic>
@@ -48,7 +51,7 @@
                             </graphic>
                         </JFXButton>
                         <JFXButton fx:id="addButton" buttonType="FLAT"
-                                   GridPane.columnIndex="1"  GridPane.rowIndex="0">
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <graphic>
                                 <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                             </graphic>
@@ -70,6 +73,7 @@
             </JFXToolbar>
         </VBox>
     </top>
+-->
     <center>
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
@@ -130,11 +134,36 @@
                             </VBox>
                         </sidePane>
                         <content>
-                            <Pane>
+                            <ScrollPane>
+                                <padding>
+                                    <Insets>
+                                        <top>24</top>
+                                        <bottom>24</bottom>
+                                        <left>24</left>
+                                        <right>24</right>
+                                    </Insets>
+                                </padding>
                                 <style>
                                     -fx-background-colour: #fafafa;
                                 </style>
-                            </Pane>
+                                <VBox spacing="24">
+
+                                    <TitledPane text="Account Settings" expanded="true">
+                                        <content>
+                                            <VBox spacing="8">
+                                                <Label>Username:</Label>
+                                                <Label>Username display</Label>
+                                                <Label>Current Password</Label>
+                                                <PasswordField fx:id="password"/>
+                                                <Label>New Password</Label>
+                                                <PasswordField fx:id="newPassword"/>
+                                                <Label>Repeat new password</Label>
+                                                <PasswordField fx:id="repeatNewPassword"/>
+                                            </VBox>
+                                        </content>
+                                    </TitledPane>
+                                </VBox>
+                            </ScrollPane>
                         </content>
                     </JFXDrawer>
                 </StackPane>

@@ -1,5 +1,6 @@
 package com.app.main.controller;
 
+import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
@@ -11,10 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class CustomersViewController extends AChildMainViewController{
+public class CustomersViewController extends AChildEmployeeViewController {
     public JFXHamburger mainMenu;
     public JFXDrawer mainDrawer;
 
@@ -37,7 +37,7 @@ public class CustomersViewController extends AChildMainViewController{
     public SalesViewController salesController;
 
     @FXML
-    public BorderPane modMenu, viewMenu;
+    public BorderPane modMenu, viewMenu, searchMenu;
 
     @FXML
     public JFXDrawer tableDisplay;
@@ -49,9 +49,6 @@ public class CustomersViewController extends AChildMainViewController{
     public Text displayResponse;
 
     @FXML
-    public Pane outsideMenu;
-
-    @FXML
     public JFXRadioButton creditLineT, creditLineF, clubMemberT, clubMemberF;
 
     public CustomersViewController(ApplicationModel model) {
@@ -60,7 +57,7 @@ public class CustomersViewController extends AChildMainViewController{
 
     @FXML
     public void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
         ToggleGroup creditLine = new ToggleGroup();
         creditLineT.setToggleGroup(creditLine);
@@ -70,10 +67,10 @@ public class CustomersViewController extends AChildMainViewController{
         clubMemberT.setToggleGroup(clubMember);
         clubMemberF.setToggleGroup(clubMember);
 
-        addButton.setOnMouseClicked(event -> modMenu.toFront());
+        /*addButton.setOnMouseClicked(event -> modMenu.toFront());
+        editButton.setOnMouseClicked(event -> modMenu.toFront());
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());*/
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
-        outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
-
     }
 
 
@@ -91,5 +88,10 @@ public class CustomersViewController extends AChildMainViewController{
     @FXML
     protected void onEdit(ActionEvent event) {
         modMenu.toFront();
+    }
+
+    @FXML
+    protected void onClose(ActionEvent event) {
+        tableView.toFront();
     }
 }

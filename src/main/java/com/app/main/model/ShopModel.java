@@ -12,10 +12,10 @@ public class ShopModel {
         address = new AddressModel();
     }
 
-    public ShopModel(String name, String addressLine1, String addressLine2, String addressSuburb,
+    public ShopModel(String name, String addressLine, String addressSuburb,
                      String addressState, String addressPostcode) {
         this.shopName = new SimpleStringProperty(name);
-        this.address = new AddressModel(addressLine1, addressLine2, addressSuburb, addressState, addressPostcode);
+        this.address = new AddressModel(addressLine, addressSuburb, addressState, addressPostcode);
     }
 
     public String getShopName() {

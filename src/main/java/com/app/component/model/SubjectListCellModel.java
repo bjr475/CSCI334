@@ -6,10 +6,16 @@ import javafx.beans.property.StringProperty;
 public class SubjectListCellModel {
     private StringProperty subjectArea;
 
-    public SubjectListCellModel(String type) { subjectArea = new SimpleStringProperty(type); }
-
-    public String getSubjectArea() { return subjectArea.get(); }
-
-    void setSubjectArea(String type) { subjectArea.setValue(type);}
+    public SubjectListCellModel(String type) {
+        subjectArea = new SimpleStringProperty(type);
     }
+
+    public String getSubjectArea() {
+        return subjectArea.get();
+    }
+
+    void setSubjectArea(String type) {
+        subjectArea.setValue(type);
+    }
+}
 

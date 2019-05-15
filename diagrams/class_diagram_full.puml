@@ -1,0 +1,165 @@
+java -jar plantuml.jar -testdot
+@startuml
+
+'skinparam linetype ortho
+'skinparam groupInheritance 1
+
+abstract class AViewController
+abstract class AChildMainViewController
+class CatalogueViewController
+class ControllerUtil
+class CustomersViewController
+class MainFrameViewController
+class SalesViewController
+class SettingsViewController
+class SuppliersViewController
+class LandingLoginViewController
+
+AViewController <|-- AChildMainViewController
+AChildMainViewController <|-- CatalogueViewController
+AChildMainViewController <|-- CustomersViewController
+AChildMainViewController <|-- SalesViewController
+AChildMainViewController <|-- SettingsViewController
+AChildMainViewController <|-- SuppliersViewController
+AChildMainViewController <|-- LandingLoginViewController
+
+UserModel <|-- EmployeeModel
+EmployeeModel <|-- AdminModel
+
+Main --* com.app.main.model.ApplicationModel
+Main --* com.app.main.controller.MainFrameViewController
+
+class Main {
+    - logger: Logger {static}
+    - model: ApplicationModel
+    --
+    + main(String[]): void {static}
+    - newController(Class<?>): Object
+    + start(Stage): void
+}
+
+namespace com.app.main.model {
+    class ApplicationModel {
+        + EmployeeModel: currentEmployee
+        --
+        - getCurrentAdmin()
+        - currentAdminProperty()
+        - getCurrentEmployee()
+        setCurrentEmployee()
+        currentEmployeeProperty()
+    }
+
+    abstract class UserModel {
+        - userID: String
+        - createdTime: Date
+        - email: StringProperty
+        - firstName: StringProperty
+        - lastName: StringProperty
+        - mobile: StringProperty
+        - password: StringProperty
+        - permissions: StringProperty
+        --
+        + UserModel()
+        + UserModel(int, Date, String, String, String, String, String, String)
+        + UserModel(AUserModel)
+
+    }
+
+    class EmployeeModel {
+
+    }
+
+    class AdminModel {
+
+    }
+
+    class CatalogueModel {
+        - itemID: String
+        - itemName: StringProperty
+        - modelType: StringProperty
+        - subjectArea: StringProperty
+        - retailPrice: StringProperty
+        - dateFirstStocked: StringProperty
+        - storeStock: MapProperty<ShopModel, Integer>;
+        - description: StringProperty;
+        - supplierItems: MapProperty<SupplierModel, BigInteger>
+        + CatalogueModel()
+        + CatalogueModel(String, String, String, String, String, MapProperty<ShopModel, Integer>, String, MapProperty<SupplierModel, BigInteger>)
+        + CatalogueModel(CatalogueModel)
+        + getItemID(): String
+        + setItemID(String): void
+        + getItemName(): String
+        + setItemName(String): void
+        + itemNameProperty(): StringProperty
+        + getModelType(): String
+        + setModelType(String): void
+        + modelTypeProperty(): StringProperty
+        + getSubjectArea(): String
+        + setSubjectArea(String): void
+        + subjectAreaProperty(): StringProperty
+        + geRetailPrice(): String
+        + setRetailPrice(String): void
+        + retailPriceProperty(): StringProperty
+        + getDateFirstStocked(): String
+        + setDateFirstStocked(String): void
+        + dateFirstStockedProperty():
+        + getStoreStock(): MapProperty<ShopModel, Integer>
+        + setStoreStock(ShopModel shop, Integer quantity): void
+        + getDescription(): String
+        + setDescription(String): void
+        + descriptionProperty(): StringProperty
+        + getSupplierItems():  MapProperty<SupplierModel, BigInteger>
+        + setSupplierItems(SupplierModel supplier, BigInteger price): void
+    }
+
+    class CustomerModel {
+        - customerID: String
+        - createdTime: Date
+        - email: StringProperty
+        - firstName: StringProperty
+        - lastName: StringProperty
+        - address: AddressModel
+        - creditLine: StringProperty
+        - subjectAreas: ObjectProperty<ObservableList<SubjectListCellModel>>
+        - modelTypes: ObjectProperty<ObservableList<SalesModel>>
+        + CustomerModel()
+        + CustomerModel(String, Date, String, String, String, String, String, String, String, String, String, ObjectProperty<ObservableList<SubjectListCellModel>>, ArrayList<String>)
+        + CustomerModel(CustomerModel)
+        + getCustomerID: String
+        + setCustomerID: void
+        + getCreatedTime: Date
+        + getEmail: String
+        + setEmail: void
+        + emailProperty: StringProperty
+        + getFirstName: String
+        + setFirstName: void
+        + firstNameProperty: StringProperty
+        + getLastName: String
+        + setLastName: void
+        + lastNameProperty: StringProperty
+        + getAddress: AddressModel
+        + getCreditLine: String
+        + setCreditLine: void
+        + creditLineProperty: StringProperty
+        + getClubMember: String
+        + setClubMember: void
+        + clubMemberProperty: StringProperty
+    }
+
+    class SalesModel {
+
+    }
+
+    class ShopModel {
+
+    }
+
+    class SupplierModel {
+
+    }
+
+    class AddressModel
+}
+
+
+@enduml

@@ -62,10 +62,10 @@ public class SuppliersViewController extends AChildEmployeeViewController {
     public void initialize() {
         //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
 
-        editButton.setOnMouseClicked(event -> modMenu.toFront());
+        /*editButton.setOnMouseClicked(event -> modMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());*/
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
-        searchButton.setOnMouseClicked(event -> searchMenu.toFront());
     }
 
     @FXML

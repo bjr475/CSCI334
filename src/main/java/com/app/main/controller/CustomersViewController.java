@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class CustomersViewController extends AChildEmployeeViewController {
@@ -50,9 +49,6 @@ public class CustomersViewController extends AChildEmployeeViewController {
     public Text displayResponse;
 
     @FXML
-    public Pane outsideMenu;
-
-    @FXML
     public JFXRadioButton creditLineT, creditLineF, clubMemberT, clubMemberF;
 
     public CustomersViewController(ApplicationModel model) {
@@ -71,10 +67,10 @@ public class CustomersViewController extends AChildEmployeeViewController {
         clubMemberT.setToggleGroup(clubMember);
         clubMemberF.setToggleGroup(clubMember);
 
-        addButton.setOnMouseClicked(event -> modMenu.toFront());
+        /*addButton.setOnMouseClicked(event -> modMenu.toFront());
+        editButton.setOnMouseClicked(event -> modMenu.toFront());
+        searchButton.setOnMouseClicked(event -> searchMenu.toFront());*/
         tableView.setOnMouseClicked(event -> viewMenu.toFront());
-        outsideMenu.setOnMouseClicked(event -> modMenu.toBack());
-        searchButton.setOnMouseClicked(event -> searchMenu.toFront());
     }
 
 

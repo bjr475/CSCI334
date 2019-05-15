@@ -10,7 +10,7 @@
            xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.EmployeeViewController"
            style="-fx-background-color: #fafafa"
-           prefHeight="1080" prefWidth="1920">
+           prefHeight="1080" prefWidth="1520">
     <Pane fx:id="adminSettingsPane">
         <fx:include source="admin/adminSettings.fxml" fx:id="adminSettings"/>
     </Pane>
@@ -64,18 +64,24 @@
                             <padding>
                                 <Insets right="20" left="20"/>
                             </padding>
-                            <JFXButton fx:id="editButton" buttonType="FLAT"
-                                       GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                <graphic>
-                                    <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
-                                </graphic>
-                            </JFXButton>
-                            <JFXButton fx:id="addButton" buttonType="FLAT"
-                                       GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                <graphic>
-                                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                </graphic>
-                            </JFXButton>
+                            <StackPane>
+                                <HBox>
+                                    <JFXButton fx:id="catalogueEditButton" buttonType="FLAT"
+                                               GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="catalogueAddButton" buttonType="FLAT"
+                                               GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                        </graphic>
+                                    </JFXButton>
+                                </HBox>
+
+                            </StackPane>
+
                             <JFXButton fx:id="filterButton" buttonType="FLAT"
                                        GridPane.columnIndex="2" GridPane.rowIndex="0">
                                 <graphic>
@@ -235,31 +241,5 @@
             </JFXDrawer>
         </center>
     </BorderPane>
-
-    <!--<AnchorPane fx:id="settingsPane">
-        <fx:include source="employee/settings.fxml" fx:id="settings"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="suppliersPane">
-        <fx:include source="employee/suppliers.fxml" fx:id="suppliers"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="salesPane">
-        <fx:include source="employee/sales.fxml" fx:id="sales"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="customersPane">
-        <fx:include source="employee/customers.fxml" fx:id="customers"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>
-    <AnchorPane fx:id="cataloguePane">
-        <fx:include source="employee/catalogue.fxml" fx:id="catalogue"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
-    </AnchorPane>-->
 
 </StackPane>

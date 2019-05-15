@@ -2,6 +2,7 @@ package com.app.main.controller;
 
 import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.model.ApplicationModel;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.event.ActionEvent;
@@ -48,6 +49,10 @@ public class EmployeeViewController extends AChildMainViewController {
 
     private AChildEmployeeViewController currentView;
 
+    /*JFXButtons*/
+
+    @FXML
+    public JFXButton catalogueAddButton, catalogueEditButton;
 
     public EmployeeViewController(ApplicationModel model) {
         super(model);
@@ -63,22 +68,16 @@ public class EmployeeViewController extends AChildMainViewController {
         suppliersController.setOwner(this);
         settingsController.setOwner(this);
 
-//        cataloguePane.toFront();
         currentView = catalogueController;
 
-
-
-        /*catalogue.setOnMouseClicked(event -> customersPane.toFront());
-        customers.setOnMouseClicked(event -> customersPane.toFront());
-        sales.setOnMouseClicked(event -> salesPane.toFront());
-        suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        settingsButton.setOnMouseClicked(event -> settingsPane.toFront());*/
     }
 
     @FXML
     protected void gotoCatalogue(ActionEvent event) {
         cataloguePane.toFront();
         currentView = catalogueController;
+        catalogueAddButton.toFront();
+        catalogueEditButton.toFront();
     }
 
     @FXML

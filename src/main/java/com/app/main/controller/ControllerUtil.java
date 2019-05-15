@@ -15,6 +15,7 @@ public class ControllerUtil {
             transition.setRate(1);
             transition.play();
         });
+        drawer.setOnMouseClicked(event -> drawer.close());
         drawer.setOnDrawerClosing(event -> {
             final Transition transition = hamburger.getAnimation();
             transition.setRate(-1);

@@ -8,7 +8,8 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.SettingsViewController"
-            prefHeight="1080.0" prefWidth="1920.0">
+            prefHeight="980.0" prefWidth="1920.0" layoutY="45">
+<!--
     <top>
         <VBox>
             <padding>
@@ -20,7 +21,7 @@
                 </Insets>
             </padding>
             <JFXToolbar>
-                <!--<leftItems>
+                &lt;!&ndash;<leftItems>
                     <GridPane alignment="center_left" hgap="25">
                         <padding>
                             <Insets right="20" left="20"/>
@@ -37,7 +38,7 @@
                             Tim's Hobby Shop
                         </Label>
                     </GridPane>
-                </leftItems>-->
+                </leftItems>&ndash;&gt;
                 <rightItems>
                     <GridPane alignment="center_right" hgap="25">
                         <padding>
@@ -72,6 +73,7 @@
             </JFXToolbar>
         </VBox>
     </top>
+-->
     <center>
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>

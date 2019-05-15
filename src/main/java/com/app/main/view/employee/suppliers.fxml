@@ -12,7 +12,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="com.app.main.controller.SuppliersViewController"
-            prefHeight="1080" prefWidth="1520">
+            prefHeight="1080" prefWidth="1520" layoutY="45">
     <fx:script source="../add_dialog.js"/>
     <top>
         <VBox>

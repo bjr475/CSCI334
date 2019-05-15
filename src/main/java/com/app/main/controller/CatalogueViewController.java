@@ -68,10 +68,12 @@ public class CatalogueViewController extends AChildEmployeeViewController {
 
         //tableDisplay.toFront();
 
-        editButton.setOnMouseClicked(event -> viewMenu.toFront());
+/*        editButton.setOnMouseClicked(event -> viewMenu.toFront());
         addButton.setOnMouseClicked(event -> modMenu.toFront());
-        tableView.setOnMouseClicked(event -> viewMenu.toFront());
         searchButton.setOnMouseClicked(event -> searchMenu.toFront());
+        */
+        tableView.setOnMouseClicked(event -> viewMenu.toFront());
+
 
         tableView.selectionModelProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue != null) {

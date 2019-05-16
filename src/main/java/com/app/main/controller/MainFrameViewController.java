@@ -5,8 +5,11 @@ import com.app.main.controller.landing.LandingViewController;
 import com.app.main.model.ApplicationModel;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MainFrameViewController extends AViewController {
+    private static final Logger logger = LogManager.getLogger(MainFrameViewController.class.getName());
 
     @FXML
     public LandingViewController landingController;
@@ -15,7 +18,10 @@ public class MainFrameViewController extends AViewController {
     public EmployeeViewController employeeController;
 
     @FXML
-    public Pane landingPane, employeePane;
+    public Pane landingPane;
+
+    @FXML
+    public Pane employeePane;
 
 
     public MainFrameViewController(ApplicationModel model) {
@@ -25,43 +31,19 @@ public class MainFrameViewController extends AViewController {
 
     @FXML
     private void initialize() {
-
         landingController.setOwner(this);
         employeeController.setOwner(this);
 
-        employeePane.toFront();
-
-
-        /*catalogueController.customer.setOnMouseClicked(event -> customersPane.toFront());
-        catalogueController.sales.setOnMouseClicked(event -> salesPane.toFront());
-        catalogueController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        catalogueController.settings.setOnMouseClicked(event -> settingsPane.toFront());
-
-        customersController.catalogue.setOnMouseClicked(event -> cataloguePane.toFront());
-        customersController.sales.setOnMouseClicked(event -> salesPane.toFront());
-        customersController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        customersController.settings.setOnMouseClicked(event -> settingsPane.toFront());
-
-        suppliersController.catalogue.setOnMouseClicked(event -> cataloguePane.toFront());
-        suppliersController.customer.setOnMouseClicked(event -> customersPane.toFront());
-        suppliersController.sales.setOnMouseClicked(event -> salesPane.toFront());
-        suppliersController.settings.setOnMouseClicked(event -> settingsPane.toFront());
-
-        salesController.customer.setOnMouseClicked(event -> customersPane.toFront());
-        salesController.catalogue.setOnMouseClicked(event -> salesPane.toFront());
-        salesController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        salesController.settings.setOnMouseClicked(event -> settingsPane.toFront());
-
-        settingsController.customer.setOnMouseClicked(event -> customersPane.toFront());
-        settingsController.catalogue.setOnMouseClicked(event -> salesPane.toFront());
-        settingsController.suppliers.setOnMouseClicked(event -> suppliersPane.toFront());
-        settingsController.sales.setOnMouseClicked(event -> suppliersPane.toFront());*/
-
-
+        landingPane.toFront();
     }
 
     public void logout() {
-        employeePane.toBack();
         landingPane.toFront();
+    }
+
+    public boolean login(String username, String password) {
+        logger.info("Attempting to login with username: {} and password: {}", username, password);
+        employeePane.toFront();
+        return true;
     }
 }

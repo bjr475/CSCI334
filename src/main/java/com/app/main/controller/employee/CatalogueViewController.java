@@ -47,6 +47,10 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         activatePane(editMenu);
     }
 
+    public void onCloseEdit() {
+        toolDrawer.close();
+    }
+
     @Override
     public void onAdd() {
         activatePane(addMenu);

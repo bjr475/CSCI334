@@ -16,6 +16,13 @@
     <root id="root">
       <element id="archive" name="JavaFXApp.jar">
         <element id="module-output" name="CSCI334" />
+        <element id="library" level="project" name="javafx" />
+        <element id="library" level="project" name="jfoenix" />
+        <element id="library" level="project" name="ikonli-core-11.2.0-sources" />
+        <element id="library" level="project" name="log4j-api-2.11.2-javadoc" />
+        <element id="library" level="project" name="sqlite-jdbc-3.27.2.1-javadoc" />
+        <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar" />
+        <element id="library" level="project" name="annotations-17.0.0-javadoc" />
       </element>
     </root>
   </artifact>

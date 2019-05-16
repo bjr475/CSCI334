@@ -37,4 +37,4 @@ out/*
 !/lib/junit/*
 !/lib/log4j/*
 !/lib/sqlite/*
-
+!/lib/javafx/bin/*.dll

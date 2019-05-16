@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
@@ -21,7 +22,6 @@ public class Main extends Application {
         System.setErr(new PrintStream(System.err) {
             @Override
             public void print(String s) {
-//                super.print(s);
                 logger.error(s);
             }
 
@@ -34,7 +34,6 @@ public class Main extends Application {
         System.setOut(new PrintStream(System.out) {
             @Override
             public void print(String s) {
-//                super.print(s);
                 logger.info(s);
             }
 
@@ -51,7 +50,8 @@ public class Main extends Application {
         launch(args);
     }
 
-    private Object newController(Class<?> type) {
+    @NotNull
+    private Object newController(@NotNull Class<?> type) {
         try {
             return type.getDeclaredConstructor(ApplicationModel.class).newInstance(model);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -61,26 +61,17 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        System.out.printf("%s%n", getClass().getResource("main/view/main_frame.fxml"));
+    public void start(@NotNull Stage primaryStage) throws Exception {
+        logger.debug("{}", getClass().getResource("main/view/main_frame.fxml"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main/view/main_frame.fxml"));
-
         model = new ApplicationModel();
-
         loader.setControllerFactory(this::newController);
-
-        Scene primary = new Scene(
-                loader.load(),
-                1920,
-                1080
-        );
+        Scene primary = new Scene(loader.load(), 1440, 768);
         primary.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
         primaryStage.setTitle("Tim's Hobby Shop");
         primaryStage.setScene(primary);
-        primaryStage.setX(0);
-        primaryStage.setY(0);
-        primaryStage.setWidth(1600);
-        primaryStage.setHeight(900);
+        primaryStage.setWidth(1440);
+        primaryStage.setHeight(768);
         primaryStage.show();
     }
 }

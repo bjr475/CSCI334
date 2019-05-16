@@ -3,20 +3,18 @@ package com.app.main.controller.employee;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
 import org.jetbrains.annotations.NotNull;
 
-public class SalesViewController extends AChildEmployeeViewController implements IEditorActionItem {
+public class ManageEmployeesViewController extends AChildEmployeeViewController implements IEditorActionItem {
 
     public JFXDrawer toolDrawer;
-    public TableView tableView;
-    public ScrollPane searchMenu;
-    public ScrollPane addMenu;
     public ScrollPane editMenu;
+    public ScrollPane addMenu;
+    public ScrollPane filterMenu;
+    public ScrollPane searchMenu;
 
-    public SalesViewController(ApplicationModel model) {
+    public ManageEmployeesViewController(ApplicationModel model) {
         super(model);
     }
 
@@ -25,7 +23,7 @@ public class SalesViewController extends AChildEmployeeViewController implements
         toolDrawer.setDefaultDrawerSize(600);
     }
 
-    private void activateView(@NotNull Control view) {
+    private void activateView(@NotNull ScrollPane view) {
         view.toFront();
         toolDrawer.open();
     }
@@ -47,7 +45,7 @@ public class SalesViewController extends AChildEmployeeViewController implements
 
     @Override
     public void onFilter() {
-
+        activateView(filterMenu);
     }
 
     @Override
@@ -55,3 +53,4 @@ public class SalesViewController extends AChildEmployeeViewController implements
         activateView(searchMenu);
     }
 }
+

@@ -8,56 +8,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="com.app.main.controller.landing.LandingLoginViewController"
-            style="-fx-background-color: #fafafa"
-            prefHeight="1080" prefWidth="1920">
-    <top>
-        <VBox>
-            <padding>
-                <Insets>
-                    <top>8</top>
-                    <bottom>8</bottom>
-                    <left>8</left>
-                    <right>8</right>
-                </Insets>
-            </padding>
+<GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+          fx:controller="com.app.main.controller.landing.LandingLoginViewController"
+          alignment="center" hgap="25" vgap="25">
+    <padding>
+        <Insets>
+            <left>20</left>
+            <right>20</right>
+        </Insets>
+    </padding>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <graphic>
+            <FontIcon iconLiteral="fa-user" iconSize="20"/>
+        </graphic>
+    </Label>
+    <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <graphic>
+            <FontIcon iconLiteral="fa-lock" iconSize="20"/>
+        </graphic>
+    </Label>
+    <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <HBox alignment="center" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <JFXButton alignment="CENTER" onAction="#onForgot">
+            Forgot Password
+        </JFXButton>
 
-        </VBox>
-    </top>
-    <center>
-        <GridPane alignment="center" hgap="25" vgap="25">
-            <padding>
-                <Insets top="0" right="20" bottom="0" left="20"/>
-            </padding>
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
-                <graphic>
-                    <FontIcon iconLiteral="fa-user" iconSize="20"/>
-                </graphic>
-            </Label>
-
-            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
-                <graphic>
-                    <FontIcon iconLiteral="fa-lock" iconSize="20"/>
-                </graphic>
-            </Label>
-            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <HBox alignment="center"
-                  GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <JFXButton fx:id="loginButton" alignment="CENTER" onAction="#handleLogin">
-                    Login
-                </JFXButton>
-            </HBox>
-            <Text fx:id="messageDisplay"
-                  GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-            <JFXButton fx:id="forgotButton" alignment="CENTER">
-                Forgot Password
-            </JFXButton>
-        </GridPane>
-    </center>
-</BorderPane>
+        <JFXButton alignment="CENTER" onAction="#onLogin">
+            Login
+        </JFXButton>
+    </HBox>
+    <Text fx:id="messageDisplay" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+</GridPane>
 
 

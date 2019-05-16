@@ -1,57 +1,19 @@
 package com.app.main.controller.employee;
 
-import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
-import com.jfoenix.controls.*;
-import javafx.event.ActionEvent;
+import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import org.jetbrains.annotations.NotNull;
 
-public class SuppliersViewController extends AChildEmployeeViewController {
-    public JFXHamburger mainMenu;
-    public JFXDrawer mainDrawer;
-
-    @FXML
-    public JFXButton catalogue, customer, sales, settings, logout;
-
-    @FXML
-    public JFXButton editButton, addButton, filterButton, searchButton;
-
-    @FXML
-    public LandingLoginViewController landingloginController;
-
-    @FXML
-    public CatalogueViewController catalogController;
-
-    @FXML
-    public CustomersViewController customersController;
-
-    @FXML
-    public SalesViewController salesController;
-
-    @FXML
-    public BorderPane modMenu, viewMenu, searchMenu;
-
-    @FXML
-    public JFXDrawer tableDisplay;
-
-    @FXML
-    public ScrollPane supplierMainScroll;
-
-    @FXML
+public class SuppliersViewController extends AChildEmployeeViewController implements IEditorActionItem {
+    public JFXDrawer toolDrawer;
     public TableView tableView;
-
-    @FXML
-    public JFXDialog addItemDialog;
-
-    @FXML
-    public JFXCheckBox creditLineExists;
-
-    @FXML
-    public TextField creditLine;
+    public ScrollPane searchMenu;
+    public ScrollPane viewMenu;
+    public ScrollPane addMenu;
 
     public SuppliersViewController(ApplicationModel model) {
         super(model);
@@ -59,41 +21,37 @@ public class SuppliersViewController extends AChildEmployeeViewController {
 
     @FXML
     public void initialize() {
-        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
-
-        /*editButton.setOnMouseClicked(event -> modMenu.toFront());
-        addButton.setOnMouseClicked(event -> modMenu.toFront());
-        searchButton.setOnMouseClicked(event -> searchMenu.toFront());*/
-        tableView.setOnMouseClicked(event -> viewMenu.toFront());
+        toolDrawer.setDefaultDrawerSize(600);
+        tableView.setOnMouseClicked(event -> activateControl(viewMenu));
     }
 
-    @FXML
-    protected void onSave(ActionEvent event) {
-        viewMenu.toFront();
+    private void activateControl(@NotNull Control pane) {
+        pane.toFront();
+        toolDrawer.open();
     }
 
-    @FXML
-    protected void onEdit(ActionEvent event) {
-        modMenu.toFront();
+    @Override
+    public boolean hasButtons() {
+        return true;
     }
 
-    @FXML
-    protected void onCancel(ActionEvent event) {
-        supplierMainScroll.toFront();
+    @Override
+    public void onEdit() {
+        activateControl(viewMenu);
     }
 
-    @FXML
-    protected void onClose(ActionEvent event) {
-        supplierMainScroll.toFront();
+    @Override
+    public void onAdd() {
+        activateControl(addMenu);
     }
 
-    public void confirmAddItemDialog() {
+    @Override
+    public void onFilter() {
 
-        addItemDialog.close();
     }
 
-    public void showViewMenu() {
-
-        viewMenu.toFront();
+    @Override
+    public void onSearch() {
+        activateControl(searchMenu);
     }
 }

@@ -1,75 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXToolbar?>
+<?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.landing.LandingViewController"
-           style="-fx-background-color: #fafafa"
-           prefHeight="1080" prefWidth="1920">
-    <BorderPane>
-        <top>
-            <VBox>
-                <padding>
-                    <Insets>
-                        <top>8</top>
-                        <bottom>8</bottom>
-                        <left>8</left>
-                        <right>8</right>
-                    </Insets>
-                </padding>
-                <JFXToolbar>
-                    <!--
-                                        <leftItems>
-                                            <GridPane alignment="center_left" hgap="25" vgap="0">
-                                                <padding>
-                                                    <Insets right="20" left="20"/>
-                                                </padding>
-                                                <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                                    <JFXHamburger fx:id="mainMenu">
-                                                        <HamburgerSlideCloseTransition/>
-                                                    </JFXHamburger>
-                                                </StackPane>
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                                    <graphic>
-                                                        <FontIcon iconLiteral="fa-photo" iconSize="24"/>
-                                                    </graphic>
-                                                    Tim's Hobby Shop
-                                                </Label>
-                                            </GridPane>
-                                        </leftItems>
-                    -->
-                </JFXToolbar>
-            </VBox>
-        </top>
-        <center>
-            <JFXDrawer fx:id="mainDrawer" style="-fx-background-color: #fafafa">
-                <!--<sidePane>
-                    <VBox spacing="20" alignment="BASELINE_LEFT">
-                        <JFXButton fx:id="login" buttonType="FLAT" prefWidth="450">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-sign-in" iconSize="24"/>
-                            </graphic>
-                            Login
-                        </JFXButton>
-                        <JFXButton fx:id="forgotButton" buttonType="FLAT" prefWidth="450">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-sign-in" iconSize="24"/>
-                            </graphic>
-                            Forgot Password
-                        </JFXButton>
-                    </VBox>
-                </sidePane>-->
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="com.app.main.controller.landing.LandingViewController"
+            styleClass="default-background">
+    <top>
+        <VBox>
+            <padding>
+                <Insets>
+                    <top>8</top>
+                    <bottom>8</bottom>
+                    <left>8</left>
+                    <right>8</right>
+                </Insets>
+            </padding>
+            <JFXToolbar VBox.vgrow="ALWAYS">
+                <leftItems>
+                    <GridPane alignment="CENTER_LEFT" hgap="25">
+                        <padding>
+                            <Insets>
+                                <left>20</left>
+                                <right>20</right>
+                            </Insets>
+                        </padding>
 
-            </JFXDrawer>
-        </center>
-    </BorderPane>
-    <Pane fx:id="landingLoginPane">
-        <fx:include source="landing_login.fxml"/>
-    </Pane>
-    <Pane fx:id="landingForgotPasswordPane">
-        <fx:include source="landing_forgot_password.fxml"/>
-    </Pane>
-</StackPane>
+                        <Pane GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <JFXHamburger fx:id="mainMenu">
+                                <HamburgerSlideCloseTransition/>
+                            </JFXHamburger>
+                        </Pane>
+
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-photo" iconSize="24"/>
+                            </graphic>
+                            Tim's Hobby Shop
+                        </Label>
+                    </GridPane>
+                </leftItems>
+            </JFXToolbar>
+        </VBox>
+    </top>
+    <center>
+        <JFXDrawer fx:id="mainDrawer">
+            <sidePane>
+                <VBox>
+                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450">Login</JFXButton>
+                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450">Forgot Password</JFXButton>
+                </VBox>
+            </sidePane>
+            <content>
+                <StackPane>
+                    <VBox fx:id="landingLoginPane" styleClass="default-background">
+                        <fx:include source="landing_login.fxml" VBox.vgrow="ALWAYS" fx:id="landingLogin"/>
+                    </VBox>
+                    <VBox fx:id="landingForgotPasswordPane" styleClass="default-background">
+                        <fx:include source="landing_forgot_password.fxml" VBox.vgrow="ALWAYS" fx:id="landingForgot"/>
+                    </VBox>
+                </StackPane>
+            </content>
+        </JFXDrawer>
+    </center>
+</BorderPane>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+           fx:controller="com.app.main.controller.employee.ManageEmployeesViewController">
+    <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
+        <sidePane>
+            <StackPane>
+                <ScrollPane styleClass="default-background" fx:id="editMenu" VBox.vgrow="ALWAYS">
+                    <Label>Edit Store</Label>
+                </ScrollPane>
+                <ScrollPane styleClass="default-background" fx:id="addMenu" VBox.vgrow="ALWAYS">
+                    <Label>Add Store</Label>
+                </ScrollPane>
+                <ScrollPane styleClass="default-background" fx:id="filterMenu" VBox.vgrow="ALWAYS">
+                    <Label>Filter Store</Label>
+                </ScrollPane>
+                <ScrollPane styleClass="default-background" fx:id="searchMenu" VBox.vgrow="ALWAYS">
+                    <Label>Search Store</Label>
+                </ScrollPane>
+            </StackPane>
+        </sidePane>
+        <content>
+            <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+                <TableView fx:id="tableView">
+                    <columns>
+                        <TableColumn text="Username"/>
+                        <TableColumn text="Permissions"/>
+                    </columns>
+                </TableView>
+            </ScrollPane>
+        </content>
+    </JFXDrawer>
+</StackPane>

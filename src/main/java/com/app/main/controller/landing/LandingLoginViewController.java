@@ -1,25 +1,14 @@
 package com.app.main.controller.landing;
 
 import com.app.main.model.ApplicationModel;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class LandingLoginViewController extends AChildLandingViewController {
-
-
-    public JFXHamburger mainMenu;
-    public JFXDrawer mainDrawer;
-
-    @FXML
-    public AnchorPane cataloguePane;
-
-    @FXML
-    public JFXButton loginButton;
+    public TextField username;
+    public PasswordField password;
 
     @FXML
     private Text messageDisplay;
@@ -28,16 +17,23 @@ public class LandingLoginViewController extends AChildLandingViewController {
         super(model);
     }
 
-    /*@FXML
-    protected void handleLogin(ActionEvent event) {
-    }*/
-
     @FXML
     public void initialize() {
+        messageDisplay.setText("");
     }
 
-    @FXML
-    protected void handleLogin(ActionEvent event) {
+    public void onForgot() {
+        getOwner().onForgot();
+    }
+
+    public void onLogin() {
+        if (getOwner().login(username.getText(), password.getText())) {
+            username.setText("");
+            password.setText("");
+            messageDisplay.setText("");
+        } else {
+            messageDisplay.setText("Wrong username or password");
+        }
     }
 }
 

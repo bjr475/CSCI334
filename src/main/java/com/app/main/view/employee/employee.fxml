@@ -4,6 +4,7 @@
 <?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
@@ -88,6 +89,13 @@
             <sidePane>
                 <HBox>
                     <VBox spacing="20" alignment="BASELINE_LEFT" HBox.hgrow="ALWAYS">
+                        <JFXButton onAction="#logout" buttonType="FLAT" prefWidth="450">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
+                            </graphic>
+                            Logout
+                        </JFXButton>
+                        <Separator/>
                         <JFXButton onAction="#gotoCatalogue" buttonType="FLAT" prefWidth="450">
                             <graphic>
                                 <FontIcon iconLiteral="fa-book" iconSize="24"/>
@@ -118,11 +126,18 @@
                             </graphic>
                             Settings
                         </JFXButton>
-                        <JFXButton onAction="#logout" buttonType="FLAT" prefWidth="450">
+                        <Separator/>
+                        <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450">
                             <graphic>
-                                <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-cog" iconSize="24"/>
                             </graphic>
-                            Logout
+                            Manage Stores
+                        </JFXButton>
+                        <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                            </graphic>
+                            Manage Employees
                         </JFXButton>
                     </VBox>
                 </HBox>
@@ -132,21 +147,24 @@
                     <VBox fx:id="cataloguePane" styleClass="default-background">
                         <fx:include source="catalogue.fxml" fx:id="catalogue" VBox.vgrow="ALWAYS"/>
                     </VBox>
-                    <Pane fx:id="customersPane">
-                        <fx:include source="customers.fxml" fx:id="customers"/>
-                    </Pane>
-                    <Pane fx:id="salesPane">
-                        <fx:include source="sales.fxml" fx:id="sales"/>
-                    </Pane>
-                    <Pane fx:id="suppliersPane">
-                        <fx:include source="suppliers.fxml" fx:id="suppliers"/>
-                    </Pane>
-                    <Pane fx:id="settingsPane">
-                        <fx:include source="settings.fxml" fx:id="settings"/>
-                    </Pane>
-                    <Pane fx:id="adminSettingsPane">
-                        <fx:include source="admin/adminSettings.fxml" fx:id="adminSettings"/>
-                    </Pane>
+                    <VBox fx:id="customersPane" styleClass="default-background">
+                        <fx:include source="customers.fxml" fx:id="customers" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="salesPane" styleClass="default-background">
+                        <fx:include source="sales.fxml" fx:id="sales" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="suppliersPane" styleClass="default-background">
+                        <fx:include source="suppliers.fxml" fx:id="suppliers" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="settingsPane" styleClass="default-background">
+                        <fx:include source="settings.fxml" fx:id="settings" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="employeesPane" styleClass="default-background">
+                        <fx:include source="manager/manageEmployees.fxml" fx:id="manageEmployees" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="storesPane" styleClass="default-background">
+                        <fx:include source="manager/manageStores.fxml" fx:id="manageStores" VBox.vgrow="ALWAYS"/>
+                    </VBox>
                 </StackPane>
             </content>
         </JFXDrawer>

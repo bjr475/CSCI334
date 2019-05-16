@@ -1,54 +1,27 @@
 package com.app.main.controller.employee;
 
-import com.app.main.controller.landing.LandingLoginViewController;
 import com.app.main.model.ApplicationModel;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXRadioButton;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
+import org.jetbrains.annotations.NotNull;
 
-public class CustomersViewController extends AChildEmployeeViewController {
-    public JFXHamburger mainMenu;
-    public JFXDrawer mainDrawer;
-
-    @FXML
-    public JFXButton catalogue, customer, suppliers, sales, settings, logout;
-
-    @FXML
-    public JFXButton editButton, addButton, filterButton, searchButton;
-
-    @FXML
-    public LandingLoginViewController landingloginController;
-
-    @FXML
-    public CatalogueViewController catalogController;
-
-    @FXML
-    public SuppliersViewController suppliersController;
-
-    @FXML
-    public SalesViewController salesController;
-
-    @FXML
-    public BorderPane modMenu, viewMenu, searchMenu;
-
-    @FXML
-    public JFXDrawer tableDisplay;
+public class CustomersViewController extends AChildEmployeeViewController implements IEditorActionItem {
+    public JFXDrawer toolDrawer;
 
     @FXML
     public TableView tableView;
 
     @FXML
-    public Text displayResponse;
-
-    @FXML
     public JFXRadioButton creditLineT, creditLineF, clubMemberT, clubMemberF;
+
+    public BorderPane searchMenu;
+    public BorderPane editMenu;
+    public BorderPane addMenu;
 
     public CustomersViewController(ApplicationModel model) {
         super(model);
@@ -56,7 +29,7 @@ public class CustomersViewController extends AChildEmployeeViewController {
 
     @FXML
     public void initialize() {
-        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        toolDrawer.setDefaultDrawerSize(600);
 
         ToggleGroup creditLine = new ToggleGroup();
         creditLineT.setToggleGroup(creditLine);
@@ -66,31 +39,36 @@ public class CustomersViewController extends AChildEmployeeViewController {
         clubMemberT.setToggleGroup(clubMember);
         clubMemberF.setToggleGroup(clubMember);
 
-        /*addButton.setOnMouseClicked(event -> modMenu.toFront());
-        editButton.setOnMouseClicked(event -> modMenu.toFront());
-        searchButton.setOnMouseClicked(event -> searchMenu.toFront());*/
-        tableView.setOnMouseClicked(event -> viewMenu.toFront());
+        tableView.setOnMouseClicked(event -> activatePane(editMenu));
     }
 
-
-    @FXML
-    protected void onCancel(ActionEvent event) {
-        tableDisplay.toFront();
-        displayResponse.setText("");
+    private void activatePane(@NotNull Pane pane) {
+        pane.toFront();
+        toolDrawer.open();
     }
 
-    @FXML
-    protected void onSave(ActionEvent event) {
-        displayResponse.setText("Catalogue item saved.");
+    @Override
+    public boolean hasButtons() {
+        return true;
     }
 
-    @FXML
-    protected void onEdit(ActionEvent event) {
-        modMenu.toFront();
+    @Override
+    public void onEdit() {
+        activatePane(editMenu);
     }
 
-    @FXML
-    protected void onClose(ActionEvent event) {
-        tableView.toFront();
+    @Override
+    public void onAdd() {
+        activatePane(addMenu);
+    }
+
+    @Override
+    public void onFilter() {
+
+    }
+
+    @Override
+    public void onSearch() {
+        activatePane(searchMenu);
     }
 }

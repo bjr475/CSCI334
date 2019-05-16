@@ -1,14 +1,16 @@
 package com.app.main.controller.landing;
 
 import com.app.main.controller.AChildMainViewController;
+import com.app.main.controller.ControllerUtil;
 import com.app.main.model.ApplicationModel;
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 public class LandingViewController extends AChildMainViewController {
+    public JFXDrawer mainDrawer;
+    public JFXHamburger mainMenu;
 
     @FXML
     public LandingLoginViewController landingLoginController;
@@ -17,22 +19,10 @@ public class LandingViewController extends AChildMainViewController {
     public LandingForgotPasswordController landingForgotController;
 
     @FXML
-    public TextField username;
-
-    @FXML
-    public PasswordField password;
-
-    @FXML
     public Pane landingLoginPane;
 
     @FXML
     public Pane landingForgotPasswordPane;
-
-    @FXML
-    public JFXButton loginButton;
-
-    @FXML
-    public JFXButton forgotButton;
 
 
     public LandingViewController(ApplicationModel model) {
@@ -40,16 +30,23 @@ public class LandingViewController extends AChildMainViewController {
     }
 
     @FXML
-    private void initialise() {
+    private void initialize() {
+        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
         landingLoginController.setOwner(this);
         landingForgotController.setOwner(this);
 
-        loginButton.setOnMouseClicked(event -> {
-            //if()
-            landingLoginPane.toFront();
-        });
-        forgotButton.setOnMouseClicked(event -> landingForgotPasswordPane.toFront());
+        landingLoginPane.toFront();
+    }
 
+    public void onLogin() {
+        landingLoginPane.toFront();
+    }
 
+    public void onForgot() {
+        landingForgotPasswordPane.toFront();
+    }
+
+    boolean login(String username, String password) {
+        return getOwner().login(username, password);
     }
 }

@@ -23,5 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="annotations-17.0.0-javadoc" level="project" />
   </component>
 </module>

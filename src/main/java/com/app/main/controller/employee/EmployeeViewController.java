@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 
 public class EmployeeViewController extends AChildMainViewController {
@@ -31,7 +32,13 @@ public class EmployeeViewController extends AChildMainViewController {
 
     @FXML
     public SettingsViewController settingsController;
-    
+
+    @FXML
+    public ManageEmployeesViewController manageEmployeesController;
+
+    @FXML
+    public ManageStoresViewController manageStoresController;
+
     @FXML
     public Pane cataloguePane;
 
@@ -47,18 +54,20 @@ public class EmployeeViewController extends AChildMainViewController {
     @FXML
     public Pane settingsPane;
 
+    @FXML
+    public VBox employeesPane;
+
+    @FXML
+    public VBox storesPane;
+
     public HBox toolbarItems;
 
-    /*JFXButtons*/
     private ObjectProperty<IEditorActionItem> currentView;
 
     public EmployeeViewController(ApplicationModel model) {
         super(model);
         currentView = new SimpleObjectProperty<>(null);
-        currentView.addListener((observableValue, oldValue, newValue) -> {
-            if (newValue != null) toolbarItems.setVisible(newValue.hasButtons());
-            else toolbarItems.setVisible(true);
-        });
+        currentView.addListener((observableValue, oldValue, newValue) -> toolbarItems.setVisible(newValue != null && newValue.hasButtons()));
     }
 
     @FXML
@@ -70,6 +79,8 @@ public class EmployeeViewController extends AChildMainViewController {
         salesController.setOwner(this);
         suppliersController.setOwner(this);
         settingsController.setOwner(this);
+        manageEmployeesController.setOwner(this);
+        manageStoresController.setOwner(this);
 
         setCurrentView(catalogueController, cataloguePane);
     }
@@ -86,22 +97,32 @@ public class EmployeeViewController extends AChildMainViewController {
 
     @FXML
     protected void gotoCustomers() {
-        setCurrentView(null, customersPane);
+        setCurrentView(customersController, customersPane);
     }
 
     @FXML
     protected void gotoSales() {
-        setCurrentView(null, salesPane);
+        setCurrentView(salesController, salesPane);
     }
 
     @FXML
     protected void gotoSuppliers() {
-        setCurrentView(null, suppliersPane);
+        setCurrentView(suppliersController, suppliersPane);
     }
 
     @FXML
     protected void gotoSettings() {
         setCurrentView(null, settingsPane);
+    }
+
+    @FXML
+    protected void gotoManageStores() {
+        setCurrentView(manageStoresController, storesPane);
+    }
+
+    @FXML
+    protected void gotoManageEmployees() {
+        setCurrentView(manageEmployeesController, employeesPane);
     }
 
     public void logout() {

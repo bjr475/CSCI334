@@ -27,6 +27,6 @@ public class SettingsViewController extends AChildEmployeeViewController {
 
     @FXML
     public void initialize() {
-        //ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        //Util.prepareDrawer(mainDrawer, mainMenu);
     }
 }

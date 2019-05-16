@@ -1,5 +1,6 @@
 package com.app.main.model;
 
+import com.app.main.model.catalogue.CatalogueItemModel;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,7 +12,7 @@ public class SupplierModel {
     private AddressModel address;
     private StringProperty creditLine;
     private SimpleMapProperty<StringProperty, StringProperty> contactDetails;
-    private ArrayList<CatalogueModel> modelList;
+    private ArrayList<CatalogueItemModel> modelList;
 
     public SupplierModel() {
         supplierName = new SimpleStringProperty();
@@ -24,7 +25,7 @@ public class SupplierModel {
     public SupplierModel(String supplierName,
                          String addressLine, String addressSuburb, String addressState,
                          String addressPostcode, String creditLine, SimpleMapProperty<StringProperty,
-            StringProperty> contactDetails, ArrayList<CatalogueModel> modelList) {
+            StringProperty> contactDetails, ArrayList<CatalogueItemModel> modelList) {
         this.supplierName = new SimpleStringProperty(supplierName);
         this.address = new AddressModel(addressLine, addressSuburb, addressState, addressPostcode);
         this.creditLine = new SimpleStringProperty(creditLine);
@@ -69,7 +70,7 @@ public class SupplierModel {
         this.contactDetails.put(contactName, contactMethod);
     }
 
-    public ArrayList<CatalogueModel> getmodelList() {
+    public ArrayList<CatalogueItemModel> getmodelList() {
         return modelList;
     }
 

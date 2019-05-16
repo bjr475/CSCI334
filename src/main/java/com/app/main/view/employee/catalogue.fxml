@@ -1,180 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.CatalogueViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
-                <BorderPane fx:id="searchMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <center>
-                        <ScrollPane styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                            <VBox spacing="20">
-                                <padding>
-                                    <Insets top="20" right="20" bottom="20" left="20"/>
-                                </padding>
-                                <VBox HBox.hgrow="ALWAYS">
-                                    <Label>Keywords</Label>
-                                    <TextField fx:id="search"/>
-                                </VBox>
-                                <HBox spacing="16">
-                                    <VBox spacing="8">
-                                        <JFXCheckBox fx:id="allSearch" text="All"/>
-                                    </VBox>
-                                    <VBox spacing="8">
-                                        <JFXCheckBox fx:id="stockSearch" text="Stock"/>
-                                        <JFXCheckBox fx:id="customersSearch" text="Customers"/>
-                                    </VBox>
-                                    <VBox spacing="8">
-                                        <JFXCheckBox fx:id="salesSearch" text="Sales"/>
-                                        <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
-                                    </VBox>
-                                </HBox>
-                                <TitledPane fx:id="filter" text="Filter">
-                                    <content>
+                <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <GridPane VBox.vgrow="ALWAYS" vgap="8" hgap="8">
+                        <Text GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">
+                            View Catalogue Item
+                        </Text>
+                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <Label>Item Name</Label>
+                            <TextField editable="false" fx:id="editItemName">--Item Name--</TextField>
+                        </VBox>
+                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <Label>Current Supplier</Label>
+                            <Label fx:id="editCurrentSupplier">--Current Supplier--</Label>
+                        </VBox>
 
-                                    </content>
-                                </TitledPane>
-                                <HBox>
-                                    <Pane HBox.hgrow="ALWAYS"/>
-                                    <JFXButton>
-                                        Search
-                                    </JFXButton>
-                                </HBox>
+                    </GridPane>
+                    <VBox spacing="20">
+                        <padding>
+                            <Insets>
+                                <left>20</left>
+                                <bottom>20</bottom>
+                                <right>20</right>
+                                <top>20</top>
+                            </Insets>
+                        </padding>
+                        <Text>View Item</Text>
+                        <HBox spacing="20" prefWidth="400">
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label>Supplier Name</Label>
+                                <Text fx:id="viewItemNo" text="display text"/>
                             </VBox>
-                        </ScrollPane>
-                    </center>
-                </BorderPane>
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label>Item Name</Label>
+                                <Text fx:id="viewItemName" text="display text"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="20">
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label>Model Type</Label>
+                                <Text fx:id="viewModelType" text="display text"/>
+                            </VBox>
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label>Subject Area</Label>
+                                <Text fx:id="viewSubjectArea" text="display text"/>
+                            </VBox>
+                            <VBox>
+                                <Label>Credit line:</Label>
+                                <Text>$0.00</Text>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="20">
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label>Retail Price</Label>
+                                <Text fx:id="viewRetailPrice">$19.99</Text>
+                            </VBox>
+                            <VBox>
+                                <Label>Date First Stocked</Label>
+                                <Text fx:id="viewDateFirstStocked">01/01/2019</Text>
+                            </VBox>
+                        </HBox>
+                        <VBox>
+                            <Label>Location in Store</Label>
+                            <Text fx:id="viewLocationInStore">display text</Text>
+                        </VBox>
+                        <VBox spacing="5">
+                            <TitledPane text="Store Stock" expanded="false">
+                                <content>
+                                    <TableView fx:id="viewStoreStockTable">
+                                        <columns>
+                                            <TableColumn prefWidth="300" text="Store Name">
+                                            </TableColumn>
+                                            <TableColumn text="Quantity">
+                                            </TableColumn>
+                                        </columns>
+                                    </TableView>
+                                </content>
+                            </TitledPane>
 
-                <BorderPane fx:id="filterMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <center>
+                        </VBox>
+                        <VBox>
+                            <Label>Description</Label>
+                            <Label fx:id="description" prefWidth="500" wrapText="true"
+                                   disable="true">
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                            </Label>
+                        </VBox>
+                        <VBox>
+                            <TitledPane text="Suppliers" expanded="false">
+                                <Text>Suppliers2</Text>
+                                <content>
+                                    <TableView fx:id="viewSuppliersTable">
+                                        <columns>
+                                            <TableColumn prefWidth="300" text="Supplier Name">
+                                            </TableColumn>
+                                            <TableColumn text="Price">
+                                            </TableColumn>
+                                        </columns>
+                                    </TableView>
+                                </content>
+                            </TitledPane>
+
+                        </VBox>
+                        <HBox spacing="20" alignment="center_right">
+                            <JFXButton onAction="#onCloseEdit">
+                                Close
+                            </JFXButton>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+
+                <ScrollPane fx:id="searchMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <VBox spacing="20">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <VBox HBox.hgrow="ALWAYS">
+                            <Label>Keywords</Label>
+                            <TextField fx:id="search"/>
+                        </VBox>
+                        <HBox spacing="16">
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="allSearch" text="All"/>
+                            </VBox>
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
+                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
+                            </VBox>
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
+                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
+                            </VBox>
+                        </HBox>
+                        <TitledPane fx:id="filter" text="Filter">
+                            <content>
+
+                            </content>
+                        </TitledPane>
+                        <HBox>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton>
+                                Search
+                            </JFXButton>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+
+                <ScrollPane fx:id="filterMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
+                    <VBox>
                         <Label>Filter</Label>
-                    </center>
-                </BorderPane>
+                    </VBox>
+                </ScrollPane>
 
-                <BorderPane fx:id="addMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <center>
+                <ScrollPane fx:id="addMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
+                    <VBox>
                         <Label>Add</Label>
-                    </center>
-                </BorderPane>
-
-                <BorderPane fx:id="editMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <center>
-                        <ScrollPane styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                            <VBox spacing="20">
-                                <padding>
-                                    <Insets top="20" right="20" bottom="20" left="20"/>
-                                </padding>
-                                <Text>View Item</Text>
-                                <HBox spacing="20" prefWidth="400">
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Supplier Name</Label>
-                                        <Text fx:id="viewItemNo" text="display text"/>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Item Name</Label>
-                                        <Text fx:id="viewItemName" text="display text"/>
-                                    </VBox>
-                                </HBox>
-                                <HBox spacing="20">
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Model Type</Label>
-                                        <Text fx:id="viewModelType" text="display text"/>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Subject Area</Label>
-                                        <Text fx:id="viewSubjectArea" text="display text"/>
-                                    </VBox>
-                                    <VBox>
-                                        <Label>Credit line:</Label>
-                                        <Text>$0.00</Text>
-                                    </VBox>
-                                </HBox>
-                                <HBox spacing="20">
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Retail Price</Label>
-                                        <Text fx:id="viewRetailPrice">$19.99</Text>
-                                    </VBox>
-                                    <VBox>
-                                        <Label>Date First Stocked</Label>
-                                        <Text fx:id="viewDateFirstStocked">01/01/2019</Text>
-                                    </VBox>
-                                </HBox>
-                                <VBox>
-                                    <Label>Location in Store</Label>
-                                    <Text fx:id="viewLocationInStore">display text</Text>
-                                </VBox>
-                                <VBox spacing="5">
-                                    <TitledPane text="Store Stock" expanded="false">
-                                        <content>
-                                            <TableView fx:id="viewStoreStockTable">
-                                                <columns>
-                                                    <TableColumn prefWidth="300" text="Store Name">
-                                                    </TableColumn>
-                                                    <TableColumn text="Quantity">
-                                                    </TableColumn>
-                                                </columns>
-                                            </TableView>
-                                        </content>
-                                    </TitledPane>
-
-                                </VBox>
-                                <VBox>
-                                    <Label>Description</Label>
-                                    <Label fx:id="description" prefWidth="500" wrapText="true"
-                                           disable="true">
-                                        display text display text display text display text
-                                        display text display text display text display text
-                                        display text display text display text display text
-                                        display text display text display text display text
-                                        display text display text display text display text
-                                    </Label>
-                                </VBox>
-                                <VBox>
-                                    <TitledPane text="Suppliers" expanded="false">
-                                        <Text>Suppliers2</Text>
-                                        <content>
-                                            <TableView fx:id="viewSuppliersTable">
-                                                <columns>
-                                                    <TableColumn prefWidth="300" text="Supplier Name">
-                                                    </TableColumn>
-                                                    <TableColumn text="Price">
-                                                    </TableColumn>
-                                                </columns>
-                                            </TableView>
-                                        </content>
-                                    </TitledPane>
-
-                                </VBox>
-                                <HBox spacing="20" alignment="center_right">
-                                    <JFXButton onAction="#onCloseEdit">
-                                        Close
-                                    </JFXButton>
-                                </HBox>
-                            </VBox>
-                        </ScrollPane>
-                    </center>
-                </BorderPane>
+                    </VBox>
+                </ScrollPane>
             </StackPane>
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView">
-                    <columns>
-                        <TableColumn prefWidth="400" text="Item No."/>
-                        <TableColumn prefWidth="370" text="Name"/>
-                        <TableColumn prefWidth="150" text="Type"/>
-                        <TableColumn prefWidth="150" text="Subject Area"/>
-                        <TableColumn prefWidth="150" text="Retail Price"/>
-                        <TableColumn prefWidth="150" text="Date First Stocked"/>
-                        <TableColumn prefWidth="150" text="Total Stock"/>
-                    </columns>
-                </TableView>
+                <TableView fx:id="catalogueTable"/>
             </ScrollPane>
         </content>
     </JFXDrawer>

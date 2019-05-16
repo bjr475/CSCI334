@@ -1,7 +1,7 @@
 package com.app.main.controller.landing;
 
 import com.app.main.controller.AChildMainViewController;
-import com.app.main.controller.ControllerUtil;
+import com.app.main.Util;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -31,7 +31,7 @@ public class LandingViewController extends AChildMainViewController {
 
     @FXML
     private void initialize() {
-        ControllerUtil.prepareDrawer(mainDrawer, mainMenu);
+        Util.prepareDrawer(mainDrawer, mainMenu);
         landingLoginController.setOwner(this);
         landingForgotController.setOwner(this);
 

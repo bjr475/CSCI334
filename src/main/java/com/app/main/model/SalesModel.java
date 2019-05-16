@@ -1,5 +1,6 @@
 package com.app.main.model;
 
+import com.app.main.model.catalogue.CatalogueItemModel;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -7,11 +8,11 @@ import javafx.beans.property.StringProperty;
 public class SalesModel {
     private String saleID;
     private CustomerModel customer;
-    private SimpleMapProperty<CatalogueModel, Integer> items;
+    private SimpleMapProperty<CatalogueItemModel, Integer> items;
     private StringProperty discount;
     private StringProperty total;
 
-    public SalesModel(String saleID, SimpleMapProperty<CatalogueModel, Integer> items,
+    public SalesModel(String saleID, SimpleMapProperty<CatalogueItemModel, Integer> items,
                       String discount, String total) {
         this.saleID = saleID;
         this.items = new SimpleMapProperty<>(items);

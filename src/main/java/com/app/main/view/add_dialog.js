@@ -3,7 +3,7 @@ function addNewDialog(dialog, parent) {
 }
 
 function addNewDialogCheck(dialog, parent, check) {
-    if(check.isSelected()) {
+    if (check.isSelected()) {
         dialog.show(parent);
     }
 }

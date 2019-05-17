@@ -1,6 +1,5 @@
 package com.app.main.controller.employee;
 
-import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;

@@ -39,6 +39,27 @@ public class CatalogueItemModel {
         stockedOn = new SimpleObjectProperty<>(Date.from(Instant.now()));
         stores = new SimpleObjectProperty<>(FXCollections.observableArrayList());
         suppliers = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        stockTotal = new SimpleIntegerProperty(0);
+        addListeners();
+    }
+
+    public CatalogueItemModel(@NotNull CatalogueItemModel item) {
+        this.itemId = item.itemId;
+        name = new SimpleStringProperty(item.name.get());
+        type = new SimpleStringProperty(item.type.get());
+        price = new SimpleDoubleProperty(item.price.get());
+        subject = new SimpleStringProperty(item.subject.get());
+        description = new SimpleStringProperty(item.description.get());
+        stockedOn = new SimpleObjectProperty<>(item.stockedOn.get());
+        stores = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        item.stores.get().forEach(i -> stores.get().add(new CatalogueItemLocationModel(i)));
+        suppliers = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        item.suppliers.get().forEach(i -> suppliers.get().add(new CatalogueItemSupplierModel(i)));
+        stockTotal = new SimpleIntegerProperty(0);
+        addListeners();
+    }
+
+    private void addListeners() {
         stores.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) oldValue.removeListener(this::onStoresChanged);
             if (newValue != null) {
@@ -46,7 +67,6 @@ public class CatalogueItemModel {
                 newValue.addListener(this::onStoresChanged);
             }
         });
-        stockTotal = new SimpleIntegerProperty(0);
         stores.get().addListener(this::onStoresChanged);
     }
 
@@ -166,5 +186,17 @@ public class CatalogueItemModel {
 
     public IntegerProperty stockTotalProperty() {
         return stockTotal;
+    }
+
+    public void set(@NotNull CatalogueItemModel model) {
+        itemId = model.itemId;
+        name = model.name;
+        type = model.type;
+        price = model.price;
+        subject = model.subject;
+        description = model.description;
+        stockedOn = model.stockedOn;
+        stores = model.stores;
+        suppliers = model.suppliers;
     }
 }

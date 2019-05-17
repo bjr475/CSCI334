@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.jetbrains.annotations.NotNull;
 
 public class CatalogueItemLocationModel {
     private StringProperty store;
@@ -12,6 +13,11 @@ public class CatalogueItemLocationModel {
     public CatalogueItemLocationModel() {
         store = new SimpleStringProperty("Store Name");
         count = new SimpleIntegerProperty(0);
+    }
+
+    CatalogueItemLocationModel(@NotNull CatalogueItemLocationModel item) {
+        store = new SimpleStringProperty(item.store.get());
+        count = new SimpleIntegerProperty(item.count.get());
     }
 
     public String getStore() {

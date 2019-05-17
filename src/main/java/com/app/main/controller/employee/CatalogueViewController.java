@@ -7,17 +7,21 @@ import com.app.main.model.catalogue.CatalogueItemModel;
 import com.app.main.model.catalogue.CatalogueItemSupplierModel;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -27,52 +31,118 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     /* Tool Drawer */
     public JFXDrawer toolDrawer;
 
-    /* Search Control */
-    public ScrollPane searchMenu;
+    /* Edit Control */
+    public ScrollPane editMenu;
+    public TextField editItemName;
+    public TextField editItemID;
+    public TextField editModelType;
+    public TextField editSubject;
+    public TextField editPrice;
+    public TextArea editDescription;
+    public TableView<CatalogueItemLocationModel> editStores;
+    public TableView<CatalogueItemSupplierModel> editSuppliers;
+
+    /* Add Control */
+    public ScrollPane addMenu;
+    public TextField addItemName;
+    public TextField addItemID;
+    public TextField addType;
+    public TextField addSubject;
+    public TextField addPrice;
+    public TextArea addDescription;
+    public TableView<CatalogueItemLocationModel> addStoresView;
+    public TableView<CatalogueItemSupplierModel> addSuppliersView;
 
     /* Filter Control */
     public ScrollPane filterMenu;
 
-    /* Add Control */
-    public ScrollPane addMenu;
-
-    /* Edit Control */
-    public ScrollPane editMenu;
-    public TextField editItemName;
-    public Label editCurrentSupplier;
+    /* Search Control */
+    public ScrollPane searchMenu;
+    public TextField searchWords;
 
     /* Catalogue Table */
     public TableView<CatalogueItemModel> catalogueTable;
 
+    /* Add and Edit Values */
+    private ObjectProperty<CatalogueItemModel> currentAddItem;
+    private ObjectProperty<CatalogueItemModel> currentEditableItem;
+
     public CatalogueViewController(ApplicationModel model) {
         super(model);
+        currentAddItem = new SimpleObjectProperty<>(null);
+        currentEditableItem = new SimpleObjectProperty<>(null);
+
+        currentAddItem.addListener(this::onUpdateAddItem);
+        currentEditableItem.addListener(this::onUpdateEditItem);
     }
 
-    @FXML
-    public void initialize() {
-        toolDrawer.setDefaultDrawerSize(600);
-
-        ArrayList<CatalogueItemModel> models = new ArrayList<>();
-
-        for (int i = 0; i < 100; i++) {
-            CatalogueItemModel catalogueItem = new CatalogueItemModel(String.format("%d", i));
-            for (int j = 0; j < 5; j++) {
-                CatalogueItemLocationModel location = new CatalogueItemLocationModel();
-                location.setStore(String.format("Store %d", j));
-                location.setCount(j);
-                catalogueItem.getStores().add(location);
-
-                CatalogueItemSupplierModel supplier = new CatalogueItemSupplierModel();
-                supplier.setName(String.format("Supplier %d", i));
-                supplier.setCurrent(j == 3);
-                catalogueItem.getSuppliers().add(supplier);
-            }
-            models.add(catalogueItem);
+    private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
+                                 @NotNull TextField type, @NotNull TextField subject, @NotNull TextField price,
+                                 @NotNull TextArea description,
+                                 @NotNull TableView<CatalogueItemLocationModel> storesView,
+                                 @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+        if (item != null) {
+            name.textProperty().unbindBidirectional(item.nameProperty());
+            id.setText("-- Item ID --");
+            type.textProperty().unbindBidirectional(item.typeProperty());
+            subject.textProperty().unbindBidirectional(item.subjectProperty());
+            price.setText("-- Price --");
+            description.textProperty().unbindBidirectional(item.descriptionProperty());
+            storesView.itemsProperty().unbindBidirectional(item.storesProperty());
+            suppliersView.itemsProperty().unbindBidirectional(item.suppliersProperty());
         }
+    }
 
-        catalogueTable.setItems(FXCollections.observableArrayList(models));
-        catalogueTable.refresh();
+    private void bindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
+                               @NotNull TextField type, @NotNull TextField subject, @NotNull TextField price,
+                               @NotNull TextArea description,
+                               @NotNull TableView<CatalogueItemLocationModel> storesView,
+                               @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+        if (item != null) {
+            name.textProperty().bindBidirectional(item.nameProperty());
+            id.setText(item.getItemId());
+            type.textProperty().bindBidirectional(item.typeProperty());
+            subject.textProperty().bindBidirectional(item.subjectProperty());
+            price.setText(Util.formatPrice(item.priceProperty()));
+            description.textProperty().bindBidirectional(item.descriptionProperty());
+            storesView.itemsProperty().bindBidirectional(item.storesProperty());
+            suppliersView.itemsProperty().bindBidirectional(item.suppliersProperty());
+        }
+    }
 
+    private void onUpdateAddItem(@SuppressWarnings("unused") ObservableValue<? extends CatalogueItemModel> observable,
+                                 CatalogueItemModel oldValue, CatalogueItemModel newValue) {
+        unbindItemModel(
+                oldValue,
+                addItemName, addItemID, addType, addSubject,
+                addPrice, addDescription, addStoresView, addSuppliersView
+        );
+        bindItemModel(
+                newValue,
+                addItemName, addItemID, addType, addSubject,
+                addPrice, addDescription, addStoresView, addSuppliersView
+        );
+        addStoresView.refresh();
+        addSuppliersView.refresh();
+    }
+
+    private void onUpdateEditItem(@SuppressWarnings("unused") ObservableValue<? extends CatalogueItemModel> observable,
+                                  CatalogueItemModel oldValue, CatalogueItemModel newValue) {
+        unbindItemModel(
+                oldValue,
+                editItemName, editItemID, editModelType, editSubject,
+                editPrice, editDescription, editStores, editSuppliers
+        );
+        bindItemModel(
+                newValue,
+                editItemName, editItemID, editModelType, editSubject,
+                editPrice, editDescription, editStores, editSuppliers
+        );
+        editStores.refresh();
+        editSuppliers.refresh();
+    }
+
+    private void buildCatalogueTable() {
         {
             TableColumn<CatalogueItemModel, String> itemIdColumn = new TableColumn<>("Item No");
             itemIdColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().getItemId()));
@@ -115,6 +185,56 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         });
     }
 
+    private void buildEditTables() {
+        {
+            TableColumn<CatalogueItemLocationModel, String> itemIdColumn = new TableColumn<>("Store Name");
+            itemIdColumn.setCellValueFactory(p -> p.getValue().storeProperty());
+            editStores.getColumns().add(itemIdColumn);
+
+            TableColumn<CatalogueItemLocationModel, String> nameColumn = new TableColumn<>("Quantity");
+            nameColumn.setCellValueFactory(p -> Bindings.concat(String.format("%d", p.getValue().getCount())));
+            editStores.getColumns().add(nameColumn);
+        }
+
+        {
+            TableColumn<CatalogueItemSupplierModel, String> itemIdColumn = new TableColumn<>("Supplier Name");
+            itemIdColumn.setCellValueFactory(p -> p.getValue().nameProperty());
+            editSuppliers.getColumns().add(itemIdColumn);
+
+            TableColumn<CatalogueItemSupplierModel, String> nameColumn = new TableColumn<>("Price");
+            nameColumn.setCellValueFactory(p -> Bindings.concat(Util.formatPrice(p.getValue().getPrice())));
+            editSuppliers.getColumns().add(nameColumn);
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        toolDrawer.setDefaultDrawerSize(600);
+        buildCatalogueTable();
+        buildEditTables();
+
+        ArrayList<CatalogueItemModel> models = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            CatalogueItemModel catalogueItem = new CatalogueItemModel(String.format("%d", i));
+            catalogueItem.setName(String.format("Name %d", i));
+            for (int j = 0; j < 5; j++) {
+                CatalogueItemLocationModel location = new CatalogueItemLocationModel();
+                location.setStore(String.format("Store %d", j));
+                location.setCount(j);
+                catalogueItem.getStores().add(location);
+
+                CatalogueItemSupplierModel supplier = new CatalogueItemSupplierModel();
+                supplier.setName(String.format("Supplier %d", i));
+                catalogueItem.getSuppliers().add(supplier);
+            }
+            models.add(catalogueItem);
+        }
+        catalogueTable.setItems(FXCollections.observableArrayList(models));
+        catalogueTable.refresh();
+
+        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+    }
+
     private void activateView(@NotNull ScrollPane view) {
         view.toFront();
         toolDrawer.open();
@@ -131,13 +251,33 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         if (item != null) openEdit(item);
     }
 
-    public void onCloseEdit() {
+    private void openEdit(@NotNull CatalogueItemModel item) {
+        logger.info("Item Clicked: {}", item);
+        currentEditableItem.set(new CatalogueItemModel(item));
+        activateView(editMenu);
+    }
+
+    public void onConfirmEdit() {
+        CatalogueItemModel model = currentEditableItem.get();
+        if (model != null) catalogueTable.getSelectionModel().getSelectedItem().set(model);
+        catalogueTable.refresh();
         toolDrawer.close();
     }
 
     @Override
     public void onAdd() {
         activateView(addMenu);
+    }
+
+    public void onCancelAdd() {
+        toolDrawer.close();
+        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+    }
+
+    public void onConfirmAdd() {
+        catalogueTable.itemsProperty().get().add(currentAddItem.get());
+        catalogueTable.refresh();
+        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
     }
 
     @Override
@@ -150,13 +290,14 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         activateView(searchMenu);
     }
 
-    public void onCancelSearch() {
-        // TODO cancel search action
-        toolDrawer.close();
+    public void resetSearch() {
+        searchWords.setText("");
     }
 
-    private void openEdit(@NotNull CatalogueItemModel item) {
-        logger.info("Item Clicked: {}", item);
-        activateView(editMenu);
+    public void confirmSearch() {
+        logger.info(
+                "Looking for catalogue items that contain the following words: '{}'",
+                searchWords.getText()
+        );
     }
 }

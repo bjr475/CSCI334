@@ -1,176 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.CatalogueViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
                 <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <GridPane VBox.vgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">
-                            View Catalogue Item
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            Edit Catalogue Item
                         </Text>
-                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
                             <Label>Item Name</Label>
-                            <TextField editable="false" fx:id="editItemName">--Item Name--</TextField>
+                            <TextField fx:id="editItemName">--Item Name--</TextField>
                         </VBox>
-                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="1">
-                            <Label>Current Supplier</Label>
-                            <Label fx:id="editCurrentSupplier">--Current Supplier--</Label>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <Label>Item ID</Label>
+                            <TextField editable="false" fx:id="editItemID">--Item ID--</TextField>
                         </VBox>
-
-                    </GridPane>
-                    <VBox spacing="20">
-                        <padding>
-                            <Insets>
-                                <left>20</left>
-                                <bottom>20</bottom>
-                                <right>20</right>
-                                <top>20</top>
-                            </Insets>
-                        </padding>
-                        <Text>View Item</Text>
-                        <HBox spacing="20" prefWidth="400">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Supplier Name</Label>
-                                <Text fx:id="viewItemNo" text="display text"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Item Name</Label>
-                                <Text fx:id="viewItemName" text="display text"/>
-                            </VBox>
-                        </HBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Model Type</Label>
-                                <Text fx:id="viewModelType" text="display text"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Subject Area</Label>
-                                <Text fx:id="viewSubjectArea" text="display text"/>
-                            </VBox>
-                            <VBox>
-                                <Label>Credit line:</Label>
-                                <Text>$0.00</Text>
-                            </VBox>
-                        </HBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Retail Price</Label>
-                                <Text fx:id="viewRetailPrice">$19.99</Text>
-                            </VBox>
-                            <VBox>
-                                <Label>Date First Stocked</Label>
-                                <Text fx:id="viewDateFirstStocked">01/01/2019</Text>
-                            </VBox>
-                        </HBox>
-                        <VBox>
-                            <Label>Location in Store</Label>
-                            <Text fx:id="viewLocationInStore">display text</Text>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                            <Label>Model Type</Label>
+                            <TextField fx:id="editModelType">--Model Type--</TextField>
                         </VBox>
-                        <VBox spacing="5">
-                            <TitledPane text="Store Stock" expanded="false">
-                                <content>
-                                    <TableView fx:id="viewStoreStockTable">
-                                        <columns>
-                                            <TableColumn prefWidth="300" text="Store Name">
-                                            </TableColumn>
-                                            <TableColumn text="Quantity">
-                                            </TableColumn>
-                                        </columns>
-                                    </TableView>
-                                </content>
-                            </TitledPane>
-
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <Label>Subject Area</Label>
+                            <TextField fx:id="editSubject">--Subject Area--</TextField>
                         </VBox>
-                        <VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                            <Label>Retail Price</Label>
+                            <TextField fx:id="editPrice">--Price--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2" GridPane.rowSpan="2">
                             <Label>Description</Label>
-                            <Label fx:id="description" prefWidth="500" wrapText="true"
-                                   disable="true">
+                            <TextArea fx:id="editDescription" wrapText="true">
                                 display text display text display text display text
                                 display text display text display text display text
                                 display text display text display text display text
                                 display text display text display text display text
                                 display text display text display text display text
-                            </Label>
+                            </TextArea>
                         </VBox>
-                        <VBox>
-                            <TitledPane text="Suppliers" expanded="false">
-                                <Text>Suppliers2</Text>
-                                <content>
-                                    <TableView fx:id="viewSuppliersTable">
-                                        <columns>
-                                            <TableColumn prefWidth="300" text="Supplier Name">
-                                            </TableColumn>
-                                            <TableColumn text="Price">
-                                            </TableColumn>
-                                        </columns>
-                                    </TableView>
-                                </content>
-                            </TitledPane>
-
-                        </VBox>
-                        <HBox spacing="20" alignment="center_right">
-                            <JFXButton onAction="#onCloseEdit">
-                                Close
+                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
+                            <TableView fx:id="editStores"/>
+                        </TitledPane>
+                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
+                            <TableView fx:id="editSuppliers"/>
+                        </TitledPane>
+                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton onAction="#onConfirmEdit">
+                                Confirm
                             </JFXButton>
                         </HBox>
-                    </VBox>
+                    </GridPane>
+                </ScrollPane>
+
+                <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            Edit Catalogue Item
+                        </Text>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <Label>Item Name</Label>
+                            <TextField fx:id="addItemName">--Item Name--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <Label>Item ID</Label>
+                            <TextField editable="false" fx:id="addItemID">--Item ID--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                            <Label>Model Type</Label>
+                            <TextField fx:id="addType">--Model Type--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <Label>Subject Area</Label>
+                            <TextField fx:id="addSubject">--Subject Area--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                            <Label>Retail Price</Label>
+                            <TextField fx:id="addPrice">--Price--</TextField>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2" GridPane.rowSpan="2">
+                            <Label>Description</Label>
+                            <TextArea fx:id="addDescription" wrapText="true">
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                                display text display text display text display text
+                            </TextArea>
+                        </VBox>
+                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
+                            <TableView fx:id="addStoresView"/>
+                        </TitledPane>
+                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
+                            <TableView fx:id="addSuppliersView"/>
+                        </TitledPane>
+                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton onAction="#onCancelAdd">Cancel</JFXButton>
+                            <JFXButton onAction="#onConfirmAdd">Confirm</JFXButton>
+                        </HBox>
+                    </GridPane>
+                </ScrollPane>
+
+                <ScrollPane fx:id="filterMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            Filter Catalogue Items
+                        </Text>
+                    </GridPane>
                 </ScrollPane>
 
                 <ScrollPane fx:id="searchMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <VBox spacing="20">
-                        <padding>
-                            <Insets top="20" right="20" bottom="20" left="20"/>
-                        </padding>
-                        <VBox HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            Search Catalogue Items
+                        </Text>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
                             <Label>Keywords</Label>
-                            <TextField fx:id="search"/>
+                            <TextField HBox.hgrow="ALWAYS" fx:id="searchWords"/>
                         </VBox>
-                        <HBox spacing="16">
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="allSearch" text="All"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
-                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
-                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
-                            </VBox>
-                        </HBox>
-                        <TitledPane fx:id="filter" text="Filter">
-                            <content>
-
-                            </content>
-                        </TitledPane>
-                        <HBox>
+                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton>
-                                Search
-                            </JFXButton>
+                            <JFXButton onAction="#resetSearch">Reset</JFXButton>
+                            <JFXButton onAction="#confirmSearch">Search</JFXButton>
                         </HBox>
-                    </VBox>
-                </ScrollPane>
-
-                <ScrollPane fx:id="filterMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <VBox>
-                        <Label>Filter</Label>
-                    </VBox>
-                </ScrollPane>
-
-                <ScrollPane fx:id="addMenu" HBox.hgrow="ALWAYS" styleClass="default-background">
-                    <VBox>
-                        <Label>Add</Label>
-                    </VBox>
+                    </GridPane>
                 </ScrollPane>
             </StackPane>
         </sidePane>

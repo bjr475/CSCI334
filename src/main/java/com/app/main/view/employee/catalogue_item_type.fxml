@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import java.lang.String?>
+<ChoiceBox xmlns:fx="http://javafx.com/fxml" value="Type" xmlns="http://javafx.com/javafx">
+    <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Type"/>
+            <String fx:value="Display"/>
+            <String fx:value="Static"/>
+            <String fx:value="Working"/>
+        </FXCollections>
+    </items>
+</ChoiceBox>

@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXHamburger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -61,6 +62,7 @@ public class EmployeeViewController extends AChildMainViewController {
     public VBox storesPane;
 
     public HBox toolbarItems;
+    public Label titleLabel;
 
     private ObjectProperty<IEditorActionItem> currentView;
 
@@ -68,6 +70,21 @@ public class EmployeeViewController extends AChildMainViewController {
         super(model);
         currentView = new SimpleObjectProperty<>(null);
         currentView.addListener((observableValue, oldValue, newValue) -> toolbarItems.setVisible(newValue != null && newValue.hasButtons()));
+
+
+        model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
+            titleLabel.setText("Tim's Hobby Shop");
+            if (newValue != null) {
+                switch (newValue.getUserType()) {
+                    case ADMIN:
+                        titleLabel.setText("Tim's Hobby Shop - Admin");
+                        break;
+                    case EMPLOYEE:
+                        titleLabel.setText("Tim's Hobby Shop - Employee");
+                        break;
+                }
+            }
+        });
     }
 
     @FXML

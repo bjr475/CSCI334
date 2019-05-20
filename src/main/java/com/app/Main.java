@@ -1,5 +1,6 @@
 package com.app;
 
+import com.app.database.Database;
 import com.app.main.model.ApplicationModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -64,6 +67,13 @@ public class Main extends Application {
     @Override
     public void start(@NotNull Stage primaryStage) throws Exception {
         logger.debug("{}", getClass().getResource("main/view/main_frame.fxml"));
+
+        try (Connection connection = Database.INSTANCE.openConnection()) {
+            logger.info("Successful connection to database: {}", connection);
+        } catch (SQLException e) {
+            logger.error("Failed to open database", e);
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main/view/main_frame.fxml"));
         model = new ApplicationModel();
         loader.setControllerFactory(this::newController);

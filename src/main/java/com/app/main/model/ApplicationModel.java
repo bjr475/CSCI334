@@ -1,37 +1,27 @@
 package com.app.main.model;
 
+import com.app.main.model.user.AUserModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 public class ApplicationModel {
-    public static final AdminModel EMPTY_ADMIN = new AdminModel();
 
-    private ObjectProperty<EmployeeModel> currentEmployee;
-    private ObjectProperty<AdminModel> currentAdmin;
+    private ObjectProperty<AUserModel> currentUser;
 
     public ApplicationModel() {
-        currentAdmin = new SimpleObjectProperty<>(EMPTY_ADMIN);
-        currentEmployee = new SimpleObjectProperty<>(null);
+        currentUser = new SimpleObjectProperty<>(null);
     }
 
-    public AdminModel getCurrentAdmin() {
-        return currentAdmin.get();
+    public AUserModel getCurrentUser() {
+        return currentUser.get();
     }
 
-    public ObjectProperty<AdminModel> currentAdminProperty() {
-        return currentAdmin;
+    public void setCurrentUser(AUserModel currentUser) {
+        this.currentUser.set(currentUser);
     }
 
-    public EmployeeModel getCurrentEmployee() {
-        return currentEmployee.get();
-    }
-
-    public void setCurrentEmployee(EmployeeModel currentEmployee) {
-        this.currentEmployee.set(currentEmployee);
-    }
-
-    public ObjectProperty<EmployeeModel> currentEmployeeProperty() {
-        return currentEmployee;
+    public ObjectProperty<AUserModel> currentUserProperty() {
+        return currentUser;
     }
 }
 

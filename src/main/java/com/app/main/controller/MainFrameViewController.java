@@ -1,10 +1,12 @@
 package com.app.main.controller;
 
+import com.app.database.Database;
+import com.app.database.dao.user.User;
 import com.app.main.controller.employee.EmployeeViewController;
 import com.app.main.controller.landing.LandingViewController;
 import com.app.main.model.ApplicationModel;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,10 +20,10 @@ public class MainFrameViewController extends AViewController {
     public EmployeeViewController employeeController;
 
     @FXML
-    public Pane landingPane;
+    public VBox landingPane;
 
     @FXML
-    public Pane employeePane;
+    public VBox employeePane;
 
 
     public MainFrameViewController(ApplicationModel model) {
@@ -43,7 +45,19 @@ public class MainFrameViewController extends AViewController {
 
     public boolean login(String username, String password) {
         logger.info("Attempting to login with username: {} and password: {}", username, password);
-        employeePane.toFront();
-        return true;
+        User user = Database.INSTANCE.getUser().login(username, password);
+        if (user != null) {
+            switch (user.getType()) {
+                case ADMIN:
+                    getModel().setCurrentUser(Database.INSTANCE.getUser().getAdmin(user.getId()));
+                    break;
+                case EMPLOYEE:
+                    getModel().setCurrentUser(Database.INSTANCE.getUser().getEmployee(user.getId()));
+                    break;
+            }
+            employeePane.toFront();
+            return true;
+        }
+        return false;
     }
 }

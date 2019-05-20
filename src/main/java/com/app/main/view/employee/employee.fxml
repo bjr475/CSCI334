@@ -37,7 +37,7 @@
                             </JFXHamburger>
                         </Pane>
 
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="main-heading">
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="titleLabel">
                             <graphic>
                                 <FontIcon iconLiteral="fa-photo" iconSize="24"/>
                             </graphic>

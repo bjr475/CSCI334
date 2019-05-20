@@ -1,14 +1,17 @@
 package com.app.main.controller.employee;
 
+import com.app.database.Database;
 import com.app.main.Util;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.catalogue.CatalogueItemLocationModel;
 import com.app.main.model.catalogue.CatalogueItemModel;
 import com.app.main.model.catalogue.CatalogueItemSupplierModel;
+import com.app.main.model.user.AUserModel;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -23,8 +26,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
 
 public class CatalogueViewController extends AChildEmployeeViewController implements IEditorActionItem {
     private static final Logger logger = LogManager.getLogger(CatalogueViewController.class.getName());
@@ -75,6 +76,20 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
         currentAddItem.addListener(this::onUpdateAddItem);
         currentEditableItem.addListener(this::onUpdateEditItem);
+
+        getModel().currentUserProperty().addListener(new ChangeListener<AUserModel>() {
+            @Override
+            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+                if (newValue != null) {
+                    currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+                    currentEditableItem.set(null);
+
+                    catalogueTable.setItems(FXCollections.observableArrayList(Database.INSTANCE.getModel().getItems()));
+                    catalogueTable.refresh();
+
+                }
+            }
+        });
     }
 
     private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
@@ -221,24 +236,24 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         buildCatalogueTable();
         buildEditTables();
 
-        ArrayList<CatalogueItemModel> models = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            CatalogueItemModel catalogueItem = new CatalogueItemModel(String.format("%d", i));
-            catalogueItem.setName(String.format("Name %d", i));
-            for (int j = 0; j < 5; j++) {
-                CatalogueItemLocationModel location = new CatalogueItemLocationModel();
-                location.setStore(String.format("Store %d", j));
-                location.setCount(j);
-                catalogueItem.getStores().add(location);
-
-                CatalogueItemSupplierModel supplier = new CatalogueItemSupplierModel();
-                supplier.setName(String.format("Supplier %d", i));
-                catalogueItem.getSuppliers().add(supplier);
-            }
-            models.add(catalogueItem);
-        }
-        catalogueTable.setItems(FXCollections.observableArrayList(models));
-        catalogueTable.refresh();
+//        ArrayList<CatalogueItemModel> models = new ArrayList<>();
+//        for (int i = 0; i < 12; i++) {
+//            CatalogueItemModel catalogueItem = new CatalogueItemModel(String.format("%d", i));
+//            catalogueItem.setName(String.format("Name %d", i));
+//            for (int j = 0; j < 5; j++) {
+//                CatalogueItemLocationModel location = new CatalogueItemLocationModel();
+//                location.setStore(String.format("Store %d", j));
+//                location.setCount(j);
+//                catalogueItem.getStores().add(location);
+//
+//                CatalogueItemSupplierModel supplier = new CatalogueItemSupplierModel();
+//                supplier.setName(String.format("Supplier %d", i));
+//                catalogueItem.getSuppliers().add(supplier);
+//            }
+//            models.add(catalogueItem);
+//        }
+//        catalogueTable.setItems(FXCollections.observableArrayList(models));
+//        catalogueTable.refresh();
 
         currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
     }

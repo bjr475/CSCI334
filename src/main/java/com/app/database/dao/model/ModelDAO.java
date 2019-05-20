@@ -1,6 +1,7 @@
 package com.app.database.dao.model;
 
 import com.app.database.Database;
+import com.app.main.model.catalogue.CatalogueItemLocationModel;
 import com.app.main.model.catalogue.CatalogueItemModel;
 import com.app.main.model.catalogue.CatalogueItemSupplierModel;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ModelDAO {
@@ -24,17 +26,28 @@ public class ModelDAO {
             "       M.description   AS description,\n" +
             "       M.stocked       AS stocked_on\n" +
             "FROM MODEL M;";
-    private static final String SQL_GET_SUPPLIER = "SELECT * FROM MODEL";
-    private static final String SQL_GET_STORE_MODELS = "SELECT M.id            AS id,\n" +
-            "       M.name          AS name,\n" +
-            "       M.type          AS type,\n" +
-            "       M.price         AS retail_price,\n" +
-            "       M.subject       AS subject,\n" +
-            "       M.description   AS description,\n" +
-            "       M.stocked       AS stocked_on\n" +
-            "FROM MODEL M\n" +
-            "         LEFT JOIN MODEL_STORE MStore ON M.id = MStore.model_id\n" +
-            "WHERE MStore.store_id = ?;";
+    private static final String SQL_GET_SUPPLIER = "SELECT MS.price AS price,\n" +
+            "       S.name   AS name\n" +
+            "FROM MODEL\n" +
+            "         LEFT JOIN MODEL_SUPPLIER MS ON MODEL.id = MS.model_id\n" +
+            "         LEFT JOIN SUPPLIER S ON MS.supplier_id = S.id\n" +
+            "WHERE MODEL.id = ?;";
+    private static final String SQL_GET_STORES = "SELECT MS.quantity AS count,\n" +
+            "       S.name      AS name\n" +
+            "FROM MODEL\n" +
+            "         LEFT JOIN MODEL_STORE MS ON MODEL.id = MS.model_id\n" +
+            "         LEFT JOIN STORE S ON MS.store_id = S.id\n" +
+            "WHERE MODEL.id = ?;";
+    private static final String SQL_UPDATE_MODEL = "UPDATE MODEL\n" +
+            "SET name        = ?,\n" +
+            "    description = ?,\n" +
+            "    subject     = ?,\n" +
+            "    type        = ?,\n" +
+            "    stocked     = ?,\n" +
+            "    price       = ?\n" +
+            "WHERE id = ?;";
+    private static final String SQL_SAVE_MODEL = "INSERT INTO MODEL (id, name, type, price, subject, description)\n" +
+            "VALUES (?, ?, ?, ?, ?, ?)";
 
     private final Database database;
 
@@ -60,36 +73,78 @@ public class ModelDAO {
         return model;
     }
 
-    public ArrayList<CatalogueItemModel> getItems() {
+    private CatalogueItemLocationModel loadItemModelLocations(@NotNull ResultSet result) throws SQLException {
+        CatalogueItemLocationModel model = new CatalogueItemLocationModel();
+        model.setCount(result.getInt("count"));
+        model.setStore(result.getString("name"));
+        return model;
+    }
+
+    private ArrayList<CatalogueItemModel> loadItems(Connection connection, @NotNull ResultSet result) throws SQLException {
         ArrayList<CatalogueItemModel> items = new ArrayList<>();
-        try (Connection connection = database.openConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_MODELS)) {
-                ResultSet result = statement.executeQuery();
-                while (result.next()) {
-                    CatalogueItemModel item = loadItemModel(result);
-//                    try (PreparedStatement supplierStatement = connection.prepareStatement(SQL_GET_SUPPLIER)) {
-//                        supplierStatement.setInt(1, );
-//                    }
-                    items.add(item);
-                }
+        while (result.next()) {
+            CatalogueItemModel item = loadItemModel(result);
+            try (PreparedStatement supplierStatement = connection.prepareStatement(SQL_GET_SUPPLIER)) {
+                supplierStatement.setString(1, item.getItemId());
+                ResultSet supplierResult = supplierStatement.executeQuery();
+                while (supplierResult.next()) item.getSuppliers().add(loadItemModelSuppliers(supplierResult));
+            } catch (SQLException e) {
+                logger.error("Failed to load catalogue item supplier models", e);
             }
-        } catch (SQLException e) {
-            logger.error("Failed to load catalogue item models", e);
+            try (PreparedStatement storesStatement = connection.prepareStatement(SQL_GET_STORES)) {
+                storesStatement.setString(1, item.getItemId());
+                ResultSet storesResult = storesStatement.executeQuery();
+                while (storesResult.next()) item.getStores().add(loadItemModelLocations(storesResult));
+            }
+            items.add(item);
         }
         return items;
     }
 
-    public ArrayList<CatalogueItemModel> getItemsFromStore(int storeId) {
-        ArrayList<CatalogueItemModel> items = new ArrayList<>();
+    public ArrayList<CatalogueItemModel> getModels() {
         try (Connection connection = database.openConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_STORE_MODELS)) {
-                statement.setInt(1, storeId);
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_MODELS)) {
                 ResultSet result = statement.executeQuery();
-                while (result.next()) items.add(loadItemModel(result));
+                return loadItems(connection, result);
             }
         } catch (SQLException e) {
             logger.error("Failed to load catalogue item models", e);
         }
-        return items;
+        return new ArrayList<>();
+    }
+
+    public void updateModel(@NotNull CatalogueItemModel model) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_MODEL)) {
+                statement.setString(1, model.getName());
+                statement.setString(2, model.getDescription());
+                statement.setString(3, model.getSubject());
+                statement.setString(4, model.getType());
+                statement.setTimestamp(5, new Timestamp(model.getStockedOn().getTime()));
+                statement.setDouble(6, model.getPrice());
+                statement.setString(7, model.getItemId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to update a model: {}", model.getItemId(), e);
+        }
+    }
+
+    public boolean saveModel(@NotNull CatalogueItemModel model) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_SAVE_MODEL)) {
+                statement.setString(1, model.getItemId());
+                statement.setString(2, model.getName());
+                statement.setString(3, model.getType());
+                statement.setDouble(4, model.getPrice());
+                statement.setString(5, model.getSubject());
+                statement.setString(6, model.getDescription());
+                statement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to update a model: {}", model.getItemId(), e);
+        }
+        return false;
     }
 }

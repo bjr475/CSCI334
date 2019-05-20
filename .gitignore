@@ -38,3 +38,7 @@ out/*
 !/lib/log4j/*
 !/lib/sqlite/*
 !/lib/javafx/bin/*.dll
+
+runtime/database.db
+runtime/output.log
+!/runtime/DO_NOT_REMOVE

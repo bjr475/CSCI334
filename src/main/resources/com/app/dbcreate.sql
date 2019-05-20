@@ -173,16 +173,16 @@ INSERT INTO SUPPLIER_CONTACT (supplier, name, phone)
 VALUES (1, 'Supplier', '00423857');
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
-VALUES (1, 1, 15);
+VALUES ('Model-01', 1, 15);
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
-VALUES (2, 1, 12);
+VALUES ('Model-02', 1, 12);
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
-VALUES (3, 1, 8);
+VALUES ('Model-03', 1, 8);
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
-VALUES (4, 1, 20);
+VALUES ('Model-04', 1, 20);
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
-VALUES (5, 1, 2);
+VALUES ('Model-05', 1, 2);

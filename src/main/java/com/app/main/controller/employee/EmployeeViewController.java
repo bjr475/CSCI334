@@ -3,10 +3,12 @@ package com.app.main.controller.employee;
 import com.app.main.Util;
 import com.app.main.controller.AChildMainViewController;
 import com.app.main.model.ApplicationModel;
+import com.app.main.model.user.AUserModel;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -72,19 +74,7 @@ public class EmployeeViewController extends AChildMainViewController {
         currentView.addListener((observableValue, oldValue, newValue) -> toolbarItems.setVisible(newValue != null && newValue.hasButtons()));
 
 
-        model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
-            titleLabel.setText("Tim's Hobby Shop");
-            if (newValue != null) {
-                switch (newValue.getUserType()) {
-                    case ADMIN:
-                        titleLabel.setText("Tim's Hobby Shop - Admin");
-                        break;
-                    case EMPLOYEE:
-                        titleLabel.setText("Tim's Hobby Shop - Employee");
-                        break;
-                }
-            }
-        });
+        model.currentUserProperty().addListener(this::onUserChanged);
     }
 
     @FXML
@@ -100,6 +90,21 @@ public class EmployeeViewController extends AChildMainViewController {
         manageStoresController.setOwner(this);
 
         setCurrentView(catalogueController, cataloguePane);
+    }
+
+    private void onUserChanged(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+        titleLabel.setText("Tim's Hobby Shop");
+        if (newValue != null) {
+            switch (newValue.getUserType()) {
+                case ADMIN:
+                    titleLabel.setText("Tim's Hobby Shop - Admin");
+                    break;
+                case EMPLOYEE:
+                    titleLabel.setText("Tim's Hobby Shop - Employee");
+                    break;
+            }
+        }
+        if (oldValue != null) mainDrawer.close();
     }
 
     private void setCurrentView(IEditorActionItem item, @NotNull Pane view) {

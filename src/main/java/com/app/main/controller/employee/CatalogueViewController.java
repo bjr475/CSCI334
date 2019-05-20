@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -76,20 +75,7 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
         currentAddItem.addListener(this::onUpdateAddItem);
         currentEditableItem.addListener(this::onUpdateEditItem);
-
-        getModel().currentUserProperty().addListener(new ChangeListener<AUserModel>() {
-            @Override
-            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
-                if (newValue != null) {
-                    currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
-                    currentEditableItem.set(null);
-
-                    catalogueTable.setItems(FXCollections.observableArrayList(Database.INSTANCE.getModel().getItems()));
-                    catalogueTable.refresh();
-
-                }
-            }
-        });
+        getModel().currentUserProperty().addListener(this::userChanged);
     }
 
     private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
@@ -156,6 +142,19 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         );
         editStores.refresh();
         editSuppliers.refresh();
+    }
+
+    private void userChanged(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+        catalogueTable.setItems(FXCollections.observableArrayList());
+        if (newValue != null) updateCatalogueTable();
+        if (oldValue != null) toolDrawer.close();
+    }
+
+    private void updateCatalogueTable() {
+        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+        currentEditableItem.set(null);
+        catalogueTable.setItems(FXCollections.observableArrayList(Database.INSTANCE.getModel().getModels()));
+        catalogueTable.refresh();
     }
 
     private void buildCatalogueTable() {
@@ -236,25 +235,6 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         buildCatalogueTable();
         buildEditTables();
 
-//        ArrayList<CatalogueItemModel> models = new ArrayList<>();
-//        for (int i = 0; i < 12; i++) {
-//            CatalogueItemModel catalogueItem = new CatalogueItemModel(String.format("%d", i));
-//            catalogueItem.setName(String.format("Name %d", i));
-//            for (int j = 0; j < 5; j++) {
-//                CatalogueItemLocationModel location = new CatalogueItemLocationModel();
-//                location.setStore(String.format("Store %d", j));
-//                location.setCount(j);
-//                catalogueItem.getStores().add(location);
-//
-//                CatalogueItemSupplierModel supplier = new CatalogueItemSupplierModel();
-//                supplier.setName(String.format("Supplier %d", i));
-//                catalogueItem.getSuppliers().add(supplier);
-//            }
-//            models.add(catalogueItem);
-//        }
-//        catalogueTable.setItems(FXCollections.observableArrayList(models));
-//        catalogueTable.refresh();
-
         currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
     }
 
@@ -282,9 +262,11 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
     public void onConfirmEdit() {
         CatalogueItemModel model = currentEditableItem.get();
-        if (model != null) catalogueTable.getSelectionModel().getSelectedItem().set(model);
-        catalogueTable.refresh();
-        toolDrawer.close();
+        if (model != null) {
+            Database.INSTANCE.getModel().updateModel(model);
+            updateCatalogueTable();
+            toolDrawer.close();
+        }
     }
 
     @Override
@@ -298,9 +280,7 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     }
 
     public void onConfirmAdd() {
-        catalogueTable.itemsProperty().get().add(currentAddItem.get());
-        catalogueTable.refresh();
-        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+        if (Database.INSTANCE.getModel().saveModel(currentAddItem.get())) updateCatalogueTable();
     }
 
     @Override

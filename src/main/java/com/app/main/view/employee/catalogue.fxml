@@ -35,11 +35,11 @@
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>Model Type</Label>
-                            <TextField fx:id="editModelType">--Model Type--</TextField>
+                            <fx:include fx:id="editModelType" source="catalogue_item_type.fxml"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
                             <Label>Subject Area</Label>
-                            <TextField fx:id="editSubject">--Subject Area--</TextField>
+                            <fx:include fx:id="editSubject" source="catalogue_item_subject.fxml"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
                             <Label>Retail Price</Label>
@@ -98,11 +98,11 @@
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>Model Type</Label>
-                            <TextField fx:id="addType">--Model Type--</TextField>
+                            <fx:include fx:id="addType" source="catalogue_item_type.fxml"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
                             <Label>Subject Area</Label>
-                            <TextField fx:id="addSubject">--Subject Area--</TextField>
+                            <fx:include fx:id="addSubject" source="catalogue_item_subject.fxml"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
                             <Label>Retail Price</Label>

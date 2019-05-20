@@ -6,13 +6,29 @@ import javafx.animation.Transition;
 import javafx.beans.property.DoubleProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Util {
     private static final Logger logger = LogManager.getLogger(Util.class.getName());
+    private static final SimpleDateFormat databaseDateFormat;
+    private static final SimpleDateFormat printFormat;
+
+    static {
+        logger.info("Default TimeZone: {}", TimeZone.getDefault());
+        databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.UK);
+        databaseDateFormat.setTimeZone(TimeZone.getDefault());
+
+        printFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.UK);
+        printFormat.setTimeZone(TimeZone.getDefault());
+    }
 
     public static void prepareDrawer(@NotNull JFXDrawer drawer, @NotNull JFXHamburger hamburger) {
         drawer.setDefaultDrawerSize(300);
@@ -44,8 +60,18 @@ public class Util {
     }
 
     @NotNull
-    @Contract(pure = true)
-    public static String formatHumanDate(Date dateFirstStocked) {
-        return "16/05/2019";
+    public static String formatPrintDate(Date date) {
+        if (date == null) return printFormat.format(Calendar.getInstance().getTime());
+        return printFormat.format(date);
+    }
+
+    @Nullable
+    public static Date parseDatabaseDate(String date) {
+        try {
+            return databaseDateFormat.parse(date);
+        } catch (ParseException e) {
+            logger.error("Error loading request timestamp", e);
+        }
+        return null;
     }
 }

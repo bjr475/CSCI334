@@ -12,7 +12,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -30,8 +36,8 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     public ScrollPane editMenu;
     public TextField editItemName;
     public TextField editItemID;
-    public TextField editModelType;
-    public TextField editSubject;
+    public ChoiceBox<String> editModelType;
+    public ChoiceBox<String> editSubject;
     public TextField editPrice;
     public TextArea editDescription;
     public TableView<CatalogueItemLocationModel> editStores;
@@ -41,8 +47,8 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     public ScrollPane addMenu;
     public TextField addItemName;
     public TextField addItemID;
-    public TextField addType;
-    public TextField addSubject;
+    public ChoiceBox<String> addType;
+    public ChoiceBox<String> addSubject;
     public TextField addPrice;
     public TextArea addDescription;
     public TableView<CatalogueItemLocationModel> addStoresView;
@@ -72,15 +78,15 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     }
 
     private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
-                                 @NotNull TextField type, @NotNull TextField subject, @NotNull TextField price,
+                                 ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
                                  @NotNull TextArea description,
                                  @NotNull TableView<CatalogueItemLocationModel> storesView,
                                  @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
         if (item != null) {
             name.textProperty().unbindBidirectional(item.nameProperty());
             id.setText("-- Item ID --");
-            type.textProperty().unbindBidirectional(item.typeProperty());
-            subject.textProperty().unbindBidirectional(item.subjectProperty());
+            type.valueProperty().unbindBidirectional(item.typeProperty());
+            subject.valueProperty().unbindBidirectional(item.subjectProperty());
             price.setText("-- Price --");
             description.textProperty().unbindBidirectional(item.descriptionProperty());
             storesView.itemsProperty().unbindBidirectional(item.storesProperty());
@@ -89,15 +95,15 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     }
 
     private void bindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
-                               @NotNull TextField type, @NotNull TextField subject, @NotNull TextField price,
+                               ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
                                @NotNull TextArea description,
                                @NotNull TableView<CatalogueItemLocationModel> storesView,
                                @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
         if (item != null) {
             name.textProperty().bindBidirectional(item.nameProperty());
             id.setText(item.getItemId());
-            type.textProperty().bindBidirectional(item.typeProperty());
-            subject.textProperty().bindBidirectional(item.subjectProperty());
+            type.valueProperty().bindBidirectional(item.typeProperty());
+            subject.valueProperty().bindBidirectional(item.subjectProperty());
             price.setText(Util.formatPrice(item.priceProperty()));
             description.textProperty().bindBidirectional(item.descriptionProperty());
             storesView.itemsProperty().bindBidirectional(item.storesProperty());
@@ -142,11 +148,6 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
             TableColumn<CatalogueItemModel, String> itemIdColumn = new TableColumn<>("Item No");
             itemIdColumn.setMinWidth(150);
             itemIdColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().getItemId()));
-            itemIdColumn.setCellFactory(catalogueItemModelStringTableColumn -> {
-                TableCell<CatalogueItemModel, String> cell = new TableCell<>();
-                cell.getStyleClass().add("table-row-cell");
-                return cell;
-            });
             catalogueTable.getColumns().add(itemIdColumn);
 
             TableColumn<CatalogueItemModel, String> nameColumn = new TableColumn<>("Name");
@@ -171,7 +172,7 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
             TableColumn<CatalogueItemModel, String> dateStockedColumn = new TableColumn<>("Date First Stocked");
             dateStockedColumn.setMinWidth(120);
-            dateStockedColumn.setCellValueFactory(p -> Bindings.concat(Util.formatHumanDate(p.getValue().getStockedOn())));
+            dateStockedColumn.setCellValueFactory(p -> Bindings.concat(Util.formatPrintDate(p.getValue().getStockedOn())));
             catalogueTable.getColumns().add(dateStockedColumn);
 
             TableColumn<CatalogueItemModel, String> stockColumn = new TableColumn<>("Total Stock");

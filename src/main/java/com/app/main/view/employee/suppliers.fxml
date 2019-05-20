@@ -273,7 +273,7 @@
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView">
+                <TableView fx:id="tableView" styleClass="table-view">
                     <columns>
                         <TableColumn prefWidth="200" text="Supplier Name"/>
                         <TableColumn prefWidth="600" text="Address"/>

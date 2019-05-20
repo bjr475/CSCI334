@@ -12,12 +12,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -145,30 +140,42 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     private void buildCatalogueTable() {
         {
             TableColumn<CatalogueItemModel, String> itemIdColumn = new TableColumn<>("Item No");
+            itemIdColumn.setMinWidth(150);
             itemIdColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().getItemId()));
+            itemIdColumn.setCellFactory(catalogueItemModelStringTableColumn -> {
+                TableCell<CatalogueItemModel, String> cell = new TableCell<>();
+                cell.getStyleClass().add("table-row-cell");
+                return cell;
+            });
             catalogueTable.getColumns().add(itemIdColumn);
 
             TableColumn<CatalogueItemModel, String> nameColumn = new TableColumn<>("Name");
+            nameColumn.setMinWidth(240);
             nameColumn.setCellValueFactory(p -> p.getValue().nameProperty());
             catalogueTable.getColumns().add(nameColumn);
 
             TableColumn<CatalogueItemModel, String> typeColumn = new TableColumn<>("Type");
+            typeColumn.setMinWidth(120);
             typeColumn.setCellValueFactory(p -> p.getValue().typeProperty());
             catalogueTable.getColumns().add(typeColumn);
 
             TableColumn<CatalogueItemModel, String> subjectColumn = new TableColumn<>("Subject Area");
+            subjectColumn.setMinWidth(120);
             subjectColumn.setCellValueFactory(p -> p.getValue().subjectProperty());
             catalogueTable.getColumns().add(subjectColumn);
 
             TableColumn<CatalogueItemModel, String> retailPriceColumn = new TableColumn<>("Retail Price");
+            retailPriceColumn.setMinWidth(120);
             retailPriceColumn.setCellValueFactory(p -> Bindings.concat(Util.formatPrice(p.getValue().priceProperty())));
             catalogueTable.getColumns().add(retailPriceColumn);
 
             TableColumn<CatalogueItemModel, String> dateStockedColumn = new TableColumn<>("Date First Stocked");
+            dateStockedColumn.setMinWidth(120);
             dateStockedColumn.setCellValueFactory(p -> Bindings.concat(Util.formatHumanDate(p.getValue().getStockedOn())));
             catalogueTable.getColumns().add(dateStockedColumn);
 
             TableColumn<CatalogueItemModel, String> stockColumn = new TableColumn<>("Total Stock");
+            stockColumn.setMinWidth(600);
             stockColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().stockTotalProperty()));
             catalogueTable.getColumns().add(stockColumn);
         }

@@ -1,7 +1,128 @@
 .main-heading {
-    -fx-font-size: 20pt;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Roboto Light", sans-serif;
+}
+
+.main-toolbar {
+    -fx-background-color: #b6b8c3;
+}
+
+menu-heading {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+.light-menu-button {
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+    -fx-alignment: "CENTER_LEFT";
+    -fx-padding: 8 0 8 32;
+    -fx-font-family: "Roboto Light", sans-serif;
+}
+
+.light-icon {
+    -fx-icon-color: white;
+}
+
+.main-menu {
+    -fx-background-color: #1c313a;
+}
+
+.main-separator {
+    -fx-padding: 30 0 0 0;
+}
+
+.main-separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #455A64;
 }
 
 .default-background {
     -fx-background-color: #fafafa;
 }
+
+.Separator {
+    -fx-background-color: #62727b;
+}
+
+.right-menu {
+    -fx-background-color: #f8fdff;
+}
+
+.action-button {
+    -fx-background-color: #29434e;
+    -fx-text-fill: white;
+    -fx-padding: 8 32 8 32;
+}
+
+.action-button:hover {
+    -fx-background-color: #34515e;
+}
+
+.secondary-button {
+    -fx-background-color: #546E7A;
+    -fx-text-fill: white;
+    -fx-padding: 8 32 8 32;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #607D8B;
+}
+
+sml-button {
+    -fx-background-color: #29434e;
+    -fx-text-fill: white;
+    -fx-padding: 0 8 0 8;
+}
+
+sml-button:hover {
+    -fx-background-color: #29434e;
+}
+
+.dark-link {
+    -fx-text-fill: black;
+}
+
+.dark-link:hover {
+    -fx-text-fill: #1c313a;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    border: 0;
+    -fx-background-insets: 0, 0 0 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: #babdbe;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-font-family: "Roboto Medium", sans-serif;
+}
+
+.table-row-cell{
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #eceff1;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #546e7a;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.table-row-cell .label{
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+
+
+
+

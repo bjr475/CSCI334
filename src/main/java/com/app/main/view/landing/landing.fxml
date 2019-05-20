@@ -14,7 +14,7 @@
             fx:controller="com.app.main.controller.landing.LandingViewController"
             styleClass="default-background">
     <top>
-        <VBox>
+        <VBox styleClass="main-toolbar">
             <padding>
                 <Insets>
                     <top>8</top>
@@ -39,7 +39,7 @@
                             </JFXHamburger>
                         </Pane>
 
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="main-heading">
                             <graphic>
                                 <FontIcon iconLiteral="fa-photo" iconSize="24"/>
                             </graphic>
@@ -53,9 +53,9 @@
     <center>
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
-                <VBox>
-                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450">Login</JFXButton>
-                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450">Forgot Password</JFXButton>
+                <VBox spacing="24" styleClass="main-menu">
+                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Login</JFXButton>
+                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Forgot Password</JFXButton>
                 </VBox>
             </sidePane>
             <content>

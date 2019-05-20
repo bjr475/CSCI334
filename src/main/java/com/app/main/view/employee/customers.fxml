@@ -323,7 +323,7 @@
             </StackPane>
         </sidePane>
         <content>
-            <TableView fx:id="tableView">
+            <TableView fx:id="tableView" styleClass="table-view">
                 <columns>
                     <TableColumn prefWidth="100" text="Customer No.">
                     </TableColumn>

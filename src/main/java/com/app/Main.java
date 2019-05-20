@@ -4,6 +4,7 @@ import com.app.main.model.ApplicationModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,6 +68,9 @@ public class Main extends Application {
         model = new ApplicationModel();
         loader.setControllerFactory(this::newController);
         Scene primary = new Scene(loader.load(), 1440, 768);
+        Font.loadFont(getClass().getResourceAsStream("/com.app/fonts/Roboto-Light.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/com.app/fonts/Roboto-Medium.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/com.app/fonts/Roboto-Regular.ttf"), 16);
         primary.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
         primaryStage.setTitle("Tim's Hobby Shop");
         primaryStage.setScene(primary);

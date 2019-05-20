@@ -86,7 +86,7 @@
                     <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
                         <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
                               GridPane.columnSpan="2">
-                            Edit Catalogue Item
+                            Add Catalogue Item
                         </Text>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
                             <Label>Item Name</Label>
@@ -130,8 +130,8 @@
                         <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
                               GridPane.columnSpan="2">
                             <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton onAction="#onCancelAdd">Cancel</JFXButton>
-                            <JFXButton onAction="#onConfirmAdd">Confirm</JFXButton>
+                            <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">Cancel</JFXButton>
+                            <JFXButton onAction="#onConfirmAdd" styleClass="action-button">Confirm</JFXButton>
                         </HBox>
                     </GridPane>
                 </ScrollPane>
@@ -181,7 +181,7 @@
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="catalogueTable"/>
+                <TableView fx:id="catalogueTable" styleClass="table-view"/>
             </ScrollPane>
         </content>
     </JFXDrawer>

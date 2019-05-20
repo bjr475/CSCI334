@@ -12,7 +12,7 @@
             fx:controller="com.app.main.controller.employee.EmployeeViewController"
             styleClass="default-background">
     <top>
-        <VBox>
+        <VBox styleClass="main-toolbar">
             <padding>
                 <Insets>
                     <top>8</top>
@@ -37,7 +37,7 @@
                             </JFXHamburger>
                         </Pane>
 
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="main-heading">
                             <graphic>
                                 <FontIcon iconLiteral="fa-photo" iconSize="24"/>
                             </graphic>
@@ -87,57 +87,57 @@
     <center>
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
-                <HBox>
+                <HBox styleClass="main-menu">
                     <VBox spacing="20" alignment="BASELINE_LEFT" HBox.hgrow="ALWAYS">
-                        <JFXButton onAction="#logout" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoCatalogue" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-sign-out" iconSize="24"/>
-                            </graphic>
-                            Logout
-                        </JFXButton>
-                        <Separator/>
-                        <JFXButton onAction="#gotoCatalogue" buttonType="FLAT" prefWidth="450">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-book" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-book" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Catalogue
                         </JFXButton>
-                        <JFXButton onAction="#gotoCustomers" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoCustomers" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-address-book" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-address-book" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Customers
                         </JFXButton>
-                        <JFXButton onAction="#gotoSales" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoSales" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-shopping-cart" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-shopping-cart" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Sales
                         </JFXButton>
-                        <JFXButton onAction="#gotoSuppliers" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoSuppliers" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-industry" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-industry" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Suppliers
                         </JFXButton>
-                        <JFXButton onAction="#gotoSettings" buttonType="FLAT" prefWidth="450">
+                        <Separator styleClass="main-separator"/>
+                        <JFXButton onAction="#gotoSettings" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Settings
                         </JFXButton>
-                        <Separator/>
-                        <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Manage Stores
                         </JFXButton>
-                        <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450">
+                        <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
                             <graphic>
-                                <FontIcon iconLiteral="fa-cog" iconSize="24"/>
+                                <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Manage Employees
+                        </JFXButton>
+                        <Separator styleClass="main-separator"/>
+                        <JFXButton onAction="#logout" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-sign-out" iconSize="24" styleClass="light-icon"/>
+                            </graphic>
+                            Logout
                         </JFXButton>
                     </VBox>
                 </HBox>

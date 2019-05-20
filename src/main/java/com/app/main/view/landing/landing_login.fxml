@@ -29,15 +29,15 @@
         </graphic>
     </Label>
     <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <HBox alignment="center" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <JFXButton alignment="CENTER" onAction="#onForgot">
-            Forgot Password
-        </JFXButton>
-
-        <JFXButton alignment="CENTER" onAction="#onLogin">
+    <VBox spacing="24" alignment="center" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <JFXButton alignment="CENTER" onAction="#onLogin" styleClass="action-button">
             Login
         </JFXButton>
-    </HBox>
+
+        <JFXButton alignment="CENTER" onAction="#onForgot" styleClass="dark-link">
+            Forgot Password
+        </JFXButton>
+    </VBox>
     <Text fx:id="messageDisplay" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 </GridPane>
 

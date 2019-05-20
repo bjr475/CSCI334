@@ -133,7 +133,7 @@
                             <HBox spacing="20">
                                 <VBox HBox.hgrow="ALWAYS">
                                     <Label>Supplier Name</Label>
-                                    <TextField fx:id="supplierName"></TextField>
+                                    <TextField fx:id="name"></TextField>
                                 </VBox>
                                 <VBox HBox.hgrow="ALWAYS">
                                     <VBox spacing="5">
@@ -273,14 +273,7 @@
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView" styleClass="table-view">
-                    <columns>
-                        <TableColumn prefWidth="200" text="Supplier Name"/>
-                        <TableColumn prefWidth="600" text="Address"/>
-                        <TableColumn prefWidth="200" text="Contact Name"/>
-                        <TableColumn prefWidth="600" text="Details"/>
-                    </columns>
-                </TableView>
+                <TableView fx:id="suppliers" styleClass="table-view"/>
             </ScrollPane>
         </content>
     </JFXDrawer>

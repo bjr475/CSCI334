@@ -9,29 +9,26 @@ public class AddressModel {
     private StringProperty state;
     private StringProperty postcode;
 
-    AddressModel() {
-        address = new SimpleStringProperty();
-        suburb = new SimpleStringProperty();
-        state = new SimpleStringProperty();
-        postcode = new SimpleStringProperty();
+    public AddressModel() {
+        this("", "", "", "");
     }
 
-    AddressModel(String addressLine, String addressSuburb, String addressState, String addressPostcode) {
-        address = new SimpleStringProperty(addressLine);
-        suburb = new SimpleStringProperty(addressSuburb);
-        state = new SimpleStringProperty(addressState);
-        postcode = new SimpleStringProperty(addressPostcode);
+    public AddressModel(String address, String suburb, String state, String postcode) {
+        this.address = new SimpleStringProperty(address);
+        this.suburb = new SimpleStringProperty(suburb);
+        this.state = new SimpleStringProperty(state);
+        this.postcode = new SimpleStringProperty(postcode);
     }
 
-    public String getLine1() {
+    public String getAddress() {
         return address.get();
     }
 
-    public void setLine1(String line1) {
-        this.address.set(line1);
+    public void setAddress(String address) {
+        this.address.set(address);
     }
 
-    public StringProperty line1Property() {
+    public StringProperty addressProperty() {
         return address;
     }
 
@@ -69,5 +66,9 @@ public class AddressModel {
 
     public StringProperty postcodeProperty() {
         return postcode;
+    }
+
+    public String format() {
+        return String.format("%s %s, %s %s", address.get(), suburb.get(), state.get(), postcode.get());
     }
 }

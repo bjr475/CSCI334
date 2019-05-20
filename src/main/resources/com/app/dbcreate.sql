@@ -112,9 +112,9 @@ CREATE TABLE SUPPLIER_CONTACT
 (
     supplier INTEGER REFERENCES SUPPLIER (id),
     name     TEXT NOT NULL,
-    phone    TEXT NOT NULL,
+    email  TEXT NOT NULL,
 
-    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, phone)
+    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, email)
 );
 
 DROP TABLE IF EXISTS MODEL_SUPPLIER;

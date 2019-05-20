@@ -31,7 +31,10 @@ out/*
 !/lib/gson/*
 !/lib/ikonli/*
 !/lib/javafaker/*
-!/lib/javafx/*
+#!/lib/javafx/*
+!/lib/javafx/lib/*
+!/lib/javafx/bin/*
+!/lib/javafx/legal/*
 !/lib/jetbrains/*
 !/lib/jfoenix/*
 !/lib/junit/*

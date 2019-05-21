@@ -1,27 +1,59 @@
 package com.app.main.controller.employee;
 
+import com.app.main.controller.AddressViewController;
 import com.app.main.model.ApplicationModel;
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXRadioButton;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 public class CustomersViewController extends AChildEmployeeViewController implements IEditorActionItem {
+    private static final Logger logger = LogManager.getLogger(CustomersViewController.class.getName());
+
+    /* Tool Drawer */
     public JFXDrawer toolDrawer;
+    public ListView<String> addTypes;
+    public ListView<String> addSubjects;
+
+    /* Edit Control */
+    public ScrollPane editMenu;
+    public TextField editEmail;
+    public TextField editCustomerID;
+    public TextField editFirstName;
+    public TextField editLastName;
+    //public ChoiceBox<String> editAddress;
 
     @FXML
-    public TableView tableView;
+    public AddressViewController editAddressController;
+
+    /* Add Control */
+    public ScrollPane addMenu;
+    public TextField addEmail;
+    public TextField addCustomerID;
+    public TextField addFirstName;
+    public TextField addLastName;
 
     @FXML
-    public JFXRadioButton creditLineT, creditLineF, clubMemberT, clubMemberF;
+    public AddressViewController addAddressController;
+    //public ChoiceBox<String> addAddress;
 
-    public BorderPane searchMenu;
-    public BorderPane editMenu;
-    public BorderPane addMenu;
+    /* Filter Control */
+    public ScrollPane filterMenu;
+
+    /* Search Control */
+    public ScrollPane searchMenu;
+    public TextField searchWords;
+
+//    /* Catalogue Table */
+//    public TableView<CustomerModel> catalogueTable;
+//
+//    /* Add and Edit Values */
+//    private ObjectProperty<CustomerModel> currentAddItem;
+//    private ObjectProperty<CustomerModel> currentEditableItem;
+
 
     public CustomersViewController(ApplicationModel model) {
         super(model);
@@ -31,19 +63,17 @@ public class CustomersViewController extends AChildEmployeeViewController implem
     public void initialize() {
         toolDrawer.setDefaultDrawerSize(600);
 
-        ToggleGroup creditLine = new ToggleGroup();
-        creditLineT.setToggleGroup(creditLine);
-        creditLineF.setToggleGroup(creditLine);
+//        customersTable.setOnMouseClicked(event -> activateView(editMenu));
 
-        ToggleGroup clubMember = new ToggleGroup();
-        clubMemberT.setToggleGroup(clubMember);
-        clubMemberF.setToggleGroup(clubMember);
+        addTypes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        tableView.setOnMouseClicked(event -> activatePane(editMenu));
+        addTypes.setOnMouseClicked(event -> {
+
+        });
     }
 
-    private void activatePane(@NotNull Pane pane) {
-        pane.toFront();
+    private void activateView(@NotNull ScrollPane view) {
+        view.toFront();
         toolDrawer.open();
     }
 
@@ -54,21 +84,47 @@ public class CustomersViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onEdit() {
-        activatePane(editMenu);
+
     }
 
     @Override
     public void onAdd() {
-        activatePane(addMenu);
+        activateView(addMenu);
+    }
+
+    public void onCancelAdd() {
+        toolDrawer.close();
+    }
+
+    public void onConfirmAdd() {
+        ObservableList<String> selectedTypes = addTypes.getSelectionModel().getSelectedItems();
+        for (String item : selectedTypes) {
+            logger.info("Item {} has been selected", item);
+        }
+        ObservableList<String> selectedSubjects = addSubjects.getSelectionModel().getSelectedItems();
+        for (String item : selectedSubjects) {
+            logger.info("Item {} has been selected", item);
+        }
     }
 
     @Override
     public void onFilter() {
-
+        activateView(filterMenu);
     }
 
     @Override
     public void onSearch() {
-        activatePane(searchMenu);
+        activateView(searchMenu);
+    }
+
+    public void resetSearch() {
+        searchWords.setText("");
+    }
+
+    public void confirmSearch() {
+        logger.info(
+                "Looking for catalogue items that contain the following words: '{}'",
+                searchWords.getText()
+        );
     }
 }

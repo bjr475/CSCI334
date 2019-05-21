@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.SettingsViewController">
-    <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-        <padding>
-            <Insets>
-                <top>24</top>
-                <bottom>24</bottom>
-                <left>24</left>
-                <right>24</right>
-            </Insets>
-        </padding>
-        <VBox spacing="24">
-            <TitledPane text="Account Settings">
-                <VBox spacing="8" maxWidth="300" alignment="CENTER_LEFT">
-                    <Label>Username:</Label>
-                    <Label>Username display</Label>
-                    <Label>Current Password</Label>
-                    <PasswordField fx:id="password"/>
-                    <Label>New Password</Label>
-                    <PasswordField fx:id="newPassword"/>
-                    <Label>Repeat new password</Label>
-                    <PasswordField fx:id="repeatNewPassword"/>
-                </VBox>
-            </TitledPane>
+<ScrollPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+            fx:controller="com.app.main.controller.employee.SettingsViewController"
+            styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+    <padding>
+        <Insets>
+            <top>24</top>
+            <bottom>24</bottom>
+            <left>24</left>
+            <right>24</right>
+        </Insets>
+    </padding>
+    <HBox spacing="24" styleClass="default-background">
+        <VBox spacing="8">
+            <Label>First Name:</Label>
+            <TextField fx:id="first_name"/>
+
+            <Label>Last Name:</Label>
+            <TextField fx:id="last_name"/>
+
+            <Label>Display Name:</Label>
+            <TextField fx:id="display_name"/>
+
+            <Label>Email:</Label>
+            <TextField fx:id="email"/>
+
+            <JFXButton styleClass="action-button" onAction="#confirmChanges">Confirm Changes</JFXButton>
         </VBox>
-    </ScrollPane>
-</StackPane>
+
+        <VBox spacing="8">
+            <Label>New Password</Label>
+            <PasswordField fx:id="newPassword"/>
+            <Label>Repeat new password</Label>
+            <PasswordField fx:id="repeatNewPassword"/>
+
+            <JFXButton styleClass="action-button" onAction="#updatePassword">Update Password</JFXButton>
+        </VBox>
+    </HBox>
+</ScrollPane>

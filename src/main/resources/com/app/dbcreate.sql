@@ -38,7 +38,7 @@ CREATE TABLE EMPLOYEE
     display_name TEXT,
     password     TEXT,
     email        TEXT,
-    store        TEXT           NOT NULL REFERENCES STORE (id),
+    store        INTEGER           NOT NULL REFERENCES STORE (id),
     permissions  BLOB
 );
 
@@ -112,9 +112,10 @@ CREATE TABLE SUPPLIER_CONTACT
 (
     supplier INTEGER REFERENCES SUPPLIER (id),
     name     TEXT NOT NULL,
-    email  TEXT NOT NULL,
+    email    TEXT,
+    phone    TEXT,
 
-    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, email)
+    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, email, phone)
 );
 
 DROP TABLE IF EXISTS MODEL_SUPPLIER;

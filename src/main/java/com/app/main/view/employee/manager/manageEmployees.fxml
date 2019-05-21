@@ -1,36 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.ManageEmployeesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
-                <ScrollPane styleClass="default-background" fx:id="editMenu" VBox.vgrow="ALWAYS">
-                    <Label>Edit Store</Label>
-                </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="addMenu" VBox.vgrow="ALWAYS">
-                    <Label>Add Store</Label>
+                    <Label>Add Employee</Label>
+                </ScrollPane>
+                <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Label GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                               GridPane.columnSpan="2">
+                            Edit Employee
+                        </Label>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <Label>Employee Id</Label>
+                            <TextField fx:id="editEmployeeId" editable="false"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <Label>Display Name</Label>
+                            <TextField fx:id="editDisplayName"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                            <Label>First Name</Label>
+                            <TextField fx:id="editFirstName" editable="false"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <Label>Contact</Label>
+                            <TextField fx:id="editContact"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                            <Label>Store</Label>
+                            <TextField fx:id="editStore" editable="false"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                            <Label>Position</Label>
+                            <ChoiceBox fx:id="editPosition">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Manager"/>
+                                        <String fx:value="Sales Assistant"/>
+                                        <String fx:value="Logistics"/>
+                                    </FXCollections>
+                                </items>
+                            </ChoiceBox>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2" GridPane.rowSpan="4" spacing="8">
+                            <Label>Permissions</Label>
+                            <Separator/>
+                            <Label>Item</Label>
+                            <HBox>
+                                <JFXToggleButton fx:id="editPermItemAdd">Add</JFXToggleButton>
+                                <JFXToggleButton fx:id="editPermItemModify">Modify</JFXToggleButton>
+                            </HBox>
+                            <Separator/>
+                            <Label>Sale</Label>
+                            <HBox>
+                                <JFXToggleButton fx:id="editPermSaleView">View</JFXToggleButton>
+                                <JFXToggleButton fx:id="editPermSaleAdd">Add</JFXToggleButton>
+                                <JFXToggleButton fx:id="editPermSaleModify">Modify</JFXToggleButton>
+                            </HBox>
+                            <Separator/>
+                            <Label>Customer</Label>
+                            <HBox>
+                                <JFXToggleButton fx:id="editPermCustomerView">View</JFXToggleButton>
+                                <JFXToggleButton fx:id="editPermCustomerAdd">Add</JFXToggleButton>
+                                <JFXToggleButton fx:id="editPermCustomerModify">Modify</JFXToggleButton>
+                            </HBox>
+                            <Separator/>
+                            <HBox>
+                                <VBox>
+                                    <Label>Supplier</Label>
+                                    <HBox>
+                                        <JFXToggleButton fx:id="editPermSupplierManage">Manage</JFXToggleButton>
+                                    </HBox>
+                                </VBox>
+                                <Separator orientation="VERTICAL"/>
+                                <VBox>
+                                    <Label>Employee</Label>
+                                    <HBox>
+                                        <JFXToggleButton fx:id="editPermEmployeeManage">Manage</JFXToggleButton>
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="9" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            <HBox>
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton styleClass="secondary-button" onAction="#cancelEdit">Cancel Changes</JFXButton>
+                                <JFXButton styleClass="action-button" onAction="#confirmEdit">Confirm Changes</JFXButton>
+                            </HBox>
+                        </VBox>
+                    </GridPane>
                 </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="filterMenu" VBox.vgrow="ALWAYS">
-                    <Label>Filter Store</Label>
+                    <Label>Filter Employee</Label>
                 </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="searchMenu" VBox.vgrow="ALWAYS">
-                    <Label>Search Store</Label>
+                    <Label>Search Employee</Label>
                 </ScrollPane>
             </StackPane>
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView">
-                    <columns>
-                        <TableColumn text="Username"/>
-                        <TableColumn text="Permissions"/>
-                    </columns>
-                </TableView>
+                <TableView fx:id="employeeTableView"/>
             </ScrollPane>
         </content>
     </JFXDrawer>

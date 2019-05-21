@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.app.main.controller.AddressViewController">
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0"
+          GridPane.columnSpan="4">
+        <Label>Address</Label>
+        <TextField fx:id="editAddress"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+          GridPane.columnSpan="2">
+        <Label>Suburb</Label>
+        <TextField fx:id="editSuburb"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="2">
+        <Label>State</Label>
+        <fx:include fx:id="editState" source="address_state.fxml"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0">
+        <Label>Postcode</Label>
+        <TextField fx:id="editPostcode"/>
+    </VBox>
+</VBox>

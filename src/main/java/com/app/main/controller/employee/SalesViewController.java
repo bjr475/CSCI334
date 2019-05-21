@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.GridPane;
 import org.jetbrains.annotations.NotNull;
 
 public class SalesViewController extends AChildEmployeeViewController implements IEditorActionItem {
@@ -13,8 +15,18 @@ public class SalesViewController extends AChildEmployeeViewController implements
     public JFXDrawer toolDrawer;
     public TableView tableView;
     public ScrollPane searchMenu;
+
+    /*       Add menu         */
     public ScrollPane addMenu;
+    public GridPane saleItemGrid;
+    public GridPane saleCustomerGrid;
+    public GridPane saleConfirmGrid;
+    public ToggleButton newCustomer;
+
+    /*       Edit menu        */
     public ScrollPane editMenu;
+
+
 
     public SalesViewController(ApplicationModel model) {
         super(model);
@@ -43,6 +55,46 @@ public class SalesViewController extends AChildEmployeeViewController implements
     @Override
     public void onAdd() {
         activateView(addMenu);
+        saleItemGrid.toFront();
+    }
+
+    public void onCancelAdd() {
+        addMenu.setVvalue(0);
+        toolDrawer.close();
+    }
+
+    public void onSaleNext() {
+        addMenu.setVvalue(0);
+        if(newCustomer.isSelected()) {
+            saleCustomerGrid.toFront();
+        }
+        else {
+            saleConfirmGrid.toFront();
+        }
+    }
+
+    public void onCustomerNext() {
+        addMenu.setVvalue(0);
+        saleConfirmGrid.toFront();
+    }
+
+    public void onCustomerBack() {
+        addMenu.setVvalue(0);
+        saleItemGrid.toFront();
+    }
+
+    public void onConfirmBack() {
+        addMenu.setVvalue(0);
+        if(newCustomer.isSelected()) {
+            saleCustomerGrid.toFront();
+        }
+        else {
+            saleItemGrid.toFront();
+        }
+    }
+
+    public void onConfirmAdd() {
+
     }
 
     @Override

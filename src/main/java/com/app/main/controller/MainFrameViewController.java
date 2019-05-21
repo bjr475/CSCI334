@@ -36,7 +36,7 @@ public class MainFrameViewController extends AViewController {
         landingController.setOwner(this);
         employeeController.setOwner(this);
 
-        landingPane.toFront();
+        employeePane.toFront();
     }
 
     public void logout() {

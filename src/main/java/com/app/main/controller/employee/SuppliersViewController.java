@@ -138,6 +138,14 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
         activateControl(addMenu);
     }
 
+    public void onCancelAdd() {
+
+    }
+
+    public void onConfirmAdd() {
+
+    }
+
     @Override
     public void onFilter() {
 

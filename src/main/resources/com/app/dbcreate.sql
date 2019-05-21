@@ -38,8 +38,9 @@ CREATE TABLE EMPLOYEE
     display_name TEXT,
     password     TEXT,
     email        TEXT,
-    store        INTEGER           NOT NULL REFERENCES STORE (id),
-    permissions  BLOB
+    store        INTEGER        NOT NULL REFERENCES STORE (id),
+    permissions  BLOB,
+    position     TEXT
 );
 
 DROP TABLE IF EXISTS STORE;
@@ -136,8 +137,8 @@ VALUES ('Tim', 'Toys', 'tim', '1234', 'tim@toyshop.co');
 INSERT INTO STORE (name, address, manager)
 VALUES ('A Store', '123 Store St, City, 1243 Australia', NULL);
 
-INSERT INTO EMPLOYEE (first_name, last_name, display_name, password, email, store, permissions)
-VALUES ('First', 'Last', 'employee', 'test', 'employee@toyshop.co', 1, NULL);
+INSERT INTO EMPLOYEE (first_name, last_name, display_name, password, email, store, permissions, position)
+VALUES ('First', 'Last', 'employee', 'test', 'employee@toyshop.co', 1, NULL, 'Manager');
 
 UPDATE STORE
 SET manager = 1

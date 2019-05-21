@@ -1,5 +1,6 @@
 package com.app.main.model;
 
+import com.app.main.model.user.permissions.EmployeePermissions;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -45,7 +46,7 @@ public class EmployeeTable {
         manageEmployee = new SimpleBooleanProperty(false);
     }
 
-    public EmployeeTable(EmployeeTable item) {
+    public EmployeeTable(@NotNull EmployeeTable item) {
         employeeId = new SimpleIntegerProperty(item.employeeId.get());
         displayName = new SimpleStringProperty(item.displayName.get());
         firstName = new SimpleStringProperty(item.firstName.get());
@@ -80,6 +81,34 @@ public class EmployeeTable {
         modifyCustomer.set(item.modifyCustomer.get());
         manageSupplier.set(item.manageSupplier.get());
         manageEmployee.set(item.manageEmployee.get());
+    }
+
+    public EmployeePermissions getPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(createItem.get());
+        permissions.setModifyItem(modifyItem.get());
+        permissions.setViewSale(viewSale.get());
+        permissions.setCreateSale(createSale.get());
+        permissions.setModifySale(modifySale.get());
+        permissions.setViewCustomer(viewCustomer.get());
+        permissions.setCreateCustomer(createCustomer.get());
+        permissions.setModifyCustomer(modifyCustomer.get());
+        permissions.setManageSupplier(manageSupplier.get());
+        permissions.setManageEmployee(manageEmployee.get());
+        return permissions;
+    }
+
+    public void setPermissions(@NotNull EmployeePermissions permissions) {
+        createItem.set(permissions.isCreateItem());
+        modifyItem.set(permissions.isModifyItem());
+        viewSale.set(permissions.isViewSale());
+        createSale.set(permissions.isCreateSale());
+        modifySale.set(permissions.isModifySale());
+        viewCustomer.set(permissions.isViewCustomer());
+        createCustomer.set(permissions.isCreateCustomer());
+        modifyCustomer.set(permissions.isModifyCustomer());
+        manageSupplier.set(permissions.getManageSupplier());
+        manageEmployee.set(permissions.getManageEmployee());
     }
 
     public String getDisplayName() {

@@ -49,7 +49,7 @@ public class SalesViewController extends AChildEmployeeViewController implements
 
     @Override
     public void onEdit() {
-        activateView(editMenu);
+//        activateView(editMenu);
     }
 
     @Override

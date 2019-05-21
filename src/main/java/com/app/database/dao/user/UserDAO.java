@@ -1,6 +1,7 @@
 package com.app.database.dao.user;
 
 import com.app.database.Database;
+import com.app.main.model.EmployeeTable;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.AdminModel;
 import com.app.main.model.user.EmployeeModel;
@@ -22,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDAO {
     private static final Logger logger = LogManager.getLogger(UserDAO.class.getName());
@@ -41,6 +43,23 @@ public class UserDAO {
     private static final String SQL_UPDATE_PASSWORD_ADMIN = "UPDATE ADMIN SET password = ? WHERE id = ?;";
     private static final String SQL_UPDATE_PASSWORD_EMPLOYEE = "UPDATE EMPLOYEE SET password = ? WHERE id = ?;";
     private static final String SQL_UPDATE_ADMIN = "UPDATE ADMIN SET first_name = ?, last_name = ?, display_name = ?, email = ? WHERE id = ?;";
+    private static final String SQL_GET_EMPLOYEE_TABLE = "SELECT *\n" +
+            "FROM (SELECT E.id           AS employee_id,\n" +
+            "             E.display_name AS display_name,\n" +
+            "             E.first_name   AS first_name,\n" +
+            "             E.email        AS contact,\n" +
+            "             S.name         AS store_name,\n" +
+            "             E.position     AS position,\n" +
+            "             E.permissions  AS permissions\n" +
+            "      FROM EMPLOYEE E\n" +
+            "               LEFT JOIN STORE S ON E.store = S.id);";
+    private static final String SQL_UPDATE_EMPLOYEE_TABLE = "UPDATE EMPLOYEE\n" +
+            "SET display_name = ?,\n" +
+            "    first_name   = ?,\n" +
+            "    email        = ?,\n" +
+            "    position     = ?,\n" +
+            "    permissions  = ?\n" +
+            "WHERE id = ?;";
     private final Database database;
 
     @Contract(pure = true)
@@ -109,12 +128,14 @@ public class UserDAO {
 
     @NotNull
     @Contract("_ -> new")
-    private ByteArrayInputStream writeEmployeePermissions(EmployeePermissions permissions) throws IOException {
+    private EmployeePermissionsResult writeEmployeePermissions(EmployeePermissions permissions) throws IOException {
         try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
             try (ObjectOutputStream oos = new ObjectOutputStream(stream)) {
                 oos.writeObject(permissions);
                 logger.info("Employee permissions have been written: {}", permissions);
-                return new ByteArrayInputStream(stream.toByteArray());
+                oos.flush();
+                stream.flush();
+                return new EmployeePermissionsResult(new ByteArrayInputStream(stream.toByteArray()), stream.size());
             }
         }
     }
@@ -185,7 +206,8 @@ public class UserDAO {
         try (PreparedStatement statement = connection.prepareStatement("")) {
             int counter = saveCommon(statement, user);
             statement.setInt(counter++, user.getStore().getId());
-            statement.setBinaryStream(counter++, writeEmployeePermissions(user.getPermissions()));
+            EmployeePermissionsResult result = writeEmployeePermissions(user.getPermissions());
+            statement.setBinaryStream(counter++, result.stream, result.length);
             statement.setInt(counter, user.getId());
             statement.executeUpdate();
         } catch (IOException e) {
@@ -215,6 +237,56 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             logger.error("Failed to update account password for user: {}", id, e);
+        }
+    }
+
+    public ArrayList<EmployeeTable> getEmployeeTable() {
+        ArrayList<EmployeeTable> employees = new ArrayList<>();
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_EMPLOYEE_TABLE)) {
+                ResultSet result = statement.executeQuery();
+                while (result.next()) {
+                    EmployeeTable employee = new EmployeeTable(result.getInt("employee_id"));
+                    employee.setDisplayName(result.getString("display_name"));
+                    employee.setFirstName(result.getString("first_name"));
+                    employee.setContact(result.getString("contact"));
+                    employee.setStore(result.getString("store_name"));
+                    employee.setPosition(result.getString("position"));
+                    EmployeePermissions permissions = readEmployeePermissions(result.getBinaryStream("permissions"));
+                    if (permissions != null) employee.setPermissions(permissions);
+                    employees.add(employee);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load employee permissions list");
+        }
+        return employees;
+    }
+
+    public void saveEmployeeTable(EmployeeTable employee) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_EMPLOYEE_TABLE)) {
+                statement.setString(1, employee.getDisplayName());
+                statement.setString(2, employee.getFirstName());
+                statement.setString(3, employee.getContact());
+                statement.setString(4, employee.getPosition());
+                EmployeePermissionsResult result = writeEmployeePermissions(employee.getPermissions());
+                statement.setBinaryStream(5, result.stream, result.length);
+                statement.setInt(6, employee.getEmployeeId());
+                statement.executeUpdate();
+            }
+        } catch (IOException | SQLException e) {
+            logger.error("Failed to write permissions for employee: {}", employee.getEmployeeId(), e);
+        }
+    }
+
+    class EmployeePermissionsResult {
+        int length;
+        ByteArrayInputStream stream;
+
+        EmployeePermissionsResult(ByteArrayInputStream input, int size) {
+            stream = input;
+            length = size;
         }
     }
 }

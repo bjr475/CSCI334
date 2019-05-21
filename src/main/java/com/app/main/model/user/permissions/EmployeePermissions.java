@@ -2,7 +2,11 @@ package com.app.main.model.user.permissions;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class EmployeePermissions implements Serializable {
@@ -14,8 +18,8 @@ public class EmployeePermissions implements Serializable {
     private BooleanProperty viewCustomer;
     private BooleanProperty createCustomer;
     private BooleanProperty modifyCustomer;
-    private BooleanProperty createSupplier;
-    private BooleanProperty modifySupplier;
+    private BooleanProperty manageSupplier;
+    private BooleanProperty manageEmployee;
 
     public EmployeePermissions() {
         createItem = new SimpleBooleanProperty(false);
@@ -26,8 +30,34 @@ public class EmployeePermissions implements Serializable {
         viewCustomer = new SimpleBooleanProperty(false);
         createCustomer = new SimpleBooleanProperty(false);
         modifyCustomer = new SimpleBooleanProperty(false);
-        createSupplier = new SimpleBooleanProperty(false);
-        modifySupplier = new SimpleBooleanProperty(false);
+        manageSupplier = new SimpleBooleanProperty(false);
+        manageEmployee = new SimpleBooleanProperty(false);
+    }
+
+    private void writeObject(@NotNull ObjectOutputStream out) throws IOException {
+        out.writeBoolean(createItem.get());
+        out.writeBoolean(modifyItem.get());
+        out.writeBoolean(viewSale.get());
+        out.writeBoolean(createSale.get());
+        out.writeBoolean(modifySale.get());
+        out.writeBoolean(viewCustomer.get());
+        out.writeBoolean(createCustomer.get());
+        out.writeBoolean(modifyCustomer.get());
+        out.writeBoolean(manageSupplier.get());
+        out.writeBoolean(manageEmployee.get());
+    }
+
+    private void readObject(@NotNull ObjectInputStream in) throws IOException, ClassNotFoundException {
+        createItem.set(in.readBoolean());
+        modifyItem.set(in.readBoolean());
+        viewSale.set(in.readBoolean());
+        createSale.set(in.readBoolean());
+        modifySale.set(in.readBoolean());
+        viewCustomer.set(in.readBoolean());
+        createCustomer.set(in.readBoolean());
+        modifyCustomer.set(in.readBoolean());
+        manageSupplier.set(in.readBoolean());
+        manageEmployee.set(in.readBoolean());
     }
 
     public boolean isCreateItem() {
@@ -126,27 +156,27 @@ public class EmployeePermissions implements Serializable {
         return modifyCustomer;
     }
 
-    public boolean isCreateSupplier() {
-        return createSupplier.get();
+    public boolean getManageSupplier() {
+        return manageSupplier.get();
     }
 
-    public void setCreateSupplier(boolean createSupplier) {
-        this.createSupplier.set(createSupplier);
+    public void setManageSupplier(boolean manageSupplier) {
+        this.manageSupplier.set(manageSupplier);
     }
 
-    public BooleanProperty createSupplierProperty() {
-        return createSupplier;
+    public BooleanProperty manageSupplierProperty() {
+        return manageSupplier;
     }
 
-    public boolean isModifySupplier() {
-        return modifySupplier.get();
+    public boolean getManageEmployee() {
+        return manageEmployee.get();
     }
 
-    public void setModifySupplier(boolean modifySupplier) {
-        this.modifySupplier.set(modifySupplier);
+    public void setManageEmployee(boolean manageEmployee) {
+        this.manageEmployee.set(manageEmployee);
     }
 
-    public BooleanProperty modifySupplierProperty() {
-        return modifySupplier;
+    public BooleanProperty manageEmployeeProperty() {
+        return manageEmployee;
     }
 }

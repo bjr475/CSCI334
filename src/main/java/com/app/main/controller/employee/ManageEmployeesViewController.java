@@ -1,11 +1,14 @@
 package com.app.main.controller.employee;
 
+import com.app.database.Database;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.EmployeeTable;
+import com.app.main.model.user.AUserModel;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -165,10 +168,9 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
 
         buildEmployeeTable();
 
-        for (int i = 0; i < 20; i++) {
-            employeeTableView.itemsProperty().get().add(new EmployeeTable(i));
-        }
-        employeeTableView.refresh();
+        getModel().currentUserProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && (newValue.getUserType() == AUserModel.UserType.ADMIN)) refreshTable();
+        });
     }
 
     private void activateView(@NotNull ScrollPane view) {
@@ -186,6 +188,13 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
         return true;
     }
 
+    private void refreshTable() {
+        employeeTableView.setItems(FXCollections.observableArrayList(
+                Database.INSTANCE.getUser().getEmployeeTable()
+        ));
+        employeeTableView.refresh();
+    }
+
     @Override
     public void onEdit() {
         EmployeeTable item = employeeTableView.getSelectionModel().getSelectedItem();
@@ -199,8 +208,9 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
 
     public void confirmEdit() {
         toolDrawer.close();
-        employeeTableView.getSelectionModel().getSelectedItem().set(editEmployee.get());
+        Database.INSTANCE.getUser().saveEmployeeTable(editEmployee.get());
         editEmployee.set(null);
+        refreshTable();
     }
 
     @Override

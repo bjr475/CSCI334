@@ -1,8 +1,11 @@
 package com.app.main.model.store;
 
+import com.app.main.model.AddressModel;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.jetbrains.annotations.NotNull;
@@ -10,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
 public class StoreModel {
     private ReadOnlyIntegerProperty storeId;
     private StringProperty name;
-    private StringProperty address;
+    private ObjectProperty<AddressModel> address;
     private IntegerProperty managerId;
     private StringProperty managerName;
 
     public StoreModel(int storeId) {
         this.storeId = new SimpleIntegerProperty(storeId);
         name = new SimpleStringProperty(String.format("Store - %d", storeId));
-        address = new SimpleStringProperty(String.format("%d Store St, Stores, NSW, 2830", storeId));
+        address = new SimpleObjectProperty<>(new AddressModel(String.format("%d Store St", storeId), "Stores", "NSW", "2830"));
         managerId = new SimpleIntegerProperty(1);
         managerName = new SimpleStringProperty("Employee 1");
     }
@@ -25,7 +28,7 @@ public class StoreModel {
     public StoreModel(@NotNull StoreModel item) {
         storeId = new SimpleIntegerProperty(item.storeId.get());
         name = new SimpleStringProperty(item.name.get());
-        address = new SimpleStringProperty(item.address.get());
+        address = new SimpleObjectProperty<>(item.address.get());
         managerId = new SimpleIntegerProperty(item.managerId.get());
         managerName = new SimpleStringProperty(item.managerName.get());
     }
@@ -57,15 +60,15 @@ public class StoreModel {
         return name;
     }
 
-    public String getAddress() {
+    public AddressModel getAddress() {
         return address.get();
     }
 
-    public void setAddress(String address) {
+    public void setAddress(AddressModel address) {
         this.address.set(address);
     }
 
-    public StringProperty addressProperty() {
+    public ObjectProperty<AddressModel> addressProperty() {
         return address;
     }
 

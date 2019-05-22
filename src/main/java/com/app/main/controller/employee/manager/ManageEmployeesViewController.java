@@ -4,8 +4,8 @@ import com.app.database.Database;
 import com.app.main.controller.employee.AChildEmployeeViewController;
 import com.app.main.controller.employee.IEditorActionItem;
 import com.app.main.model.ApplicationModel;
-import com.app.main.model.EmployeeTable;
 import com.app.main.model.user.AUserModel;
+import com.app.main.model.user.EmployeeTable;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXToggleButton;
@@ -13,7 +13,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import org.jetbrains.annotations.NotNull;
 
 public class ManageEmployeesViewController extends AChildEmployeeViewController implements IEditorActionItem {

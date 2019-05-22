@@ -33,7 +33,7 @@ public class CustomerModel {
         creditLine = new SimpleStringProperty();
         clubMember = new SimpleStringProperty();
         subjectAreas = new SimpleObjectProperty<>((FXCollections.observableArrayList()));
-        modelTypes = new ArrayList<String>();
+        modelTypes = new ArrayList<>();
         sales = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
 

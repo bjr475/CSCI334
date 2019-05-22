@@ -1,7 +1,12 @@
-package com.app.main.model;
+package com.app.main.model.user;
 
 import com.app.main.model.user.permissions.EmployeePermissions;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.jetbrains.annotations.NotNull;
 
 public class EmployeeTable {

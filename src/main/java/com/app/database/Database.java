@@ -28,10 +28,10 @@ public class Database {
         INSTANCE = new Database();
     }
 
-    private String connectionPath;
     private final UserDAO user;
     private final ModelDAO model;
     private final StoreDAO store;
+    private String connectionPath;
 
     private Database() {
         Path path = Path.of(System.getProperty("user.dir"), "runtime", "database.db");

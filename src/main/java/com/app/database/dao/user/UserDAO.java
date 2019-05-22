@@ -1,11 +1,12 @@
 package com.app.database.dao.user;
 
 import com.app.database.Database;
-import com.app.main.model.EmployeeTable;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.AdminModel;
 import com.app.main.model.user.EmployeeModel;
+import com.app.main.model.user.EmployeeNameId;
 import com.app.main.model.user.EmployeeStoreModel;
+import com.app.main.model.user.EmployeeTable;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +61,10 @@ public class UserDAO {
             "    position     = ?,\n" +
             "    permissions  = ?\n" +
             "WHERE id = ?;";
+    private static final String SQL_GET_EMPLOYEE_NAME_IDS = "SELECT id, display_name\n" +
+            "FROM EMPLOYEE\n" +
+            "WHERE id NOT IN (SELECT manager FROM STORE);";
+
     private final Database database;
 
     @Contract(pure = true)
@@ -274,6 +284,23 @@ public class UserDAO {
         } catch (IOException | SQLException e) {
             logger.error("Failed to write permissions for employee: {}", employee.getEmployeeId(), e);
         }
+    }
+
+    public ArrayList<EmployeeNameId> getEmployeeNameIds() {
+        ArrayList<EmployeeNameId> items = new ArrayList<>();
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_EMPLOYEE_NAME_IDS)) {
+                ResultSet result = statement.executeQuery();
+                while (result.next()) {
+                    EmployeeNameId item = new EmployeeNameId(result.getInt("id"), result.getString("display_name"));
+                    logger.debug("Loading Employee: {}", item);
+                    items.add(item);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load employee names", e);
+        }
+        return items;
     }
 
     class EmployeePermissionsResult {

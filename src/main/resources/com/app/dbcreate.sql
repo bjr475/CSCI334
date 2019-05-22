@@ -13,17 +13,20 @@ DROP TABLE IF EXISTS CUSTOMER;
 CREATE TABLE CUSTOMER
 (
 
-    id            INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
-    first_name    TEXT           NOT NULL,
-    last_name     TEXT           NOT NULL,
-    display_name  TEXT,
-    password      TEXT,
-    email         TEXT,
-    interests     TEXT,
-    address       TEXT,
-    telephone     TEXT,
-    balance       REAL,
-    member_status INTEGER                                           DEFAULT 0x01,
+    id               INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
+    first_name       TEXT           NOT NULL,
+    last_name        TEXT           NOT NULL,
+    display_name     TEXT,
+    password         TEXT,
+    email            TEXT,
+    interests        TEXT,
+    address_address  TEXT,
+    address_suburb   TEXT,
+    address_state    TEXT,
+    address_postcode TEXT,
+    telephone        TEXT,
+    balance          REAL,
+    member_status    INTEGER                                           DEFAULT 0x01,
     -- 0x01 a customer IS NOT a member
     -- 0x02 a customer IS a member
     CHECK (member_status IN (0x01, 0x02))
@@ -35,7 +38,7 @@ CREATE TABLE EMPLOYEE
     id           INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
     first_name   TEXT           NOT NULL,
     last_name    TEXT           NOT NULL,
-    display_name TEXT,
+    display_name TEXT UNIQUE    NOT NULL,
     password     TEXT,
     email        TEXT,
     store        INTEGER        NOT NULL REFERENCES STORE (id),
@@ -46,10 +49,13 @@ CREATE TABLE EMPLOYEE
 DROP TABLE IF EXISTS STORE;
 CREATE TABLE STORE
 (
-    id      INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
-    name    TEXT           NOT NULL,
-    address TEXT           NOT NULL,
-    managerName INTEGER REFERENCES EMPLOYEE (id)
+    id               INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
+    name             TEXT           NOT NULL,
+    address_address  TEXT,
+    address_suburb   TEXT,
+    address_state    TEXT,
+    address_postcode TEXT,
+    manager          INTEGER REFERENCES EMPLOYEE (id)
 );
 
 DROP TABLE IF EXISTS SALE;
@@ -104,7 +110,10 @@ CREATE TABLE SUPPLIER
 (
     id               INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT DEFAULT 0,
     name             TEXT    NOT NULL,
-    address          TEXT    NOT NULL,
+    address_address  TEXT,
+    address_suburb   TEXT,
+    address_state    TEXT,
+    address_postcode TEXT,
     delivery_details TEXT    NOT NULL
 );
 
@@ -134,14 +143,22 @@ CREATE TABLE MODEL_SUPPLIER
 INSERT INTO ADMIN (first_name, last_name, display_name, password, email)
 VALUES ('Tim', 'Toys', 'tim', '1234', 'tim@toyshop.co');
 
-INSERT INTO STORE (name, address, managerName)
-VALUES ('A Store', '123 Store St, City, 1243 Australia', NULL);
+INSERT INTO CUSTOMER (first_name, last_name, display_name, password, email, interests, address_address, address_suburb,
+                      address_state, address_postcode, telephone, balance)
+VALUES ('John', 'Doe', '__default__', '__default__', 'customer@toyshop.co', '', '123 Customer St',
+        'Customer Suburb', 'NSW', '3241', '0912 123, 482', 0);
+
+INSERT INTO STORE (name, address_address, address_suburb, address_state, address_postcode, manager)
+VALUES ('Tim Hobby Shop', '123 Store St', 'Store Suburb', 'NSW', '2345', NULL);
 
 INSERT INTO EMPLOYEE (first_name, last_name, display_name, password, email, store, permissions, position)
 VALUES ('First', 'Last', 'employee', 'test', 'employee@toyshop.co', 1, NULL, 'Manager');
 
+INSERT INTO EMPLOYEE (first_name, last_name, display_name, password, email, store, permissions, position)
+VALUES ('Jane', 'Doe', 'employee2', 'test2', 'employee2@toyshop.co', 1, NULL, 'Sales Assistant');
+
 UPDATE STORE
-SET managerName = 1
+SET manager = 1
 WHERE STORE.id = 1;
 
 INSERT INTO MODEL (id, name, type, price, subject, description)
@@ -168,11 +185,11 @@ VALUES ('Model-02', 1, 'Model Trains Row 1', 9);
 INSERT INTO MODEL_STORE (model_id, store_id, location, quantity)
 VALUES ('Model-04', 1, 'Model Trains Row 1', 20);
 
-INSERT INTO SUPPLIER (name, address, delivery_details)
-VALUES ('Model Supplier 2', '123 Supplier St, Supplier City', 'Delivery Details');
+INSERT INTO SUPPLIER (name, address_address, address_suburb, address_state, address_postcode, delivery_details)
+VALUES ('Supplier', '123 Supplier St', 'Supplier Suburb', 'NSW', '0397', 'Delivery Details');
 
 INSERT INTO SUPPLIER_CONTACT (supplier, name, phone)
-VALUES (1, 'Supplier', '00423857');
+VALUES (1, 'Mary', '00423857');
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
 VALUES ('Model-01', 1, 15);
@@ -188,3 +205,6 @@ VALUES ('Model-04', 1, 20);
 
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
 VALUES ('Model-05', 1, 2);
+
+INSERT INTO SALE (customer, employee, discount, final_price)
+VALUES (1, 1, 0, 100);

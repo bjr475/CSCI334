@@ -35,7 +35,9 @@
                             <Label>Manager Name</Label>
                             <TextField fx:id="editStoreManagerName"/>
                         </VBox>
-                        <HBox GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                        <fx:include source="../address.fxml" fx:id="editAddress" GridPane.rowIndex="3"
+                                    GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"/>
+                        <HBox GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2">
                             <Pane HBox.hgrow="ALWAYS"/>
                             <JFXButton onAction="#cancelEdit" styleClass="secondary-button">Cancel Changes</JFXButton>
                             <JFXButton onAction="#confirmEdit" styleClass="action-button">Confirm Changes</JFXButton>
@@ -43,7 +45,34 @@
                     </GridPane>
                 </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="addMenu" VBox.vgrow="ALWAYS">
-                    <Label>Add Store</Label>
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" vgap="8" hgap="8">
+                        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            Add Store
+                        </Label>
+                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            <Label>Store Name</Label>
+                            <TextField fx:id="addStoreName"/>
+                        </VBox>
+                        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="1">
+                            <Label>Manager</Label>
+                            <ChoiceBox fx:id="addStoreManager"/>
+                        </VBox>
+                        <fx:include source="../address.fxml" fx:id="addAddress" GridPane.rowIndex="3"
+                                    GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"/>
+                        <HBox GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2" spacing="16">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton onAction="#cancelAdd" styleClass="secondary-button">Cancel Changes</JFXButton>
+                            <JFXButton onAction="#confirmAdd" styleClass="action-button">Confirm Changes</JFXButton>
+                        </HBox>
+                    </GridPane>
                 </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="filterMenu" VBox.vgrow="ALWAYS">
                     <Label>Filter Store</Label>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import java.lang.*?>
+<?import java.lang.String?>
 <ChoiceBox xmlns:fx="http://javafx.com/fxml" value="State" xmlns="http://javafx.com/javafx">
     <items>
         <FXCollections fx:factory="observableArrayList">

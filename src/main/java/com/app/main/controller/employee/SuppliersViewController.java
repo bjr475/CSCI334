@@ -7,6 +7,8 @@ import com.app.main.model.supplier.SupplierModel;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
@@ -23,14 +25,19 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
     public JFXDrawer toolDrawer;
     public TableView<SupplierModel> suppliers;
     public ScrollPane searchMenu;
-    public ScrollPane viewMenu;
     public ScrollPane addMenu;
 
     public JFXDialog addContactDialog;
     public JFXDialog addItemDialog;
 
+    /* Add and Edit Values */
+    private ObjectProperty<SupplierModel> currentAddSupplier;
+    private ObjectProperty<SupplierModel> currentEditableSupplier;
+
     public SuppliersViewController(ApplicationModel model) {
         super(model);
+        currentAddSupplier = new SimpleObjectProperty<>(null);
+        currentEditableSupplier = new SimpleObjectProperty<>(null);
 
         model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) updateSuppliersTable();
@@ -120,6 +127,8 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
         }
         suppliers.setItems(FXCollections.observableArrayList(supplierModels));
         suppliers.refresh();
+
+
     }
 
     private void activateControl(@NotNull Control pane) {
@@ -134,7 +143,7 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onEdit() {
-        activateControl(viewMenu);
+
     }
 
     @Override

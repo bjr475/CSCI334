@@ -6,23 +6,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-      fx:controller="com.app.main.controller.AddressViewController" spacing="8">
+      fx:controller="com.app.main.controller.AddressViewController"
+      spacing="10">
     <VBox>
         <Label>Address</Label>
-        <TextField fx:id="editAddress"/>
+        <TextField fx:id="addressLine"/>
     </VBox>
-    <HBox>
+    <HBox spacing="8">
         <VBox HBox.hgrow="ALWAYS">
             <Label>Suburb</Label>
-            <TextField fx:id="editSuburb"/>
+            <TextField fx:id="suburb"/>
         </VBox>
         <VBox>
             <Label>State</Label>
-            <fx:include fx:id="editState" source="address_state.fxml"/>
+            <fx:include fx:id="state" source="address_state.fxml"/>
         </VBox>
         <VBox HBox.hgrow="ALWAYS">
             <Label>Postcode</Label>
-            <TextField fx:id="editPostcode"/>
+            <TextField fx:id="postcode"/>
         </VBox>
     </HBox>
 </VBox>

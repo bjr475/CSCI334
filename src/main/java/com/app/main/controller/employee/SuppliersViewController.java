@@ -4,16 +4,12 @@ import com.app.main.model.AddressModel;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.supplier.SupplierContactModel;
 import com.app.main.model.supplier.SupplierModel;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -24,6 +20,9 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
     public ScrollPane searchMenu;
     public ScrollPane viewMenu;
     public ScrollPane addMenu;
+
+    public JFXDialog addContactDialog;
+    public JFXDialog addItemDialog;
 
     public SuppliersViewController(ApplicationModel model) {
         super(model);
@@ -144,6 +143,22 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
 
     public void onConfirmAdd() {
 
+    }
+
+    public void cancelContactDialog() {
+        addContactDialog.close();
+    }
+
+    public void saveContactDialog() {
+        addContactDialog.close();
+    }
+
+    public void cancelItemDialog() {
+        addItemDialog.close();
+    }
+
+    public void saveItemDialog() {
+        addItemDialog.close();
     }
 
     @Override

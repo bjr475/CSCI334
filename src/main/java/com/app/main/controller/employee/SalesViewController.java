@@ -51,10 +51,14 @@ public class SalesViewController extends AChildEmployeeViewController implements
 //        activateView(editMenu);
     }
 
+    public void onCancelEdit() {
+        editMenu.setVvalue(0);
+        toolDrawer.close();
+    }
+
     @Override
     public void onAdd() {
         activateView(addMenu);
-        saleItemGrid.toFront();
     }
 
     public void onCancelAdd() {

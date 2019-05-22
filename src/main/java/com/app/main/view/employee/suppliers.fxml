@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.lang.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:id="parentSuppliersPane" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.SuppliersViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
@@ -55,6 +56,7 @@
                         </HBox>
                     </VBox>
                 </ScrollPane>
+
                 <ScrollPane styleClass="default-background" fx:id="viewMenu">
                     <VBox spacing="20">
                         <padding>
@@ -119,6 +121,7 @@
                         </HBox>
                     </VBox>
                 </ScrollPane>
+
                 <ScrollPane styleClass="default-background" fx:id="addMenu">
                     <GridPane alignment="baseline_center" hgap="25" vgap="5">
                         <padding>
@@ -130,103 +133,45 @@
                             </Insets>
                         </padding>
                         <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <Label>Add Supplier</Label>
                             <HBox spacing="20">
                                 <VBox HBox.hgrow="ALWAYS">
                                     <Label>Supplier Name</Label>
-                                    <TextField fx:id="name"></TextField>
+                                    <TextField fx:id="addSupplierName"></TextField>
                                 </VBox>
                                 <VBox HBox.hgrow="ALWAYS">
-                                    <VBox spacing="5">
-                                        <HBox spacing="20">
-                                            <JFXCheckBox fx:id="creditLineExists"></JFXCheckBox>
-                                            <Label>Existing credit line</Label>
-                                        </HBox>
-                                        <TextField fx:id="creditLine" disable="true">$
-                                        </TextField>
-                                    </VBox>
+                                    <Label>Supplier ID</Label>
+                                    <TextField fx:id="addSupplierID" editable="false"></TextField>
                                 </VBox>
                             </HBox>
-                            <VBox>
-                                <Label>Address</Label>
-                                <TextField fx:id="address"></TextField>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="4">
+                                <fx:include fx:id="addAddress" source="address.fxml"/>
                             </VBox>
-                            <HBox spacing="20">
-                                <VBox HBox.hgrow="ALWAYS">
-                                    <Label>Suburb</Label>
-                                    <TextField fx:id="suburb" style="color: grey">Suburb
-                                    </TextField>
-                                </VBox>
-                                <VBox>
-                                    <Label>State</Label>
-                                    <ChoiceBox fx:id="state">
-                                        <items>
-                                            <FXCollections fx:factory="observableArrayList">
-                                                <String fx:value="State"/>
-                                                <String fx:value="NSW"/>
-                                                <String fx:value="VIC"/>
-                                                <String fx:value="QLD"/>
-                                                <String fx:value="ACT"/>
-                                                <String fx:value="TAS"/>
-                                                <String fx:value="SA"/>
-                                                <String fx:value="WA"/>
-                                                <String fx:value="NT"/>
-                                            </FXCollections>
-                                        </items>
-                                    </ChoiceBox>
-                                </VBox>
-                                <VBox HBox.hgrow="ALWAYS">
-                                    <Label>Postcode</Label>
-                                    <TextField fx:id="postcode" promptText="Postcode"/>
-                                </VBox>
-                            </HBox>
-                            <TitledPane text="Contacts" expanded="false">
+
+                            <TitledPane text="Contacts">
                                 <content>
                                     <TableView fx:id="contactTable">
                                         <columns>
                                             <TableColumn prefWidth="150" text="Contact Name">
                                             </TableColumn>
-                                            <TableColumn prefWidth="150" text="Details">
+                                            <TableColumn prefWidth="150" text="Phone">
+                                            </TableColumn>
+                                            <TableColumn prefWidth="150" text="Email">
                                             </TableColumn>
                                         </columns>
                                     </TableView>
+                                    <HBox>
+                                        <Pane HBox.hgrow="ALWAYS"/>
+                                        <JFXButton styleClass="sml-button"
+                                                   onAction="addContactDialog.show(parentSuppliersPane)">
+                                            Add Contact
+                                        </JFXButton>
+                                    </HBox>
                                 </content>
                             </TitledPane>
-                            <HBox spacing="20">
-                                <HBox spacing="20">
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Contact Name</Label>
-                                        <TextField fx:id="scontactName"/>
-                                    </VBox>
-                                </HBox>
-                                <HBox spacing="20">
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Phone</Label>
-                                        <TextField fx:id="sphoneContact"/>
-                                    </VBox>
-                                </HBox>
-                                <!--<VBox HBox.hgrow="ALWAYS">
-                                        <Label>Store Name</Label>
-                                        <TextField fx:id="storeName"/>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                        <Label>Quantity</Label>
-                                        <VBox spacing="10">
-                                            <TextField fx:id="quantity"/>
-                                            <VBox>
-                                                <Label>Total:</Label>
-                                                <Text fx:id="totalStock"></Text>
-                                            </VBox>
-                                        </VBox>
-                                    </VBox>-->
 
-                                <JFXButton fx:id="addContactButton"
-                                           buttonType="FLAT">
-                                    <graphic>
-                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                    </graphic>
-                                </JFXButton>
-                            </HBox>
-                            <TitledPane text="Items" expanded="false">
+                            <TitledPane text="Items">
                                 <content>
                                     <TableView>
                                         <columns>
@@ -244,6 +189,10 @@
                                 <VBox HBox.hgrow="ALWAYS">
                                     <TextField fx:id="itemSearch" promptText="Item Search"/>
                                 </VBox>
+                                <JFXButton styleClass="sml-button"
+                                           onAction="addItemDialog.show(parentSuppliersPane)">
+                                    New Item
+                                </JFXButton>
                                 <VBox HBox.hgrow="ALWAYS">
                                     <JFXButton fx:id="addSupplierItemButton" buttonType="FLAT"
                                                alignment="BOTTOM_RIGHT">
@@ -253,15 +202,25 @@
                                     </JFXButton>
                                 </VBox>
                             </HBox>
-                            <JFXCheckBox fx:id="newItemCheck" GridPane.rowIndex="13">New Item
-                            </JFXCheckBox>
+                            <VBox spacing="8" GridPane.rowIndex="13">
+                                <JFXCheckBox fx:id="existingCreditLine">
+                                    Existing Credit Line
+                                </JFXCheckBox>
+                                <Label>Credit</Label>
+                                <TextField fx:id="addCredit"/>
+                            </VBox>
+
+
                         </VBox>
-                        <HBox spacing="20" GridPane.rowIndex="14"
-                              alignment="center_right">
-                            <JFXButton>
+                        <HBox spacing="20" GridPane.rowIndex="14">
+                            <JFXButton styleClass="sml-button">
                                 Delete
                             </JFXButton>
-                            <JFXButton>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelAdd">
+                                Cancel
+                            </JFXButton>
+                            <JFXButton styleClass="action-button" onAction="#onConfirmAdd">
                                 Save
                             </JFXButton>
                         </HBox>
@@ -270,155 +229,196 @@
                     </GridPane>
                 </ScrollPane>
             </StackPane>
+
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
                 <TableView fx:id="suppliers" styleClass="table-view"/>
             </ScrollPane>
         </content>
+        <JFXDialog fx:id="addContactDialog">
+            <JFXDialogLayout prefWidth="600">
+                <heading>
+                    <Label>
+                        Add Contact Details
+                    </Label>
+                </heading>
+                <body>
+                    <ScrollPane>
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <VBox>
+                            <VBox>
+                                <Label>Contact Name</Label>
+                                <TextField fx:id="addContactName"/>
+                            </VBox>
+                            <VBox>
+                                <Label>Phone</Label>
+                                <TextField fx:id="addContactPhone"/>
+                            </VBox>
+                            <VBox>
+                                <Label>Email</Label>
+                                <TextField fx:id="addContactEmail"/>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+
+                </body>
+                <actions>
+                    <JFXButton styleClass="secondary-button" onAction="#cancelContactDialog">Cancel</JFXButton>
+                    <JFXButton styleClass="action-button" onAction="#saveContactDialog">Save</JFXButton>
+                </actions>
+            </JFXDialogLayout>
+        </JFXDialog>
+
+        <JFXDialog fx:id="addItemDialog">
+            <JFXDialogLayout prefWidth="600">
+
+                <heading>
+                    <Label>
+                        Add Item
+                    </Label>
+                </heading>
+                <body>
+                    <ScrollPane>
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <VBox spacing="20" alignment="CENTER_RIGHT">
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Item No.</Label>
+                                    <TextField fx:id="itemNo"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Item Name</Label>
+                                    <TextField fx:id="itemName"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Model Type</Label>
+                                    <ChoiceBox fx:id="modelType" value="Model Type">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Model Type"/>
+                                                <String fx:value="Display"/>
+                                                <String fx:value="Static"/>
+                                                <String fx:value="Working"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Subject Area</Label>
+                                    <ChoiceBox fx:id="subjectArea" value="Subject Area" prefWidth="200">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Subject"/>
+                                                <String fx:value="Train"/>
+                                                <String fx:value="Boat"/>
+                                                <String fx:value="Car"/>
+                                                <String fx:value="Airplane"/>
+                                                <String fx:value="Other"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Mobile</Label>
+                                    <TextField fx:id="retailPrice"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Date First Stocked</Label>
+                                    <DatePicker fx:id="dateFirstStocked"/>
+                                </VBox>
+                            </HBox>
+                            <VBox>
+                                <Label>Location in Store</Label>
+                                <TextField fx:id="locationInStore"/>
+                            </VBox>
+                            <VBox spacing="5">
+                                <Label>Store Stock</Label>
+                                <TableView fx:id="storeStockTable" prefHeight="100">
+                                    <columns>
+                                        <TableColumn prefWidth="300" text="Store Name">
+                                        </TableColumn>
+                                        <TableColumn text="Quantity">
+                                        </TableColumn>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Store</Label>
+                                    <TextField fx:id="itemIDView"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Quantity</Label>
+                                    <TextField fx:id="quantityView"/>
+                                </VBox>
+                                <VBox alignment="BOTTOM_RIGHT">
+                                    <JFXButton fx:id="addItemButton" buttonType="FLAT">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                        </graphic>
+                                    </JFXButton>
+                                </VBox>
+                            </HBox>
+                            <VBox>
+                                <Label>Description</Label>
+                                <TextArea prefHeight="200"></TextArea>
+                            </VBox>
+                            <TitledPane text="Suppliers">
+                                <TableView fx:id="suppliersTable" prefHeight="100">
+                                    <columns>
+                                        <TableColumn prefWidth="300" text="Supplier Name">
+                                        </TableColumn>
+                                        <TableColumn text="Price">
+                                        </TableColumn>
+                                    </columns>
+                                </TableView>
+                            </TitledPane>
+
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label GridPane.columnIndex="0" GridPane.rowIndex="18">Supplier</Label>
+                                    <TextField fx:id="supplierSearch" promptText="Search by ID or Name"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Price/Item</Label>
+                                    <TextField fx:id="price"/>
+                                </VBox>
+                                <VBox alignment="BOTTOM_RIGHT">
+                                    <JFXButton fx:id="addSupplierButton" buttonType="FLAT">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                        </graphic>
+                                    </JFXButton>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox HBox.hgrow="ALWAYS">
+
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </ScrollPane>
+                </body>
+                <actions>
+                    <JFXButton styleClass="secondary-button" onAction="#cancelItemDialog">Cancel</JFXButton>
+                    <JFXButton styleClass="action-button" onAction="saveItemDialog">Save</JFXButton>
+                </actions>
+            </JFXDialogLayout>
+        </JFXDialog>
     </JFXDrawer>
-    <JFXDialog fx:id="addItemDialog">
-        <JFXDialogLayout prefWidth="600">
 
-            <heading>
-                <Label>Supplier Contact Details</Label>
-            </heading>
-            <body>
-                <ScrollPane>
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                    <VBox spacing="20" alignment="CENTER_RIGHT">
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Item No.</Label>
-                                <TextField fx:id="itemNo"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Item Name</Label>
-                                <TextField fx:id="itemName"/>
-                            </VBox>
-                        </HBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Model Type</Label>
-                                <ChoiceBox fx:id="modelType" value="Model Type">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Model Type"/>
-                                            <String fx:value="Display"/>
-                                            <String fx:value="Static"/>
-                                            <String fx:value="Working"/>
-                                        </FXCollections>
-                                    </items>
-                                </ChoiceBox>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Subject Area</Label>
-                                <ChoiceBox fx:id="subjectArea" value="Subject Area" prefWidth="200">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Subject"/>
-                                            <String fx:value="Train"/>
-                                            <String fx:value="Boat"/>
-                                            <String fx:value="Car"/>
-                                            <String fx:value="Airplane"/>
-                                            <String fx:value="Other"/>
-                                        </FXCollections>
-                                    </items>
-                                </ChoiceBox>
-                            </VBox>
-                        </HBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Mobile</Label>
-                                <TextField fx:id="retailPrice"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Date First Stocked</Label>
-                                <DatePicker fx:id="dateFirstStocked"/>
-                            </VBox>
-                        </HBox>
-                        <VBox>
-                            <Label>Location in Store</Label>
-                            <TextField fx:id="locationInStore"/>
-                        </VBox>
-                        <VBox spacing="5">
-                            <Label>Store Stock</Label>
-                            <TableView fx:id="storeStockTable" prefHeight="100">
-                                <columns>
-                                    <TableColumn prefWidth="300" text="Store Name">
-                                    </TableColumn>
-                                    <TableColumn text="Quantity">
-                                    </TableColumn>
-                                </columns>
-                            </TableView>
-                        </VBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Store</Label>
-                                <TextField fx:id="itemIDView"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Quantity</Label>
-                                <TextField fx:id="quantityView"/>
-                            </VBox>
-                            <VBox alignment="BOTTOM_RIGHT">
-                                <JFXButton fx:id="addItemButton" buttonType="FLAT">
-                                    <graphic>
-                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                    </graphic>
-                                </JFXButton>
-                            </VBox>
-                        </HBox>
-                        <VBox>
-                            <Label>Description</Label>
-                            <TextArea prefHeight="200"></TextArea>
-                        </VBox>
-                        <VBox>
-                            <Label>Suppliers</Label>
-                            <TableView fx:id="suppliersTable" prefHeight="100"> <!--Hide in an accordion-->
-                                <columns>
-                                    <TableColumn prefWidth="300" text="Supplier Name">
-                                    </TableColumn>
-                                    <TableColumn text="Price">
-                                    </TableColumn>
-                                </columns>
-                            </TableView>
-                        </VBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label GridPane.columnIndex="0" GridPane.rowIndex="18">Supplier</Label>
-                                <TextField fx:id="supplierSearch" promptText="Search by ID or Name"/>
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-                                <Label>Price/Item</Label>
-                                <TextField fx:id="price"/>
-                            </VBox>
-                            <VBox alignment="BOTTOM_RIGHT">
-                                <JFXButton fx:id="addSupplierButton" buttonType="FLAT">
-                                    <graphic>
-                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                    </graphic>
-                                </JFXButton>
-                            </VBox>
-                        </HBox>
-                        <HBox spacing="20">
-                            <VBox HBox.hgrow="ALWAYS">
 
-                            </VBox>
-                            <VBox HBox.hgrow="ALWAYS">
-
-                            </VBox>
-                        </HBox>
-                    </VBox>
-                </ScrollPane>
-            </body>
-            <actions>
-                <JFXButton>Cancel</JFXButton>
-                <JFXButton>Save</JFXButton>
-            </actions>
-        </JFXDialogLayout>
-    </JFXDialog>
 </StackPane>
 

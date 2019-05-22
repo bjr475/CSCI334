@@ -54,8 +54,12 @@
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
                 <VBox spacing="24" styleClass="main-menu">
-                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Login</JFXButton>
-                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Forgot Password</JFXButton>
+                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        Login
+                    </JFXButton>
+                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        Forgot Password
+                    </JFXButton>
                 </VBox>
             </sidePane>
             <content>

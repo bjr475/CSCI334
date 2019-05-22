@@ -117,13 +117,14 @@ public class UserDAO {
         if (stream != null) {
             try (ObjectInputStream ois = new ObjectInputStream(stream)) {
                 EmployeePermissions permissions = (EmployeePermissions) ois.readObject();
+                if (permissions == null) permissions = EmployeePermissions.newDefaultPermissions();
                 logger.info("Employee permissions have been loaded: {}", permissions);
                 return permissions;
             } catch (IOException | ClassNotFoundException e) {
                 logger.error("Failed to read employee permissions", e);
             }
         }
-        return null;
+        return EmployeePermissions.newDefaultPermissions();
     }
 
     @NotNull
@@ -253,7 +254,7 @@ public class UserDAO {
                     employee.setStore(result.getString("store_name"));
                     employee.setPosition(result.getString("position"));
                     EmployeePermissions permissions = readEmployeePermissions(result.getBinaryStream("permissions"));
-                    if (permissions != null) employee.setPermissions(permissions);
+                    employee.setPermissions(permissions);
                     employees.add(employee);
                 }
             }
@@ -263,7 +264,7 @@ public class UserDAO {
         return employees;
     }
 
-    public void saveEmployeeTable(EmployeeTable employee) {
+    public void saveEmployeeTable(@NotNull EmployeeTable employee) {
         try (Connection connection = database.openConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_EMPLOYEE_TABLE)) {
                 statement.setString(1, employee.getDisplayName());

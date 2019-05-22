@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.collections.FXCollections?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.SalesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
@@ -45,7 +44,7 @@
 
                             </TitledPane>
                             <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="3">
-                                <Label >Item ID</Label>
+                                <Label>Item ID</Label>
                                 <TextField fx:id="itemIDView"/>
                             </VBox>
                             <VBox GridPane.columnIndex="3" GridPane.rowIndex="6">
@@ -83,23 +82,22 @@
 
                         <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
                                   fx:id="saleCustomerGrid" styleClass="default-background">
-                                <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                                      GridPane.columnSpan="2">
-                                    Add Customer
-                                </Text>
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                Add Customer
+                            </Text>
 
 
-
-                                <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                                      GridPane.columnSpan="4">
-                                    <Pane HBox.hgrow="ALWAYS"/>
-                                    <JFXButton styleClass="secondary-button" onMouseClicked="#onCustomerBack">
-                                        Back
-                                    </JFXButton>
-                                    <JFXButton styleClass="action-button" onMouseClicked="#onCustomerNext">
-                                        Next
-                                    </JFXButton>
-                                </HBox>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="4">
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton styleClass="secondary-button" onMouseClicked="#onCustomerBack">
+                                    Back
+                                </JFXButton>
+                                <JFXButton styleClass="action-button" onMouseClicked="#onCustomerNext">
+                                    Next
+                                </JFXButton>
+                            </HBox>
                         </GridPane>
 
 

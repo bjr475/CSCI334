@@ -1,9 +1,12 @@
-package com.app.main.controller.employee;
+package com.app.main.controller.employee.manager;
 
 import com.app.database.Database;
+import com.app.main.controller.employee.AChildEmployeeViewController;
+import com.app.main.controller.employee.IEditorActionItem;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.EmployeeTable;
 import com.app.main.model.user.AUserModel;
+import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.ObjectProperty;
@@ -43,12 +46,12 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
     public JFXToggleButton editPermSupplierManage;
     public JFXToggleButton editPermEmployeeManage;
     private ObjectProperty<EmployeeTable> editEmployee;
+    private boolean editEmployeeNew = false;
 
     public ManageEmployeesViewController(ApplicationModel model) {
         super(model);
 
         editEmployee = new SimpleObjectProperty<>(null);
-
         editEmployee.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 editEmployeeId.setText("-- ID --");
@@ -68,6 +71,7 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
                 editPermCustomerModify.selectedProperty().unbindBidirectional(oldValue.modifyCustomerProperty());
                 editPermSupplierManage.selectedProperty().unbindBidirectional(oldValue.manageSupplierProperty());
                 editPermEmployeeManage.selectedProperty().unbindBidirectional(oldValue.manageEmployeeProperty());
+                editEmployeeNew = false;
             }
 
             if (newValue != null) {
@@ -88,7 +92,12 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
                 editPermCustomerModify.selectedProperty().bindBidirectional(newValue.modifyCustomerProperty());
                 editPermSupplierManage.selectedProperty().bindBidirectional(newValue.manageSupplierProperty());
                 editPermEmployeeManage.selectedProperty().bindBidirectional(newValue.manageEmployeeProperty());
+                editEmployeeNew = true;
             }
+        });
+
+        model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && (newValue.getUserType() == AUserModel.UserType.ADMIN)) refreshTable();
         });
     }
 
@@ -168,8 +177,16 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
 
         buildEmployeeTable();
 
-        getModel().currentUserProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && (newValue.getUserType() == AUserModel.UserType.ADMIN)) refreshTable();
+        editPosition.valueProperty().addListener((observable, oldValue, newValue) -> {
+            EmployeeTable employee = editEmployee.get();
+            if (employee != null && newValue != null && editEmployeeNew) {
+                if (newValue.equals("Manager"))
+                    employee.setPermissions(EmployeePermissions.newManagerPermissions());
+                if (newValue.equals("Sales Assistant"))
+                    employee.setPermissions(EmployeePermissions.newSalesAssitantPermissions());
+                if (newValue.equals("Stock Assistant"))
+                    employee.setPermissions(EmployeePermissions.newStockAssistantPermissions());
+            }
         });
     }
 
@@ -179,8 +196,10 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
     }
 
     private void openEdit(EmployeeTable item) {
-        editEmployee.set(new EmployeeTable(item));
-        activateView(editMenu);
+        if (item != null) {
+            editEmployee.set(new EmployeeTable(item));
+            activateView(editMenu);
+        }
     }
 
     @Override

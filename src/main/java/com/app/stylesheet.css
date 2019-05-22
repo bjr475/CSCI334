@@ -98,27 +98,27 @@ sml-button:hover {
     -fx-background-color: #babdbe;
 }
 
-.table-view .column-header-background .label{
+.table-view .column-header-background .label {
     -fx-background-color: transparent;
     -fx-font-family: "Roboto Medium", sans-serif;
 }
 
-.table-row-cell{
+.table-row-cell {
     -fx-background-insets: 0, 0 0 1 0;
 }
 
-.table-row-cell:odd{
+.table-row-cell:odd {
     -fx-background-color: -fx-table-cell-border-color, #eceff1;
     -fx-background-insets: 0, 0 0 1 0;
 }
 
-.table-row-cell:selected{
+.table-row-cell:selected {
     -fx-background-color: #546e7a;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
 
-.table-row-cell .label{
+.table-row-cell .label {
     -fx-font-family: "Roboto", sans-serif;
 }
 

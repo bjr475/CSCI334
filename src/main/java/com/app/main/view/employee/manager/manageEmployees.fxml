@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.ManageEmployeesViewController">
+           fx:controller="com.app.main.controller.employee.manager.ManageEmployeesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
@@ -38,7 +38,7 @@
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>First Name</Label>
-                            <TextField fx:id="editFirstName" editable="false"/>
+                            <TextField fx:id="editFirstName"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
                             <Label>Contact</Label>
@@ -55,7 +55,7 @@
                                     <FXCollections fx:factory="observableArrayList">
                                         <String fx:value="Manager"/>
                                         <String fx:value="Sales Assistant"/>
-                                        <String fx:value="Logistics"/>
+                                        <String fx:value="Stock Assistant"/>
                                     </FXCollections>
                                 </items>
                             </ChoiceBox>
@@ -104,8 +104,10 @@
                               GridPane.columnSpan="2">
                             <HBox>
                                 <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton styleClass="secondary-button" onAction="#cancelEdit">Cancel Changes</JFXButton>
-                                <JFXButton styleClass="action-button" onAction="#confirmEdit">Confirm Changes</JFXButton>
+                                <JFXButton styleClass="secondary-button" onAction="#cancelEdit">Cancel Changes
+                                </JFXButton>
+                                <JFXButton styleClass="action-button" onAction="#confirmEdit">Confirm Changes
+                                </JFXButton>
                             </HBox>
                         </VBox>
                     </GridPane>

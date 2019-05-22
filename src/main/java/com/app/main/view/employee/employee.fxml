@@ -89,44 +89,51 @@
             <sidePane>
                 <HBox styleClass="main-menu">
                     <VBox spacing="20" alignment="BASELINE_LEFT" HBox.hgrow="ALWAYS">
-                        <JFXButton onAction="#gotoCatalogue" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoCatalogue" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-book" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Catalogue
                         </JFXButton>
-                        <JFXButton onAction="#gotoCustomers" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoCustomers" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-address-book" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Customers
                         </JFXButton>
-                        <JFXButton onAction="#gotoSales" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoSales" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-shopping-cart" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Sales
                         </JFXButton>
-                        <JFXButton onAction="#gotoSuppliers" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoSuppliers" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-industry" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Suppliers
                         </JFXButton>
                         <Separator styleClass="main-separator"/>
-                        <JFXButton onAction="#gotoSettings" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoSettings" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Settings
                         </JFXButton>
-                        <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Manage Stores
                         </JFXButton>
-                        <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450"
+                                   styleClass="light-menu-button">
                             <graphic>
                                 <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>

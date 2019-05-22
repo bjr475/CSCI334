@@ -49,7 +49,7 @@ CREATE TABLE STORE
     id      INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
     name    TEXT           NOT NULL,
     address TEXT           NOT NULL,
-    manager INTEGER REFERENCES EMPLOYEE (id)
+    managerName INTEGER REFERENCES EMPLOYEE (id)
 );
 
 DROP TABLE IF EXISTS SALE;
@@ -134,14 +134,14 @@ CREATE TABLE MODEL_SUPPLIER
 INSERT INTO ADMIN (first_name, last_name, display_name, password, email)
 VALUES ('Tim', 'Toys', 'tim', '1234', 'tim@toyshop.co');
 
-INSERT INTO STORE (name, address, manager)
+INSERT INTO STORE (name, address, managerName)
 VALUES ('A Store', '123 Store St, City, 1243 Australia', NULL);
 
 INSERT INTO EMPLOYEE (first_name, last_name, display_name, password, email, store, permissions, position)
 VALUES ('First', 'Last', 'employee', 'test', 'employee@toyshop.co', 1, NULL, 'Manager');
 
 UPDATE STORE
-SET manager = 1
+SET managerName = 1
 WHERE STORE.id = 1;
 
 INSERT INTO MODEL (id, name, type, price, subject, description)

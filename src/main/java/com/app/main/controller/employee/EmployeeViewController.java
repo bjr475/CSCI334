@@ -2,6 +2,8 @@ package com.app.main.controller.employee;
 
 import com.app.main.Util;
 import com.app.main.controller.AChildMainViewController;
+import com.app.main.controller.employee.manager.ManageEmployeesViewController;
+import com.app.main.controller.employee.manager.ManageStoresViewController;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.user.AUserModel;
 import com.jfoenix.controls.JFXDrawer;

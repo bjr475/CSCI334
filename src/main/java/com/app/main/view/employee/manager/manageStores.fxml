@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.ManageStoresViewController">
+           fx:controller="com.app.main.controller.employee.manager.ManageStoresViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
-                <ScrollPane styleClass="default-background" fx:id="editMenu" VBox.vgrow="ALWAYS">
-                    <Label>Edit Store</Label>
+                <ScrollPane fx:id="editMenu" styleClass="default-background" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" vgap="8" hgap="8">
+                        <Label GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            Edit Store
+                        </Label>
+                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="1">
+                            <Label>Store ID</Label>
+                            <TextField fx:id="editStoreId" editable="false"/>
+                        </VBox>
+                        <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="1">
+                            <Label>Store Name</Label>
+                            <TextField fx:id="editStoreName"/>
+                        </VBox>
+                        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="1">
+                            <Label>Manager Name</Label>
+                            <TextField fx:id="editStoreManagerName"/>
+                        </VBox>
+                        <HBox GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton onAction="#cancelEdit" styleClass="secondary-button">Cancel Changes</JFXButton>
+                            <JFXButton onAction="#confirmEdit" styleClass="action-button">Confirm Changes</JFXButton>
+                        </HBox>
+                    </GridPane>
                 </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="addMenu" VBox.vgrow="ALWAYS">
                     <Label>Add Store</Label>
@@ -24,12 +55,7 @@
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView">
-                    <columns>
-                        <TableColumn text="Name"/>
-                        <TableColumn text="Address"/>
-                    </columns>
-                </TableView>
+                <TableView fx:id="storesView"/>
             </ScrollPane>
         </content>
     </JFXDrawer>

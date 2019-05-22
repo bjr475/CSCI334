@@ -12,7 +12,4 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
   </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="--add-exports javafx.graphics/com.sun.javafx.util=SwingApp --add-exports com.rasa/javafx.fxml=SwingApp --add-exports javafx.fxml/com.rasa=SwingApp --add-exports javafx.controls/com.jfoenix=SwingApp --add-exports com.rasa/javafx.controls=SwingApp --add-exports com.rasa/javafx.scene.control.skin=SwingApp --add-exports javafx.base/com.sun.javafx=SwingApp --add-exports javafx.base/com.sun.javafx.collections=SwingApp --add-exports javafx.graphics/com.sun.javafx.css=SwingApp --add-exports javafx.graphics/com.sun.javafx.cursor=SwingApp --add-exports javafx.base/com.sun.javafx.event=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=SwingApp --add-exports javafx.graphics/com.sun.javafx.tk=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control=SwingApp --add-exports javafx.controls/com.sun.javafx.scene.control.skin=SwingApp --add-exports javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.skin=com.jfoenix --add-exports javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix,SwingApp" />
-  </component>
 </project>

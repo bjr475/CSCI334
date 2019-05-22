@@ -1,6 +1,7 @@
 package com.app.database;
 
 import com.app.database.dao.model.ModelDAO;
+import com.app.database.dao.store.StoreDAO;
 import com.app.database.dao.user.UserDAO;
 import com.app.main.Util;
 import org.apache.logging.log4j.LogManager;
@@ -28,8 +29,9 @@ public class Database {
     }
 
     private String connectionPath;
-    private UserDAO user;
-    private ModelDAO model;
+    private final UserDAO user;
+    private final ModelDAO model;
+    private final StoreDAO store;
 
     private Database() {
         Path path = Path.of(System.getProperty("user.dir"), "runtime", "database.db");
@@ -54,6 +56,7 @@ public class Database {
         }
         user = new UserDAO(this);
         model = new ModelDAO(this);
+        store = new StoreDAO(this);
     }
 
     @Nullable
@@ -109,5 +112,9 @@ public class Database {
 
     public ModelDAO getModel() {
         return model;
+    }
+
+    public StoreDAO getStore() {
+        return store;
     }
 }

@@ -34,6 +34,70 @@ public class EmployeePermissions implements Serializable {
         manageEmployee = new SimpleBooleanProperty(false);
     }
 
+    @SuppressWarnings("Duplicates")
+    public static EmployeePermissions newManagerPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(true);
+        permissions.setModifyItem(true);
+        permissions.setViewSale(true);
+        permissions.setCreateSale(true);
+        permissions.setModifySale(true);
+        permissions.setViewCustomer(true);
+        permissions.setCreateCustomer(true);
+        permissions.setModifyCustomer(true);
+        permissions.setManageSupplier(false);
+        permissions.setManageEmployee(false);
+        return permissions;
+    }
+
+    @SuppressWarnings("Duplicates")
+    public static EmployeePermissions newSalesAssitantPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(false);
+        permissions.setModifyItem(false);
+        permissions.setViewSale(true);
+        permissions.setCreateSale(true);
+        permissions.setModifySale(true);
+        permissions.setViewCustomer(true);
+        permissions.setCreateCustomer(true);
+        permissions.setModifyCustomer(true);
+        permissions.setManageSupplier(false);
+        permissions.setManageEmployee(false);
+        return permissions;
+    }
+
+    @SuppressWarnings("Duplicates")
+    public static EmployeePermissions newStockAssistantPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(true);
+        permissions.setModifyItem(true);
+        permissions.setViewSale(false);
+        permissions.setCreateSale(false);
+        permissions.setModifySale(false);
+        permissions.setViewCustomer(false);
+        permissions.setCreateCustomer(false);
+        permissions.setModifyCustomer(false);
+        permissions.setManageSupplier(false);
+        permissions.setManageEmployee(false);
+        return permissions;
+    }
+
+    @SuppressWarnings("Duplicates")
+    public static EmployeePermissions newDefaultPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(false);
+        permissions.setModifyItem(false);
+        permissions.setViewSale(false);
+        permissions.setCreateSale(false);
+        permissions.setModifySale(false);
+        permissions.setViewCustomer(false);
+        permissions.setCreateCustomer(false);
+        permissions.setModifyCustomer(false);
+        permissions.setManageSupplier(false);
+        permissions.setManageEmployee(false);
+        return permissions;
+    }
+
     private void writeObject(@NotNull ObjectOutputStream out) throws IOException {
         out.writeBoolean(createItem.get());
         out.writeBoolean(modifyItem.get());
@@ -48,16 +112,16 @@ public class EmployeePermissions implements Serializable {
     }
 
     private void readObject(@NotNull ObjectInputStream in) throws IOException, ClassNotFoundException {
-        createItem.set(in.readBoolean());
-        modifyItem.set(in.readBoolean());
-        viewSale.set(in.readBoolean());
-        createSale.set(in.readBoolean());
-        modifySale.set(in.readBoolean());
-        viewCustomer.set(in.readBoolean());
-        createCustomer.set(in.readBoolean());
-        modifyCustomer.set(in.readBoolean());
-        manageSupplier.set(in.readBoolean());
-        manageEmployee.set(in.readBoolean());
+        createItem = new SimpleBooleanProperty(in.readBoolean());
+        modifyItem = new SimpleBooleanProperty(in.readBoolean());
+        viewSale = new SimpleBooleanProperty(in.readBoolean());
+        createSale = new SimpleBooleanProperty(in.readBoolean());
+        modifySale = new SimpleBooleanProperty(in.readBoolean());
+        viewCustomer = new SimpleBooleanProperty(in.readBoolean());
+        createCustomer = new SimpleBooleanProperty(in.readBoolean());
+        modifyCustomer = new SimpleBooleanProperty(in.readBoolean());
+        manageSupplier = new SimpleBooleanProperty(in.readBoolean());
+        manageEmployee = new SimpleBooleanProperty(in.readBoolean());
     }
 
     public boolean isCreateItem() {

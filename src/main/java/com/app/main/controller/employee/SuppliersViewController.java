@@ -1,14 +1,23 @@
 package com.app.main.controller.employee;
 
+import com.app.main.controller.AddressViewController;
 import com.app.main.model.AddressModel;
 import com.app.main.model.ApplicationModel;
+import com.app.main.model.catalogue.CatalogueItemLocationModel;
+import com.app.main.model.catalogue.CatalogueItemSupplierModel;
 import com.app.main.model.supplier.SupplierContactModel;
 import com.app.main.model.supplier.SupplierModel;
+import com.app.main.model.user.AUserModel;
+import com.app.main.model.user.EmployeeModel;
+import com.app.main.model.user.permissions.EmployeePermissions;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,19 +29,98 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
     public JFXDrawer toolDrawer;
     public TableView<SupplierModel> suppliers;
     public ScrollPane searchMenu;
-    public ScrollPane addMenu;
 
+    /*Edit Menu*/
+    public ScrollPane editMenu;
+    public TextField editSupplierName;
+    public TextField editSupplierID;
+    public TableView editContactTable;
+    public TableView editSupplierItemsTable;
+    public TextField editItemSearch;
+    public JFXButton editSupplierItemButton;
+    public TextField editCredit;
+
+    public AddressViewController editAddressViewController;
+
+    /*Add Menu*/
+    public ScrollPane addMenu;
+    public TextField addSupplierName;
+    public TextField addSupplierID;
+    public TableView contactTable;
+    public TableView supplierItemsTable;
+    public TextField itemSearch;
+    public JFXButton addSupplierItemButton;
+    public CheckBox existingCreditLine;
+    public TextField addCredit;
+
+    /*Contact Dialog*/
     public JFXDialog addContactDialog;
+    public TextField addContactName;
+    public TextField addContactPhone;
+    public TextField addContactEmail;
+
+    /*Item Dialog*/
     public JFXDialog addItemDialog;
+    public TextField itemNo;
+    public TextField itemName;
+    public ChoiceBox<String> modelType;
+    public ChoiceBox<String> subjectArea;
+    public TextField retailPrice;
+    public DatePicker dateFirstStocked;
+    public TableView<CatalogueItemLocationModel> storeStockTable;
+    public TextField itemIDView;
+    public TextField quantityView;
+    public JFXButton addItemButton;
+    public TextArea description;
+    public TableView<CatalogueItemSupplierModel> suppliersTable;
+    public TextField supplierSearch;
+    public TextField price;
+    public JFXButton addSupplierButton;
 
     /* Add and Edit Values */
     private ObjectProperty<SupplierModel> currentAddSupplier;
     private ObjectProperty<SupplierModel> currentEditableSupplier;
 
+    private void setEditable(boolean state) {
+        editSupplierName.setEditable(state);
+        editSupplierID.setEditable(state);
+        editContactTable.setEditable(state);
+        editSupplierItemsTable.setEditable(state);
+        editItemSearch.setEditable(state);
+        editSupplierItemButton.setDisable(!state);
+        editCredit.setEditable(state);
+
+        addSupplierName.setEditable(state);
+        addSupplierID.setEditable(state);
+        contactTable.setEditable(state);
+        supplierItemsTable.setEditable(state);
+        itemSearch.setEditable(state);
+        addSupplierItemButton.setDisable(!state);
+        existingCreditLine.setDisable(!state);
+        addCredit.setEditable(state);
+    }
+
     public SuppliersViewController(ApplicationModel model) {
         super(model);
         currentAddSupplier = new SimpleObjectProperty<>(null);
         currentEditableSupplier = new SimpleObjectProperty<>(null);
+
+        model.currentUserProperty().addListener(new ChangeListener<AUserModel>() {
+            @Override
+            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+                if (newValue != null) {
+                    if (newValue.getUserType() == AUserModel.UserType.EMPLOYEE) {
+                        EmployeeModel employee = (EmployeeModel) newValue;
+                        EmployeePermissions permissions = employee.getPermissions();
+                        boolean canModify = permissions.isModifyCustomer() || permissions.isCreateCustomer();
+                        setEditable(canModify);
+                    } else {
+                        // admin
+                        setEditable(true);
+                    }
+                }
+            }
+        });
 
         model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) updateSuppliersTable();
@@ -126,7 +214,7 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
 
     }
 
-    private void activateControl(@NotNull Control pane) {
+    private void activateView(@NotNull Control pane) {
         pane.toFront();
         toolDrawer.open();
     }
@@ -138,12 +226,12 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onEdit() {
-
+        activateView(editMenu);
     }
 
     @Override
     public void onAdd() {
-        activateControl(addMenu);
+        activateView(addMenu);
     }
 
     public void onCancelAdd() {
@@ -177,6 +265,6 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onSearch() {
-        activateControl(searchMenu);
+        activateView(searchMenu);
     }
 }

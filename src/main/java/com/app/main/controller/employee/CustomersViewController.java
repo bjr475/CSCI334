@@ -52,11 +52,8 @@ public class CustomersViewController extends AChildEmployeeViewController implem
     public ListView<String> addSubjects;
     public ListView<String> addTypes;
 
-    public EmployeeModel employeeModel;
-
     @FXML
     public AddressViewController addAddressController;
-    //public ChoiceBox<String> addAddress;
 
     /* Filter Control */
     public ScrollPane filterMenu;
@@ -65,8 +62,8 @@ public class CustomersViewController extends AChildEmployeeViewController implem
     public ScrollPane searchMenu;
     public TextField searchWords;
 
-//    /* Catalogue Table */
-//    public TableView<CustomerModel> catalogueTable;
+//    /* Customer Table */
+//    public TableView<CustomerModel> customerTable;
 //
 //    /* Add and Edit Values */
 //    private ObjectProperty<CustomerModel> currentAddItem;
@@ -77,23 +74,24 @@ public class CustomersViewController extends AChildEmployeeViewController implem
         editFirstName.setEditable(state);
         editLastName.setEditable(state);
         editAddressController.setEditable(state);
-        editExistingCredit.setDisable(state);
+        editExistingCredit.setDisable(!state);
         editCredit.setEditable(state);
-        editClubMember.setDisable(state);
+        editClubMember.setDisable(!state);
         editClubStartDate.setEditable(state);
-        editSubjects.setEditable(state);
-        editTypes.setEditable(state);
+        editSubjects.setDisable(!state);
+        editTypes.setDisable(!state);
 
         addEmail.setEditable(state);
         addCustomerID.setEditable(state);
         addFirstName.setEditable(state);
         addLastName.setEditable(state);
-        addExistingCredit.setDisable(state);
+        addAddressController.setEditable(state);
+        addExistingCredit.setDisable(!state);
         addCredit.setEditable(state);
-        clubMember.setDisable(state);
+        clubMember.setDisable(!state);
         addClubStartDate.setEditable(state);
-        addSubjects.setEditable(state);
-        addTypes.setEditable(state);
+        addSubjects.setDisable(!state);
+        addTypes.setDisable(!state);
     }
 
     public CustomersViewController(ApplicationModel model) {
@@ -124,9 +122,6 @@ public class CustomersViewController extends AChildEmployeeViewController implem
         addTypes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         addSubjects.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        addTypes.setOnMouseClicked(event -> {
-
-        });
     }
 
     private void activateView(@NotNull ScrollPane view) {
@@ -141,11 +136,24 @@ public class CustomersViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onEdit() {
-
+        AUserModel currentUser = getModel().getCurrentUser();
+        if (currentUser != null && currentUser.getUserType() == AUserModel.UserType.EMPLOYEE) {
+            EmployeeModel employeeModel = (EmployeeModel) currentUser;
+            EmployeePermissions permissions = employeeModel.getPermissions();
+            if (!permissions.isModifyCustomer()) return;
+        }
+        activateView(editMenu);
     }
 
     @Override
     public void onAdd() {
+
+        AUserModel currentUser = getModel().getCurrentUser();
+        if (currentUser != null && currentUser.getUserType() == AUserModel.UserType.EMPLOYEE) {
+            EmployeeModel employeeModel = (EmployeeModel) currentUser;
+            EmployeePermissions permissions = employeeModel.getPermissions();
+            if (!permissions.isCreateCustomer()) return;
+        }
         activateView(addMenu);
     }
 

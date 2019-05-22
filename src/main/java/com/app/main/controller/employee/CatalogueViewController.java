@@ -7,10 +7,14 @@ import com.app.main.model.catalogue.CatalogueItemLocationModel;
 import com.app.main.model.catalogue.CatalogueItemModel;
 import com.app.main.model.catalogue.CatalogueItemSupplierModel;
 import com.app.main.model.user.AUserModel;
+import com.app.main.model.user.EmployeeModel;
+import com.app.main.model.user.permissions.EmployeePermissions;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -37,6 +41,7 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     public TableView<CatalogueItemLocationModel> editStores;
     public TableView<CatalogueItemSupplierModel> editSuppliers;
 
+
     /* Add Control */
     public ScrollPane addMenu;
     public TextField addItemName;
@@ -47,6 +52,20 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     public TextArea addDescription;
     public TableView<CatalogueItemLocationModel> addStoresView;
     public TableView<CatalogueItemSupplierModel> addSuppliersView;
+
+    /*Store Dialog*/
+    public JFXDialog addStoreDialog;
+    public ListView storeList;
+    public TableView storeAvailabilityView;
+    public TextField selectedStore;
+    public TextField itemQuantity;
+
+    /*Supplier Dialog*/
+    public JFXDialog addSupplierDialog;
+    public ListView supplierList;
+    public TableView itemSupplierView;
+    public TextField selectedSupplier;
+    public TextField itemPrice;
 
     /* Filter Control */
     public ScrollPane filterMenu;
@@ -62,6 +81,26 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     private ObjectProperty<CatalogueItemModel> currentAddItem;
     private ObjectProperty<CatalogueItemModel> currentEditableItem;
 
+    private void setEditable(boolean state) {
+        editItemName.setEditable(state);
+        editItemID.setEditable(state);
+        editModelType.setDisable(!state);
+        editSubject.setDisable(!state);
+        editPrice.setEditable(state);
+        editDescription.setEditable(state);
+        editStores.setEditable(state);
+        editSuppliers.setEditable(state);
+
+        addItemName.setEditable(state);
+        addItemID.setEditable(state);
+        addType.setDisable(!state);
+        addSubject.setDisable(!state);
+        addPrice.setEditable(state);
+        addDescription.setEditable(state);
+        addStoresView.setEditable(state);
+        addSuppliersView.setEditable(state);
+    }
+
     public CatalogueViewController(ApplicationModel model) {
         super(model);
         currentAddItem = new SimpleObjectProperty<>(null);
@@ -70,6 +109,23 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         currentAddItem.addListener(this::onUpdateAddItem);
         currentEditableItem.addListener(this::onUpdateEditItem);
         getModel().currentUserProperty().addListener(this::userChanged);
+
+        model.currentUserProperty().addListener(new ChangeListener<AUserModel>() {
+            @Override
+            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+                if (newValue != null) {
+                    if (newValue.getUserType() == AUserModel.UserType.EMPLOYEE) {
+                        EmployeeModel employee = (EmployeeModel) newValue;
+                        EmployeePermissions permissions = employee.getPermissions();
+                        boolean canModify = permissions.isModifyCustomer() || permissions.isCreateCustomer();
+                        setEditable(canModify);
+                    } else {
+                        // admin
+                        setEditable(true);
+                    }
+                }
+            }
+        });
     }
 
     private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
@@ -273,6 +329,22 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
     public void onConfirmAdd() {
         if (Database.INSTANCE.getModel().saveModel(currentAddItem.get())) updateCatalogueTable();
+    }
+
+    public void cancelStoreDialog() {
+        addStoreDialog.close();
+    }
+
+    public void saveStoreDialog() {
+        addStoreDialog.close();
+    }
+
+    public void cancelSupplierDialog() {
+        addSupplierDialog.close();
+    }
+
+    public void saveSupplierDialog() {
+        addSupplierDialog.close();
     }
 
     @Override

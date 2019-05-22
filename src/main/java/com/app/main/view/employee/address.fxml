@@ -13,15 +13,15 @@
     <HBox spacing="8">
         <VBox HBox.hgrow="ALWAYS">
             <Label>Suburb</Label>
-            <TextField fx:id="suburb"/>
+            <TextField fx:id="addressSuburb"/>
         </VBox>
         <VBox>
             <Label>State</Label>
-            <fx:include fx:id="state" source="address_state.fxml"/>
+            <fx:include fx:id="addressState" source="address_state.fxml"/>
         </VBox>
         <VBox HBox.hgrow="ALWAYS">
             <Label>Postcode</Label>
-            <TextField fx:id="postcode"/>
+            <TextField fx:id="addressPostcode"/>
         </VBox>
     </HBox>
 </VBox>

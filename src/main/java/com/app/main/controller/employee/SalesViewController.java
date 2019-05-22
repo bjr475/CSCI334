@@ -27,7 +27,6 @@ public class SalesViewController extends AChildEmployeeViewController implements
     public ScrollPane editMenu;
 
 
-
     public SalesViewController(ApplicationModel model) {
         super(model);
     }
@@ -52,10 +51,14 @@ public class SalesViewController extends AChildEmployeeViewController implements
 //        activateView(editMenu);
     }
 
+    public void onCancelEdit() {
+        editMenu.setVvalue(0);
+        toolDrawer.close();
+    }
+
     @Override
     public void onAdd() {
         activateView(addMenu);
-        saleItemGrid.toFront();
     }
 
     public void onCancelAdd() {
@@ -65,10 +68,9 @@ public class SalesViewController extends AChildEmployeeViewController implements
 
     public void onSaleNext() {
         addMenu.setVvalue(0);
-        if(newCustomer.isSelected()) {
+        if (newCustomer.isSelected()) {
             saleCustomerGrid.toFront();
-        }
-        else {
+        } else {
             saleConfirmGrid.toFront();
         }
     }
@@ -85,10 +87,9 @@ public class SalesViewController extends AChildEmployeeViewController implements
 
     public void onConfirmBack() {
         addMenu.setVvalue(0);
-        if(newCustomer.isSelected()) {
+        if (newCustomer.isSelected()) {
             saleCustomerGrid.toFront();
-        }
-        else {
+        } else {
             saleItemGrid.toFront();
         }
     }

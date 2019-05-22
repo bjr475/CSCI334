@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import com.jfoenix.controls.JFXToolbar?>
+<?import com.jfoenix.controls.*?>
 <?import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -54,8 +51,12 @@
         <JFXDrawer fx:id="mainDrawer">
             <sidePane>
                 <VBox spacing="24" styleClass="main-menu">
-                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Login</JFXButton>
-                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">Forgot Password</JFXButton>
+                    <JFXButton onAction="#onLogin" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        Login
+                    </JFXButton>
+                    <JFXButton onAction="#onForgot" buttonType="FLAT" prefWidth="450" styleClass="light-menu-button">
+                        Forgot Password
+                    </JFXButton>
                 </VBox>
             </sidePane>
             <content>

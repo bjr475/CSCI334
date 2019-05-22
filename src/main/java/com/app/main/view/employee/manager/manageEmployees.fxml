@@ -104,8 +104,10 @@
                               GridPane.columnSpan="2">
                             <HBox>
                                 <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton styleClass="secondary-button" onAction="#cancelEdit">Cancel Changes</JFXButton>
-                                <JFXButton styleClass="action-button" onAction="#confirmEdit">Confirm Changes</JFXButton>
+                                <JFXButton styleClass="secondary-button" onAction="#cancelEdit">Cancel Changes
+                                </JFXButton>
+                                <JFXButton styleClass="action-button" onAction="#confirmEdit">Confirm Changes
+                                </JFXButton>
                             </HBox>
                         </VBox>
                     </GridPane>

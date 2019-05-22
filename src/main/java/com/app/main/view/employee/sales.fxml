@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.SalesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
@@ -24,6 +22,77 @@
                         </Insets>
                     </padding>
                     <StackPane>
+
+                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
+                                  fx:id="saleConfirmGrid" styleClass="default-background">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0"
+                                  GridPane.rowIndex="0" GridPane.columnSpan="2">
+                                Confirm Sale
+                            </Text>
+                            <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
+                                        text="Item List">
+                                <TableView fx:id="confirmItemTable">
+                                    <columns>
+                                        <TableColumn prefWidth="200" text="Item No.">
+                                        </TableColumn>
+                                        <TableColumn prefWidth="200" text="Item Name">
+                                        </TableColumn>
+                                        <TableColumn prefWidth="100" text="Quantity">
+                                        </TableColumn>
+                                    </columns>
+                                </TableView>
+
+                            </TitledPane>
+
+                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                                <CheckBox fx:id="otherDiscount" text="Other Discount"/>
+                                <TextField fx:id="otherDiscountAmount"/>
+                            </VBox>
+
+                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                                <Text textAlignment="left">Subtotal</Text>
+                                <Text textAlignment="left">Discount</Text>
+                                <Text textAlignment="left">GST</Text>
+                                <Text textAlignment="left">Total</Text>
+                            </VBox>
+
+                            <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
+                                <Text fx:id="discount" textAlignment="right">-$0.00</Text>
+                                <Text fx:id="GST" textAlignment="right">-$0.00</Text>
+                                <Text fx:id="total" textAlignment="right">$0.00</Text>
+                            </VBox>
+
+                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13"
+                                  GridPane.columnSpan="5" alignment="center_right">
+                                <JFXButton styleClass="secondary-button" onMouseClicked="#onConfirmBack">
+                                    Back
+                                </JFXButton>
+                                <JFXButton styleClass="action-button" onAction="#onConfirmAdd">
+                                    Confirm
+                                </JFXButton>
+                            </HBox>
+                        </GridPane>
+
+                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
+                                  fx:id="saleCustomerGrid" styleClass="default-background">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                Add Customer
+                            </Text>
+
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="4">
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton styleClass="secondary-button" onMouseClicked="#onCustomerBack">
+                                    Back
+                                </JFXButton>
+                                <JFXButton styleClass="action-button" onMouseClicked="#onCustomerNext">
+                                    Next
+                                </JFXButton>
+                            </HBox>
+                        </GridPane>
+
                         <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
                                   fx:id="saleItemGrid" styleClass="default-background">
                             <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0"
@@ -45,7 +114,7 @@
 
                             </TitledPane>
                             <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="3">
-                                <Label >Item ID</Label>
+                                <Label>Item ID</Label>
                                 <TextField fx:id="itemIDView"/>
                             </VBox>
                             <VBox GridPane.columnIndex="3" GridPane.rowIndex="6">
@@ -80,84 +149,11 @@
 
                         </GridPane>
 
-
-                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
-                                  fx:id="saleCustomerGrid" styleClass="default-background">
-                                <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                                      GridPane.columnSpan="2">
-                                    Add Customer
-                                </Text>
-
-
-
-                                <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                                      GridPane.columnSpan="4">
-                                    <Pane HBox.hgrow="ALWAYS"/>
-                                    <JFXButton styleClass="secondary-button" onMouseClicked="#onCustomerBack">
-                                        Back
-                                    </JFXButton>
-                                    <JFXButton styleClass="action-button" onMouseClicked="#onCustomerNext">
-                                        Next
-                                    </JFXButton>
-                                </HBox>
-                        </GridPane>
-
-
-                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
-                                  fx:id="saleConfirmGrid" styleClass="default-background">
-                            <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0"
-                                  GridPane.rowIndex="0" GridPane.columnSpan="2">
-                                Confirm Sale
-                            </Text>
-                            <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
-                                        text="Item List">
-                                <TableView fx:id="confirmItemTable">
-                                    <columns>
-                                        <TableColumn prefWidth="200" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="200" text="Item Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="100" text="Quantity">
-                                        </TableColumn>
-                                    </columns>
-                                </TableView>
-
-                            </TitledPane>
-
-                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                                <CheckBox fx:id="otherDiscount" text="Other Discount"/>
-                                <TextField fx:id="otherDiscountAmount"/>
-                            </VBox>
-
-                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
-                                <Text textAlignment="left">Subtotal</Text>
-                                <Text textAlignment="left">Discount</Text>
-                                <Text textAlignment="left">GST</Text>
-                                <Text textAlignment="left">Total</Text>
-                            </VBox>
-                            <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
-                                <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
-                                <Text fx:id="discount" textAlignment="right">-$0.00</Text>
-                                <Text fx:id="GST" textAlignment="right">-$0.00</Text>
-                                <Text fx:id="total" textAlignment="right">$0.00</Text>
-                            </VBox>
-
-                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13"
-                                  GridPane.columnSpan="5" alignment="center_right">
-                                <JFXButton styleClass="secondary-button" onMouseClicked="#onConfirmBack">
-                                    Back
-                                </JFXButton>
-                                <JFXButton styleClass="action-button" onAction="#onConfirmAdd">
-                                    Confirm
-                                </JFXButton>
-                            </HBox>
-
-                        </GridPane>
                     </StackPane>
                 </ScrollPane>
 
 
-                <!--<ScrollPane styleClass="default-background" fx:id="searchMenu">
+                <ScrollPane styleClass="default-background" fx:id="searchMenu">
                     <VBox spacing="20">
                         <padding>
                             <Insets>
@@ -199,95 +195,7 @@
                         </HBox>
                     </VBox>
                 </ScrollPane>
-                <ScrollPane styleClass="default-background" fx:id="addMenu">
-                    <GridPane alignment="baseline_center" hgap="25" vgap="5">
-                        <padding>
-                            <Insets>
-                                <left>20</left>
-                                <bottom>20</bottom>
-                                <right>20</right>
-                                <top>20</top>
-                            </Insets>
-                        </padding>
-                        <Text>Add a Sale</Text>
 
-                        <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer
-                            ID
-                        </Label>
-                        <TextField fx:id="customerID" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                                   GridPane.columnSpan="5"/>
-
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                            <CheckBox fx:id="newCustomer"/>
-                            <Label>New Customer</Label>
-                        </HBox>
-
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
-
-                        </HBox>
-
-                        <Label GridPane.columnIndex="0" GridPane.rowIndex="4">Item List</Label>
-                        <TableView fx:id="itemTable" GridPane.rowIndex="5" GridPane.columnSpan="5"
-                                   prefHeight="200" prefWidth="550">
-                            <columns>
-                                <TableColumn prefWidth="200" text="Item No.">
-                                </TableColumn>
-                                <TableColumn prefWidth="200" text="Item Name">
-                                </TableColumn>
-                                <TableColumn prefWidth="100" text="Quantity">
-                                </TableColumn>
-                            </columns>
-                        </TableView>
-
-                        <Label GridPane.columnIndex="0" GridPane.rowIndex="6">Item ID</Label>
-                        <TextField fx:id="itemIDView" GridPane.columnIndex="0" GridPane.rowIndex="7"
-                                   GridPane.columnSpan="2"/>
-                        <Label GridPane.columnIndex="2" GridPane.rowIndex="6">Quantity</Label>
-                        <TextField fx:id="quantityView" GridPane.columnIndex="2" GridPane.rowIndex="7"
-                                   GridPane.columnSpan="1"/>
-                        <JFXButton fx:id="addItemButton" buttonType="FLAT"
-                                   GridPane.columnIndex="3" GridPane.rowIndex="7">
-                            <graphic>
-                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                            </graphic>
-                        </JFXButton>
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                            <CheckBox fx:id="otherDiscount"/>
-                            <Label>Other Discount</Label>
-
-                            <CheckBox fx:id="clubMember"/>
-                            <Label>Club Member</Label>
-                        </HBox>
-                        &lt;!&ndash;<CheckBox fx:id="otherDiscount" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-                        <Label GridPane.columnIndex="1" GridPane.rowIndex="8">Other Discount</Label>
-
-                        <CheckBox fx:id="clubMember" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
-                        <Label GridPane.columnIndex="3" GridPane.rowIndex="8">Club Member</Label>&ndash;&gt;
-                        <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
-
-                            <Text textAlignment="left">Subtotal</Text>
-                            <Text textAlignment="left">Discount</Text>
-                            <Text textAlignment="left">GST</Text>
-                            <Text textAlignment="left">Total</Text>
-                        </VBox>
-                        <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
-                            <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
-                            <Text fx:id="discount" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="GST" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="total" textAlignment="right">$0.00</Text>
-                        </VBox>
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12"
-                              GridPane.columnSpan="5" alignment="center_right">
-                            <JFXButton>
-                                Cancel
-                            </JFXButton>
-                            <JFXButton>
-                                Save
-                            </JFXButton>
-                        </HBox>
-
-                    </GridPane>
-                </ScrollPane>
                 <ScrollPane styleClass="default-background" fx:id="editMenu">
                     <GridPane alignment="baseline_center" hgap="25" vgap="5">
                         <padding>
@@ -298,63 +206,66 @@
                                 <top>20</top>
                             </Insets>
                         </padding>
-                        <Text>Add a Sale</Text>
+                        <Text>Edit Sale</Text>
 
-                        <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4">Customer
-                            ID
-                        </Label>
-                        <Text fx:id="customerIDView" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                              GridPane.columnSpan="5">c3948734
-                        </Text>
-
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
-
-                        </HBox>
-
-                        <TitledPane text="Item List" expanded="false"
-                                    GridPane.rowIndex="5" GridPane.columnSpan="5">
-                            <content>
-                                <TableView fx:id="itemTableView" prefWidth="550">
-                                    <columns>
-                                        <TableColumn prefWidth="200" text="Item No."/>
-                                        <TableColumn prefWidth="200" text="Item Name"/>
-                                        <TableColumn prefWidth="100" text="Quantity"/>
-                                    </columns>
-                                </TableView>
-                            </content>
+                        <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
+                                    text="Item List">
+                            <TableView fx:id="editItemTable">
+                                <columns>
+                                    <TableColumn prefWidth="200" text="Item No.">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200" text="Item Name">
+                                    </TableColumn>
+                                    <TableColumn prefWidth="100" text="Quantity">
+                                    </TableColumn>
+                                </columns>
+                            </TableView>
+                            <HBox>
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton styleClass="action-button">
+                                    Edit Sale Items
+                                </JFXButton>
+                            </HBox>
                         </TitledPane>
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
-                            <Label>Other Discount</Label>
-                            <Text fx:id="otherDiscountView">No</Text>
 
-                            <Label>Club Member</Label>
-                            <Text fx:id="clubMemberView">No</Text>
-                        </HBox>
+                        <VBox HBox.hgrow="ALWAYS" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                              GridPane.columnSpan="5">
+                            <Label>Customer ID</Label>
+                            <TextField fx:id="editCustomerID"/>
+                        </VBox>
 
-                        <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                        <VBox HBox.hgrow="ALWAYS" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <CheckBox fx:id="viewOtherDiscount" text="Other Discount"/>
+                            <TextField fx:id="viewOtherDiscountAmount"/>
+                        </VBox>
 
+
+                        <VBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="4">
                             <Text textAlignment="left">Subtotal</Text>
                             <Text textAlignment="left">Discount</Text>
                             <Text textAlignment="left">GST</Text>
                             <Text textAlignment="left">Total</Text>
                         </VBox>
-                        <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
-                            <Text fx:id="subtotalView" textAlignment="right">$0.00</Text>
-                            <Text fx:id="discountView" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="GSTView" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="totalView" textAlignment="right">$0.00</Text>
+
+                        <VBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="4"
+                              GridPane.columnSpan="2">
+                            <Text fx:id="viewSubtotal" textAlignment="right">$0.00</Text>
+                            <Text fx:id="viewDiscount" textAlignment="right">-$0.00</Text>
+                            <Text fx:id="viewGST" textAlignment="right">-$0.00</Text>
+                            <Text fx:id="viewTotal" textAlignment="right">$0.00</Text>
                         </VBox>
-                        <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12"
+
+                        <HBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="6"
                               GridPane.columnSpan="5" alignment="center_right">
-                            <JFXButton>
-                                Close
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">
+                                Cancel
                             </JFXButton>
-                            <JFXButton onAction="#onEdit">
+                            <JFXButton styleClass="action-button" onAction="#onEdit">
                                 Edit
                             </JFXButton>
                         </HBox>
                     </GridPane>
-                </ScrollPane>-->
+                </ScrollPane>
             </StackPane>
         </sidePane>
         <content>

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.collections.FXCollections?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.CatalogueViewController">
+           fx:controller="com.app.main.controller.employee.CatalogueViewController"
+           fx:id="parentCataloguePane">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
@@ -60,13 +66,25 @@
                         <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
                                     GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
                             <TableView fx:id="addStoresView"/>
+                            <HBox>
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton onAction="addStoreDialog.show(parentCataloguePane)">
+                                    Add Store
+                                </JFXButton>
+                            </HBox>
                         </TitledPane>
                         <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
                                     GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
                             <TableView fx:id="addSuppliersView"/>
+                            <HBox>
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton onAction="addSupplierDialog.show(parentCataloguePane)">
+                                    Add Supplier
+                                </JFXButton>
+                            </HBox>
                         </TitledPane>
                         <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                              GridPane.columnSpan="2" spacing="10">
                             <Pane HBox.hgrow="ALWAYS"/>
                             <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">Cancel</JFXButton>
                             <JFXButton onAction="#onConfirmAdd" styleClass="action-button">Confirm</JFXButton>
@@ -163,6 +181,86 @@
                 </ScrollPane>
 
             </StackPane>
+            <JFXDialog fx:id="addStoreDialog">
+                <JFXDialogLayout>
+                    <heading>
+                        <Label>Store Item Availability</Label>
+                    </heading>
+                    <body>
+                        <VBox spacing="10">
+                            <HBox spacing="10">
+                                <ListView fx:id="storeList">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Select Stores"/>
+                                        </FXCollections>
+                                    </items>
+                                </ListView>
+                                <TableView fx:id="storeAvailabilityView"/> <!--TODO functionality for edit/remove row-->
+                            </HBox>
+                            <HBox spacing="10">
+                                <TextField fx:id="selectedStore" promptText="Search or select a Store"/>
+                                <TextField fx:id="itemQuantity" promptText="Item Quantity"/>
+                                <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                    </graphic>
+                                </JFXButton>
+                            </HBox>
+
+                        </VBox>
+                    </body>
+                    <actions>
+                        <JFXButton onAction="#cancelStoreDialog" styleClass="secondary-button">
+                            Cancel
+                        </JFXButton>
+                        <JFXButton onAction="#saveStoreDialog" styleClass="action-button">
+                            Save
+                        </JFXButton>
+                    </actions>
+                </JFXDialogLayout>
+            </JFXDialog>
+
+            <JFXDialog fx:id="addSupplierDialog">
+                <JFXDialogLayout>
+                    <heading>
+                        <Label>Item Suppliers</Label>
+                    </heading>
+                    <body>
+                        <VBox spacing="10">
+                            <VBox spacing="10">
+                                <HBox spacing="10">
+                                    <ListView fx:id="supplierList">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Select Suppliers"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ListView>
+                                    <TableView fx:id="itemSupplierView"/> <!--TODO functionality for edit/remove row-->
+                                </HBox>
+                                <HBox spacing="10">
+                                <TextField fx:id="selectedSupplier" promptText="Search or select a Supplier"/>
+                                <TextField fx:id="itemPrice" promptText="Price per item"/>
+                                    <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
+                                        <graphic>
+                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                        </graphic>
+                                    </JFXButton>
+                            </HBox>
+                            </VBox>
+                        </VBox>
+                    </body>
+                    <actions>
+                        <JFXButton onAction="#cancelSupplierDialog" styleClass="secondary-button">
+                            Cancel
+                        </JFXButton>
+                        <JFXButton onAction="#saveSupplierDialog" styleClass="action-button">
+                            Save
+                        </JFXButton>
+                    </actions>
+                </JFXDialogLayout>
+            </JFXDialog>
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">

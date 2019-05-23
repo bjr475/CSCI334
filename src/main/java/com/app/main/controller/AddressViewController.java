@@ -13,9 +13,9 @@ public class AddressViewController {
     private final ApplicationModel model;
     private final ObjectProperty<AddressModel> address;
     public TextField addressLine;
-    public TextField suburb;
-    public ChoiceBox<String> state;
-    public TextField postcode;
+    public TextField addressSuburb;
+    public ChoiceBox<String> addressState;
+    public TextField addressPostcode;
 
     @Contract(pure = true)
     public AddressViewController(ApplicationModel model) {
@@ -48,11 +48,11 @@ public class AddressViewController {
         return model;
     }
 
-    public void setEditable(boolean canModify) {
-        addressLine.setEditable(canModify);
-        suburb.setEditable(canModify);
-        state.setDisable(canModify);
-        postcode.setEditable(canModify);
+    public void setEditable(boolean state) {
+        addressLine.setEditable(state);
+        addressSuburb.setEditable(state);
+        addressState.setDisable(!state);
+        addressPostcode.setEditable(state);
     }
 
     public AddressModel getAddress() {

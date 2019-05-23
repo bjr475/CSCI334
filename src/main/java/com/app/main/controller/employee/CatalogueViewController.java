@@ -19,6 +19,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -87,26 +88,6 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     private ObjectProperty<CatalogueItemModel> currentAddItem;
     private ObjectProperty<CatalogueItemModel> currentEditableItem;
 
-    private void setEditable(boolean state) {
-        editItemName.setEditable(state);
-        editItemID.setEditable(state);
-        editModelType.setDisable(!state);
-        editSubject.setDisable(!state);
-        editPrice.setEditable(state);
-        editDescription.setEditable(state);
-        editStores.setEditable(state);
-        editSuppliers.setEditable(state);
-
-        addItemName.setEditable(state);
-        addItemID.setEditable(state);
-        addType.setDisable(!state);
-        addSubject.setDisable(!state);
-        addPrice.setEditable(state);
-        addDescription.setEditable(state);
-        addStoresView.setEditable(state);
-        addSuppliersView.setEditable(state);
-    }
-
     public CatalogueViewController(ApplicationModel model) {
         super(model);
         currentAddItem = new SimpleObjectProperty<>(null);
@@ -132,6 +113,26 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
                 }
             }
         });
+    }
+
+    private void setEditable(boolean state) {
+        editItemName.setEditable(state);
+        editItemID.setEditable(state);
+        editModelType.setDisable(!state);
+        editSubject.setDisable(!state);
+        editPrice.setEditable(state);
+        editDescription.setEditable(state);
+        editStores.setEditable(state);
+        editSuppliers.setEditable(state);
+
+        addItemName.setEditable(state);
+        addItemID.setEditable(state);
+        addType.setDisable(!state);
+        addSubject.setDisable(!state);
+        addPrice.setEditable(state);
+        addDescription.setEditable(state);
+        addStoresView.setEditable(state);
+        addSuppliersView.setEditable(state);
     }
 
     private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,

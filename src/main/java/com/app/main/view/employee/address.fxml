@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
 <VBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
       fx:controller="com.app.main.controller.AddressViewController"
       spacing="10">
@@ -19,7 +21,21 @@
         </VBox>
         <VBox>
             <Label>State</Label>
-            <fx:include fx:id="addressState" source="address_state.fxml"/>
+            <ChoiceBox value="State" fx:id="addressState">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="State"/>
+                        <String fx:value="NSW"/>
+                        <String fx:value="QLD"/>
+                        <String fx:value="VIC"/>
+                        <String fx:value="ACT"/>
+                        <String fx:value="TAS"/>
+                        <String fx:value="WA"/>
+                        <String fx:value="NT"/>
+                        <String fx:value="SA"/>
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
         </VBox>
         <VBox HBox.hgrow="ALWAYS">
             <Label>Postcode</Label>

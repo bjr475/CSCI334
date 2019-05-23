@@ -20,12 +20,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -86,25 +81,6 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
     private ObjectProperty<SupplierModel> currentAddSupplier;
     private ObjectProperty<SupplierModel> currentEditableSupplier;
 
-    private void setEditable(boolean state) {
-        editSupplierName.setEditable(state);
-        editSupplierID.setEditable(state);
-        editContactTable.setEditable(state);
-        editSupplierItemsTable.setEditable(state);
-        editItemSearch.setEditable(state);
-        editSupplierItemButton.setDisable(!state);
-        editCredit.setEditable(state);
-
-        addSupplierName.setEditable(state);
-        addSupplierID.setEditable(state);
-        contactTable.setEditable(state);
-        supplierItemsTable.setEditable(state);
-        itemSearch.setEditable(state);
-        addSupplierItemButton.setDisable(!state);
-        existingCreditLine.setDisable(!state);
-        addCredit.setEditable(state);
-    }
-
     public SuppliersViewController(ApplicationModel model) {
         super(model);
         currentAddSupplier = new SimpleObjectProperty<>(null);
@@ -130,6 +106,25 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
         model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) updateSuppliersTable();
         });
+    }
+
+    private void setEditable(boolean state) {
+        editSupplierName.setEditable(state);
+        editSupplierID.setEditable(state);
+        editContactTable.setEditable(state);
+        editSupplierItemsTable.setEditable(state);
+        editItemSearch.setEditable(state);
+        editSupplierItemButton.setDisable(!state);
+        editCredit.setEditable(state);
+
+        addSupplierName.setEditable(state);
+        addSupplierID.setEditable(state);
+        contactTable.setEditable(state);
+        supplierItemsTable.setEditable(state);
+        itemSearch.setEditable(state);
+        addSupplierItemButton.setDisable(!state);
+        existingCreditLine.setDisable(!state);
+        addCredit.setEditable(state);
     }
 
     private void updateSuppliersTable() {

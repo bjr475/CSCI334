@@ -12,6 +12,7 @@ public class AddressViewController {
 
     private final ApplicationModel model;
     private final ObjectProperty<AddressModel> address;
+
     public TextField addressLine;
     public TextField addressSuburb;
     public ChoiceBox<String> addressState;
@@ -26,20 +27,20 @@ public class AddressViewController {
         address.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 addressLine.textProperty().unbindBidirectional(oldValue.addressProperty());
-                suburb.textProperty().unbindBidirectional(oldValue.suburbProperty());
-                state.valueProperty().unbindBidirectional(oldValue.stateProperty());
-                postcode.textProperty().unbindBidirectional(oldValue.postcodeProperty());
+                addressSuburb.textProperty().unbindBidirectional(oldValue.suburbProperty());
+                addressState.valueProperty().unbindBidirectional(oldValue.stateProperty());
+                addressPostcode.textProperty().unbindBidirectional(oldValue.postcodeProperty());
 
                 addressLine.setText("Address");
-                suburb.setText("Suburb");
-                state.setValue("State");
-                postcode.setText("Postcode");
+                addressSuburb.setText("Suburb");
+                addressState.setValue("State");
+                addressPostcode.setText("Postcode");
             }
             if (newValue != null) {
-                addressLine.textProperty().unbindBidirectional(newValue.addressProperty());
-                suburb.textProperty().unbindBidirectional(newValue.suburbProperty());
-                state.valueProperty().unbindBidirectional(newValue.stateProperty());
-                postcode.textProperty().unbindBidirectional(newValue.postcodeProperty());
+                addressLine.textProperty().bindBidirectional(newValue.addressProperty());
+                addressSuburb.textProperty().bindBidirectional(newValue.suburbProperty());
+                addressState.valueProperty().bindBidirectional(newValue.stateProperty());
+                addressPostcode.textProperty().bindBidirectional(newValue.postcodeProperty());
             }
         });
     }

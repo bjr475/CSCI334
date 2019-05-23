@@ -22,11 +22,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class ManageStoresViewController extends AChildEmployeeViewController implements IEditorActionItem {
+    private static final Logger logger = LogManager.getLogger(ManageStoresViewController.class.getName());
+
     public JFXDrawer toolDrawer;
     public ScrollPane filterMenu;
     public ScrollPane searchMenu;
@@ -59,11 +63,13 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
                 editStoreId.setText("-- Store ID --");
                 editStoreName.textProperty().unbindBidirectional(oldValue.nameProperty());
                 editStoreManagerName.textProperty().unbindBidirectional(oldValue.managerNameProperty());
+                editAddressController.addressProperty().unbindBidirectional(oldValue.addressProperty());
             }
             if (newValue != null) {
                 editStoreId.setText(String.format("%d", newValue.getStoreId()));
                 editStoreName.textProperty().bindBidirectional(newValue.nameProperty());
                 editStoreManagerName.textProperty().bindBidirectional(newValue.managerNameProperty());
+                editAddressController.addressProperty().bindBidirectional(newValue.addressProperty());
             }
         });
     }
@@ -141,6 +147,7 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
     public void confirmAdd() {
         StoreModel model = new StoreModel(-1);
         model.setName(addStoreName.getText());
+        model.setAddress(addAddressViewController.getAddress());
         EmployeeNameId nameId = addStoreManager.getValue();
         model.setManagerId(nameId == null ? 0 : nameId.getId());
         Database.INSTANCE.getStore().saveStore(model);
@@ -165,6 +172,8 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
                 ).findFirst().orElse(null);
             }
         });
+
+        logger.debug("Address Controller Edit ({}) >> Add ({})", editAddressController, addAddressViewController);
     }
 
     private void activateView(@NotNull ScrollPane view) {

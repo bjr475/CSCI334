@@ -1,12 +1,17 @@
 package com.app.database;
 
+import com.app.database.dao.customer.CustomerDAO;
 import com.app.database.dao.model.ModelDAO;
 import com.app.database.dao.store.StoreDAO;
 import com.app.database.dao.user.UserDAO;
 import com.app.main.Util;
+import com.app.main.model.AddressModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
@@ -16,6 +21,8 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -31,6 +38,7 @@ public class Database {
     private final UserDAO user;
     private final ModelDAO model;
     private final StoreDAO store;
+    private final CustomerDAO customer;
     private String connectionPath;
 
     private Database() {
@@ -57,6 +65,7 @@ public class Database {
         user = new UserDAO(this);
         model = new ModelDAO(this);
         store = new StoreDAO(this);
+        customer = new CustomerDAO(this);
     }
 
     @Nullable
@@ -106,6 +115,47 @@ public class Database {
         return null;
     }
 
+    public int saveAddress(@NotNull PreparedStatement statement, @NotNull AddressModel address) throws SQLException {
+        int counter = 1;
+        logger.debug(
+                "Writing Address: {} {} {} {}",
+                address.getAddress(), address.getSuburb(),
+                address.getState(), address.getPostcode()
+        );
+        statement.setString(counter++, address.getAddress());
+        statement.setString(counter++, address.getSuburb());
+        statement.setString(counter++, address.getState());
+        statement.setString(counter++, address.getPostcode());
+        return counter;
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public AddressModel loadAddress(@NotNull ResultSet result, String prefix) throws SQLException {
+        return new AddressModel(
+                result.getString(prefix + "address_address"),
+                result.getString(prefix + "address_suburb"),
+                result.getString(prefix + "address_state"),
+                result.getString(prefix + "address_postcode")
+        );
+    }
+
+
+    @NotNull
+    @Contract("_ -> new")
+    public AddressModel loadAddress(@NotNull ResultSet result) throws SQLException {
+        return loadAddress(result, "");
+    }
+
+    public int saveStringArray(int initial, @NotNull PreparedStatement statement, ObservableList<String> array) throws SQLException {
+        statement.setString(initial++, String.join(";", array));
+        return initial;
+    }
+
+    public ObservableList<String> readStringArray(@NotNull ResultSet result, String name) throws SQLException {
+        return FXCollections.observableArrayList(result.getString(name).split(";"));
+    }
+
     public UserDAO getUser() {
         return user;
     }
@@ -116,5 +166,9 @@ public class Database {
 
     public StoreDAO getStore() {
         return store;
+    }
+
+    public CustomerDAO getCustomer() {
+        return customer;
     }
 }

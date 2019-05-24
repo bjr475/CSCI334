@@ -17,7 +17,7 @@ public class CustomerModel {
     private ObjectProperty<AddressModel> address;
     private ObjectProperty<ObservableList<SalesModel>> sales;
     private ObjectProperty<ObservableList<String>> modelTypes;
-    private ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas;
+    private ObjectProperty<ObservableList<String>> subjectAreas;
 
     public CustomerModel() {
         id = new SimpleIntegerProperty(0);
@@ -31,6 +31,15 @@ public class CustomerModel {
         sales = new SimpleObjectProperty<>(FXCollections.observableArrayList());
         modelTypes = new SimpleObjectProperty<>(FXCollections.observableArrayList());
         subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "CustomerModel<%d %s %s %s %.02f %b %s %s>",
+                id.get(), email.get(), firstName.get(), lastName.get(), creditLine.get(), clubMember.get(),
+                modelTypes.get().toArray(), subjectAreas.get().toArray()
+        );
     }
 
     public int getId() {
@@ -81,7 +90,7 @@ public class CustomerModel {
         return lastName;
     }
 
-    public double isCreditLine() {
+    public double getCreditLine() {
         return creditLine.get();
     }
 
@@ -153,15 +162,15 @@ public class CustomerModel {
         return modelTypes;
     }
 
-    public ObservableList<SubjectListCellModel> getSubjectAreas() {
+    public ObservableList<String> getSubjectAreas() {
         return subjectAreas.get();
     }
 
-    public void setSubjectAreas(ObservableList<SubjectListCellModel> subjectAreas) {
+    public void setSubjectAreas(ObservableList<String> subjectAreas) {
         this.subjectAreas.set(subjectAreas);
     }
 
-    public ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreasProperty() {
+    public ObjectProperty<ObservableList<String>> subjectAreasProperty() {
         return subjectAreas;
     }
 }

@@ -55,6 +55,9 @@
                                 <valueFactory>
                                     <SpinnerValueFactory.DoubleSpinnerValueFactory>
                                         <min>0</min>
+                                        <max>
+                                            <Integer fx:constant="MAX_VALUE"/>
+                                        </max>
                                         <amountToStepBy>1</amountToStepBy>
                                     </SpinnerValueFactory.DoubleSpinnerValueFactory>
                                 </valueFactory>
@@ -92,8 +95,8 @@
                         <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
                               GridPane.columnSpan="3" spacing="8">
                             <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton styleClass="secondary-button" onMouseClicked="#onCancelAdd">Cancel</JFXButton>
-                            <JFXButton styleClass="action-button" onMouseClicked="#onConfirmAdd">Confirm</JFXButton>
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelAdd">Cancel</JFXButton>
+                            <JFXButton styleClass="action-button" onAction="#onConfirmAdd">Confirm</JFXButton>
                         </HBox>
                     </GridPane>
                 </ScrollPane>
@@ -136,7 +139,17 @@
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
                             <Label>Credit</Label>
-                            <TextField fx:id="editCredit"/>
+                            <Spinner fx:id="editCredit">
+                                <valueFactory>
+                                    <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                        <min>0</min>
+                                        <max>
+                                            <Integer fx:constant="MAX_VALUE"/>
+                                        </max>
+                                        <amountToStepBy>1</amountToStepBy>
+                                    </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                </valueFactory>
+                            </Spinner>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="2">
                             <Label>Starting Date</Label>
@@ -175,8 +188,8 @@
                         <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
                               GridPane.columnSpan="3" spacing="8">
                             <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton styleClass="secondary-button">Cancel</JFXButton>
-                            <JFXButton styleClass="action-button" onMouseClicked="#onConfirmAdd">Confirm</JFXButton>
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">Cancel</JFXButton>
+                            <JFXButton styleClass="action-button" onAction="#onConfirmEdit">Confirm</JFXButton>
                         </HBox>
                     </GridPane>
                 </ScrollPane>
@@ -227,30 +240,7 @@
             </StackPane>
         </sidePane>
         <content>
-            <TableView fx:id="customersTable" styleClass="table-view">
-                <columns>
-                    <TableColumn prefWidth="100" text="Customer No.">
-                    </TableColumn>
-                    <TableColumn prefWidth="300" text="Email">
-                    </TableColumn>
-                    <TableColumn prefWidth="150" text="First Name">
-                    </TableColumn>
-                    <TableColumn prefWidth="150" text="Last Name">
-                    </TableColumn>
-                    <TableColumn prefWidth="300" text="Address">
-                    </TableColumn>
-                    <TableColumn prefWidth="170" text="Suburb">
-                    </TableColumn>
-                    <TableColumn prefWidth="50" text="State">
-                    </TableColumn>
-                    <TableColumn prefWidth="100" text="Postcode">
-                    </TableColumn>
-                    <TableColumn prefWidth="100" text="Credit Line">
-                    </TableColumn>
-                    <TableColumn prefWidth="100" text="Club Member">
-                    </TableColumn>
-                </columns>
-            </TableView>
+            <TableView fx:id="customersTable" styleClass="table-view"/>
         </content>
     </JFXDrawer>
 </StackPane>

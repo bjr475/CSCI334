@@ -1,7 +1,6 @@
 package com.app.database.dao.store;
 
 import com.app.database.Database;
-import com.app.main.model.AddressModel;
 import com.app.main.model.store.StoreModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,31 +43,6 @@ public class StoreDAO {
         this.database = database;
     }
 
-    @NotNull
-    @Contract("_ -> new")
-    private AddressModel loadAddress(@NotNull ResultSet result) throws SQLException {
-        return new AddressModel(
-                result.getString("store_address_address"),
-                result.getString("store_address_suburb"),
-                result.getString("store_address_state"),
-                result.getString("store_address_postcode")
-        );
-    }
-
-    private int saveAddress(@NotNull PreparedStatement statement, @NotNull AddressModel address) throws SQLException {
-        int counter = 1;
-        logger.debug(
-                "Writing Address: {} {} {} {}",
-                address.getAddress(), address.getSuburb(),
-                address.getState(), address.getPostcode()
-        );
-        statement.setString(counter++, address.getAddress());
-        statement.setString(counter++, address.getSuburb());
-        statement.setString(counter++, address.getState());
-        statement.setString(counter++, address.getPostcode());
-        return counter;
-    }
-
     public ArrayList<StoreModel> getStores() {
         ArrayList<StoreModel> stores = new ArrayList<>();
         try (Connection connection = database.openConnection()) {
@@ -77,7 +51,7 @@ public class StoreDAO {
                 while (result.next()) {
                     StoreModel store = new StoreModel(result.getInt("store_id"));
                     store.setName(result.getString("store_name"));
-                    store.setAddress(loadAddress(result));
+                    store.setAddress(database.loadAddress(result, "store_"));
                     store.setManagerId(result.getInt("store_manager_id"));
                     store.setManagerName(result.getString("store_manager_name"));
                     stores.add(store);
@@ -92,7 +66,7 @@ public class StoreDAO {
     public void updateStore(@NotNull StoreModel store) {
         try (Connection connection = database.openConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_STORE)) {
-                int counter = saveAddress(statement, store.getAddress());
+                int counter = database.saveAddress(statement, store.getAddress());
                 statement.setString(counter++, store.getName());
                 statement.setInt(counter++, store.getManagerId());
                 statement.setInt(counter, store.getStoreId());
@@ -106,7 +80,7 @@ public class StoreDAO {
     public void saveStore(@NotNull StoreModel store) {
         try (Connection connection = database.openConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SQL_SAVE_STORE)) {
-                int counter = saveAddress(statement, store.getAddress());
+                int counter = database.saveAddress(statement, store.getAddress());
                 statement.setString(counter++, store.getName());
                 statement.setInt(counter, store.getManagerId());
                 statement.executeUpdate();

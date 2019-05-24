@@ -240,7 +240,7 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
                     @Override
                     protected void updateItem(Number item, boolean empty) {
                         if (!empty && item != null) {
-                            setGraphic(new Label(Util.formatModelId(item)));
+                            setGraphic(new Label(Util.formatId(item)));
                         } else {
                             super.updateItem(item, empty);
                         }

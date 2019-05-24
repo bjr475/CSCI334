@@ -63,7 +63,6 @@ public class UserDAO {
             "WHERE id = ?;";
     private static final String SQL_GET_EMPLOYEE_NAME_IDS = "SELECT id, display_name, first_name\n" +
             "FROM EMPLOYEE;";
-//            "WHERE id NOT IN (SELECT manager FROM STORE);";
 
     private final Database database;
 

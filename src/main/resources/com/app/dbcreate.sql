@@ -12,24 +12,22 @@ CREATE TABLE ADMIN
 DROP TABLE IF EXISTS CUSTOMER;
 CREATE TABLE CUSTOMER
 (
-
     id               INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
     first_name       TEXT           NOT NULL,
     last_name        TEXT           NOT NULL,
-    display_name     TEXT,
-    password         TEXT,
     email            TEXT,
-    interests        TEXT,
     address_address  TEXT,
     address_suburb   TEXT,
     address_state    TEXT,
     address_postcode TEXT,
     telephone        TEXT,
     balance          REAL,
-    member_status    INTEGER                                           DEFAULT 0x01,
-    -- 0x01 a customer IS NOT a member
-    -- 0x02 a customer IS a member
-    CHECK (member_status IN (0x01, 0x02))
+    subject            TEXT,
+    type             TEXT,
+    member_status    INTEGER                                           DEFAULT 1,
+    -- 0 (false) a customer IS NOT a member
+    -- 1 (true) a customer IS a member
+    CHECK (member_status IN (0, 1))
 );
 
 DROP TABLE IF EXISTS EMPLOYEE;
@@ -159,10 +157,10 @@ END;
 INSERT INTO ADMIN (first_name, last_name, display_name, password, email)
 VALUES ('Tim', 'Toys', 'tim', '1234', 'tim@toyshop.co');
 
-INSERT INTO CUSTOMER (first_name, last_name, display_name, password, email, interests, address_address, address_suburb,
-                      address_state, address_postcode, telephone, balance)
-VALUES ('John', 'Doe', '__default__', '__default__', 'customer@toyshop.co', '', '123 Customer St',
-        'Customer Suburb', 'NSW', '3241', '0912 123, 482', 0);
+INSERT INTO CUSTOMER (first_name, last_name, email, address_address, address_suburb, address_state, address_postcode,
+                      telephone, balance, subject, type)
+VALUES ('John', 'Doe', 'customer@toyshop.co', '123 Customer St',
+        'Customer Suburb', 'NSW', '3241', '0912 123, 482', 0, '', '');
 
 INSERT INTO STORE (name, address_address, address_suburb, address_state, address_postcode, manager)
 VALUES ('Tim Hobby Shop', '123 Store St', 'Store Suburb', 'NSW', '2345', NULL);

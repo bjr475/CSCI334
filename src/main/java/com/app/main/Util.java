@@ -66,10 +66,10 @@ public class Util {
     }
 
     public static String formatModelId(@NotNull CatalogueItemModel model) {
-        return formatModelId(model.getItemId());
+        return formatId(model.getItemId());
     }
 
-    public static String formatModelId(@NotNull Number id) {
+    public static String formatId(@NotNull Number id) {
         return String.format("%011d", id.intValue());
     }
 

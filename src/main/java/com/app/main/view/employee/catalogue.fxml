@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?language javascript?>
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.collections.FXCollections?>
@@ -10,259 +9,259 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.CatalogueViewController"
-           fx:id="parentCataloguePane">
-    <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
-        <sidePane>
-            <StackPane>
-
-                <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <padding>
-                        <Insets>
-                            <top>8</top>
-                            <bottom>8</bottom>
-                            <left>8</left>
-                            <right>8</right>
-                        </Insets>
-                    </padding>
-                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
-                            Add Catalogue Item
-                        </Text>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
-                            <Label>Item Name</Label>
-                            <TextField fx:id="addItemName">--Item Name--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                            <Label>Model Type</Label>
-                            <fx:include fx:id="addType" source="catalogue_item_type.fxml"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
-                            <Label>Subject Area</Label>
-                            <fx:include fx:id="addSubject" source="catalogue_item_subject.fxml"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
-                            <Label>Retail Price</Label>
-                            <TextField fx:id="addPrice">--Price--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2" GridPane.rowSpan="2">
-                            <Label>Description</Label>
-                            <TextArea fx:id="addDescription" wrapText="true">
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                            </TextArea>
-                        </VBox>
-                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
-                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
-                            <TableView fx:id="addStoresView"/>
-                            <HBox>
-                                <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton onAction="addStoreDialog.show(parentCataloguePane)">
-                                    Add Store
-                                </JFXButton>
-                            </HBox>
-                        </TitledPane>
-                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
-                            <TableView fx:id="addSuppliersView"/>
-                            <HBox>
-                                <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton onAction="addSupplierDialog.show(parentCataloguePane)">
-                                    Add Supplier
-                                </JFXButton>
-                            </HBox>
-                        </TitledPane>
-                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2" spacing="10">
-                            <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">Cancel</JFXButton>
-                            <JFXButton onAction="#onConfirmAdd" styleClass="action-button">Confirm</JFXButton>
-                        </HBox>
-                    </GridPane>
-                </ScrollPane>
-
-                <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <padding>
-                        <Insets>
-                            <top>8</top>
-                            <bottom>8</bottom>
-                            <left>8</left>
-                            <right>8</right>
-                        </Insets>
-                    </padding>
-                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
-                            Edit Catalogue Item
-                        </Text>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                            <Label>Item Name</Label>
-                            <TextField fx:id="editItemName">--Item Name--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                            <Label>Item ID</Label>
-                            <TextField editable="false" fx:id="editItemID">--Item ID--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                            <Label>Model Type</Label>
-                            <fx:include fx:id="editModelType" source="catalogue_item_type.fxml"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
-                            <Label>Subject Area</Label>
-                            <fx:include fx:id="editSubject" source="catalogue_item_subject.fxml"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
-                            <Label>Retail Price</Label>
-                            <TextField fx:id="editPrice">--Price--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2" GridPane.rowSpan="2">
-                            <Label>Description</Label>
-                            <TextArea fx:id="editDescription" wrapText="true">
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                                display text display text display text display text
-                            </TextArea>
-                        </VBox>
-                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
-                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
-                            <TableView fx:id="editStores"/>
-                        </TitledPane>
-                        <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                                    GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
-                            <TableView fx:id="editSuppliers"/>
-                        </TitledPane>
-                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
-                            <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton onAction="#onConfirmEdit">
-                                Confirm
-                            </JFXButton>
-                        </HBox>
-                    </GridPane>
-                </ScrollPane>
-
-                <ScrollPane fx:id="searchMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <padding>
-                        <Insets>
-                            <top>8</top>
-                            <bottom>8</bottom>
-                            <left>8</left>
-                            <right>8</right>
-                        </Insets>
-                    </padding>
-                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                            Search Catalogue Items
-                        </Text>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                            <Label>Keywords</Label>
-                            <TextField HBox.hgrow="ALWAYS" fx:id="searchWords"/>
-                        </VBox>
-                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                            <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton onAction="#resetSearch">Reset</JFXButton>
-                            <JFXButton onAction="#confirmSearch">Search</JFXButton>
-                        </HBox>
-                    </GridPane>
-                </ScrollPane>
-
-            </StackPane>
-            <JFXDialog fx:id="addStoreDialog">
-                <JFXDialogLayout>
-                    <heading>
-                        <Label>Store Item Availability</Label>
-                    </heading>
-                    <body>
-                        <VBox spacing="10">
-                            <HBox spacing="10">
-                                <ListView fx:id="storeList">
-                                    <items>
-                                        <FXCollections fx:factory="observableArrayList">
-                                            <String fx:value="Select Stores"/>
-                                        </FXCollections>
-                                    </items>
-                                </ListView>
-                                <TableView fx:id="storeAvailabilityView"/> <!--TODO functionality for edit/remove row-->
-                            </HBox>
-                            <HBox spacing="10">
-                                <TextField fx:id="selectedStore" promptText="Search or select a Store"/>
-                                <TextField fx:id="itemQuantity" promptText="Item Quantity"/>
-                                <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
-                                    <graphic>
-                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                    </graphic>
-                                </JFXButton>
-                            </HBox>
-
-                        </VBox>
-                    </body>
-                    <actions>
-                        <JFXButton onAction="#cancelStoreDialog" styleClass="secondary-button">
-                            Cancel
-                        </JFXButton>
-                        <JFXButton onAction="#saveStoreDialog" styleClass="action-button">
-                            Save
-                        </JFXButton>
-                    </actions>
-                </JFXDialogLayout>
-            </JFXDialog>
-
-            <JFXDialog fx:id="addSupplierDialog">
-                <JFXDialogLayout>
-                    <heading>
-                        <Label>Item Suppliers</Label>
-                    </heading>
-                    <body>
-                        <VBox spacing="10">
-                            <VBox spacing="10">
-                                <HBox spacing="10">
-                                    <ListView fx:id="supplierList">
-                                        <items>
-                                            <FXCollections fx:factory="observableArrayList">
-                                                <String fx:value="Select Suppliers"/>
-                                            </FXCollections>
-                                        </items>
-                                    </ListView>
-                                    <TableView fx:id="itemSupplierView"/> <!--TODO functionality for edit/remove row-->
-                                </HBox>
-                                <HBox spacing="10">
-                                    <TextField fx:id="selectedSupplier" promptText="Search or select a Supplier"/>
-                                    <TextField fx:id="itemPrice" promptText="Price per item"/>
-                                    <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
-                                        <graphic>
-                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                        </graphic>
+           fx:controller="com.app.main.controller.employee.CatalogueViewController">
+    <StackPane fx:id="parentCataloguePane">
+        <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
+            <sidePane>
+                <StackPane>
+                    <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                        <padding>
+                            <Insets>
+                                <top>8</top>
+                                <bottom>8</bottom>
+                                <left>8</left>
+                                <right>8</right>
+                            </Insets>
+                        </padding>
+                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                Add Catalogue Item
+                            </Text>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                <Label>Item Name</Label>
+                                <TextField fx:id="addItemName">--Item Name--</TextField>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                <Label>Model Type</Label>
+                                <fx:include fx:id="addType" source="catalogue_item_type.fxml"/>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                <Label>Subject Area</Label>
+                                <fx:include fx:id="addSubject" source="catalogue_item_subject.fxml"/>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                                <Label>Retail Price</Label>
+                                <TextField fx:id="addPrice">--Price--</TextField>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2" GridPane.rowSpan="2">
+                                <Label>Description</Label>
+                                <TextArea fx:id="addDescription" wrapText="true" maxHeight="150">
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                </TextArea>
+                            </VBox>
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                                        GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
+                                <TableView fx:id="addStoresView" maxHeight="150"/>
+                                <HBox>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <JFXButton onAction="#addStore">
+                                        Add Store
                                     </JFXButton>
                                 </HBox>
+                            </TitledPane>
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                        GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
+                                <TableView fx:id="addSuppliersView" maxHeight="150"/>
+                                <HBox>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <JFXButton onAction="#addSupplier">
+                                        Add Supplier
+                                    </JFXButton>
+                                </HBox>
+                            </TitledPane>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2" spacing="10">
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">Cancel</JFXButton>
+                                <JFXButton onAction="#onConfirmAdd" styleClass="action-button">Confirm</JFXButton>
+                            </HBox>
+                        </GridPane>
+                    </ScrollPane>
+
+                    <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                        <padding>
+                            <Insets>
+                                <top>8</top>
+                                <bottom>8</bottom>
+                                <left>8</left>
+                                <right>8</right>
+                            </Insets>
+                        </padding>
+                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                Edit Catalogue Item
+                            </Text>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                <Label>Item Name</Label>
+                                <TextField fx:id="editItemName">--Item Name--</TextField>
                             </VBox>
-                        </VBox>
-                    </body>
-                    <actions>
-                        <JFXButton onAction="#cancelSupplierDialog" styleClass="secondary-button">
-                            Cancel
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                <Label>Item ID</Label>
+                                <TextField editable="false" fx:id="editItemID">--Item ID--</TextField>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                <Label>Model Type</Label>
+                                <fx:include fx:id="editModelType" source="catalogue_item_type.fxml"/>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                <Label>Subject Area</Label>
+                                <fx:include fx:id="editSubject" source="catalogue_item_subject.fxml"/>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                                <Label>Retail Price</Label>
+                                <TextField fx:id="editPrice">--Price--</TextField>
+                            </VBox>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2" GridPane.rowSpan="2">
+                                <Label>Description</Label>
+                                <TextArea fx:id="editDescription" wrapText="true" maxHeight="150">
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                    display text display text display text display text
+                                </TextArea>
+                            </VBox>
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                                        GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
+                                <TableView fx:id="editStores" maxHeight="150"/>
+                            </TitledPane>
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
+                                        GridPane.columnSpan="2" GridPane.rowSpan="4" text="Suppliers">
+                                <TableView fx:id="editSuppliers" maxHeight="150"/>
+                            </TitledPane>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="15" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="2">
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton onAction="#onConfirmEdit">
+                                    Confirm
+                                </JFXButton>
+                            </HBox>
+                        </GridPane>
+                    </ScrollPane>
+
+                    <ScrollPane fx:id="searchMenu" styleClass="default-background" HBox.hgrow="ALWAYS"
+                                fitToWidth="true">
+                        <padding>
+                            <Insets>
+                                <top>8</top>
+                                <bottom>8</bottom>
+                                <left>8</left>
+                                <right>8</right>
+                            </Insets>
+                        </padding>
+                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                Search Catalogue Items
+                            </Text>
+                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                <Label>Keywords</Label>
+                                <TextField HBox.hgrow="ALWAYS" fx:id="searchWords"/>
+                            </VBox>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <JFXButton onAction="#resetSearch">Reset</JFXButton>
+                                <JFXButton onAction="#confirmSearch">Search</JFXButton>
+                            </HBox>
+                        </GridPane>
+                    </ScrollPane>
+                </StackPane>
+            </sidePane>
+            <content>
+                <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+                    <TableView fx:id="catalogueTable" styleClass="table-view"/>
+                </ScrollPane>
+            </content>
+        </JFXDrawer>
+    </StackPane>
+
+    <JFXDialog fx:id="addStoreDialog">
+        <JFXDialogLayout>
+            <heading>
+                <Label>Store Item Availability</Label>
+            </heading>
+            <body>
+                <VBox spacing="10">
+                    <HBox spacing="10">
+                        <ListView fx:id="storeList">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Select Stores"/>
+                                </FXCollections>
+                            </items>
+                        </ListView>
+                        <TableView fx:id="storeAvailabilityView"/> <!--TODO functionality for edit/remove row-->
+                    </HBox>
+                    <HBox spacing="10">
+                        <TextField fx:id="selectedStore" promptText="Search or select a Store"/>
+                        <TextField fx:id="itemQuantity" promptText="Item Quantity"/>
+                        <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
+                            <graphic>
+                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#saveSupplierDialog" styleClass="action-button">
-                            Save
-                        </JFXButton>
-                    </actions>
-                </JFXDialogLayout>
-            </JFXDialog>
-        </sidePane>
-        <content>
-            <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="catalogueTable" styleClass="table-view"/>
-            </ScrollPane>
-        </content>
-    </JFXDrawer>
+                    </HBox>
+                </VBox>
+            </body>
+            <actions>
+                <JFXButton onAction="#cancelStoreDialog" styleClass="secondary-button">
+                    Cancel
+                </JFXButton>
+                <JFXButton onAction="#saveStoreDialog" styleClass="action-button">
+                    Save
+                </JFXButton>
+            </actions>
+        </JFXDialogLayout>
+    </JFXDialog>
+
+    <JFXDialog fx:id="addSupplierDialog">
+        <JFXDialogLayout>
+            <heading>
+                <Label>Item Suppliers</Label>
+            </heading>
+            <body>
+                <VBox spacing="10">
+                    <VBox spacing="10">
+                        <HBox spacing="10">
+                            <ListView fx:id="supplierList">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Select Suppliers"/>
+                                    </FXCollections>
+                                </items>
+                            </ListView>
+                            <TableView fx:id="itemSupplierView"/> <!--TODO functionality for edit/remove row-->
+                        </HBox>
+                        <HBox spacing="10">
+                            <TextField fx:id="selectedSupplier" promptText="Search or select a Supplier"/>
+                            <TextField fx:id="itemPrice" promptText="Price per item"/>
+                            <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                </graphic>
+                            </JFXButton>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </body>
+            <actions>
+                <JFXButton onAction="#cancelSupplierDialog" styleClass="secondary-button">
+                    Cancel
+                </JFXButton>
+                <JFXButton onAction="#saveSupplierDialog" styleClass="action-button">
+                    Save
+                </JFXButton>
+            </actions>
+        </JFXDialogLayout>
+    </JFXDialog>
 </StackPane>
 
 

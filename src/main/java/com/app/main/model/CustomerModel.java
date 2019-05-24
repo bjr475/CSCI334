@@ -1,80 +1,48 @@
 package com.app.main.model;
 
-import com.app.component.model.SubjectListCellModel;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class CustomerModel {
-    private String customerID;
-    private Date createdTime;
+    private IntegerProperty id;
     private StringProperty email;
     private StringProperty firstName;
     private StringProperty lastName;
-    private AddressModel address;
-    private StringProperty creditLine;
-    private StringProperty clubMember;
-    private ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas;
-    private ArrayList<String> modelTypes;
+    private DoubleProperty creditLine;
+    private BooleanProperty clubMember;
+    private ObjectProperty<Date> createdTime;
+    private ObjectProperty<AddressModel> address;
     private ObjectProperty<ObservableList<SalesModel>> sales;
+    private ObjectProperty<ObservableList<String>> modelTypes;
+    private ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas;
 
     public CustomerModel() {
-        createdTime = new Date();
-        email = new SimpleStringProperty();
-        firstName = new SimpleStringProperty();
-        lastName = new SimpleStringProperty();
-        address = new AddressModel();
-        creditLine = new SimpleStringProperty();
-        clubMember = new SimpleStringProperty();
-        subjectAreas = new SimpleObjectProperty<>((FXCollections.observableArrayList()));
-        modelTypes = new ArrayList<>();
+        id = new SimpleIntegerProperty(0);
+        email = new SimpleStringProperty("");
+        firstName = new SimpleStringProperty("");
+        lastName = new SimpleStringProperty("");
+        creditLine = new SimpleDoubleProperty(0);
+        clubMember = new SimpleBooleanProperty(false);
+        createdTime = new SimpleObjectProperty<>(null);
+        address = new SimpleObjectProperty<>(new AddressModel());
         sales = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        modelTypes = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
 
-    public CustomerModel(String customerID, Date createdTime, String email, String firstName, String lastName,
-                         String addressLine, String addressSuburb, String addressState,
-                         String addressPostcode, String creditLine,
-                         String clubMember, ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreas, ArrayList<String> modelTypes) {
-        this.customerID = customerID;
-        this.createdTime = createdTime;
-        this.email = new SimpleStringProperty(email);
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.address = new AddressModel(addressLine, addressSuburb, addressState, addressPostcode);
-        this.creditLine = new SimpleStringProperty(creditLine);
-        this.clubMember = new SimpleStringProperty(clubMember);
-        this.subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
-        this.modelTypes = new ArrayList<String>();
+    public int getId() {
+        return id.get();
     }
 
-    public void reset() {
-        customerID = "UNKNOWN";
-        email.setValue("");
-        firstName.setValue("");
-        lastName.setValue("");
-        //address
-        creditLine.setValue("");
-        clubMember.setValue("");
-        //subject area
-        //model types
+    public void setId(int id) {
+        this.id.set(id);
     }
 
-    public String getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public String getEmail() {
@@ -113,35 +81,87 @@ public class CustomerModel {
         return lastName;
     }
 
-    public AddressModel getAddress() {
-        return address;
-    }
-
-    public String getCreditLine() {
+    public double isCreditLine() {
         return creditLine.get();
     }
 
-    public void setCreditLine(String creditLine) {
+    public void setCreditLine(double creditLine) {
         this.creditLine.set(creditLine);
     }
 
-    public StringProperty creditLineProperty() {
+    public DoubleProperty creditLineProperty() {
         return creditLine;
     }
 
-    public String getclubMember() {
+    public boolean isClubMember() {
         return clubMember.get();
     }
 
-    public void setClubMember(String clubMember) {
+    public void setClubMember(boolean clubMember) {
         this.clubMember.set(clubMember);
     }
 
-    public StringProperty clubMemberProperty() {
+    public BooleanProperty clubMemberProperty() {
         return clubMember;
     }
 
-    //subjectAreas
+    public Date getCreatedTime() {
+        return createdTime.get();
+    }
 
-    //model types
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime.set(createdTime);
+    }
+
+    public ObjectProperty<Date> createdTimeProperty() {
+        return createdTime;
+    }
+
+    public AddressModel getAddress() {
+        return address.get();
+    }
+
+    public void setAddress(AddressModel address) {
+        this.address.set(address);
+    }
+
+    public ObjectProperty<AddressModel> addressProperty() {
+        return address;
+    }
+
+    public ObservableList<SalesModel> getSales() {
+        return sales.get();
+    }
+
+    public void setSales(ObservableList<SalesModel> sales) {
+        this.sales.set(sales);
+    }
+
+    public ObjectProperty<ObservableList<SalesModel>> salesProperty() {
+        return sales;
+    }
+
+    public ObservableList<String> getModelTypes() {
+        return modelTypes.get();
+    }
+
+    public void setModelTypes(ObservableList<String> modelTypes) {
+        this.modelTypes.set(modelTypes);
+    }
+
+    public ObjectProperty<ObservableList<String>> modelTypesProperty() {
+        return modelTypes;
+    }
+
+    public ObservableList<SubjectListCellModel> getSubjectAreas() {
+        return subjectAreas.get();
+    }
+
+    public void setSubjectAreas(ObservableList<SubjectListCellModel> subjectAreas) {
+        this.subjectAreas.set(subjectAreas);
+    }
+
+    public ObjectProperty<ObservableList<SubjectListCellModel>> subjectAreasProperty() {
+        return subjectAreas;
+    }
 }

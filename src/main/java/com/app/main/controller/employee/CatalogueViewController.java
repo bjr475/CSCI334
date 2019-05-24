@@ -17,8 +17,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,6 +80,7 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
 
     /* Catalogue Table */
     public TableView<CatalogueItemModel> catalogueTable;
+    public StackPane parentCataloguePane;
 
     /* Add and Edit Values */
     private ObjectProperty<CatalogueItemModel> currentAddItem;
@@ -432,5 +435,13 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
                 "Looking for catalogue items that contain the following words: '{}'",
                 searchWords.getText()
         );
+    }
+
+    public void addSupplier(ActionEvent event) {
+        addSupplierDialog.show(parentCataloguePane);
+    }
+
+    public void addStore(ActionEvent event) {
+        addStoreDialog.show(parentCataloguePane);
     }
 }

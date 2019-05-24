@@ -23,61 +23,47 @@
                         </Insets>
                     </padding>
                     <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
                             Add Customer
                         </Text>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                              GridPane.columnSpan="3">
                             <Label>Email</Label>
                             <TextField fx:id="addEmail"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
-                            <Label>Customer ID</Label>
-                            <TextField editable="false" fx:id="addCustomerID"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>First Name</Label>
                             <TextField fx:id="addFirstName"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="2">
                             <Label>Last Name</Label>
                             <TextField fx:id="addLastName"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                              GridPane.columnSpan="4" GridPane.rowSpan="2">
-                            <fx:include fx:id="addAddress" source="address.fxml"/>
+                              GridPane.columnSpan="3">
+                            <fx:include fx:id="addAddress" source="address.fxml" HBox.hgrow="ALWAYS"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0">
                             <CheckBox fx:id="addExistingCredit" text="Existing Credit Line"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="2">
                             <CheckBox fx:id="addClubMember" text="Club Member"/>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
                             <Label>Credit</Label>
-                            <TextField fx:id="addCredit"/>
+                            <Spinner fx:id="addCredit">
+                                <valueFactory>
+                                    <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                        <min>0</min>
+                                        <amountToStepBy>1</amountToStepBy>
+                                    </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                </valueFactory>
+                            </Spinner>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
-                            <Label>Starting Date</Label>
-                            <DatePicker fx:id="addClubStartDate" GridPane.hgrow="ALWAYS"/>
-                        </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0">
                             <Label>Interests</Label>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0">
                             <Label>Subjects</Label>
                             <ListView fx:id="addSubjects" maxHeight="150">
                                 <items>
@@ -91,9 +77,7 @@
                                 </items>
                             </ListView>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="2">
                             <Label>Model Types</Label>
                             <ListView fx:id="addTypes" maxHeight="150">
                                 <items>
@@ -105,9 +89,8 @@
                                 </items>
                             </ListView>
                         </VBox>
-
-                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                              GridPane.columnSpan="4">
+                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
+                              GridPane.columnSpan="3" spacing="8">
                             <Pane HBox.hgrow="ALWAYS"/>
                             <JFXButton styleClass="secondary-button" onMouseClicked="#onCancelAdd">Cancel</JFXButton>
                             <JFXButton styleClass="action-button" onMouseClicked="#onConfirmAdd">Confirm</JFXButton>
@@ -125,74 +108,45 @@
                         </Insets>
                     </padding>
                     <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
                             Edit Customer
                         </Text>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                              GridPane.columnSpan="3">
                             <Label>Email</Label>
                             <TextField fx:id="editEmail"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
-                            <Label>Customer ID</Label>
-                            <TextField editable="false" fx:id="editCustomerID"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>First Name</Label>
                             <TextField fx:id="editFirstName"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="2">
                             <Label>Last Name</Label>
                             <TextField fx:id="editLastName"/>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                              GridPane.columnSpan="4">
+                              GridPane.columnSpan="3">
                             <fx:include fx:id="editAddress" source="address.fxml"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
-                            <Label>Suburb</Label>
-                            <TextField fx:id="editSuburb"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="2">
-                            <Label>State</Label>
-                            <TextField fx:id="editState"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="3">
-                            <Label>Postcode</Label>
-                            <TextField fx:id="editPostcode"/>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0">
                             <CheckBox fx:id="editExistingCredit" text="Existing Credit Line"/>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="2">
                             <CheckBox fx:id="editClubMember" text="Club Member"/>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
                             <Label>Credit</Label>
                             <TextField fx:id="editCredit"/>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="2">
                             <Label>Starting Date</Label>
-                            <DatePicker fx:id="editClubStartDate" GridPane.hgrow="ALWAYS"/>
+                            <DatePicker fx:id="editClubStartDate" GridPane.hgrow="ALWAYS" editable="false"
+                                        disable="true"/>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0">
                             <Label>Interests</Label>
                         </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0">
                             <Label>Subjects</Label>
                             <ListView fx:id="editSubjects" maxHeight="150">
                                 <items>
@@ -206,9 +160,7 @@
                                 </items>
                             </ListView>
                         </VBox>
-
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="2"
-                              GridPane.columnSpan="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="2">
                             <Label>Model Types</Label>
                             <ListView fx:id="editTypes" maxHeight="150">
                                 <items>
@@ -220,9 +172,8 @@
                                 </items>
                             </ListView>
                         </VBox>
-
-                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                              GridPane.columnSpan="4">
+                        <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
+                              GridPane.columnSpan="3" spacing="8">
                             <Pane HBox.hgrow="ALWAYS"/>
                             <JFXButton styleClass="secondary-button">Cancel</JFXButton>
                             <JFXButton styleClass="action-button" onMouseClicked="#onConfirmAdd">Confirm</JFXButton>

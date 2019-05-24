@@ -2,10 +2,14 @@ package com.app.main.controller.employee;
 
 import com.app.main.controller.AddressViewController;
 import com.app.main.model.ApplicationModel;
+import com.app.main.model.CustomerModel;
+import com.app.main.model.SubjectListCellModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXDrawer;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -13,6 +17,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
@@ -25,19 +30,16 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     /* Tool Drawer */
     public JFXDrawer toolDrawer;
 
-    public TableView customersTable;
-
     /* Edit Control */
     public ScrollPane editMenu;
     public TextField editEmail;
-    public TextField editCustomerID;
     public TextField editFirstName;
     public TextField editLastName;
     public CheckBox editExistingCredit;
     public TextField editCredit;
     public CheckBox editClubMember;
     public DatePicker editClubStartDate;
-    public ListView<String> editSubjects;
+    public ListView<SubjectListCellModel> editSubjects;
     public ListView<String> editTypes;
 
     @FXML
@@ -46,41 +48,60 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     /* Add Control */
     public ScrollPane addMenu;
     public TextField addEmail;
-    public TextField addCustomerID;
     public TextField addFirstName;
     public TextField addLastName;
     public CheckBox addExistingCredit;
-    public TextField addCredit;
+    public Spinner<Double> addCredit;
     public CheckBox addClubMember;
     public DatePicker addClubStartDate;
-    public ListView<String> addSubjects;
+    public ListView<SubjectListCellModel> addSubjects;
     public ListView<String> addTypes;
 
     @FXML
     public AddressViewController addAddressController;
 
-    /* Filter Control */
-    public ScrollPane filterMenu;
-
     /* Search Control */
     public ScrollPane searchMenu;
     public TextField searchWords;
 
-//    /* Customer Table */
-//    public TableView<CustomerModel> customerTable;
-//
-//    /* Add and Edit Values */
-//    private ObjectProperty<CustomerModel> currentAddItem;
+    /* Customer Table */
+    public TableView<CustomerModel> customersTable;
+
+    /* Add and Edit Values */
+    private ObjectProperty<CustomerModel> currentAddItem;
 //    private ObjectProperty<CustomerModel> currentEditableItem;
 
     public CustomersViewController(ApplicationModel model) {
         super(model);
+
+        currentAddItem = new SimpleObjectProperty<>(new CustomerModel());
+
+        currentAddItem.addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null) {
+                addEmail.textProperty().unbindBidirectional(oldValue.emailProperty());
+                addFirstName.textProperty().unbindBidirectional(oldValue.firstNameProperty());
+                addLastName.textProperty().unbindBidirectional(oldValue.lastNameProperty());
+                addAddressController.addressProperty().unbindBidirectional(oldValue.addressProperty());
+                addClubMember.selectedProperty().unbindBidirectional(oldValue.clubMemberProperty());
+                addSubjects.itemsProperty().unbindBidirectional(oldValue.subjectAreasProperty());
+                addTypes.itemsProperty().unbindBidirectional(oldValue.modelTypesProperty());
+            }
+            if (newValue != null) {
+                addEmail.textProperty().bindBidirectional(newValue.emailProperty());
+                addFirstName.textProperty().bindBidirectional(newValue.firstNameProperty());
+                addLastName.textProperty().bindBidirectional(newValue.lastNameProperty());
+                addAddressController.addressProperty().bindBidirectional(newValue.addressProperty());
+                addClubMember.selectedProperty().bindBidirectional(newValue.clubMemberProperty());
+                addSubjects.itemsProperty().bindBidirectional(newValue.subjectAreasProperty());
+                addTypes.itemsProperty().bindBidirectional(newValue.modelTypesProperty());
+            }
+        });
     }
 
     private void setEditableAdd(boolean state) {
         setEditable(
                 state,
-                addEmail, addFirstName, addLastName, addCredit
+                addEmail, addFirstName, addLastName
         );
         setEditable(
                 state,
@@ -90,7 +111,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
                 state,
                 addSubjects, addTypes
         );
-        addClubStartDate.setEditable(state);
+        addCredit.setDisable(!state);
         addAddressController.setEditable(state);
     }
 
@@ -129,7 +150,8 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
 
         addTypes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         addSubjects.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        
+        addCredit.valueProperty().addListener((observable, oldValue, newValue) -> currentAddItem.get().setCreditLine(newValue));
     }
 
     private void activateView(@NotNull ScrollPane view) {
@@ -155,7 +177,6 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
 
     @Override
     public void onAdd() {
-
         AUserModel currentUser = getModel().getCurrentUser();
         if (currentUser != null && currentUser.getUserType() == AUserModel.UserType.EMPLOYEE) {
             EmployeeModel employeeModel = (EmployeeModel) currentUser;
@@ -174,15 +195,15 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         for (String item : selectedTypes) {
             logger.info("Item {} has been selected", item);
         }
-        ObservableList<String> selectedSubjects = addSubjects.getSelectionModel().getSelectedItems();
-        for (String item : selectedSubjects) {
+        ObservableList<SubjectListCellModel> selectedSubjects = addSubjects.getSelectionModel().getSelectedItems();
+        for (SubjectListCellModel item : selectedSubjects) {
             logger.info("Item {} has been selected", item);
         }
     }
 
     @Override
     public void onFilter() {
-        activateView(filterMenu);
+//        activateView(filterMenu);
     }
 
     @Override

@@ -1,30 +1,32 @@
 package com.app.main.model.supplier;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class SupplierItemModel {
-    private StringProperty id;
+    private IntegerProperty id;
     private StringProperty name;
     private DoubleProperty price;
 
     public SupplierItemModel() {
-        id = new SimpleStringProperty("");
+        id = new SimpleIntegerProperty(0);
         name = new SimpleStringProperty("");
         price = new SimpleDoubleProperty(0);
     }
 
-    public String getId() {
+    public int getId() {
         return id.get();
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 
-    public StringProperty idProperty() {
+    public IntegerProperty idProperty() {
         return id;
     }
 

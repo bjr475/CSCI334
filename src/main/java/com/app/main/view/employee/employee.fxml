@@ -55,25 +55,25 @@
                         </padding>
                         <HBox fx:id="toolbarItems">
                             <JFXButton onAction="#onEdit" buttonType="FLAT"
-                                       GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="editButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
                                 </graphic>
                             </JFXButton>
                             <JFXButton onAction="#onAdd" buttonType="FLAT"
-                                       GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                       GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="addButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                 </graphic>
                             </JFXButton>
                             <JFXButton onAction="#onFilter" buttonType="FLAT"
-                                       GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                       GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="filterButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-filter" iconSize="20"/>
                                 </graphic>
                             </JFXButton>
                             <JFXButton onAction="#onSearch" buttonType="FLAT"
-                                       GridPane.columnIndex="3" GridPane.rowIndex="0">
+                                       GridPane.columnIndex="3" GridPane.rowIndex="0" fx:id="searchButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-search" iconSize="24"/>
                                 </graphic>

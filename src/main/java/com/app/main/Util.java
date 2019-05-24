@@ -1,8 +1,8 @@
 package com.app.main;
 
+import com.app.main.model.catalogue.CatalogueItemModel;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
-import javafx.animation.Transition;
 import javafx.beans.property.DoubleProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,19 +32,19 @@ public class Util {
 
     public static void prepareDrawer(@NotNull JFXDrawer drawer, @NotNull JFXHamburger hamburger) {
         drawer.setDefaultDrawerSize(300);
-        drawer.setOnDrawerOpening(e -> {
-//            logger.debug("A JFXDrawer is opening: {}", drawer);
-            final Transition transition = hamburger.getAnimation();
-            transition.setRate(1);
-            transition.play();
-        });
-        drawer.setOnMouseClicked(event -> drawer.close());
-        drawer.setOnDrawerClosing(event -> {
-//            logger.debug("A JFXDrawer is closing: {}", drawer);
-            final Transition transition = hamburger.getAnimation();
-            transition.setRate(-1);
-            transition.play();
-        });
+//        drawer.setOnDrawerOpening(e -> {
+////            logger.debug("A JFXDrawer is opening: {}", drawer);
+//            final Transition transition = hamburger.getAnimation();
+//            transition.setRate(1);
+//            transition.play();
+//        });
+//        drawer.setOnMouseClicked(event -> drawer.close());
+//        drawer.setOnDrawerClosing(event -> {
+////            logger.debug("A JFXDrawer is closing: {}", drawer);
+//            final Transition transition = hamburger.getAnimation();
+//            transition.setRate(-1);
+//            transition.play();
+//        });
         hamburger.setOnMouseClicked(event -> {
             if (drawer.isClosed() || drawer.isClosing()) drawer.open();
             else drawer.close();
@@ -63,6 +63,14 @@ public class Util {
     public static String formatPrintDate(Date date) {
         if (date == null) return printFormat.format(Calendar.getInstance().getTime());
         return printFormat.format(date);
+    }
+
+    public static String formatModelId(@NotNull CatalogueItemModel model) {
+        return formatModelId(model.getItemId());
+    }
+
+    public static String formatModelId(@NotNull Number id) {
+        return String.format("%011d", id.intValue());
     }
 
     @Nullable

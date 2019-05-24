@@ -4,6 +4,7 @@ import com.app.main.model.AddressModel;
 import com.app.main.model.ApplicationModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import org.jetbrains.annotations.Contract;
@@ -21,9 +22,7 @@ public class AddressViewController {
     @Contract(pure = true)
     public AddressViewController(ApplicationModel model) {
         this.model = model;
-        address = new SimpleObjectProperty<>();
-
-
+        address = new SimpleObjectProperty<>(null);
         address.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 addressLine.textProperty().unbindBidirectional(oldValue.addressProperty());
@@ -47,6 +46,11 @@ public class AddressViewController {
 
     public ApplicationModel getModel() {
         return model;
+    }
+
+    @FXML
+    public void initialize() {
+        address.set(new AddressModel());
     }
 
     public void setEditable(boolean state) {

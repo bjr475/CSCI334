@@ -7,8 +7,6 @@ import com.app.main.model.catalogue.CatalogueItemLocationModel;
 import com.app.main.model.catalogue.CatalogueItemSupplierModel;
 import com.app.main.model.supplier.SupplierContactModel;
 import com.app.main.model.supplier.SupplierModel;
-import com.app.main.model.user.AUserModel;
-import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -16,8 +14,6 @@ import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class SuppliersViewController extends AChildEmployeeViewController implements IEditorActionItem {
+public class SuppliersViewController extends AChildEmployeeEditorActionViewController {
     public JFXDrawer toolDrawer;
     public TableView<SupplierModel> suppliers;
     public ScrollPane searchMenu;
@@ -85,46 +81,51 @@ public class SuppliersViewController extends AChildEmployeeViewController implem
         super(model);
         currentAddSupplier = new SimpleObjectProperty<>(null);
         currentEditableSupplier = new SimpleObjectProperty<>(null);
-
-        model.currentUserProperty().addListener(new ChangeListener<AUserModel>() {
-            @Override
-            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
-                if (newValue != null) {
-                    if (newValue.getUserType() == AUserModel.UserType.EMPLOYEE) {
-                        EmployeeModel employee = (EmployeeModel) newValue;
-                        EmployeePermissions permissions = employee.getPermissions();
-                        boolean canModify = permissions.isModifyCustomer() || permissions.isCreateCustomer();
-                        setEditable(canModify);
-                    } else {
-                        // admin
-                        setEditable(true);
-                    }
-                }
-            }
-        });
-
         model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) updateSuppliersTable();
         });
     }
 
-    private void setEditable(boolean state) {
-        editSupplierName.setEditable(state);
-        editSupplierID.setEditable(state);
-        editContactTable.setEditable(state);
-        editSupplierItemsTable.setEditable(state);
-        editItemSearch.setEditable(state);
-        editSupplierItemButton.setDisable(!state);
-        editCredit.setEditable(state);
+    @Override
+    protected void setUserEditable(@NotNull EmployeePermissions permissions) {
+        setEditableAdd(permissions.isCreateCustomer());
+        setEditableEdit(permissions.isModifyCustomer());
+    }
 
-        addSupplierName.setEditable(state);
-        addSupplierID.setEditable(state);
-        contactTable.setEditable(state);
-        supplierItemsTable.setEditable(state);
-        itemSearch.setEditable(state);
-        addSupplierItemButton.setDisable(!state);
-        existingCreditLine.setDisable(!state);
-        addCredit.setEditable(state);
+    @Override
+    protected void setAdminEditable() {
+        setEditableAdd(true);
+        setEditableEdit(true);
+    }
+
+    private void setEditableAdd(boolean state) {
+        setEditable(
+                state,
+                addSupplierName, itemSearch, addCredit
+        );
+        setEditable(
+                state,
+                contactTable, supplierItemsTable
+        );
+        setEditable(
+                state,
+                addSupplierItemButton, existingCreditLine
+        );
+    }
+
+    private void setEditableEdit(boolean state) {
+        setEditable(
+                state,
+                editSupplierName, editItemSearch, editCredit
+        );
+        setEditable(
+                state,
+                editContactTable, editSupplierItemsTable
+        );
+        setEditable(
+                state,
+                editSupplierItemButton
+        );
     }
 
     private void updateSuppliersTable() {

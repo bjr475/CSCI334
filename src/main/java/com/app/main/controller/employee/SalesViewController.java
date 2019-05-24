@@ -7,15 +7,20 @@ import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Control;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
-public class SalesViewController extends AChildEmployeeViewController implements IEditorActionItem {
+public class SalesViewController extends AChildEmployeeEditorActionViewController {
 
     public JFXDrawer toolDrawer;
     public TableView tableView;
@@ -69,56 +74,55 @@ public class SalesViewController extends AChildEmployeeViewController implements
     public Text GST;
     public Text total;
 
-
-    private void setEditable(boolean state) {
-        editCustomerID.setEditable(state);
-        viewOtherDiscount.setDisable(!state);
-        viewOtherDiscountAmount.setEditable(state);
-
-        itemTable.setEditable(state);
-        itemIDView.setEditable(state);
-        quantityView.setEditable(state);
-        addItemButton.setDisable(!state);
-        customerID.setEditable(state);
-        newCustomer.setDisable(!state);
-
-        addEmail.setEditable(state);
-        addCustomerID.setEditable(state);
-        addFirstName.setEditable(state);
-        addLastName.setEditable(state);
-        addExistingCredit.setDisable(!state);
-        addCredit.setEditable(state);
-        clubMember.setDisable(!state);
-        addClubStartDate.setEditable(state);
-        addSubjects.setEditable(state);
-        addTypes.setEditable(state);
-        addAddressController.setEditable(state);
-
-        saleConfirmGrid.setDisable(!state);
-        confirmItemTable.setEditable(state);
-        otherDiscount.setDisable(!state);
-        otherDiscountAmount.setEditable(state);
-    }
-
     public SalesViewController(ApplicationModel model) {
         super(model);
+    }
 
-        model.currentUserProperty().addListener(new ChangeListener<AUserModel>() {
-            @Override
-            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
-                if (newValue != null) {
-                    if (newValue.getUserType() == AUserModel.UserType.EMPLOYEE) {
-                        EmployeeModel employee = (EmployeeModel) newValue;
-                        EmployeePermissions permissions = employee.getPermissions();
-                        boolean canModify = permissions.isModifyCustomer() || permissions.isCreateCustomer();
-                        setEditable(canModify);
-                    } else {
-                        // admin
-                        setEditable(true);
-                    }
-                }
-            }
-        });
+    @Override
+    protected void setUserEditable(@NotNull EmployeePermissions permissions) {
+        boolean state = permissions.isModifyCustomer() || permissions.isCreateCustomer();
+        addClubStartDate.setEditable(state);
+        addAddressController.setEditable(state);
+        setEditable(
+                state,
+                addSubjects, addTypes
+        );
+        setEditable(
+                state,
+                addItemButton, newCustomer, addExistingCredit, otherDiscount, viewOtherDiscount, clubMember
+        );
+        setEditable(
+                state,
+                viewOtherDiscountAmount, quantityView, addEmail, addFirstName, addLastName, addCredit,
+                otherDiscountAmount
+        );
+        setEditable(
+                state,
+                itemTable, confirmItemTable
+        );
+    }
+
+    @Override
+    protected void setAdminEditable() {
+        addClubStartDate.setEditable(true);
+        addAddressController.setEditable(true);
+        setEditable(
+                true,
+                addSubjects, addTypes
+        );
+        setEditable(
+                true,
+                addItemButton, newCustomer, addExistingCredit, otherDiscount, viewOtherDiscount, clubMember
+        );
+        setEditable(
+                true,
+                viewOtherDiscountAmount, quantityView, addEmail, addFirstName, addLastName, addCredit,
+                otherDiscountAmount
+        );
+        setEditable(
+                true,
+                itemTable, confirmItemTable
+        );
     }
 
     @FXML

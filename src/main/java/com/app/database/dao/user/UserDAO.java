@@ -61,9 +61,9 @@ public class UserDAO {
             "    position     = ?,\n" +
             "    permissions  = ?\n" +
             "WHERE id = ?;";
-    private static final String SQL_GET_EMPLOYEE_NAME_IDS = "SELECT id, display_name\n" +
-            "FROM EMPLOYEE\n" +
-            "WHERE id NOT IN (SELECT manager FROM STORE);";
+    private static final String SQL_GET_EMPLOYEE_NAME_IDS = "SELECT id, display_name, first_name\n" +
+            "FROM EMPLOYEE;";
+//            "WHERE id NOT IN (SELECT manager FROM STORE);";
 
     private final Database database;
 
@@ -292,7 +292,11 @@ public class UserDAO {
             try (PreparedStatement statement = connection.prepareStatement(SQL_GET_EMPLOYEE_NAME_IDS)) {
                 ResultSet result = statement.executeQuery();
                 while (result.next()) {
-                    EmployeeNameId item = new EmployeeNameId(result.getInt("id"), result.getString("display_name"));
+                    EmployeeNameId item = new EmployeeNameId(
+                            result.getInt("id"),
+                            result.getString("display_name"),
+                            result.getString("first_name")
+                    );
                     logger.debug("Loading Employee: {}", item);
                     items.add(item);
                 }

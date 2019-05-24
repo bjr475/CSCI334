@@ -6,7 +6,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:id="parentSuppliersPane" xmlns="http://javafx.com/javafx"
@@ -14,7 +13,6 @@
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
-
 
 
                 <ScrollPane styleClass="default-background" fx:id="addMenu">
@@ -34,7 +32,7 @@
                             <Label>Supplier Name</Label>
                             <TextField fx:id="addSupplierName"/>
                         </VBox>
-                        <VBox  GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2">
                             <Label>Supplier ID</Label>
                             <TextField fx:id="addSupplierID" editable="false"/>
                         </VBox>
@@ -115,7 +113,7 @@
                             <TextField fx:id="addCredit"/>
                         </VBox>
 
-                        <HBox spacing="20"  GridPane.hgrow="ALWAYS"
+                        <HBox spacing="20" GridPane.hgrow="ALWAYS"
                               GridPane.rowIndex="7" GridPane.columnIndex="0"
                               GridPane.columnSpan="4">
                             <Pane HBox.hgrow="ALWAYS"/>
@@ -148,7 +146,7 @@
                             <Label>Supplier Name</Label>
                             <TextField fx:id="editSupplierName"></TextField>
                         </VBox>
-                        <VBox  GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="2">
                             <Label>Supplier ID</Label>
                             <TextField fx:id="editSupplierID" editable="false"></TextField>
                         </VBox>
@@ -226,7 +224,7 @@
                             <TextField fx:id="editCredit"/>
                         </VBox>
 
-                        <HBox spacing="20"  GridPane.hgrow="ALWAYS"
+                        <HBox spacing="20" GridPane.hgrow="ALWAYS"
                               GridPane.rowIndex="7" GridPane.columnIndex="0"
                               GridPane.columnSpan="4">
                             <Pane HBox.hgrow="ALWAYS"/>
@@ -284,7 +282,6 @@
                 </ScrollPane>
 
             </StackPane>
-
 
 
         </sidePane>

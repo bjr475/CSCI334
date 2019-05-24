@@ -2,13 +2,14 @@ package com.app.main.controller.employee.manager;
 
 import com.app.database.Database;
 import com.app.main.controller.AddressViewController;
-import com.app.main.controller.employee.AChildEmployeeViewController;
-import com.app.main.controller.employee.IEditorActionItem;
+import com.app.main.controller.employee.AChildEmployeeEditorActionViewController;
 import com.app.main.model.AddressModel;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.store.StoreModel;
 import com.app.main.model.user.AUserModel;
+import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.EmployeeNameId;
+import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,25 +29,39 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class ManageStoresViewController extends AChildEmployeeViewController implements IEditorActionItem {
+public class ManageStoresViewController extends AChildEmployeeEditorActionViewController {
     private static final Logger logger = LogManager.getLogger(ManageStoresViewController.class.getName());
+    private static final StringConverter<EmployeeNameId> MANAGER_CONVERTER = new StringConverter<>() {
+        private String combine(@NotNull EmployeeNameId employeeNameId) {
+            return String.format("%s - %s", employeeNameId.getDisplay(), employeeNameId.getFirstName());
+        }
 
+        @NotNull
+        @Override
+        public String toString(@NotNull EmployeeNameId item) {
+            return combine(item);
+        }
+
+        @Override
+        public EmployeeNameId fromString(String string) {
+            return Database.INSTANCE.getUser().getEmployeeNameIds().stream().filter(
+                    employeeNameId -> combine(employeeNameId).equals(string)
+            ).findFirst().orElse(null);
+        }
+    };
     public JFXDrawer toolDrawer;
     public ScrollPane filterMenu;
     public ScrollPane searchMenu;
     public TableView<StoreModel> storesView;
-
     public ScrollPane editMenu;
     public TextField editStoreId;
     public TextField editStoreName;
-    public TextField editStoreManagerName;
+    public ChoiceBox<EmployeeNameId> editStoreManager;
     public AddressViewController editAddressController;
-
     public ScrollPane addMenu;
     public TextField addStoreName;
     public ChoiceBox<EmployeeNameId> addStoreManager;
-    public AddressViewController addAddressViewController;
-
+    public AddressViewController addAddressController;
     private ObjectProperty<StoreModel> editStore;
 
     public ManageStoresViewController(ApplicationModel model) {
@@ -62,16 +77,29 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
             if (oldValue != null) {
                 editStoreId.setText("-- Store ID --");
                 editStoreName.textProperty().unbindBidirectional(oldValue.nameProperty());
-                editStoreManagerName.textProperty().unbindBidirectional(oldValue.managerNameProperty());
                 editAddressController.addressProperty().unbindBidirectional(oldValue.addressProperty());
+                editStoreManager.setValue(null);
             }
             if (newValue != null) {
                 editStoreId.setText(String.format("%d", newValue.getStoreId()));
                 editStoreName.textProperty().bindBidirectional(newValue.nameProperty());
-                editStoreManagerName.textProperty().bindBidirectional(newValue.managerNameProperty());
+                EmployeeModel m = Database.INSTANCE.getUser().getEmployee(newValue.getManagerId());
+                EmployeeNameId manager = new EmployeeNameId(m.getId(), m.getDisplayName(), m.getFirstName());
+//                if (!editStoreManager.getItems().contains(manager)) editStoreManager.getItems().add(0, manager);
+                editStoreManager.setValue(manager);
                 editAddressController.addressProperty().bindBidirectional(newValue.addressProperty());
             }
         });
+    }
+
+    @Override
+    protected void setUserEditable(@NotNull EmployeePermissions permissions) {
+
+    }
+
+    @Override
+    protected void setAdminEditable() {
+
     }
 
     private void refreshStoresTable() {
@@ -80,6 +108,7 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
         storesView.refresh();
 
         addStoreManager.setItems(FXCollections.observableArrayList(Database.INSTANCE.getUser().getEmployeeNameIds()));
+        editStoreManager.setItems(FXCollections.observableArrayList(Database.INSTANCE.getUser().getEmployeeNameIds()));
     }
 
     private void buildStoresTable() {
@@ -131,6 +160,7 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
     }
 
     public void confirmEdit() {
+        editStore.get().setManagerId(editStoreManager.getValue().getId());
         Database.INSTANCE.getStore().updateStore(editStore.get());
         refreshStoresTable();
         toolDrawer.close();
@@ -147,7 +177,7 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
     public void confirmAdd() {
         StoreModel model = new StoreModel(-1);
         model.setName(addStoreName.getText());
-        model.setAddress(addAddressViewController.getAddress());
+        model.setAddress(addAddressController.getAddress());
         EmployeeNameId nameId = addStoreManager.getValue();
         model.setManagerId(nameId == null ? 0 : nameId.getId());
         Database.INSTANCE.getStore().saveStore(model);
@@ -159,21 +189,10 @@ public class ManageStoresViewController extends AChildEmployeeViewController imp
         toolDrawer.setDefaultDrawerSize(600);
         buildStoresTable();
 
-        addStoreManager.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(EmployeeNameId item) {
-                return item.getName();
-            }
+        addStoreManager.setConverter(MANAGER_CONVERTER);
+        editStoreManager.setConverter(MANAGER_CONVERTER);
 
-            @Override
-            public EmployeeNameId fromString(String string) {
-                return Database.INSTANCE.getUser().getEmployeeNameIds().stream().filter(
-                        employeeNameId -> employeeNameId.getName().equals(string)
-                ).findFirst().orElse(null);
-            }
-        });
-
-        logger.debug("Address Controller Edit ({}) >> Add ({})", editAddressController, addAddressViewController);
+        logger.debug("Address Controller Edit ({}) >> Add ({})", editAddressController, addAddressController);
     }
 
     private void activateView(@NotNull ScrollPane view) {

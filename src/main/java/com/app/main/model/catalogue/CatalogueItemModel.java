@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.util.Date;
 
 public class CatalogueItemModel {
-    private String itemId;
+    private IntegerProperty itemId;
     private StringProperty name;
     private StringProperty type;
     private DoubleProperty price;
@@ -29,8 +29,8 @@ public class CatalogueItemModel {
 
     private IntegerProperty stockTotal;
 
-    public CatalogueItemModel(String itemId) {
-        this.itemId = itemId;
+    public CatalogueItemModel(int itemId) {
+        this.itemId = new SimpleIntegerProperty(itemId);
         name = new SimpleStringProperty("Name");
         type = new SimpleStringProperty("Type");
         price = new SimpleDoubleProperty(19.95);
@@ -44,7 +44,7 @@ public class CatalogueItemModel {
     }
 
     public CatalogueItemModel(@NotNull CatalogueItemModel item) {
-        this.itemId = item.itemId;
+        this.itemId = new SimpleIntegerProperty(item.itemId.get());
         name = new SimpleStringProperty(item.name.get());
         type = new SimpleStringProperty(item.type.get());
         price = new SimpleDoubleProperty(item.price.get());
@@ -78,10 +78,6 @@ public class CatalogueItemModel {
         int total = 0;
         for (CatalogueItemLocationModel item : items) total += item.getCount();
         stockTotal.set(total);
-    }
-
-    public String getItemId() {
-        return itemId;
     }
 
     public String getName() {
@@ -189,7 +185,7 @@ public class CatalogueItemModel {
     }
 
     public void set(@NotNull CatalogueItemModel model) {
-        itemId = model.itemId;
+        this.itemId = new SimpleIntegerProperty(model.itemId.get());
         name = model.name;
         type = model.type;
         price = model.price;
@@ -198,5 +194,13 @@ public class CatalogueItemModel {
         stockedOn = model.stockedOn;
         stores = model.stores;
         suppliers = model.suppliers;
+    }
+
+    public int getItemId() {
+        return itemId.get();
+    }
+
+    public IntegerProperty itemIdProperty() {
+        return itemId;
     }
 }

@@ -3,8 +3,6 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.collections.FXCollections?>
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -32,13 +30,10 @@
                               GridPane.columnSpan="2">
                             Add Catalogue Item
                         </Text>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
                             <Label>Item Name</Label>
                             <TextField fx:id="addItemName">--Item Name--</TextField>
-                        </VBox>
-                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                            <Label>Item ID</Label>
-                            <TextField editable="false" fx:id="addItemID">--Item ID--</TextField>
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                             <Label>Model Type</Label>
@@ -240,14 +235,14 @@
                                     <TableView fx:id="itemSupplierView"/> <!--TODO functionality for edit/remove row-->
                                 </HBox>
                                 <HBox spacing="10">
-                                <TextField fx:id="selectedSupplier" promptText="Search or select a Supplier"/>
-                                <TextField fx:id="itemPrice" promptText="Price per item"/>
+                                    <TextField fx:id="selectedSupplier" promptText="Search or select a Supplier"/>
+                                    <TextField fx:id="itemPrice" promptText="Price per item"/>
                                     <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT">
                                         <graphic>
                                             <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                         </graphic>
                                     </JFXButton>
-                            </HBox>
+                                </HBox>
                             </VBox>
                         </VBox>
                     </body>

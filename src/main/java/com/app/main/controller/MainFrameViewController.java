@@ -55,6 +55,7 @@ public class MainFrameViewController extends AViewController {
                     getModel().setCurrentUser(Database.INSTANCE.getUser().getEmployee(user.getId()));
                     break;
             }
+            employeeController.gotoCatalogue();
             employeePane.toFront();
             return true;
         }

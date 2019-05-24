@@ -14,24 +14,20 @@ import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CatalogueViewController extends AChildEmployeeViewController implements IEditorActionItem {
+import java.util.stream.Collectors;
+
+public class CatalogueViewController extends AChildEmployeeEditorActionViewController {
     private static final Logger logger = LogManager.getLogger(CatalogueViewController.class.getName());
 
     /* Tool Drawer */
@@ -52,7 +48,6 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     /* Add Control */
     public ScrollPane addMenu;
     public TextField addItemName;
-    public TextField addItemID;
     public ChoiceBox<String> addType;
     public ChoiceBox<String> addSubject;
     public TextField addPrice;
@@ -96,53 +91,49 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         currentAddItem.addListener(this::onUpdateAddItem);
         currentEditableItem.addListener(this::onUpdateEditItem);
         getModel().currentUserProperty().addListener(this::userChanged);
-
-        model.currentUserProperty().addListener(new ChangeListener<AUserModel>() {
-            @Override
-            public void changed(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
-                if (newValue != null) {
-                    if (newValue.getUserType() == AUserModel.UserType.EMPLOYEE) {
-                        EmployeeModel employee = (EmployeeModel) newValue;
-                        EmployeePermissions permissions = employee.getPermissions();
-                        boolean canModify = permissions.isModifyCustomer() || permissions.isCreateCustomer();
-                        setEditable(canModify);
-                    } else {
-                        // admin
-                        setEditable(true);
-                    }
-                }
-            }
-        });
     }
 
-    private void setEditable(boolean state) {
-        editItemName.setEditable(state);
-        editItemID.setEditable(state);
-        editModelType.setDisable(!state);
-        editSubject.setDisable(!state);
-        editPrice.setEditable(state);
-        editDescription.setEditable(state);
-        editStores.setEditable(state);
-        editSuppliers.setEditable(state);
+    @Override
+    protected void setUserEditable(@NotNull EmployeePermissions permissions) {
+        boolean state = permissions.isCreateItem() || permissions.isModifyItem();
+        editProperty().set(permissions.isModifyItem());
+        addProperty().set(permissions.isCreateItem());
 
-        addItemName.setEditable(state);
-        addItemID.setEditable(state);
-        addType.setDisable(!state);
-        addSubject.setDisable(!state);
-        addPrice.setEditable(state);
-        addDescription.setEditable(state);
-        addStoresView.setEditable(state);
-        addSuppliersView.setEditable(state);
+        setEditable(
+                state,
+                editItemName, editPrice, editDescription, addItemName, addPrice, addDescription
+        );
+        setEditable(
+                state,
+                editModelType, editSubject, addType, addSubject
+        );
+        setEditable(
+                state, editStores, editSuppliers, addStoresView, addSuppliersView
+        );
     }
 
-    private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
-                                 ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
-                                 @NotNull TextArea description,
-                                 @NotNull TableView<CatalogueItemLocationModel> storesView,
-                                 @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+    @Override
+    protected void setAdminEditable() {
+        setEditable(
+                true,
+                editItemName, editPrice, editDescription, addItemName, addPrice, addDescription
+        );
+        setEditable(
+                true,
+                editModelType, editSubject, addType, addSubject
+        );
+        setEditable(
+                true, editStores, editSuppliers, addStoresView, addSuppliersView
+        );
+    }
+
+    private void unbindItemModelAdd(@Nullable CatalogueItemModel item, @NotNull TextField name,
+                                    ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
+                                    @NotNull TextArea description,
+                                    @NotNull TableView<CatalogueItemLocationModel> storesView,
+                                    @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
         if (item != null) {
             name.textProperty().unbindBidirectional(item.nameProperty());
-            id.setText("-- Item ID --");
             type.valueProperty().unbindBidirectional(item.typeProperty());
             subject.valueProperty().unbindBidirectional(item.subjectProperty());
             price.setText("-- Price --");
@@ -152,14 +143,13 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         }
     }
 
-    private void bindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
-                               ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
-                               @NotNull TextArea description,
-                               @NotNull TableView<CatalogueItemLocationModel> storesView,
-                               @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+    private void bindItemModelAdd(@Nullable CatalogueItemModel item, @NotNull TextField name,
+                                  ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
+                                  @NotNull TextArea description,
+                                  @NotNull TableView<CatalogueItemLocationModel> storesView,
+                                  @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
         if (item != null) {
             name.textProperty().bindBidirectional(item.nameProperty());
-            id.setText(item.getItemId());
             type.valueProperty().bindBidirectional(item.typeProperty());
             subject.valueProperty().bindBidirectional(item.subjectProperty());
             price.setText(Util.formatPrice(item.priceProperty()));
@@ -169,16 +159,38 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         }
     }
 
+    private void unbindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
+                                 ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
+                                 @NotNull TextArea description,
+                                 @NotNull TableView<CatalogueItemLocationModel> storesView,
+                                 @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+        if (item != null) {
+            id.setText("-- Item ID --");
+            unbindItemModelAdd(item, name, type, subject, price, description, storesView, suppliersView);
+        }
+    }
+
+    private void bindItemModel(@Nullable CatalogueItemModel item, @NotNull TextField name, @NotNull TextField id,
+                               ChoiceBox<String> type, ChoiceBox<String> subject, @NotNull TextField price,
+                               @NotNull TextArea description,
+                               @NotNull TableView<CatalogueItemLocationModel> storesView,
+                               @NotNull TableView<CatalogueItemSupplierModel> suppliersView) {
+        if (item != null) {
+            id.setText(Util.formatModelId(item));
+            bindItemModelAdd(item, name, type, subject, price, description, storesView, suppliersView);
+        }
+    }
+
     private void onUpdateAddItem(@SuppressWarnings("unused") ObservableValue<? extends CatalogueItemModel> observable,
                                  CatalogueItemModel oldValue, CatalogueItemModel newValue) {
-        unbindItemModel(
+        unbindItemModelAdd(
                 oldValue,
-                addItemName, addItemID, addType, addSubject,
+                addItemName, addType, addSubject,
                 addPrice, addDescription, addStoresView, addSuppliersView
         );
-        bindItemModel(
+        bindItemModelAdd(
                 newValue,
-                addItemName, addItemID, addType, addSubject,
+                addItemName, addType, addSubject,
                 addPrice, addDescription, addStoresView, addSuppliersView
         );
         addStoresView.refresh();
@@ -208,16 +220,31 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     }
 
     private void updateCatalogueTable() {
-        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+        currentAddItem.set(new CatalogueItemModel(catalogueTable.getItems().size()));
         currentEditableItem.set(null);
         catalogueTable.setItems(FXCollections.observableArrayList(Database.INSTANCE.getModel().getModels()));
         catalogueTable.refresh();
     }
 
     private void buildCatalogueTable() {
-        TableColumn<CatalogueItemModel, String> itemIdColumn = new TableColumn<>("Item No");
+        TableColumn<CatalogueItemModel, Number> itemIdColumn = new TableColumn<>("Item No");
         itemIdColumn.setMinWidth(150);
-        itemIdColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().getItemId()));
+        itemIdColumn.setCellValueFactory(p -> p.getValue().itemIdProperty());
+        itemIdColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<CatalogueItemModel, Number> call(TableColumn<CatalogueItemModel, Number> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(Number item, boolean empty) {
+                        if (!empty && item != null) {
+                            setGraphic(new Label(Util.formatModelId(item)));
+                        } else {
+                            super.updateItem(item, empty);
+                        }
+                    }
+                };
+            }
+        });
         catalogueTable.getColumns().add(itemIdColumn);
 
         TableColumn<CatalogueItemModel, String> nameColumn = new TableColumn<>("Name");
@@ -246,9 +273,35 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         catalogueTable.getColumns().add(dateStockedColumn);
 
         TableColumn<CatalogueItemModel, String> stockColumn = new TableColumn<>("Total Stock");
-        stockColumn.setMinWidth(600);
+        stockColumn.setMinWidth(120);
         stockColumn.setCellValueFactory(p -> Bindings.concat(p.getValue().stockTotalProperty()));
         catalogueTable.getColumns().add(stockColumn);
+
+        TableColumn<CatalogueItemModel, ObservableList<CatalogueItemSupplierModel>> suppliersColumn = new TableColumn<>("Suppliers");
+        suppliersColumn.setMinWidth(120);
+        suppliersColumn.setCellValueFactory(p -> p.getValue().suppliersProperty());
+        suppliersColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<CatalogueItemModel, ObservableList<CatalogueItemSupplierModel>> call(TableColumn<CatalogueItemModel, ObservableList<CatalogueItemSupplierModel>> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(ObservableList<CatalogueItemSupplierModel> item, boolean empty) {
+                        if (!empty && item != null) {
+                            setGraphic(
+                                    new Label(
+                                            item.stream().map(CatalogueItemSupplierModel::getName).collect(
+                                                    Collectors.joining(", ")
+                                            )
+                                    )
+                            );
+                        } else {
+                            super.updateItem(item, empty);
+                        }
+                    }
+                };
+            }
+        });
+        catalogueTable.getColumns().add(suppliersColumn);
 
         catalogueTable.setRowFactory(param -> {
             TableRow<CatalogueItemModel> row = new TableRow<>();
@@ -290,7 +343,7 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
         buildCatalogueTable();
         buildEditTables();
 
-        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+        currentAddItem.set(new CatalogueItemModel(catalogueTable.getItems().size()));
     }
 
     private void activateView(@NotNull ScrollPane view) {
@@ -310,9 +363,13 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
     }
 
     private void openEdit(@NotNull CatalogueItemModel item) {
-        logger.info("Item Clicked: {}", item);
-        currentEditableItem.set(new CatalogueItemModel(item));
-        activateView(editMenu);
+        AUserModel user = getModel().getCurrentUser();
+        boolean canEdit = (user.getUserType() != AUserModel.UserType.EMPLOYEE) || ((EmployeeModel) user).getPermissions().isModifyItem();
+        if (canEdit) {
+            logger.info("Item Clicked: {}", item);
+            currentEditableItem.set(new CatalogueItemModel(item));
+            activateView(editMenu);
+        }
     }
 
     public void onConfirmEdit() {
@@ -326,12 +383,14 @@ public class CatalogueViewController extends AChildEmployeeViewController implem
 
     @Override
     public void onAdd() {
-        activateView(addMenu);
+        AUserModel user = getModel().getCurrentUser();
+        boolean canEdit = (user.getUserType() != AUserModel.UserType.EMPLOYEE) || ((EmployeeModel) user).getPermissions().isCreateItem();
+        if (canEdit) activateView(addMenu);
     }
 
     public void onCancelAdd() {
         toolDrawer.close();
-        currentAddItem.set(new CatalogueItemModel(String.format("NewItem-%d", catalogueTable.getItems().size())));
+        currentAddItem.set(new CatalogueItemModel(catalogueTable.getItems().size()));
     }
 
     public void onConfirmAdd() {

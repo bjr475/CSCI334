@@ -33,7 +33,7 @@
                         </VBox>
                         <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="1">
                             <Label>Manager Name</Label>
-                            <TextField fx:id="editStoreManagerName"/>
+                            <ChoiceBox fx:id="editStoreManager"/>
                         </VBox>
                         <fx:include source="../address.fxml" fx:id="editAddress" GridPane.rowIndex="3"
                                     GridPane.columnIndex="0" GridPane.hgrow="ALWAYS"/>

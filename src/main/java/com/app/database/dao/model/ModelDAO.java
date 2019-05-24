@@ -57,7 +57,7 @@ public class ModelDAO {
     }
 
     private CatalogueItemModel loadItemModel(@NotNull ResultSet result) throws SQLException {
-        CatalogueItemModel model = new CatalogueItemModel(result.getString("id"));
+        CatalogueItemModel model = new CatalogueItemModel(result.getInt("id"));
         model.setName(result.getString("name"));
         model.setType(result.getString("type"));
         model.setSubject(result.getString("subject"));
@@ -85,14 +85,14 @@ public class ModelDAO {
         while (result.next()) {
             CatalogueItemModel item = loadItemModel(result);
             try (PreparedStatement supplierStatement = connection.prepareStatement(SQL_GET_SUPPLIER)) {
-                supplierStatement.setString(1, item.getItemId());
+                supplierStatement.setInt(1, item.getItemId());
                 ResultSet supplierResult = supplierStatement.executeQuery();
                 while (supplierResult.next()) item.getSuppliers().add(loadItemModelSuppliers(supplierResult));
             } catch (SQLException e) {
                 logger.error("Failed to load catalogue item supplier models", e);
             }
             try (PreparedStatement storesStatement = connection.prepareStatement(SQL_GET_STORES)) {
-                storesStatement.setString(1, item.getItemId());
+                storesStatement.setInt(1, item.getItemId());
                 ResultSet storesResult = storesStatement.executeQuery();
                 while (storesResult.next()) item.getStores().add(loadItemModelLocations(storesResult));
             }
@@ -122,7 +122,7 @@ public class ModelDAO {
                 statement.setString(4, model.getType());
                 statement.setTimestamp(5, new Timestamp(model.getStockedOn().getTime()));
                 statement.setDouble(6, model.getPrice());
-                statement.setString(7, model.getItemId());
+                statement.setInt(7, model.getItemId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -133,7 +133,7 @@ public class ModelDAO {
     public boolean saveModel(@NotNull CatalogueItemModel model) {
         try (Connection connection = database.openConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SQL_SAVE_MODEL)) {
-                statement.setString(1, model.getItemId());
+                statement.setInt(1, model.getItemId());
                 statement.setString(2, model.getName());
                 statement.setString(3, model.getType());
                 statement.setDouble(4, model.getPrice());

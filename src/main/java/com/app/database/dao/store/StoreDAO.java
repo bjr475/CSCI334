@@ -35,7 +35,8 @@ public class StoreDAO {
             "    name             = ?,\n" +
             "    manager          = ?\n" +
             "WHERE id = ?;";
-
+    private static final String SQL_SAVE_STORE = "INSERT INTO STORE (address_address, address_suburb, address_state, address_postcode, name, manager)\n" +
+            "VALUES (?, ?, ?, ?, ?, ?);";
     private Database database;
 
     @Contract(pure = true)
@@ -56,6 +57,11 @@ public class StoreDAO {
 
     private int saveAddress(@NotNull PreparedStatement statement, @NotNull AddressModel address) throws SQLException {
         int counter = 1;
+        logger.debug(
+                "Writing Address: {} {} {} {}",
+                address.getAddress(), address.getSuburb(),
+                address.getState(), address.getPostcode()
+        );
         statement.setString(counter++, address.getAddress());
         statement.setString(counter++, address.getSuburb());
         statement.setString(counter++, address.getState());
@@ -99,7 +105,7 @@ public class StoreDAO {
 
     public void saveStore(@NotNull StoreModel store) {
         try (Connection connection = database.openConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO STORE (address_address, address_suburb, address_state, address_postcode, name, manager) VALUES (?, ?, ?, ?, ?, ?);")) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_SAVE_STORE)) {
                 int counter = saveAddress(statement, store.getAddress());
                 statement.setString(counter++, store.getName());
                 statement.setInt(counter, store.getManagerId());

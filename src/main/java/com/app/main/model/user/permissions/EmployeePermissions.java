@@ -98,6 +98,22 @@ public class EmployeePermissions implements Serializable {
         return permissions;
     }
 
+    @SuppressWarnings("Duplicates")
+    public static EmployeePermissions newAdminPermissions() {
+        EmployeePermissions permissions = new EmployeePermissions();
+        permissions.setCreateItem(true);
+        permissions.setModifyItem(true);
+        permissions.setViewSale(true);
+        permissions.setCreateSale(true);
+        permissions.setModifySale(true);
+        permissions.setViewCustomer(true);
+        permissions.setCreateCustomer(true);
+        permissions.setModifyCustomer(true);
+        permissions.setManageSupplier(true);
+        permissions.setManageEmployee(true);
+        return permissions;
+    }
+
     private void writeObject(@NotNull ObjectOutputStream out) throws IOException {
         out.writeBoolean(createItem.get());
         out.writeBoolean(modifyItem.get());

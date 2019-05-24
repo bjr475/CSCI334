@@ -57,7 +57,7 @@
                         </VBox>
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="2"
                               GridPane.columnSpan="2">
-                            <CheckBox fx:id="clubMember" text="Club Member"/>
+                            <CheckBox fx:id="addClubMember" text="Club Member"/>
                         </VBox>
 
                         <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"

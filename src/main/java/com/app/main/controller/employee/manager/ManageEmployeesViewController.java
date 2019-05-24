@@ -1,8 +1,7 @@
 package com.app.main.controller.employee.manager;
 
 import com.app.database.Database;
-import com.app.main.controller.employee.AChildEmployeeViewController;
-import com.app.main.controller.employee.IEditorActionItem;
+import com.app.main.controller.employee.AChildEmployeeEditorActionViewController;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeTable;
@@ -20,7 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.jetbrains.annotations.NotNull;
 
-public class ManageEmployeesViewController extends AChildEmployeeViewController implements IEditorActionItem {
+public class ManageEmployeesViewController extends AChildEmployeeEditorActionViewController {
     public JFXDrawer toolDrawer;
     public ScrollPane addMenu;
     public ScrollPane filterMenu;
@@ -99,6 +98,16 @@ public class ManageEmployeesViewController extends AChildEmployeeViewController 
         model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && (newValue.getUserType() == AUserModel.UserType.ADMIN)) refreshTable();
         });
+    }
+
+    @Override
+    protected void setUserEditable(@NotNull EmployeePermissions permissions) {
+
+    }
+
+    @Override
+    protected void setAdminEditable() {
+
     }
 
     private void buildEmployeeTable() {

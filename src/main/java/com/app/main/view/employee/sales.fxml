@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import java.lang.*?>
+<?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.SalesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
@@ -212,7 +212,7 @@
 
                             <Label GridPane.columnIndex="0" GridPane.rowIndex="11">Customer Search</Label>
                             <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5">
-                                <TextField fx:id="customerID" promptText="Search by ID or name"/>
+                                <TextField fx:id="customerID" promptText="Search by ID or display"/>
                                 <ToggleButton fx:id="newCustomer">
                                     New Customer
                                 </ToggleButton>

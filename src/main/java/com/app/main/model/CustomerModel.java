@@ -3,6 +3,7 @@ package com.app.main.model;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
@@ -33,12 +34,31 @@ public class CustomerModel {
         subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
     }
 
+    public CustomerModel(@NotNull CustomerModel customer) {
+        id = new SimpleIntegerProperty(customer.id.get());
+        email = new SimpleStringProperty(customer.email.get());
+        firstName = new SimpleStringProperty(customer.firstName.get());
+        lastName = new SimpleStringProperty(customer.lastName.get());
+        creditLine = new SimpleDoubleProperty(customer.creditLine.get());
+        clubMember = new SimpleBooleanProperty(customer.clubMember.get());
+        createdTime = new SimpleObjectProperty<>(customer.createdTime.get());
+        address = new SimpleObjectProperty<>(new AddressModel(customer.address.get()));
+        sales = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        modelTypes = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+        subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
+
+        customer.sales.get().forEach(sale -> sales.get().add(new SalesModel(sale)));
+        customer.modelTypes.get().forEach(type -> modelTypes.get().add(type));
+        customer.subjectAreas.get().forEach(subject -> subjectAreas.get().add(subject));
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "CustomerModel<%d %s %s %s %.02f %b %s %s>",
+                "CustomerModel<%d %s %s %s %.02f %b [%s] [%s] %s>",
                 id.get(), email.get(), firstName.get(), lastName.get(), creditLine.get(), clubMember.get(),
-                modelTypes.get().toArray(), subjectAreas.get().toArray()
+                String.join(",", modelTypes.get()), String.join(",", subjectAreas.get()),
+                address.get()
         );
     }
 

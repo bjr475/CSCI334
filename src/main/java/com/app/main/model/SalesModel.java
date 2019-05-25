@@ -20,6 +20,13 @@ public class SalesModel {
         this.total = new SimpleStringProperty(total);
     }
 
+    public SalesModel(SalesModel sale) {
+        this.saleID = sale.saleID;
+        this.items = new SimpleMapProperty<>(sale.items);
+        this.discount = new SimpleStringProperty(sale.discount.get());
+        this.total = new SimpleStringProperty(sale.total.get());
+    }
+
     public String getSaleID() {
         return saleID;
     }

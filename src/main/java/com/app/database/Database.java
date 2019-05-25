@@ -117,11 +117,7 @@ public class Database {
 
     public int saveAddress(@NotNull PreparedStatement statement, @NotNull AddressModel address) throws SQLException {
         int counter = 1;
-        logger.debug(
-                "Writing Address: {} {} {} {}",
-                address.getAddress(), address.getSuburb(),
-                address.getState(), address.getPostcode()
-        );
+        logger.debug("Writing Address: {}", address);
         statement.setString(counter++, address.getAddress());
         statement.setString(counter++, address.getSuburb());
         statement.setString(counter++, address.getState());

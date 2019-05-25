@@ -20,6 +20,22 @@ public class AddressModel {
         this.postcode = new SimpleStringProperty(postcode);
     }
 
+    public AddressModel(AddressModel address) {
+        this.address = new SimpleStringProperty(address.getAddress());
+        this.suburb = new SimpleStringProperty(address.getSuburb());
+        this.state = new SimpleStringProperty(address.getState());
+        this.postcode = new SimpleStringProperty(address.getPostcode());
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s %s %s %s",
+                getAddress(), getSuburb(),
+                getState(), getPostcode()
+        );
+    }
+
     public String getAddress() {
         return address.get();
     }

@@ -72,6 +72,12 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         currentAddItem = new SimpleObjectProperty<>();
         currentEditItem = new SimpleObjectProperty<>();
 
+        model.currentUserProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                refreshCustomersTable();
+            }
+        });
+
         currentAddItem.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 addEmail.textProperty().unbindBidirectional(oldValue.emailProperty());
@@ -86,8 +92,6 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
                 addLastName.textProperty().bindBidirectional(newValue.lastNameProperty());
                 addAddressController.addressProperty().bindBidirectional(newValue.addressProperty());
                 addClubMember.selectedProperty().bindBidirectional(newValue.clubMemberProperty());
-
-                refreshCustomersTable();
             }
         });
 
@@ -105,7 +109,6 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
                 editLastName.textProperty().bindBidirectional(newValue.lastNameProperty());
                 editAddressController.addressProperty().bindBidirectional(newValue.addressProperty());
                 editClubMember.selectedProperty().bindBidirectional(newValue.clubMemberProperty());
-                refreshCustomersTable();
             }
         });
     }
@@ -244,7 +247,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         return true;
     }
 
-    public void openEdit(CustomerModel customer) {
+    private void openEdit(CustomerModel customer) {
         AUserModel currentUser = getModel().getCurrentUser();
         if (currentUser != null && currentUser.getUserType() == AUserModel.UserType.EMPLOYEE) {
             EmployeeModel employeeModel = (EmployeeModel) currentUser;
@@ -253,10 +256,13 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         }
 
         if (customer != null) {
-            currentEditItem.set(customer);
-            editCredit.getValueFactory().setValue(customer.getCreditLine());
-            for (String item : customer.getModelTypes()) editTypes.getSelectionModel().select(item);
-            for (String item : customer.getSubjectAreas()) editSubjects.getSelectionModel().select(item);
+            logger.info("Editing Customer: {}", customer);
+            currentEditItem.set(new CustomerModel(customer));
+            editCredit.getValueFactory().setValue(currentEditItem.get().getCreditLine());
+            editTypes.getSelectionModel().clearSelection();
+            editSubjects.getSelectionModel().clearSelection();
+            for (String item : currentEditItem.get().getModelTypes()) editTypes.getSelectionModel().select(item);
+            for (String item : currentEditItem.get().getSubjectAreas()) editSubjects.getSelectionModel().select(item);
             activateView(editMenu);
         }
     }
@@ -275,7 +281,10 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     }
 
     public void onConfirmEdit() {
-        // TODO save edit
+        currentEditItem.get().setModelTypes(editTypes.getSelectionModel().getSelectedItems());
+        currentEditItem.get().setSubjectAreas(editSubjects.getSelectionModel().getSelectedItems());
+        Database.INSTANCE.getCustomer().updateCustomer(currentEditItem.get());
+        refreshCustomersTable();
         onCancelAdd();
     }
 
@@ -301,7 +310,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     public void onConfirmAdd() {
         currentAddItem.get().setModelTypes(addTypes.getSelectionModel().getSelectedItems());
         currentAddItem.get().setSubjectAreas(addSubjects.getSelectionModel().getSelectedItems());
-        Database.INSTANCE.getCustomer().saveCustomer(currentAddItem.get());
+        Database.INSTANCE.getCustomer().insertCustomer(currentAddItem.get());
         refreshCustomersTable();
         onCancelAdd();
     }

@@ -3,6 +3,7 @@ package com.app.database;
 import com.app.database.dao.customer.CustomerDAO;
 import com.app.database.dao.model.ModelDAO;
 import com.app.database.dao.store.StoreDAO;
+import com.app.database.dao.supplier.SupplierDAO;
 import com.app.database.dao.user.UserDAO;
 import com.app.main.Util;
 import com.app.main.model.AddressModel;
@@ -39,6 +40,7 @@ public class Database {
     private final ModelDAO model;
     private final StoreDAO store;
     private final CustomerDAO customer;
+    private final SupplierDAO supplier;
     private String connectionPath;
 
     private Database() {
@@ -66,6 +68,7 @@ public class Database {
         model = new ModelDAO(this);
         store = new StoreDAO(this);
         customer = new CustomerDAO(this);
+        supplier = new SupplierDAO(this);
     }
 
     @Nullable
@@ -166,5 +169,9 @@ public class Database {
 
     public CustomerDAO getCustomer() {
         return customer;
+    }
+
+    public SupplierDAO getSupplier() {
+        return supplier;
     }
 }

@@ -2,6 +2,8 @@ package com.app.main.model.supplier;
 
 import com.app.main.model.AddressModel;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,6 +13,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class SupplierModel {
+    private ReadOnlyIntegerProperty id;
     private StringProperty creditLine;
     private StringProperty name;
     private ObjectProperty<AddressModel> address;
@@ -19,7 +22,8 @@ public class SupplierModel {
 
     private ObjectProperty<SupplierContactModel> primaryContact;
 
-    public SupplierModel() {
+    public SupplierModel(int id) {
+        this.id = new SimpleIntegerProperty(id);
         creditLine = new SimpleStringProperty("");
         name = new SimpleStringProperty("");
         address = new SimpleObjectProperty<>(new AddressModel());
@@ -36,9 +40,12 @@ public class SupplierModel {
     }
 
     private void updatePrimary() {
+        primaryContact.set(null);
         for (SupplierContactModel contactModel : contactDetails.get()) {
             if (contactModel.isPrimary()) primaryContact.set(contactModel);
         }
+        if (primaryContact.get() == null && contactDetails.get().size() > 0)
+            primaryContact.set(contactDetails.get().get(0));
     }
 
     public String getCreditLine() {
@@ -107,5 +114,13 @@ public class SupplierModel {
 
     public ObjectProperty<SupplierContactModel> primaryContactProperty() {
         return primaryContact;
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public ReadOnlyIntegerProperty idProperty() {
+        return id;
     }
 }

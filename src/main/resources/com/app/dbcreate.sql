@@ -22,7 +22,7 @@ CREATE TABLE CUSTOMER
     address_postcode TEXT,
     telephone        TEXT,
     balance          REAL,
-    subject            TEXT,
+    subject          TEXT,
     type             TEXT,
     member_status    INTEGER                                           DEFAULT 1,
     -- 0 (false) a customer IS NOT a member
@@ -122,8 +122,10 @@ CREATE TABLE SUPPLIER_CONTACT
     name     TEXT NOT NULL,
     email    TEXT,
     phone    TEXT,
+    current  INTEGER DEFAULT 0,
 
-    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, email, phone)
+    CONSTRAINT PK_supplierContact PRIMARY KEY (supplier, name, email, phone),
+    CHECK ( current IN (0, 1) )
 );
 
 DROP TABLE IF EXISTS MODEL_SUPPLIER;

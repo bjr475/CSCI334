@@ -9,15 +9,7 @@ public interface IEditorActionItem {
 
     BooleanProperty addProperty();
 
-    BooleanProperty filterProperty();
-
-    BooleanProperty searchProperty();
-
     void onEdit();
 
     void onAdd();
-
-    void onFilter();
-
-    void onSearch();
 }

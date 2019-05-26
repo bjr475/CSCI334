@@ -204,4 +204,30 @@ public class ModelDAO {
         }
         return -1;
     }
+
+    public ArrayList<CatalogueItemModel> searchModels(String keywords) {
+        ArrayList<CatalogueItemModel> items = new ArrayList<>();
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT id\n" +
+                    "FROM MODEL_SEARCH\n" +
+                    "WHERE name MATCH ?\n" +
+                    "   OR type MATCH ?\n" +
+                    "   OR subject MATCH ?\n" +
+                    "   OR description MATCH ?")) {
+                statement.setString(1, keywords);
+                statement.setString(2, keywords);
+                statement.setString(3, keywords);
+                statement.setString(4, keywords);
+                ResultSet result = statement.executeQuery();
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    logger.info("Found Model with id: {}", id);
+                    items.add(getModel(id));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load customers from search query: {}", keywords, e);
+        }
+        return items;
+    }
 }

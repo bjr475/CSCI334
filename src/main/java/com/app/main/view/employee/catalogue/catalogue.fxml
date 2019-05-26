@@ -147,32 +147,6 @@
                             </HBox>
                         </GridPane>
                     </ScrollPane>
-
-                    <ScrollPane fx:id="searchMenu" styleClass="default-background" HBox.hgrow="ALWAYS"
-                                fitToWidth="true">
-                        <padding>
-                            <Insets>
-                                <top>8</top>
-                                <bottom>8</bottom>
-                                <left>8</left>
-                                <right>8</right>
-                            </Insets>
-                        </padding>
-                        <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
-                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                                Search Catalogue Items
-                            </Text>
-                            <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                                <Label>Keywords</Label>
-                                <TextField HBox.hgrow="ALWAYS" fx:id="searchWords"/>
-                            </VBox>
-                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                                <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton onAction="#resetSearch">Reset</JFXButton>
-                                <JFXButton onAction="#confirmSearch">Search</JFXButton>
-                            </HBox>
-                        </GridPane>
-                    </ScrollPane>
                 </StackPane>
             </sidePane>
             <content>

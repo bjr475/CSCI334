@@ -152,6 +152,126 @@ BEGIN
     UPDATE EMPLOYEE SET store = NEW.id WHERE id = NEW.manager AND NEW.manager != 0;
 END;
 
+CREATE VIRTUAL TABLE CUSTOMER_SEARCH USING FTS3
+(
+    id,
+    first_name,
+    last_name,
+    email,
+    address_address,
+    address_suburb,
+    address_state,
+    address_postcode,
+    subject
+);
+
+
+DROP TRIGGER IF EXISTS insert_customer_search;
+CREATE TRIGGER insert_customer_search
+    AFTER INSERT
+    ON CUSTOMER
+BEGIN
+    -- noinspection SqlWithoutWhere
+    DELETE FROM CUSTOMER_SEARCH;
+    INSERT INTO CUSTOMER_SEARCH (id,
+                                 first_name,
+                                 last_name,
+                                 email,
+                                 address_address,
+                                 address_suburb,
+                                 address_state,
+                                 address_postcode,
+                                 subject)
+    SELECT id,
+           first_name,
+           last_name,
+           email,
+           address_address,
+           address_suburb,
+           address_state,
+           address_postcode,
+           subject
+    FROM CUSTOMER;
+END;
+
+DROP TRIGGER IF EXISTS update_customer_search;
+CREATE TRIGGER update_customer_search
+    UPDATE
+    ON CUSTOMER
+BEGIN
+    -- noinspection SqlWithoutWhere
+    DELETE FROM CUSTOMER_SEARCH;
+    INSERT INTO CUSTOMER_SEARCH (id,
+                                 first_name,
+                                 last_name,
+                                 email,
+                                 address_address,
+                                 address_suburb,
+                                 address_state,
+                                 address_postcode,
+                                 subject)
+    SELECT id,
+           first_name,
+           last_name,
+           email,
+           address_address,
+           address_suburb,
+           address_state,
+           address_postcode,
+           subject
+    FROM CUSTOMER;
+END;
+
+CREATE VIRTUAL TABLE MODEL_SEARCH USING FTS3
+(
+    id,
+    name,
+    type,
+    subject,
+    description
+);
+
+
+DROP TRIGGER IF EXISTS insert_model_search;
+CREATE TRIGGER insert_model_search
+    AFTER INSERT
+    ON MODEL
+BEGIN
+    -- noinspection SqlWithoutWhere
+    DELETE FROM MODEL_SEARCH;
+    INSERT INTO MODEL_SEARCH (id,
+                              name,
+                              type,
+                              subject,
+                              description)
+    SELECT id,
+           name,
+           type,
+           subject,
+           description
+    FROM MODEL;
+END;
+
+DROP TRIGGER IF EXISTS update_model_search;
+CREATE TRIGGER update_model_search
+    UPDATE
+    ON MODEL
+BEGIN
+    -- noinspection SqlWithoutWhere
+    DELETE FROM MODEL_SEARCH;
+    INSERT INTO MODEL_SEARCH (id,
+                              name,
+                              type,
+                              subject,
+                              description)
+    SELECT id,
+           name,
+           type,
+           subject,
+           description
+    FROM MODEL;
+END;
+
 -- Prepare test data
 
 INSERT INTO ADMIN (first_name, last_name, display_name, password, email)
@@ -224,4 +344,4 @@ INSERT INTO SALE (customer, employee, final_price)
 VALUES (1, 1, 100);
 
 INSERT INTO SALE_ITEM (sale_id, model_id)
-VALUES (1, 1)
+VALUES (1, 1);

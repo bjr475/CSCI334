@@ -245,15 +245,5 @@ public class ManageEmployeesViewController extends AChildEmployeeEditorActionVie
     public void onAdd() {
         activateView(addMenu);
     }
-
-    @Override
-    public void onFilter() {
-        activateView(filterMenu);
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
-    }
 }
 

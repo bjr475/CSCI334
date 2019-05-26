@@ -189,49 +189,6 @@
                         </HBox>
                     </GridPane>
                 </ScrollPane>
-
-                <ScrollPane styleClass="default-background" fx:id="searchMenu">
-                    <VBox spacing="20">
-                        <padding>
-                            <Insets>
-                                <left>20</left>
-                                <bottom>20</bottom>
-                                <right>20</right>
-                                <top>20</top>
-                            </Insets>
-                        </padding>
-
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label>Keywords</Label>
-                            <TextField fx:id="search"/>
-                        </VBox>
-
-                        <HBox spacing="16">
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="allSearch" text="All"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
-                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
-                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
-                            </VBox>
-                        </HBox>
-                        <TitledPane fx:id="filter" text="Filter">
-                            <content>
-
-                            </content>
-                        </TitledPane>
-                        <HBox>
-                            <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton>
-                                Search
-                            </JFXButton>
-                        </HBox>
-                    </VBox>
-                </ScrollPane>
             </StackPane>
         </sidePane>
         <content>

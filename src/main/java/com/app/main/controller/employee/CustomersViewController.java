@@ -38,6 +38,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     public ListView<String> editSubjects;
     public ListView<String> editTypes;
 
+    @SuppressWarnings("WeakerAccess")
     @FXML
     public AddressViewController editAddressController;
 
@@ -52,12 +53,9 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     public ListView<String> addSubjects;
     public ListView<String> addTypes;
 
+    @SuppressWarnings("WeakerAccess")
     @FXML
     public AddressViewController addAddressController;
-
-    /* Search Control */
-    public ScrollPane searchMenu;
-    public TextField searchWords;
 
     /* Customer Table */
     public TableView<CustomerModel> customersTable;
@@ -315,23 +313,8 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         onCancelAdd();
     }
 
-    @Override
-    public void onFilter() {
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
-    }
-
-    public void resetSearch() {
-        searchWords.setText("");
-    }
-
-    public void confirmSearch() {
-        logger.info(
-                "Looking for catalogue items that contain the following words: '{}'",
-                searchWords.getText()
-        );
+    public void highlightItem(CustomerModel item) {
+        customersTable.scrollTo(item);
+        customersTable.selectionModelProperty().get().select(item);
     }
 }

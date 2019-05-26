@@ -18,7 +18,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
@@ -71,13 +70,6 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
     public TableView itemSupplierView;
     public TextField selectedSupplier;
     public TextField itemPrice;
-
-    /* Filter Control */
-    public ScrollPane filterMenu;
-
-    /* Search Control */
-    public ScrollPane searchMenu;
-    public TextField searchWords;
 
     /* Catalogue Table */
     public TableView<CatalogueItemModel> catalogueTable;
@@ -217,7 +209,7 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
         editSuppliers.refresh();
     }
 
-    private void userChanged(ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
+    private void userChanged(@SuppressWarnings("unused") ObservableValue<? extends AUserModel> observable, AUserModel oldValue, AUserModel newValue) {
         catalogueTable.setItems(FXCollections.observableArrayList());
         if (newValue != null) updateCatalogueTable();
         if (oldValue != null) toolDrawer.close();
@@ -417,32 +409,16 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
         addSupplierDialog.close();
     }
 
-    @Override
-    public void onFilter() {
-        activateView(filterMenu);
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
-    }
-
-    public void resetSearch() {
-        searchWords.setText("");
-    }
-
-    public void confirmSearch() {
-        logger.info(
-                "Looking for catalogue items that contain the following words: '{}'",
-                searchWords.getText()
-        );
-    }
-
-    public void addSupplier(ActionEvent event) {
+    public void addSupplier() {
         addSupplierDialog.show(parentCataloguePane);
     }
 
-    public void addStore(ActionEvent event) {
+    public void addStore() {
         addStoreDialog.show(parentCataloguePane);
+    }
+
+    public void highlightItem(CatalogueItemModel item) {
+        catalogueTable.scrollTo(item);
+        catalogueTable.selectionModelProperty().get().select(item);
     }
 }

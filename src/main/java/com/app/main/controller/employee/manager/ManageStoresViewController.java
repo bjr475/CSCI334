@@ -50,17 +50,17 @@ public class ManageStoresViewController extends AChildEmployeeEditorActionViewCo
         }
     };
     public JFXDrawer toolDrawer;
-    public ScrollPane filterMenu;
-    public ScrollPane searchMenu;
     public TableView<StoreModel> storesView;
     public ScrollPane editMenu;
     public TextField editStoreId;
     public TextField editStoreName;
     public ChoiceBox<EmployeeNameId> editStoreManager;
+    @SuppressWarnings("WeakerAccess")
     public AddressViewController editAddressController;
     public ScrollPane addMenu;
     public TextField addStoreName;
     public ChoiceBox<EmployeeNameId> addStoreManager;
+    @SuppressWarnings("WeakerAccess")
     public AddressViewController addAddressController;
     private ObjectProperty<StoreModel> editStore;
 
@@ -213,15 +213,5 @@ public class ManageStoresViewController extends AChildEmployeeEditorActionViewCo
     @Override
     public void onAdd() {
         activateView(addMenu);
-    }
-
-    @Override
-    public void onFilter() {
-        activateView(filterMenu);
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
     }
 }

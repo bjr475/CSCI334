@@ -5,6 +5,7 @@ import com.app.main.model.sales.SaleModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -52,6 +53,16 @@ public class CustomerModel {
         customer.sales.get().forEach(sale -> sales.get().add(new SaleModel(sale)));
         customer.modelTypes.get().forEach(type -> modelTypes.get().add(type));
         customer.subjectAreas.get().forEach(subject -> subjectAreas.get().add(subject));
+    }
+
+    @Contract(value = "null -> false", pure = true)
+    @Override
+    public boolean equals(Object obj) {
+        CustomerModel mod = obj instanceof CustomerModel ? ((CustomerModel) obj) : null;
+        if (mod != null) {
+            return mod.getId() == id.get();
+        }
+        return super.equals(obj);
     }
 
     @Override

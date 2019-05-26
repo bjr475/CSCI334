@@ -5,7 +5,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
@@ -59,24 +61,21 @@
                                 <graphic>
                                     <FontIcon iconLiteral="fa-pencil" iconSize="20"/>
                                 </graphic>
+                                Edit View
                             </JFXButton>
                             <JFXButton onAction="#onAdd" buttonType="FLAT"
                                        GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="addButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                 </graphic>
-                            </JFXButton>
-                            <JFXButton onAction="#onFilter" buttonType="FLAT"
-                                       GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="filterButton">
-                                <graphic>
-                                    <FontIcon iconLiteral="fa-filter" iconSize="20"/>
-                                </graphic>
+                                Create
                             </JFXButton>
                             <JFXButton onAction="#onSearch" buttonType="FLAT"
                                        GridPane.columnIndex="3" GridPane.rowIndex="0" fx:id="searchButton">
                                 <graphic>
                                     <FontIcon iconLiteral="fa-search" iconSize="24"/>
                                 </graphic>
+                                Search
                             </JFXButton>
                         </HBox>
                     </GridPane>
@@ -97,14 +96,14 @@
                             Catalogue
                         </JFXButton>
                         <JFXButton onAction="#gotoCustomers" buttonType="FLAT" prefWidth="450"
-                                   styleClass="light-menu-button">
+                                   styleClass="light-menu-button" fx:id="customerBtn">
                             <graphic>
                                 <FontIcon iconLiteral="fa-address-book" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Customers
                         </JFXButton>
                         <JFXButton onAction="#gotoSales" buttonType="FLAT" prefWidth="450"
-                                   styleClass="light-menu-button">
+                                   styleClass="light-menu-button" fx:id="salesBtn">
                             <graphic>
                                 <FontIcon iconLiteral="fa-shopping-cart" iconSize="24" styleClass="light-icon"/>
                             </graphic>
@@ -126,14 +125,14 @@
                             Settings
                         </JFXButton>
                         <JFXButton onAction="#gotoManageStores" buttonType="FLAT" prefWidth="450"
-                                   styleClass="light-menu-button">
+                                   styleClass="light-menu-button" fx:id="manageStoresBtn">
                             <graphic>
                                 <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
                             Manage Stores
                         </JFXButton>
                         <JFXButton onAction="#gotoManageEmployees" buttonType="FLAT" prefWidth="450"
-                                   styleClass="light-menu-button">
+                                   styleClass="light-menu-button" fx:id="manageEmployeesBtn">
                             <graphic>
                                 <FontIcon iconLiteral="fa-cog" iconSize="24" styleClass="light-icon"/>
                             </graphic>
@@ -150,7 +149,7 @@
                 </HBox>
             </sidePane>
             <content>
-                <StackPane VBox.vgrow="ALWAYS">
+                <StackPane VBox.vgrow="ALWAYS" fx:id="parent">
                     <VBox fx:id="cataloguePane" styleClass="default-background">
                         <fx:include source="catalogue/catalogue.fxml" fx:id="catalogue" VBox.vgrow="ALWAYS"/>
                     </VBox>
@@ -171,6 +170,9 @@
                     </VBox>
                     <VBox fx:id="storesPane" styleClass="default-background">
                         <fx:include source="manager/manageStores.fxml" fx:id="manageStores" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox fx:id="searchPane" styleClass="default-background">
+                        <fx:include source="search/search.fxml" fx:id="searchSystem" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </StackPane>
             </content>

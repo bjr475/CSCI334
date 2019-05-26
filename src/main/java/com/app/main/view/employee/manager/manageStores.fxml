@@ -74,12 +74,6 @@
                         </HBox>
                     </GridPane>
                 </ScrollPane>
-                <ScrollPane styleClass="default-background" fx:id="filterMenu" VBox.vgrow="ALWAYS">
-                    <Label>Filter Store</Label>
-                </ScrollPane>
-                <ScrollPane styleClass="default-background" fx:id="searchMenu" VBox.vgrow="ALWAYS">
-                    <Label>Search Store</Label>
-                </ScrollPane>
             </StackPane>
         </sidePane>
         <content>

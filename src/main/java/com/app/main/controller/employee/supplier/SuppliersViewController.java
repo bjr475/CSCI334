@@ -35,11 +35,11 @@ public class SuppliersViewController extends AChildEmployeeEditorActionViewContr
     public JFXDrawer toolDrawer;
     public TableView<SupplierModel> suppliers;
     public StackPane parentSuppliersPane;
-    public ScrollPane searchMenu;
 
     /*Edit Menu*/
     public ScrollPane editMenu;
     public TextField editSupplierName;
+    @SuppressWarnings("WeakerAccess")
     public AddressViewController editAddressController;
     public TableView<SupplierContactModel> editContactTable;
     public TableView<SupplierCatalogueItemModel> editItemsTable;
@@ -50,6 +50,7 @@ public class SuppliersViewController extends AChildEmployeeEditorActionViewContr
     /*Add Menu*/
     public ScrollPane addMenu;
     public TextField addSupplierName;
+    @SuppressWarnings("WeakerAccess")
     public AddressViewController addAddressController;
     public TableView<SupplierContactModel> addContactTable;
     public TableView<SupplierCatalogueItemModel> addItemsTable;
@@ -59,9 +60,11 @@ public class SuppliersViewController extends AChildEmployeeEditorActionViewContr
     public Spinner<Double> addCredit;
 
     /*Contact Dialog*/
+    @SuppressWarnings("WeakerAccess")
     public SupplierContactViewController addContactController;
 
     /*Item Dialog*/
+    @SuppressWarnings("WeakerAccess")
     public SupplierItemViewController addItemController;
 
     /* Add Values */
@@ -400,16 +403,6 @@ public class SuppliersViewController extends AChildEmployeeEditorActionViewContr
     @Override
     public void onEdit() {
         openEdit(suppliers.getSelectionModel().getSelectedItem());
-    }
-
-    @Override
-    public void onFilter() {
-
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
     }
 
     public void openEditAddContact(ActionEvent event) {

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+           fx:controller="com.app.main.controller.employee.search.SearchViewController"
+           VBox.vgrow="ALWAYS">
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <StackPane fx:id="parent" VBox.vgrow="ALWAYS">
+            <VBox>
+                <TitledPane text="Items" VBox.vgrow="ALWAYS">
+                    <TableView fx:id="searchItems"/>
+                </TitledPane>
+                <TitledPane text="Customers" VBox.vgrow="ALWAYS">
+                    <TableView fx:id="searchCustomers"/>
+                </TitledPane>
+            </VBox>
+        </StackPane>
+    </ScrollPane>
+    <JFXDialog fx:id="searchDialog">
+        <JFXDialogLayout>
+            <heading>
+                <Text>Search</Text>
+            </heading>
+            <body>
+                <VBox>
+                    <VBox>
+                        <Label>Keywords</Label>
+                        <TextField fx:id="searchWords"/>
+                    </VBox>
+                    <VBox>
+                        <Label>Search Areas</Label>
+                        <HBox>
+                            <JFXCheckBox selected="true" fx:id="searchInItems">Items</JFXCheckBox>
+                            <JFXCheckBox selected="true" fx:id="searchInCustomers">Customers</JFXCheckBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </body>
+            <actions>
+                <JFXButton styleClass="action-button" onAction="#performSearch">Search</JFXButton>
+            </actions>
+        </JFXDialogLayout>
+    </JFXDialog>
+</StackPane>

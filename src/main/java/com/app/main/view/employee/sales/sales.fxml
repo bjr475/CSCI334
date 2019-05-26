@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.sales.SalesViewController" fx:id="parentView">
@@ -41,49 +43,6 @@
                         </Insets>
                     </padding>
                     <fx:include styleClass="default-background" source="update_sale.fxml" fx:id="updateSale"/>
-                </ScrollPane>
-
-                <ScrollPane styleClass="default-background" fx:id="searchMenu">
-                    <VBox spacing="20">
-                        <padding>
-                            <Insets>
-                                <left>20</left>
-                                <bottom>20</bottom>
-                                <right>20</right>
-                                <top>20</top>
-                            </Insets>
-                        </padding>
-
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label>Keywords</Label>
-                            <TextField fx:id="search"/>
-                        </VBox>
-
-                        <HBox spacing="16">
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="allSearch" text="All"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
-                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
-                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
-                            </VBox>
-                        </HBox>
-                        <TitledPane fx:id="filter" text="Filter">
-                            <content>
-
-                            </content>
-                        </TitledPane>
-                        <HBox>
-                            <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton>
-                                Search
-                            </JFXButton>
-                        </HBox>
-                    </VBox>
                 </ScrollPane>
 
             </StackPane>

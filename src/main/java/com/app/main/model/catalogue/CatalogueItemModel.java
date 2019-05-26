@@ -11,6 +11,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
@@ -57,6 +58,16 @@ public class CatalogueItemModel {
         item.suppliers.get().forEach(i -> suppliers.get().add(new CatalogueItemSupplierModel(i)));
         stockTotal = new SimpleIntegerProperty(0);
         addListeners();
+    }
+
+    @Contract(value = "null -> false", pure = true)
+    @Override
+    public boolean equals(Object obj) {
+        CatalogueItemModel mod = obj instanceof CatalogueItemModel ? ((CatalogueItemModel) obj) : null;
+        if (mod != null) {
+            return mod.getItemId() == itemId.get();
+        }
+        return super.equals(obj);
     }
 
     private void addListeners() {

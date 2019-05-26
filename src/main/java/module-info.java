@@ -24,6 +24,7 @@ module ToyShop {
     opens com.app.main.controller.landing to javafx.fxml, javafx.controls;
     opens com.app.main.controller.employee to javafx.fxml, javafx.controls;
     opens com.app.main.controller.employee.catalogue to javafx.fxml, javafx.controls;
+    opens com.app.main.controller.employee.search to javafx.fxml, javafx.controls;
     opens com.app.main.controller.employee.sales to javafx.fxml, javafx.controls;
     opens com.app.main.controller.employee.supplier to javafx.fxml, javafx.controls;
     opens com.app.main.controller.employee.manager to javafx.fxml, javafx.controls;

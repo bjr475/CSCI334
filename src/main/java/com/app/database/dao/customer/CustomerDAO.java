@@ -120,4 +120,38 @@ public class CustomerDAO {
             logger.error("Failed to update customer: {}", customer, e);
         }
     }
+
+    public ArrayList<CustomerModel> searchCustomers(String keywords) {
+        ArrayList<CustomerModel> customers = new ArrayList<>();
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT id\n" +
+                    "FROM CUSTOMER_SEARCH\n" +
+                    "WHERE first_name MATCH ?\n" +
+                    "   OR last_name MATCH ?\n" +
+                    "   OR email MATCH ?\n" +
+                    "   OR address_address MATCH ?\n" +
+                    "   OR address_suburb MATCH ?\n" +
+                    "   OR address_state MATCH ?\n" +
+                    "   OR address_postcode MATCH ?\n" +
+                    "   OR subject MATCH ?;")) {
+                statement.setString(1, keywords);
+                statement.setString(2, keywords);
+                statement.setString(3, keywords);
+                statement.setString(4, keywords);
+                statement.setString(5, keywords);
+                statement.setString(6, keywords);
+                statement.setString(7, keywords);
+                statement.setString(8, keywords);
+                ResultSet result = statement.executeQuery();
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    logger.info("Found Customer with id: {}", id);
+                    customers.add(getCustomer(id));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load customers from search query: {}", keywords, e);
+        }
+        return customers;
+    }
 }

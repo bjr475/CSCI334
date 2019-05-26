@@ -29,7 +29,6 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     public JFXDrawer toolDrawer;
     public TableView<SaleModel> sales;
     public StackPane parentView;
-    public ScrollPane searchMenu;
 
     /*       Edit menu        */
     public ScrollPane editMenu;
@@ -178,16 +177,6 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         saleItemController.clearItems();
         toolDrawer.close();
         nextSalePage(saleItem);
-    }
-
-    @Override
-    public void onFilter() {
-
-    }
-
-    @Override
-    public void onSearch() {
-        activateView(searchMenu);
     }
 
     void refundSale() {

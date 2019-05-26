@@ -112,12 +112,6 @@
                         </VBox>
                     </GridPane>
                 </ScrollPane>
-                <ScrollPane styleClass="default-background" fx:id="filterMenu" VBox.vgrow="ALWAYS">
-                    <Label>Filter Employee</Label>
-                </ScrollPane>
-                <ScrollPane styleClass="default-background" fx:id="searchMenu" VBox.vgrow="ALWAYS">
-                    <Label>Search Employee</Label>
-                </ScrollPane>
             </StackPane>
         </sidePane>
         <content>

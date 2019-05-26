@@ -178,19 +178,19 @@ SET manager = 1
 WHERE STORE.id = 1;
 
 INSERT INTO MODEL (name, type, price, subject, description)
-VALUES ('Model', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
+VALUES ('Model A', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
 
 INSERT INTO MODEL (name, type, price, subject, description)
-VALUES ('Model', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
+VALUES ('Model B', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
 
 INSERT INTO MODEL (name, type, price, subject, description)
-VALUES ('Model', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
+VALUES ('Model C', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
 
 INSERT INTO MODEL (name, type, price, subject, description)
-VALUES ('Model', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
+VALUES ('Model D', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
 
 INSERT INTO MODEL (name, type, price, subject, description)
-VALUES ('Model', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
+VALUES ('Model E', 'Static', 19.95, 'Trains', 'This is a very long description of an item');
 
 INSERT INTO MODEL_STORE (model_id, store_id, location, quantity)
 VALUES (1, 1, 'Model Trains Row 1', 2);

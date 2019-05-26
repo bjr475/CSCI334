@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SearchableComboBoxUtil {
-    static final SearchableComboBoxUtilComparator<CatalogueItemIdNameModel> CATALOGUE_COMPARATOR = (input, object) -> {
+    public static final SearchableComboBoxUtilComparator<CatalogueItemIdNameModel> CATALOGUE_COMPARATOR = (input, object) -> {
         if (object.getName().contains(input)) return true;
         try {
             return object.getId() == Integer.valueOf(input);
@@ -24,7 +24,7 @@ public class SearchableComboBoxUtil {
         }
     };
 
-    static <T> void createSearchableComboBox(@NotNull ComboBox<T> box, SearchableComboBoxUtilComparator<T> comparator) {
+    public static <T> void createSearchableComboBox(@NotNull ComboBox<T> box, SearchableComboBoxUtilComparator<T> comparator) {
         ObservableList<T> data = box.getItems();
         box.getEditor().focusedProperty().addListener(observable -> {
             if (box.getSelectionModel().getSelectedIndex() < 0) {
@@ -101,7 +101,7 @@ public class SearchableComboBoxUtil {
         });
     }
 
-    static void setCatalogueIdModelConverter(ComboBox<CatalogueItemIdNameModel> box) {
+    public static void setCatalogueIdModelConverter(@NotNull ComboBox<CatalogueItemIdNameModel> box) {
         box.setCellFactory(new Callback<>() {
             @Override
             public ListCell<CatalogueItemIdNameModel> call(ListView<CatalogueItemIdNameModel> param) {
@@ -138,6 +138,10 @@ public class SearchableComboBoxUtil {
     public static <T> T getComboBoxValue(@NotNull ComboBox<T> comboBox) {
         if (comboBox.getSelectionModel().getSelectedIndex() < 0) return null;
         return comboBox.getItems().get(comboBox.getSelectionModel().getSelectedIndex());
+    }
+
+    public static <T> void clearComboBoxValue(@NotNull ComboBox<T> comboBox) {
+        comboBox.getSelectionModel().clearSelection();
     }
 
     public interface SearchableComboBoxUtilComparator<T> {

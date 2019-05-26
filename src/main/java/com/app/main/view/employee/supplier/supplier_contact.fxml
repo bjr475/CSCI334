@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<JFXDialog xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+           fx:controller="com.app.main.controller.employee.supplier.SupplierContactViewController" fx:id="dialog">
+    <JFXDialogLayout>
+        <heading>
+            <Text>Add Contact Details</Text>
+        </heading>
+        <body>
+            <VBox>
+                <VBox>
+                    <Label>Contact Name</Label>
+                    <TextField HBox.hgrow="ALWAYS" fx:id="name"/>
+                </VBox>
+                <HBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label>Phone</Label>
+                        <TextField HBox.hgrow="ALWAYS" fx:id="phone"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label>Email</Label>
+                        <TextField HBox.hgrow="ALWAYS" fx:id="email"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </body>
+        <actions>
+            <JFXButton styleClass="secondary-button" onAction="#cancel">Cancel</JFXButton>
+            <JFXButton styleClass="action-button" onAction="#confirm">Save</JFXButton>
+        </actions>
+    </JFXDialogLayout>
+</JFXDialog>

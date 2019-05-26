@@ -12,8 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
 import org.jetbrains.annotations.NotNull;
 
 public class SalesViewController extends AChildEmployeeEditorActionViewController {
@@ -133,44 +131,14 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     public void initialize() {
         toolDrawer.setDefaultDrawerSize(600);
 
-        itemIDView.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<CatalogueItemIdNameModel> call(ListView<CatalogueItemIdNameModel> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(CatalogueItemIdNameModel item, boolean empty) {
-                        if (!empty && item != null) {
-                            setGraphic(new Label(item.toStringValue()));
-                        } else {
-                            super.updateItem(item, empty);
-                        }
-                    }
-                };
-            }
-        });
-
-        itemIDView.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(CatalogueItemIdNameModel item) {
-                if (item == null) return null;
-                return item.toStringValue();
-            }
-
-            @Override
-            public CatalogueItemIdNameModel fromString(String string) {
-                return itemIDView.getItems().stream().filter(
-                        item -> item.toStringValue().equals(string)
-                ).findFirst().orElse(null);
-            }
-        });
-
         itemIDView.itemsProperty().get().addAll(
                 new CatalogueItemIdNameModel(0, "Model 0"),
                 new CatalogueItemIdNameModel(1, "Model 1"),
                 new CatalogueItemIdNameModel(2, "Model 2"),
                 new CatalogueItemIdNameModel(3, "Model 3")
         );
-
+        
+        SearchableComboBoxUtil.setCatalogueIdModelConverter(itemIDView);
         SearchableComboBoxUtil.createSearchableComboBox(itemIDView, SearchableComboBoxUtil.CATALOGUE_COMPARATOR);
     }
 

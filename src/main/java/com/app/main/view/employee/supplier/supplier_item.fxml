@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.lang.Double?>
+<?import java.lang.Integer?>
+<JFXDialog xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+           fx:controller="com.app.main.controller.employee.supplier.SupplierItemViewController" fx:id="dialog">
+    <JFXDialogLayout prefHeight="700" maxHeight="700" prefWidth="700">
+        <heading>
+            <Label>Item</Label>
+        </heading>
+        <body>
+            <ScrollPane fitToWidth="true">
+                <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                          GridPane.columnSpan="2">
+                        <Label>Item Name</Label>
+                        <TextField fx:id="itemName">--Item Name--</TextField>
+                    </VBox>
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                        <Label>Model Type</Label>
+                        <fx:include fx:id="itemType" source="../catalogue_item_type.fxml"/>
+                    </VBox>
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                        <Label>Subject Area</Label>
+                        <fx:include fx:id="itemSubject" source="../catalogue_item_subject.fxml"/>
+                    </VBox>
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                        <Label>Retail Price</Label>
+                        <Spinner fx:id="retailPrice" editable="true">
+                            <valueFactory>
+                                <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                    <min>0</min>
+                                    <max>
+                                        <Double fx:constant="MAX_VALUE"/>
+                                    </max>
+                                    <amountToStepBy>1</amountToStepBy>
+                                </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                            </valueFactory>
+                        </Spinner>
+                    </VBox>
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                        <Label>Supplier Price</Label>
+                        <Spinner fx:id="supplierPrice" editable="true">
+                            <valueFactory>
+                                <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                    <min>0</min>
+                                    <max>
+                                        <Double fx:constant="MAX_VALUE"/>
+                                    </max>
+                                    <amountToStepBy>1</amountToStepBy>
+                                </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                            </valueFactory>
+                        </Spinner>
+                    </VBox>
+                    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                          GridPane.columnSpan="2" GridPane.rowSpan="2">
+                        <Label>Description</Label>
+                        <TextArea fx:id="itemDescription" wrapText="true" maxHeight="150">
+                            display text display text display text display text
+                            display text display text display text display text
+                            display text display text display text display text
+                            display text display text display text display text
+                            display text display text display text display text
+                        </TextArea>
+                    </VBox>
+                    <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                                GridPane.columnSpan="2" GridPane.rowSpan="4" text="Stores">
+                        <VBox>
+                            <TableView fx:id="itemStores" maxHeight="240"/>
+                            <HBox>
+                                <ComboBox HBox.hgrow="ALWAYS" fx:id="itemStoreNames" editable="true"/>
+                                <Spinner HBox.hgrow="ALWAYS" fx:id="itemStoreQuantity" initialValue="1" editable="true">
+                                    <valueFactory>
+                                        <SpinnerValueFactory.IntegerSpinnerValueFactory>
+                                            <min>0</min>
+                                            <max>
+                                                <Integer fx:constant="MAX_VALUE"/>
+                                            </max>
+                                            <amountToStepBy>1</amountToStepBy>
+                                        </SpinnerValueFactory.IntegerSpinnerValueFactory>
+                                    </valueFactory>
+                                </Spinner>
+                                <JFXButton onAction="#addItemStore">
+                                    <graphic>
+                                        <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                    </graphic>
+                                </JFXButton>
+                            </HBox>
+                        </VBox>
+                    </TitledPane>
+                </GridPane>
+            </ScrollPane>
+        </body>
+        <actions>
+            <JFXButton styleClass="secondary-button" onAction="#cancel">
+                Cancel
+            </JFXButton>
+            <JFXButton styleClass="action-button" onAction="#confirm">
+                Save
+            </JFXButton>
+        </actions>
+    </JFXDialogLayout>
+</JFXDialog>

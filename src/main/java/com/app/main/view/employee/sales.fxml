@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.lang.Integer?>
 <?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.SalesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
-
                 <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
                     <padding>
                         <Insets>
@@ -24,29 +24,24 @@
                         </Insets>
                     </padding>
                     <StackPane>
-
                         <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
                                   fx:id="saleConfirmGrid" styleClass="default-background" minWidth="540">
                             <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0"
-                                  GridPane.rowIndex="0" GridPane.columnSpan="2">
+                                  GridPane.rowIndex="0" GridPane.columnSpan="3">
                                 Confirm Sale
                             </Text>
-                            <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
-                                        text="Item List">
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                                        GridPane.columnSpan="3" text="Item List">
                                 <TableView fx:id="confirmItemTable">
                                     <columns>
-                                        <TableColumn prefWidth="200" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="200" text="Item Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="100" text="Quantity">
-                                        </TableColumn>
+                                        <TableColumn prefWidth="200" text="Item No."/>
+                                        <TableColumn prefWidth="200" text="Item Name"/>
+                                        <TableColumn prefWidth="100" text="Quantity"/>
                                     </columns>
                                 </TableView>
-
                             </TitledPane>
-
-                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                            <VBox spacing="20" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                                  GridPane.columnSpan="3">
                                 <CheckBox fx:id="otherDiscount" text="Other Discount"/>
                                 <TextField fx:id="otherDiscountAmount"/>
                             </VBox>
@@ -176,50 +171,69 @@
 
                         <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8"
                                   fx:id="saleItemGrid" styleClass="default-background">
-                            <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0"
-                                  GridPane.rowIndex="0" GridPane.columnSpan="2">
+                            <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
                                 Add a Sale
                             </Text>
-                            <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
+                            <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0"
                                         text="Item List">
                                 <TableView fx:id="itemTable">
                                     <columns>
-                                        <TableColumn prefWidth="200" text="Item No.">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="200" text="Item Name">
-                                        </TableColumn>
-                                        <TableColumn prefWidth="100" text="Quantity">
-                                        </TableColumn>
+                                        <TableColumn prefWidth="200" text="Item No."/>
+                                        <TableColumn prefWidth="200" text="Item Name"/>
+                                        <TableColumn prefWidth="100" text="Quantity"/>
                                     </columns>
                                 </TableView>
-
                             </TitledPane>
-                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="3">
-                                <Label>Item ID</Label>
-                                <TextField fx:id="itemIDView"/>
-                            </VBox>
-                            <VBox GridPane.columnIndex="3" GridPane.rowIndex="6">
-                                <Label>Quantity</Label>
-                                <HBox spacing="20">
-                                    <TextField fx:id="quantityView"/>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Item ID</Label>
+                                    <ComboBox editable="true" fx:id="itemIDView"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Quantity</Label>
+                                    <Spinner fx:id="quantityView">
+                                        <valueFactory>
+                                            <SpinnerValueFactory.IntegerSpinnerValueFactory>
+                                                <min>1</min>
+                                                <max>
+                                                    <Integer fx:constant="MAX_VALUE"/>
+                                                </max>
+                                            </SpinnerValueFactory.IntegerSpinnerValueFactory>
+                                        </valueFactory>
+                                    </Spinner>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label>Discount</Label>
+                                    <Spinner fx:id="discountSpinner">
+                                        <valueFactory>
+                                            <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                                <min>0.0</min>
+                                                <max>100.0</max>
+                                                <amountToStepBy>1.0</amountToStepBy>
+                                            </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                        </valueFactory>
+                                    </Spinner>
+                                </VBox>
+                                <VBox>
+                                    <Label/>
                                     <JFXButton fx:id="addItemButton" buttonType="FLAT">
                                         <graphic>
                                             <FontIcon iconLiteral="fa-plus" iconSize="20"/>
                                         </graphic>
                                     </JFXButton>
-                                </HBox>
-                            </VBox>
-
-                            <Label GridPane.columnIndex="0" GridPane.rowIndex="11">Customer Search</Label>
-                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5">
+                                </VBox>
+                            </HBox>
+                            <Label GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                                Customer Search
+                            </Label>
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0" spacing="20">
                                 <TextField fx:id="customerID" promptText="Search by ID or display"/>
                                 <ToggleButton fx:id="newCustomer">
                                     New Customer
                                 </ToggleButton>
                             </HBox>
-
-                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13"
-                                  GridPane.columnSpan="5" alignment="center_right">
+                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0" spacing="20">
+                                <Pane HBox.hgrow="ALWAYS"/>
                                 <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">
                                     Cancel
                                 </JFXButton>
@@ -227,9 +241,7 @@
                                     Next
                                 </JFXButton>
                             </HBox>
-
                         </GridPane>
-
                     </StackPane>
                 </ScrollPane>
 

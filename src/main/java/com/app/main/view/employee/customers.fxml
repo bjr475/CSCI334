@@ -56,7 +56,7 @@
                                     <SpinnerValueFactory.DoubleSpinnerValueFactory>
                                         <min>0</min>
                                         <max>
-                                            <Integer fx:constant="MAX_VALUE"/>
+                                            <Double fx:constant="MAX_VALUE"/>
                                         </max>
                                         <amountToStepBy>1</amountToStepBy>
                                     </SpinnerValueFactory.DoubleSpinnerValueFactory>

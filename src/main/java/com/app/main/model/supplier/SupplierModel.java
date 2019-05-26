@@ -1,8 +1,10 @@
 package com.app.main.model.supplier;
 
 import com.app.main.model.AddressModel;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +16,7 @@ import javafx.collections.ObservableList;
 
 public class SupplierModel {
     private ReadOnlyIntegerProperty id;
-    private StringProperty creditLine;
+    private DoubleProperty creditLine;
     private StringProperty name;
     private ObjectProperty<AddressModel> address;
     private ObjectProperty<ObservableList<SupplierItemModel>> models;
@@ -24,7 +26,7 @@ public class SupplierModel {
 
     public SupplierModel(int id) {
         this.id = new SimpleIntegerProperty(id);
-        creditLine = new SimpleStringProperty("");
+        creditLine = new SimpleDoubleProperty(0);
         name = new SimpleStringProperty("");
         address = new SimpleObjectProperty<>(new AddressModel());
         models = new SimpleObjectProperty<>(FXCollections.observableArrayList());
@@ -48,15 +50,15 @@ public class SupplierModel {
             primaryContact.set(contactDetails.get().get(0));
     }
 
-    public String getCreditLine() {
+    public Double getCreditLine() {
         return creditLine.get();
     }
 
-    public void setCreditLine(String creditLine) {
+    public void setCreditLine(Double creditLine) {
         this.creditLine.set(creditLine);
     }
 
-    public StringProperty creditLineProperty() {
+    public DoubleProperty creditLineProperty() {
         return creditLine;
     }
 

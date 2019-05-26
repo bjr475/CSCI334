@@ -2,22 +2,18 @@ package com.app.main.controller.employee;
 
 import com.app.main.controller.AddressViewController;
 import com.app.main.model.ApplicationModel;
+import com.app.main.model.catalogue.CatalogueItemIdNameModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Control;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import org.jetbrains.annotations.NotNull;
 
 public class SalesViewController extends AChildEmployeeEditorActionViewController {
@@ -43,8 +39,8 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     /*Item Grid*/
     public GridPane saleItemGrid;
     public TableView itemTable;
-    public TextField itemIDView;
-    public TextField quantityView;
+    public ComboBox<CatalogueItemIdNameModel> itemIDView;
+    public Spinner quantityView;
     public JFXButton addItemButton;
     public TextField customerID;
     public ToggleButton newCustomer;
@@ -93,8 +89,12 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         );
         setEditable(
                 state,
-                viewOtherDiscountAmount, quantityView, addEmail, addFirstName, addLastName, addCredit,
+                viewOtherDiscountAmount, addEmail, addFirstName, addLastName, addCredit,
                 otherDiscountAmount
+        );
+        setEditable(
+                state,
+                quantityView
         );
         setEditable(
                 state,
@@ -116,8 +116,12 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         );
         setEditable(
                 true,
-                viewOtherDiscountAmount, quantityView, addEmail, addFirstName, addLastName, addCredit,
+                viewOtherDiscountAmount, addEmail, addFirstName, addLastName, addCredit,
                 otherDiscountAmount
+        );
+        setEditable(
+                true,
+                quantityView
         );
         setEditable(
                 true,
@@ -129,6 +133,45 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     public void initialize() {
         toolDrawer.setDefaultDrawerSize(600);
 
+        itemIDView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<CatalogueItemIdNameModel> call(ListView<CatalogueItemIdNameModel> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(CatalogueItemIdNameModel item, boolean empty) {
+                        if (!empty && item != null) {
+                            setGraphic(new Label(item.toStringValue()));
+                        } else {
+                            super.updateItem(item, empty);
+                        }
+                    }
+                };
+            }
+        });
+
+        itemIDView.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(CatalogueItemIdNameModel item) {
+                if (item == null) return null;
+                return item.toStringValue();
+            }
+
+            @Override
+            public CatalogueItemIdNameModel fromString(String string) {
+                return itemIDView.getItems().stream().filter(
+                        item -> item.toStringValue().equals(string)
+                ).findFirst().orElse(null);
+            }
+        });
+
+        itemIDView.itemsProperty().get().addAll(
+                new CatalogueItemIdNameModel(0, "Model 0"),
+                new CatalogueItemIdNameModel(1, "Model 1"),
+                new CatalogueItemIdNameModel(2, "Model 2"),
+                new CatalogueItemIdNameModel(3, "Model 3")
+        );
+
+        SearchableComboBoxUtil.createSearchableComboBox(itemIDView, SearchableComboBoxUtil.CATALOGUE_COMPARATOR);
     }
 
     private void activateView(@NotNull Control view) {

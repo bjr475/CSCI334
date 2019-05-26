@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.lang.Double?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:id="parentSuppliersPane" xmlns="http://javafx.com/javafx"
+           fx:controller="com.app.main.controller.employee.supplier.SuppliersViewController">
+    <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
+        <sidePane>
+            <StackPane>
+                <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <left>8</left>
+                            <bottom>8</bottom>
+                            <right>8</right>
+                            <top>8</top>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Add Supplier</Label>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <Label>Supplier Name</Label>
+                            <TextField fx:id="addSupplierName"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                            <!--suppress JavaFxUnresolvedFxIdReference -->
+                            <fx:include fx:id="addAddress" source="../address.fxml"/>
+                        </VBox>
+                        <TitledPane text="Contacts" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
+                                    GridPane.columnIndex="0" expanded="false" maxHeight="240">
+                            <VBox>
+                                <TableView fx:id="addContactTable"/>
+                                <HBox>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <JFXButton onAction="#openAddContact">Add Contact</JFXButton>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
+                        <TitledPane text="Items" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                                    expanded="false" maxHeight="240">
+                            <VBox>
+                                <TableView fx:id="addItemsTable"/>
+                                <HBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <ComboBox editable="true" fx:id="addItemSearch" promptText="Item Search"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Spinner fx:id="addItemPrice">
+                                            <valueFactory>
+                                                <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                                    <min>0</min>
+                                                    <max>
+                                                        <Double fx:constant="MAX_VALUE"/>
+                                                    </max>
+                                                </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                            </valueFactory>
+                                        </Spinner>
+                                    </VBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT"
+                                                   onAction="#confirmSearchAddItemSupplier">
+                                            <graphic>
+                                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                            </graphic>
+                                        </JFXButton>
+                                    </VBox>
+                                    <JFXButton onAction="#openAddItem">
+                                        New Item
+                                    </JFXButton>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
+                        <VBox spacing="8" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
+                            <JFXCheckBox fx:id="addExistingCredit">
+                                Existing Credit Line
+                            </JFXCheckBox>
+                            <Label>Credit:</Label>
+                            <Spinner fx:id="addCredit">
+                                <valueFactory>
+                                    <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                        <min>0</min>
+                                        <max>
+                                            <Double fx:constant="MAX_VALUE"/>
+                                        </max>
+                                    </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                </valueFactory>
+                            </Spinner>
+                        </VBox>
+                        <HBox spacing="20" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelAdd">
+                                Cancel
+                            </JFXButton>
+                            <JFXButton styleClass="action-button" onAction="#onConfirmAdd">
+                                Save
+                            </JFXButton>
+                        </HBox>
+                    </GridPane>
+                </ScrollPane>
+
+                <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
+                    <padding>
+                        <Insets>
+                            <left>8</left>
+                            <bottom>8</bottom>
+                            <right>8</right>
+                            <top>8</top>
+                        </Insets>
+                    </padding>
+                    <GridPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+                        <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Edit Supplier</Label>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <Label>Supplier Name</Label>
+                            <TextField fx:id="editSupplierName"/>
+                        </VBox>
+                        <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                            <!--suppress JavaFxUnresolvedFxIdReference -->
+                            <fx:include fx:id="editAddress" source="../address.fxml"/>
+                        </VBox>
+                        <TitledPane text="Contacts" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
+                                    GridPane.columnIndex="0" expanded="false" maxHeight="240">
+                            <VBox>
+                                <TableView fx:id="editContactTable"/>
+                                <HBox>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <JFXButton onAction="#openEditAddContact">Add Contact</JFXButton>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
+                        <TitledPane text="Items" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                                    expanded="false" maxHeight="240">
+                            <VBox>
+                                <TableView fx:id="editItemsTable"/>
+                                <HBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <ComboBox editable="true" fx:id="editItemSearch" promptText="Item Search"/>
+                                    </VBox>
+                                    <VBox>
+                                        <Spinner fx:id="editItemPrice">
+                                            <valueFactory>
+                                                <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                                    <min>0</min>
+                                                    <max>
+                                                        <Double fx:constant="MAX_VALUE"/>
+                                                    </max>
+                                                </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                            </valueFactory>
+                                        </Spinner>
+                                    </VBox>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                        <JFXButton buttonType="FLAT" alignment="BOTTOM_RIGHT"
+                                                   onAction="#confirmSearchEditItemSupplier">
+                                            <graphic>
+                                                <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                                            </graphic>
+                                        </JFXButton>
+                                    </VBox>
+                                    <JFXButton onAction="#openEditItem">
+                                        New Item
+                                    </JFXButton>
+                                </HBox>
+                            </VBox>
+                        </TitledPane>
+                        <VBox spacing="8" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
+                            <Label>Credit:</Label>
+                            <Spinner fx:id="editCredit">
+                                <valueFactory>
+                                    <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                        <min>0</min>
+                                        <max>
+                                            <Double fx:constant="MAX_VALUE"/>
+                                        </max>
+                                    </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                                </valueFactory>
+                            </Spinner>
+                        </VBox>
+                        <HBox spacing="20" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">
+                                Cancel
+                            </JFXButton>
+                            <JFXButton styleClass="action-button" onAction="#onConfirmEdit">
+                                Save
+                            </JFXButton>
+                        </HBox>
+                    </GridPane>
+                </ScrollPane>
+
+                <ScrollPane styleClass="default-background" fx:id="searchMenu">
+                    <VBox spacing="20">
+                        <padding>
+                            <Insets>
+                                <left>20</left>
+                                <bottom>20</bottom>
+                                <right>20</right>
+                                <top>20</top>
+                            </Insets>
+                        </padding>
+
+                        <VBox HBox.hgrow="ALWAYS">
+                            <Label>Keywords</Label>
+                            <TextField fx:id="search"/>
+                        </VBox>
+
+                        <HBox spacing="16">
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="allSearch" text="All"/>
+                            </VBox>
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
+                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
+                            </VBox>
+                            <VBox spacing="8">
+                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
+                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
+                            </VBox>
+                        </HBox>
+                        <TitledPane fx:id="filter" text="Filter">
+                            <content>
+
+                            </content>
+                        </TitledPane>
+                        <HBox>
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <JFXButton>
+                                Search
+                            </JFXButton>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </StackPane>
+        </sidePane>
+        <content>
+            <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
+                <TableView fx:id="suppliers" styleClass="table-view"/>
+            </ScrollPane>
+        </content>
+
+        <!--suppress JavaFxUnresolvedFxIdReference -->
+        <fx:include source="supplier_contact.fxml" fx:id="addContact"/>
+        <!--suppress JavaFxUnresolvedFxIdReference -->
+        <fx:include source="supplier_contact.fxml" fx:id="editContact"/>
+
+        <!--suppress JavaFxUnresolvedFxIdReference -->
+        <fx:include source="supplier_item.fxml" fx:id="addItem"/>
+
+        <!--suppress JavaFxUnresolvedFxIdReference -->
+        <fx:include source="supplier_item.fxml" fx:id="editItem"/>
+    </JFXDrawer>
+
+
+</StackPane>
+

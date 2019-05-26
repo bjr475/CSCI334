@@ -15,6 +15,11 @@ public class CatalogueItemLocationModel {
         count = new SimpleIntegerProperty(0);
     }
 
+    public CatalogueItemLocationModel(String name, int number) {
+        store = new SimpleStringProperty(name);
+        count = new SimpleIntegerProperty(number);
+    }
+
     CatalogueItemLocationModel(@NotNull CatalogueItemLocationModel item) {
         store = new SimpleStringProperty(item.store.get());
         count = new SimpleIntegerProperty(item.count.get());

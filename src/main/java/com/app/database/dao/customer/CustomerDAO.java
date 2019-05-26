@@ -31,6 +31,8 @@ public class CustomerDAO {
             "    subject          = ?,\n" +
             "    type             = ?\n" +
             "WHERE id = ?;";
+    private static final String SQL_GET_CUSTOMERS = "SELECT * FROM CUSTOMER";
+    private static final String SQL_GET_CUSTOMER = SQL_GET_CUSTOMERS + "\nWHERE id = ?";
     private final Database database;
 
     @Contract(pure = true)
@@ -38,29 +40,46 @@ public class CustomerDAO {
         this.database = database;
     }
 
+    private CustomerModel loadCustomer(@NotNull ResultSet result) throws SQLException {
+        CustomerModel model = new CustomerModel();
+        model.setId(result.getInt("id"));
+        model.setFirstName(result.getString("first_name"));
+        model.setLastName(result.getString("last_name"));
+        model.setEmail(result.getString("email"));
+        model.setAddress(database.loadAddress(result));
+        model.setCreditLine(result.getDouble("balance"));
+        model.setClubMember(result.getBoolean("member_status"));
+        model.setSubjectAreas(database.readStringArray(result, "subject"));
+        model.setModelTypes(database.readStringArray(result, "type"));
+        return model;
+    }
+
     public ArrayList<CustomerModel> getCustomers() {
         ArrayList<CustomerModel> customers = new ArrayList<>();
         try (Connection connection = database.openConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM CUSTOMER")) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_CUSTOMERS)) {
                 ResultSet result = statement.executeQuery();
-                while (result.next()) {
-                    CustomerModel model = new CustomerModel();
-                    model.setId(result.getInt("id"));
-                    model.setFirstName(result.getString("first_name"));
-                    model.setLastName(result.getString("last_name"));
-                    model.setEmail(result.getString("email"));
-                    model.setAddress(database.loadAddress(result));
-                    model.setCreditLine(result.getDouble("balance"));
-                    model.setClubMember(result.getBoolean("member_status"));
-                    model.setSubjectAreas(database.readStringArray(result, "subject"));
-                    model.setModelTypes(database.readStringArray(result, "type"));
-                    customers.add(model);
-                }
+                while (result.next()) customers.add(loadCustomer(result));
             }
         } catch (SQLException e) {
             logger.error("Failed to get all customers", e);
         }
         return customers;
+    }
+
+    public CustomerModel getCustomer(int customer) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_CUSTOMER)) {
+                statement.setInt(1, customer);
+                ResultSet result = statement.executeQuery();
+                if (result.next()) {
+                    return loadCustomer(result);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load customer with id: {}", customer);
+        }
+        return null;
     }
 
     private int setCustomerStatement(PreparedStatement statement, @NotNull CustomerModel customer) throws SQLException {
@@ -74,16 +93,19 @@ public class CustomerDAO {
         return database.saveStringArray(counter, statement, customer.getModelTypes());
     }
 
-    public void insertCustomer(CustomerModel customer) {
+    public int insertCustomer(CustomerModel customer) {
         logger.info("Inserting Customer: {}", customer);
         try (Connection connection = database.openConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SQL_INSERT_CUSTOMER)) {
                 setCustomerStatement(statement, customer);
                 statement.executeUpdate();
+                ResultSet genKey = statement.getGeneratedKeys();
+                if (genKey.next()) return genKey.getInt(1);
             }
         } catch (SQLException e) {
             logger.error("Failed to insert new customer: {}", customer, e);
         }
+        return -1;
     }
 
     public void updateCustomer(CustomerModel customer) {

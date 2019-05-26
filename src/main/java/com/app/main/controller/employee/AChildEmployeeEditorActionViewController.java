@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +46,13 @@ public abstract class AChildEmployeeEditorActionViewController extends AChildEmp
     protected void setEditable(boolean state, @NotNull TextInputControl... textInputs) {
         for (TextInputControl input : textInputs) {
             input.setEditable(state);
+        }
+    }
+
+    protected void setEditable(boolean state, @NotNull Spinner... spinners) {
+        for (Spinner spinner : spinners) {
+            spinner.setEditable(state);
+            spinner.setDisable(!state);
         }
     }
 

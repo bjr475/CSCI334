@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+          fx:controller="com.app.main.controller.employee.sales.NewSaleConfirmViewController"
+          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8" styleClass="default-background">
+    <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0">Confirm Sale</Text>
+    <TitledPane GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1" text="Item List">
+        <TableView fx:id="itemsTable"/>
+    </TitledPane>
+    <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <HBox>
+            <Text>Subtotal</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>Discount</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="discount" textAlignment="right">-$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>GST</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="gst" textAlignment="right">-$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>Total</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="total" textAlignment="right">$0.00</Text>
+        </HBox>
+    </VBox>
+    <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <Pane HBox.hgrow="ALWAYS"/>
+        <JFXButton styleClass="secondary-button" onAction="#back">Back</JFXButton>
+        <JFXButton styleClass="action-button" onAction="#confirm">Confirm</JFXButton>
+    </HBox>
+</GridPane>

@@ -397,7 +397,7 @@ public class CatalogueViewController extends AChildEmployeeEditorActionViewContr
     }
 
     public void onConfirmAdd() {
-        if (Database.INSTANCE.getModel().saveModel(currentAddItem.get())) updateCatalogueTable();
+        if (Database.INSTANCE.getModel().saveModel(currentAddItem.get()) > -1) updateCatalogueTable();
     }
 
     public void cancelStoreDialog() {

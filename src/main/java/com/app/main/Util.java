@@ -4,6 +4,9 @@ import com.app.main.model.catalogue.CatalogueItemModel;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import javafx.beans.property.DoubleProperty;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -81,5 +84,31 @@ public class Util {
             logger.error("Error loading request timestamp", e);
         }
         return null;
+    }
+
+    public static <S> TableCell<S, Number> getIdCell(TableColumn<S, Number> param) {
+        return new TableCell<>() {
+            @Override
+            protected void updateItem(Number item, boolean empty) {
+                if (!empty && item != null) {
+                    setGraphic(new Label(formatId(item)));
+                } else {
+                    super.updateItem(item, empty);
+                }
+            }
+        };
+    }
+
+    public static <S> TableCell<S, Number> getPriceCell(TableColumn<S, Number> param) {
+        return new TableCell<>() {
+            @Override
+            protected void updateItem(Number item, boolean empty) {
+                if (!empty && item != null) {
+                    setGraphic(new Label(formatPrice(item.doubleValue())));
+                } else {
+                    super.updateItem(item, empty);
+                }
+            }
+        };
     }
 }

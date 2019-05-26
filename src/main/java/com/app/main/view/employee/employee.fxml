@@ -158,10 +158,10 @@
                         <fx:include source="customers.fxml" fx:id="customers" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="salesPane" styleClass="default-background">
-                        <fx:include source="sales.fxml" fx:id="sales" VBox.vgrow="ALWAYS"/>
+                        <fx:include source="sales/sales.fxml" fx:id="sales" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="suppliersPane" styleClass="default-background">
-                        <fx:include source="suppliers.fxml" fx:id="suppliers" VBox.vgrow="ALWAYS"/>
+                        <fx:include source="supplier/suppliers.fxml" fx:id="suppliers" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="settingsPane" styleClass="default-background">
                         <fx:include source="settings.fxml" fx:id="settings" VBox.vgrow="ALWAYS"/>

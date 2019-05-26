@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.String?>
+<GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+          fx:controller="com.app.main.controller.employee.sales.NewSaleCustomerViewController"
+          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+    <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">
+        Add Customer
+    </Text>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <Label>Email</Label>
+        <TextField fx:id="email"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+        <Label>First Name</Label>
+        <TextField fx:id="firstName"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
+        <Label>Last Name</Label>
+        <TextField fx:id="lastName"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <fx:include fx:id="address" source="../address.fxml"/>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0">
+        <CheckBox fx:id="clubMember" text="Club Member"/>
+    </VBox>
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0">
+        <Label>Interests</Label>
+    </HBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0">
+        <Label>Subjects</Label>
+        <ListView fx:id="subjects" maxHeight="150">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Train"/>
+                    <String fx:value="Boat"/>
+                    <String fx:value="Car"/>
+                    <String fx:value="Airplane"/>
+                    <String fx:value="Other"/>
+                </FXCollections>
+            </items>
+        </ListView>
+    </VBox>
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="1">
+        <Label>Model Types</Label>
+        <ListView fx:id="types" maxHeight="150">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Display"/>
+                    <String fx:value="Working"/>
+                    <String fx:value="Static"/>
+                </FXCollections>
+            </items>
+        </ListView>
+    </VBox>
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2" spacing="8">
+        <Pane HBox.hgrow="ALWAYS"/>
+        <JFXButton styleClass="secondary-button" onAction="#back">Back</JFXButton>
+        <JFXButton styleClass="action-button" onAction="#next">Next</JFXButton>
+    </HBox>
+</GridPane>

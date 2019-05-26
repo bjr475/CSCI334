@@ -1,26 +1,24 @@
 package com.app.main.controller.employee.sales;
 
 import com.app.database.Database;
-import com.app.main.Util;
 import com.app.main.controller.employee.AChildEmployeeEditorActionViewController;
 import com.app.main.model.ApplicationModel;
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import com.app.main.model.sales.SaleItemModel;
 import com.app.main.model.sales.SaleModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Control;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -30,20 +28,27 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
 
     public JFXDrawer toolDrawer;
     public TableView<SaleModel> sales;
+    public StackPane parentView;
     public ScrollPane searchMenu;
 
     /*       Edit menu        */
     public ScrollPane editMenu;
+    public GridPane updateSale;
+    @SuppressWarnings("WeakerAccess")
     public UpdateSaleViewController updateSaleController;
+    public JFXDialog refundDialog;
 
     /*       Add menu         */
     public ScrollPane addMenu;
-    public NewSaleItemsViewController saleItemController;
-    public NewSaleCustomerViewController saleCustomerController;
-    public NewSaleConfirmViewController saleConfirmController;
     public GridPane saleItem;
     public GridPane saleCustomer;
     public GridPane saleConfirm;
+    @SuppressWarnings("WeakerAccess")
+    public NewSaleItemsViewController saleItemController;
+    @SuppressWarnings("WeakerAccess")
+    public NewSaleCustomerViewController saleCustomerController;
+    @SuppressWarnings("WeakerAccess")
+    public NewSaleConfirmViewController saleConfirmController;
 
     public SalesViewController(ApplicationModel model) {
         super(model);
@@ -57,7 +62,7 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
 
     @Override
     protected void setUserEditable(@NotNull EmployeePermissions permissions) {
-        boolean state = permissions.isModifyCustomer() || permissions.isCreateCustomer();
+//        boolean state = permissions.isModifyCustomer() || permissions.isCreateCustomer();
     }
 
     @Override
@@ -183,5 +188,27 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     @Override
     public void onSearch() {
         activateView(searchMenu);
+    }
+
+    void refundSale() {
+        refundDialog.show(parentView);
+    }
+
+    public void cancelRefund() {
+        refundDialog.close();
+    }
+
+    public void performRefund() {
+        SaleModel model = sales.getSelectionModel().getSelectedItem();
+        if (!model.isRefunded()) {
+            model.setRefunded(true);
+            Database.INSTANCE.getSales().updateSale(model);
+            refreshSalesTable();
+            openEdit(model);
+            refundDialog.close();
+            CustomerModel customer = model.getCustomer();
+            customer.setCreditLine(customer.getCreditLine() + model.getTotal());
+            Database.INSTANCE.getCustomer().updateCustomer(customer);
+        }
     }
 }

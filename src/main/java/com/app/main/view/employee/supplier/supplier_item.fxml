@@ -24,11 +24,11 @@
                     </VBox>
                     <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
                         <Label>Model Type</Label>
-                        <fx:include fx:id="itemType" source="../catalogue_item_type.fxml"/>
+                        <fx:include fx:id="itemType" source="../catalogue/catalogue_item_type.fxml"/>
                     </VBox>
                     <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="1">
                         <Label>Subject Area</Label>
-                        <fx:include fx:id="itemSubject" source="../catalogue_item_subject.fxml"/>
+                        <fx:include fx:id="itemSubject" source="../catalogue/catalogue_item_subject.fxml"/>
                     </VBox>
                     <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
                         <Label>Retail Price</Label>

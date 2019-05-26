@@ -46,6 +46,6 @@
     </VBox>
     <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
         <Pane HBox.hgrow="ALWAYS"/>
-        <JFXButton styleClass="action-button" onAction="#refund">Perform Refund</JFXButton>
+        <JFXButton styleClass="action-button" onAction="#refund" fx:id="refundBtn">Perform Refund</JFXButton>
     </HBox>
 </GridPane>

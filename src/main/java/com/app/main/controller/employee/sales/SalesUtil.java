@@ -34,6 +34,10 @@ class SalesUtil {
         totalColumn.setCellFactory(Util::getPriceCell);
         totalColumn.setPrefWidth(200);
         sales.getColumns().add(totalColumn);
+        TableColumn<SaleModel, Boolean> refundColumn = new TableColumn<>("Refunded");
+        refundColumn.setCellValueFactory(param -> param.getValue().refundedProperty());
+        refundColumn.setPrefWidth(200);
+        sales.getColumns().add(refundColumn);
 
         sales.setRowFactory(param -> {
             TableRow<SaleModel> row = new TableRow<>();

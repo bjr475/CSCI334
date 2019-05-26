@@ -2,7 +2,7 @@ package com.app.main.controller.employee.sales;
 
 import com.app.main.controller.AddressViewController;
 import com.app.main.model.ApplicationModel;
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;

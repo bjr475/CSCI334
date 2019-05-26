@@ -1,14 +1,7 @@
 package com.app.main.model.sales;
 
-import com.app.main.model.CustomerModel;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyIntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import com.app.main.model.customer.CustomerModel;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +14,7 @@ public class SaleModel {
     private ListProperty<SaleItemModel> items;
     private ObjectProperty<CustomerModel> customer;
     private ObjectProperty<Date> transactionDate;
+    private BooleanProperty refunded;
 
     public SaleModel(int id) {
         this.id = new SimpleIntegerProperty(id);
@@ -28,6 +22,7 @@ public class SaleModel {
         items = new SimpleListProperty<>(FXCollections.observableArrayList());
         customer = new SimpleObjectProperty<>(null);
         transactionDate = new SimpleObjectProperty<>(null);
+        refunded = new SimpleBooleanProperty(false);
     }
 
     public SaleModel(@NotNull SaleModel sale) {
@@ -92,5 +87,17 @@ public class SaleModel {
 
     public ObjectProperty<Date> transactionDateProperty() {
         return transactionDate;
+    }
+
+    public boolean isRefunded() {
+        return refunded.get();
+    }
+
+    public void setRefunded(boolean refunded) {
+        this.refunded.set(refunded);
+    }
+
+    public BooleanProperty refundedProperty() {
+        return refunded;
     }
 }

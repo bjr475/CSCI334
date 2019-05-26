@@ -9,7 +9,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import java.lang.String?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.CatalogueViewController">
+           fx:controller="com.app.main.controller.employee.catalogue.CatalogueViewController">
     <StackPane fx:id="parentCataloguePane">
         <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
             <sidePane>

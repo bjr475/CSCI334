@@ -1,6 +1,6 @@
 package com.app.main.controller.employee;
 
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import com.app.main.model.catalogue.CatalogueItemIdNameModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

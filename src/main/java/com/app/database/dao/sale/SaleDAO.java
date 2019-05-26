@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -23,8 +24,13 @@ public class SaleDAO {
     private static final String SQL_ADD_SALE_ITEM = "INSERT INTO SALE_ITEM (sale_id, model_id, quantity, discount)\n" +
             "VALUES (?, ?, ?, ?)";
     private static final String SQL_GET_SALES = "SELECT * FROM SALE";
+    private static final String SQL_UPDATE_SALE = "UPDATE SALE\n" +
+            "SET customer = ?,\n" +
+            "    refunded = ?\n" +
+            "WHERE id = ?;";
     private final Database database;
 
+    @Contract(pure = true)
     public SaleDAO(Database database) {
         this.database = database;
     }
@@ -56,6 +62,7 @@ public class SaleDAO {
                     sale.setTransactionDate(Util.parseDatabaseDate(result.getString("date")));
                     sale.setCustomer(database.getCustomer().getCustomer(result.getInt("customer")));
                     sale.setItems(FXCollections.observableArrayList(getSaleItems(connection, sale.getId())));
+                    sale.setRefunded(result.getBoolean("refunded"));
                     sales.add(sale);
                 }
             }
@@ -93,6 +100,19 @@ public class SaleDAO {
             }
         } catch (SQLException e) {
             logger.error("Failed to insert new sale", e);
+        }
+    }
+
+    public void updateSale(@NotNull SaleModel model) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_SALE)) {
+                statement.setInt(1, model.getCustomer().getId());
+                statement.setBoolean(2, model.isRefunded());
+                statement.setInt(3, model.getId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to update sale:{}", model.getId(), e);
         }
     }
 }

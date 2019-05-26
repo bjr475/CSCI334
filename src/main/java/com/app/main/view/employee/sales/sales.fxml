@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -10,8 +8,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.sales.SalesViewController">
+           fx:controller="com.app.main.controller.employee.sales.SalesViewController" fx:id="parentView">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
@@ -93,6 +92,20 @@
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
                 <TableView fx:id="sales" styleClass="table-view"/>
             </ScrollPane>
+            <JFXDialog fx:id="refundDialog">
+                <JFXDialogLayout>
+                    <heading>
+                        <Text>Refund Sale</Text>
+                    </heading>
+                    <body>
+                        <Text>Are you sure that you want to refund this sale?</Text>
+                    </body>
+                    <actions>
+                        <JFXButton styleClass="secondary-button" onAction="#cancelRefund">No</JFXButton>
+                        <JFXButton styleClass="action-button" onAction="#performRefund">Yes</JFXButton>
+                    </actions>
+                </JFXDialogLayout>
+            </JFXDialog>
         </content>
     </JFXDrawer>
 </StackPane>

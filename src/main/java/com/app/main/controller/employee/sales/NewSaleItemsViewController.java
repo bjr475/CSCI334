@@ -3,7 +3,7 @@ package com.app.main.controller.employee.sales;
 import com.app.database.Database;
 import com.app.main.controller.employee.SearchableComboBoxUtil;
 import com.app.main.model.ApplicationModel;
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import com.app.main.model.catalogue.CatalogueItemIdNameModel;
 import com.app.main.model.sales.SaleItemModel;
 import javafx.collections.FXCollections;
@@ -47,7 +47,7 @@ public class NewSaleItemsViewController extends AChildSalesViewController {
             itemsTable.refresh();
         });
     }
-    
+
     public void initialize() {
         SalesUtil.buildItemsTable(itemsTable);
         SearchableComboBoxUtil.setCatalogueIdModelConverter(itemSearch);

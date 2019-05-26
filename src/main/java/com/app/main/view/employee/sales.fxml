@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.collections.FXCollections?>
@@ -7,9 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import java.lang.String?>
+<?import java.lang.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           fx:controller="com.app.main.controller.employee.SalesViewController">
+           fx:controller="com.app.main.controller.employee.SalesViewController"
+           fx:id="parentSalesPane">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
         <sidePane>
             <StackPane>
@@ -43,29 +45,53 @@
                                         </TableColumn>
                                     </columns>
                                 </TableView>
-
                             </TitledPane>
 
-                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                            <VBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="8">
                                 <CheckBox fx:id="otherDiscount" text="Other Discount"/>
-                                <TextField fx:id="otherDiscountAmount"/>
+                                <HBox spacing="10">
+                                    <ToggleButton fx:id="discountPercentage" visible="false"
+                                    selected="true">
+                                        Percentage
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="discountAmount" visible="false">
+                                        Amount
+                                    </ToggleButton>
+                                </HBox>
+                                <TextField fx:id="otherDiscountAmount" visible="false"/>
                             </VBox>
 
-                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10">
-                                <Text textAlignment="left">Subtotal</Text>
-                                <Text textAlignment="left">Discount</Text>
-                                <Text textAlignment="left">GST</Text>
-                                <Text textAlignment="left">Total</Text>
+                            <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="10"
+                                  GridPane.columnSpan="5">
+                                <HBox>
+                                    <Text textAlignment="left">Subtotal</Text>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
+                                </HBox>
+                                <HBox>
+                                    <Text textAlignment="left">Discount</Text>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <Text fx:id="discount" textAlignment="right">-$0.00</Text>
+                                </HBox>
+                                <HBox>
+                                    <Text textAlignment="left">GST</Text>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <Text fx:id="GST" textAlignment="right">-$0.00</Text>
+                                </HBox>
+                                <HBox>
+                                    <Text textAlignment="left">Total</Text>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <Text fx:id="total" textAlignment="right">$0.00</Text>
+                                </HBox>
+
                             </VBox>
 
                             <VBox spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="10">
-                                <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
-                                <Text fx:id="discount" textAlignment="right">-$0.00</Text>
-                                <Text fx:id="GST" textAlignment="right">-$0.00</Text>
-                                <Text fx:id="total" textAlignment="right">$0.00</Text>
+
+
                             </VBox>
 
-                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13"
+                            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="13"
                                   GridPane.columnSpan="5" alignment="center_right">
                                 <JFXButton styleClass="secondary-button" onMouseClicked="#onConfirmBack">
                                     Back
@@ -118,14 +144,14 @@
 
                             <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="0"
                                   GridPane.columnSpan="2">
-                                <Label>Credit</Label>
-                                <TextField fx:id="addCredit"/>
+                                <Label fx:id="addCreditLabel" visible="false">Credit</Label>
+                                <TextField fx:id="addCredit" visible="false"/>
                             </VBox>
 
                             <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.columnIndex="2"
                                   GridPane.columnSpan="2">
                                 <Label>Starting Date</Label>
-                                <DatePicker fx:id="addClubStartDate" GridPane.hgrow="ALWAYS"/>
+                                <DatePicker fx:id="addClubStartDate" GridPane.hgrow="ALWAYS" visible="false"/>
                             </VBox>
 
                             <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.columnIndex="0"
@@ -162,8 +188,8 @@
                                 </ListView>
                             </VBox>
 
-                            <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="10" GridPane.columnIndex="0"
-                                  GridPane.columnSpan="4">
+                            <HBox spacing="10" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10"
+                                  GridPane.columnIndex="0" GridPane.columnSpan="4">
                                 <Pane HBox.hgrow="ALWAYS"/>
                                 <JFXButton styleClass="secondary-button" onMouseClicked="#onCustomerBack">
                                     Back
@@ -180,7 +206,23 @@
                                   GridPane.rowIndex="0" GridPane.columnSpan="2">
                                 Add a Sale
                             </Text>
-                            <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
+                            <HBox GridPane.hgrow="ALWAYS"
+                                  GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                  GridPane.columnSpan="5" spacing="20">
+                                <VBox alignment="BOTTOM_LEFT" GridPane.hgrow="ALWAYS"
+                                      spacing="10">
+                                    <Label>Sale ID</Label>
+                                    <TextField fx:id="saleID" GridPane.hgrow="ALWAYS"/>
+                                </VBox>
+                                <Pane HBox.hgrow="ALWAYS"/>
+                                <VBox alignment="BOTTOM_LEFT" GridPane.hgrow="ALWAYS"
+                                      spacing="10">
+                                    <JFXCheckBox fx:id="pastSaleRecord" text="Past Record"/>
+                                    <DatePicker fx:id="saleDate" promptText="Date of sale" visible="false"/>
+                                </VBox>
+                            </HBox>
+
+                            <TitledPane GridPane.rowIndex="2" GridPane.columnSpan="5"
                                         text="Item List">
                                 <TableView fx:id="itemTable">
                                     <columns>
@@ -193,22 +235,12 @@
                                     </columns>
                                 </TableView>
 
-                            </TitledPane>
-                            <VBox GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="3">
-                                <Label>Item ID</Label>
-                                <TextField fx:id="itemIDView"/>
-                            </VBox>
-                            <VBox GridPane.columnIndex="3" GridPane.rowIndex="6">
-                                <Label>Quantity</Label>
-                                <HBox spacing="20">
-                                    <TextField fx:id="quantityView"/>
-                                    <JFXButton fx:id="addItemButton" buttonType="FLAT">
-                                        <graphic>
-                                            <FontIcon iconLiteral="fa-plus" iconSize="20"/>
-                                        </graphic>
-                                    </JFXButton>
+                                <HBox>
+                                    <Pane HBox.hgrow="ALWAYS"/>
+                                    <JFXButton onAction="saleItemsDialog.show(parentSalesPane)"
+                                               styleClass="action-button" text="Add/Edit Items"/>
                                 </HBox>
-                            </VBox>
+                            </TitledPane>
 
                             <Label GridPane.columnIndex="0" GridPane.rowIndex="11">Customer Search</Label>
                             <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="5">
@@ -218,7 +250,7 @@
                                 </ToggleButton>
                             </HBox>
 
-                            <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="13"
+                            <HBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="14"
                                   GridPane.columnSpan="5" alignment="center_right">
                                 <JFXButton onAction="#onCancelAdd" styleClass="secondary-button">
                                     Cancel
@@ -246,6 +278,16 @@
                         <Text GridPane.rowIndex="0">
                             Edit Sale
                         </Text>
+                        <HBox>
+                            <VBox HBox.hgrow="ALWAYS" spacing="20">
+                                <Label>Sale ID</Label>
+                                <Text fx:id="viewSaleID"/>
+                            </VBox>
+                            <VBox HBox.hgrow="ALWAYS" spacing="20">
+                                <Label>Date of Sale</Label>
+                                <Text fx:id="viewSaleDate"/>
+                            </VBox>
+                        </HBox>
 
                         <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
                                     text="Item List">
@@ -261,7 +303,7 @@
                             </TableView>
                             <HBox>
                                 <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton styleClass="action-button">
+                                <JFXButton onAction="saleItemsDialog.show(parentSalesPane)" styleClass="action-button">
                                     Edit Sale Items
                                 </JFXButton>
                             </HBox>
@@ -294,7 +336,7 @@
                             <Text fx:id="viewTotal" textAlignment="right">$0.00</Text>
                         </VBox>
 
-                        <HBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                        <HBox HBox.hgrow="ALWAYS" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="6"
                               GridPane.columnSpan="5" alignment="center_right">
                             <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">
                                 Cancel
@@ -319,30 +361,15 @@
 
                         <VBox HBox.hgrow="ALWAYS">
                             <Label>Keywords</Label>
-                            <TextField fx:id="search"/>
+                            <TextField fx:id="searchWords"/>
                         </VBox>
 
-                        <HBox spacing="16">
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="allSearch" text="All"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="stockSearch" text="Stock"/>
-                                <JFXCheckBox fx:id="customersSearch" text="Customers"/>
-                            </VBox>
-                            <VBox spacing="8">
-                                <JFXCheckBox fx:id="salesSearch" text="Sales"/>
-                                <JFXCheckBox fx:id="suppliersSearch" text="Suppliers"/>
-                            </VBox>
-                        </HBox>
-                        <TitledPane fx:id="filter" text="Filter">
-                            <content>
-
-                            </content>
-                        </TitledPane>
-                        <HBox>
+                        <HBox spacing="10">
                             <Pane HBox.hgrow="ALWAYS"/>
-                            <JFXButton>
+                            <JFXButton onAction="#resetSearch" styleClass="secondary-button">
+                                Reset
+                            </JFXButton>
+                            <JFXButton onAction="#confirmSearch" styleClass="action-button">
                                 Search
                             </JFXButton>
                         </HBox>
@@ -353,7 +380,7 @@
         </sidePane>
         <content>
             <ScrollPane styleClass="default-background" VBox.vgrow="ALWAYS" fitToWidth="true" fitToHeight="true">
-                <TableView fx:id="tableView" styleClass="table-view">
+                <TableView fx:id="salesTable" styleClass="table-view">
                     <columns>
                         <TableColumn prefWidth="200" text="Sale No."/>
                         <TableColumn prefWidth="200" text="Customer No."/>
@@ -364,5 +391,51 @@
                 </TableView>
             </ScrollPane>
         </content>
+        <JFXDialog fx:id="saleItemsDialog">
+            <JFXDialogLayout>
+                <heading>
+                    <Label>
+                        Add Sale Items
+                    </Label>
+                </heading>
+                <body>
+                    <VBox spacing="10">
+                        <HBox spacing="10">
+                            <Pane HBox.hgrow="ALWAYS"/>
+                            <TextField fx:id="searchItems" promptText="Search"/>
+                            <JFXButton onAction="#searchItemTable">
+                                <graphic>
+                                    <FontIcon iconLiteral="fa-search" iconSize="15"/>
+                                </graphic>
+                            </JFXButton>
+                        </HBox>
+                        <Pane VBox.vgrow="ALWAYS"/>
+                        <ScrollPane fitToWidth="true">
+                            <TableView fx:id="selectItemTable" VBox.vgrow="ALWAYS">
+                                <columns>
+                                    <TableColumn text="Item ID" prefWidth="150"/>
+                                    <TableColumn text="quantity" prefWidth="100"/>
+                                </columns>
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Select Items and edit quantity"/>
+                                    </FXCollections>
+                                </items>
+                            </TableView>
+                        </ScrollPane>
+
+                    </VBox>
+                </body>
+                <actions>
+                    <JFXButton onAction="#cancelSaleItemsDialog" styleClass="secondary-button">
+                        Cancel
+                    </JFXButton>
+                    <JFXButton onAction="#saveSaleItemsDialog" styleClass="action-button">
+                        Save
+                    </JFXButton>
+                </actions>
+            </JFXDialogLayout>
+        </JFXDialog>
+
     </JFXDrawer>
 </StackPane>

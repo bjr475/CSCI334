@@ -190,6 +190,9 @@
                         </VBox>
                         <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.columnIndex="0"
                               GridPane.columnSpan="3" spacing="8">
+                            <JFXButton styleClass="secondary-button" style="-fx-background-color: red;"
+                                       onAction="#onRemove" fx:id="removeButton">Remove
+                            </JFXButton>
                             <Pane HBox.hgrow="ALWAYS"/>
                             <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">Cancel</JFXButton>
                             <JFXButton styleClass="action-button" onAction="#onConfirmEdit">Confirm</JFXButton>

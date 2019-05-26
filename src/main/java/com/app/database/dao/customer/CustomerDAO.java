@@ -154,4 +154,15 @@ public class CustomerDAO {
         }
         return customers;
     }
+
+    public void removeCustomer(@NotNull CustomerModel customerModel) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM CUSTOMER WHERE id = ?;")) {
+                statement.setInt(1, customerModel.getId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to remove customer: {}", customerModel.getId(), e);
+        }
+    }
 }

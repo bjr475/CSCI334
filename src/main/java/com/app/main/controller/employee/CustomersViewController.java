@@ -8,11 +8,13 @@ import com.app.main.model.customer.CustomerModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
@@ -59,6 +61,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
 
     /* Customer Table */
     public TableView<CustomerModel> customersTable;
+    public JFXButton removeButton;
 
     /* Add and Edit Values */
     private ObjectProperty<CustomerModel> currentAddItem;
@@ -254,6 +257,7 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
         }
 
         if (customer != null) {
+            removeButton.setDisable(customer.getId() == 1);
             logger.info("Editing Customer: {}", customer);
             currentEditItem.set(new CustomerModel(customer));
             editCredit.getValueFactory().setValue(currentEditItem.get().getCreditLine());
@@ -316,5 +320,13 @@ public class CustomersViewController extends AChildEmployeeEditorActionViewContr
     public void highlightItem(CustomerModel item) {
         customersTable.scrollTo(item);
         customersTable.selectionModelProperty().get().select(item);
+    }
+
+    public void onRemove(ActionEvent event) {
+        if (currentEditItem.get().getId() != 1) {
+            Database.INSTANCE.getCustomer().removeCustomer(currentEditItem.get());
+            toolDrawer.close();
+            refreshCustomersTable();
+        }
     }
 }

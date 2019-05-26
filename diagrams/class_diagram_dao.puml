@@ -1,0 +1,137 @@
+java -jar plantuml.jar -testdot
+@startuml
+
+'skinparam linetype ortho
+'skinparam groupInheritance 1
+
+namespace com.app {
+    namespace database {
+        namespace dao {
+            namespace customer {
+                class CustomerDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + CustomerDAO(Database)
+                }
+            }
+
+            namespace model {
+                class ModelDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + ModelDAO(Database)
+                    - loadItemModel(ResultSet): CatalogueItemModel
+                    - loadItemModelSuppliers(ResultSet): CatalogueItemSupplierModel
+                    - loadItemModelLocations(ResultSet): CatalogueItemSupplierModel
+                    - loadItem(Connection, ResultSet): CatalogueItemModel
+                    - loadItems(Connection, ResultSet): ArrayList<CatalogueItemModel>
+                    + getModels(): ArrayList<CatalogueItemModel>
+                    + getModel(int): CatalogueItemModel
+                    + getIdNameModel(): CatalogueItemIdNameModel
+                    + getIdNameModels(): ArrayList<CatalogueItemIdNameModel>
+                    + updateModel(CatalogueItemModel): void
+                    + saveModel(CatalogueItemModel): int
+                    + searchModels(String): ArrayList<CatalogueItemModel>
+                }
+            }
+
+             namespace sale {
+                class SaleDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + SaleDAO(Database)
+                    - getSaleItems(Connection, int): void
+                    + getSales(): ArrayList<SalesModel>
+                    - insertSaleItems(Connection, int, ObservableList<SalesModel): void
+                    + insertSale(int, int, double, ObservableList<SalesModel>): void
+                    + updateSale(SalesModel): void
+                 }
+             }
+
+            namespace store{
+                class StoreDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + StoreDAO(Database)
+                    + updateStore(StoreModel): void
+                    + saveStore(StoreModel): void
+                }
+            }
+
+            namespace supplier{
+                class SupplierDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + SupplierDAO(Database)
+                    - getSupplierContracts(SupplierModel, Connection): ArrayList<SupplierContactModel>
+                    + getSuppliers(): ArrayList<SupplierModel>
+                    + saveSupplier(SupplierModel, ObservableList<SupplierCatalogueItemModel>): void
+                }
+            }
+
+            namespace user{
+                class User {
+                    - id: int
+                    - type: AUserModel.UserType
+                    + User(int, AUserModel.UserType)
+                    + getId(): int
+                    + getType(): AUserModel.UserType
+                }
+                class UserDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + login(String, String): User
+                    - setUserCommon(AUserModel, ResultSet): void
+                    + getAdmin(int): AdminModel
+                    - readEmployeePermissions(InputStream): EmployeePermissions
+                    - writeEmployeePermissions(EmployeePermissions): EmployeePermissionsResult
+                    - getEmployeeStore(Connection, int) EmployeeStoreModel
+                    + getEmployee(int): EmployeeStoreModel
+                    + saveUser(AUserModel): void
+                    - saveCommon(PreparedStatement, AUserModel): int
+                    - saveUser(Connection, AdminModel): void
+                    - saveUser(Connection, EmployeeModel): void
+                    + updatePassword(int, AUserModel.UserType, String): void
+                    + getEmloyeeTable(): ArrayList<EmployeeTable>
+                    + saveEmployeeTable(EmployeeTable): void
+                    + getEmployeeNameIds(): ArrayList<EmployeeNameId>
+                }
+            }
+
+            class Database {
+                - user: UserDAO
+                - model: ModelDAO
+                - store: StoreDAO
+                - customer: CustomerDAO
+                - supplier: SupplierDAO
+                - sales: SaleDAO
+                - connectionPath: String
+                - Database()
+                + getDate(String): Date
+                + getDate(String, Date): Date
+                - initialiseDatabase(): void
+                + openConnection(): Connection
+                + saveAddress(PreparedStatement, AddressModel): int
+                + loadAddress(ResultSet, String): AddressModel
+                + loadAddress(ResultSet): AddressModel
+                + saveStringArray(int, PreparedStatement, ObservableList<String>): int
+                + readStringArray(ResultSet, String): ObservableList<String>
+                + getUser(): UserDAO
+                + getModel(): ModelDAO
+                + getStore(): StoreDAO
+                + getCustomer(): CustomerDAO
+                + getSupplier(): SupplierDAO
+                + getSales(): SaleDAO
+            }
+        }
+    }
+}
+
+    com.app.database.dao.Database --* com.app.database.dao.user.UserDAO
+    com.app.database.dao.Database --* com.app.database.dao.model.ModelDAO
+    com.app.database.dao.Database --* com.app.database.dao.store.StoreDAO
+    com.app.database.dao.Database --* com.app.database.dao.customer.CustomerDAO
+    com.app.database.dao.Database --* com.app.database.dao.supplier.SupplierDAO
+    com.app.database.dao.Database --* com.app.database.dao.sale.SaleDAO
+
+@enduml

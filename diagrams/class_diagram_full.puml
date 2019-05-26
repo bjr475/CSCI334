@@ -4,6 +4,706 @@ java -jar plantuml.jar -testdot
 'skinparam linetype ortho
 'skinparam groupInheritance 1
 
+namespace com.app {
+    namespace database {
+        namespace dao {
+            namespace customer {
+                class CustomerDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + CustomerDAO(Database)
+                }
+            }
+
+            namespace model {
+                class ModelDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + ModelDAO(Database)
+                    - loadItemModel(ResultSet): CatalogueItemModel
+                    - loadItemModelSuppliers(ResultSet): CatalogueItemSupplierModel
+                    - loadItemModelLocations(ResultSet): CatalogueItemSupplierModel
+                    - loadItem(Connection, ResultSet): CatalogueItemModel
+                    - loadItems(Connection, ResultSet): ArrayList<CatalogueItemModel>
+                    + getModels(): ArrayList<CatalogueItemModel>
+                    + getModel(int): CatalogueItemModel
+                    + getIdNameModel(): CatalogueItemIdNameModel
+                    + getIdNameModels(): ArrayList<CatalogueItemIdNameModel>
+                    + updateModel(CatalogueItemModel): void
+                    + saveModel(CatalogueItemModel): int
+                    + searchModels(String): ArrayList<CatalogueItemModel>
+                }
+            }
+
+             namespace sale {
+                class SaleDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + SaleDAO(Database)
+                    - getSaleItems(Connection, int): void
+                    + getSales(): ArrayList<SalesModel>
+                    - insertSaleItems(Connection, int, ObservableList<SalesModel): void
+                    + insertSale(int, int, double, ObservableList<SalesModel>): void
+                    + updateSale(SalesModel): void
+                 }
+             }
+
+            namespace store{
+                class StoreDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + StoreDAO(Database)
+                    + updateStore(StoreModel): void
+                    + saveStore(StoreModel): void
+                }
+            }
+
+            namespace supplier{
+                class SupplierDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + SupplierDAO(Database)
+                    - getSupplierContracts(SupplierModel, Connection): ArrayList<SupplierContactModel>
+                    + getSuppliers(): ArrayList<SupplierModel>
+                    + saveSupplier(SupplierModel, ObservableList<SupplierCatalogueItemModel>): void
+                }
+            }
+
+            namespace user{
+                class User {
+                    - id: int
+                    - type: AUserModel.UserType
+                    + User(int, AUserModel.UserType)
+                    + getId(): int
+                    + getType(): AUserModel.UserType
+                }
+                class UserDAO {
+                    - logger: Logger {static}
+                    - database: Database
+                    + login(String, String): User
+                    - setUserCommon(AUserModel, ResultSet): void
+                    + getAdmin(int): AdminModel
+                    - readEmployeePermissions(InputStream): EmployeePermissions
+                    - writeEmployeePermissions(EmployeePermissions): EmployeePermissionsResult
+                    - getEmployeeStore(Connection, int) EmployeeStoreModel
+                    + getEmployee(int): EmployeeStoreModel
+                    + saveUser(AUserModel): void
+                    - saveCommon(PreparedStatement, AUserModel): int
+                    - saveUser(Connection, AdminModel): void
+                    - saveUser(Connection, EmployeeModel): void
+                    + updatePassword(int, AUserModel.UserType, String): void
+                    + getEmloyeeTable(): ArrayList<EmployeeTable>
+                    + saveEmployeeTable(EmployeeTable): void
+                    + getEmployeeNameIds(): ArrayList<EmployeeNameId>
+                }
+            }
+
+            class Database {
+                - user: UserDAO
+                - model: ModelDAO
+                - store: StoreDAO
+                - customer: CustomerDAO
+                - supplier: SupplierDAO
+                - sales: SaleDAO
+                - connectionPath: String
+                - Database()
+                + getDate(String): Date
+                + getDate(String, Date): Date
+                - initialiseDatabase(): void
+                + openConnection(): Connection
+                + saveAddress(PreparedStatement, AddressModel): int
+                + loadAddress(ResultSet, String): AddressModel
+                + loadAddress(ResultSet): AddressModel
+                + saveStringArray(int, PreparedStatement, ObservableList<String>): int
+                + readStringArray(ResultSet, String): ObservableList<String>
+                + getUser(): UserDAO
+                + getModel(): ModelDAO
+                + getStore(): StoreDAO
+                + getCustomer(): CustomerDAO
+                + getSupplier(): SupplierDAO
+                + getSales(): SaleDAO
+            }
+        }
+        com.app.database.dao.Database --* com.app.database.dao.supplier.UserDAO
+        com.app.database.dao.Database --* com.app.database.dao.supplier.ModelDAO
+        com.app.database.dao.Database --* com.app.database.dao.supplier.StoreDAO
+        com.app.database.dao.Database --* com.app.database.dao.supplier.CustomerDAO
+        com.app.database.dao.Database --* com.app.database.dao.supplier.SupplierDAO
+        com.app.database.dao.Database --* com.app.database.dao.supplier.SaleDAO
+    }
+
+    namespace main {
+        namespace controller {
+            namespace employee {
+                namespace catalogue {
+                    class CatalogueViewController {
+                        + toolDrawer: JFXDrawer
+                        + editMenu: ScrollPane
+                        + editItemID: TextField
+                        + editModelType: ChoiceBox<String>
+                        + editSubject: ChoiceBox<String>
+                        + editPrice: TextField
+                        + editDescription: Text
+                        + editStores: TableView<CatalogueItemLocationModel>
+                        + editSuppliers: TableView<CatalogueItemLocationModel>
+                        + addMenu: ScrollPane
+                        + addItemName: TextField
+                        + addType: ChoiceBox<String>
+                        + addSubject: ChoiceBox<String>
+                        + addPrice: TextField
+                        + addDescription: TextArea
+                        + addStoresView: TableView<CatalogueItemLocationModel>
+                        + addSuppliersView: TableView<CatalogueItemLocationModel>
+                        + addStoreDialog: JFXDialog
+                        + storeList: ListView
+                        + storeAvailabilityView: TableView
+                        + selectedStore: TextField
+                        + itemQuantity: TextField
+                        + addSupplierDialog: JFXDialog
+                        + supplierList: ListView
+                        + itemSupplierView:TableView
+                        + selectedSupplier: TextField
+                        + itemPrice: TextField
+                        + catalogueTable: TableView<CatalogueItemModel>
+                        + parentCataloguePane: StackPane
+                        + currentAddItem: ObjectProperty<CatalogueItemModel>
+                        + currentEditableItem: ObjectProperty<CatalogueItemModel>
+                        + CatalogueViewController(ApplicationModel)
+                        ~ setUserEditable(EmployeePermissions): void
+                        ~ setAdminEditable(): void
+                        - unbindItemModelAdd(CatalogueItemModel, Textfield, ChoiceBox<String>, ChoiceBox<String>, Textfield, TextArea, TableView<CatalogueItemLocationModel>, TableView<CatalogueItemLocationModel>): void
+                        - bindItemModelAdd(CatalogueItemModel, Textfield, ChoiceBox<String>, ChoiceBox<String>, Textfield, TextArea, TableView<CatalogueItemLocationModel>, TableView<CatalogueItemLocationModel>): void
+                        - unbindItemModel(CatalogueItemModel, Textfield, ChoiceBox<String>, ChoiceBox<String>, Textfield, TextArea, TableView<CatalogueItemLocationModel>, TableView<CatalogueItemLocationModel>): void
+                        - bindItemModel(CatalogueItemModel, Textfield, ChoiceBox<String>, ChoiceBox<String>, Textfield, TextArea, TableView<CatalogueItemLocationModel>, TableView<CatalogueItemLocationModel>): void
+                        - onUpdateAddItem(ObservableValue<? extends CatalogueItemModel>, CatalogueItemModel, CatalogueItemModel): void
+                        - onUpdateEditItem(ObservableValue<? extends CatalogueItemModel>, CatalogueItemModel, CatalogueItemModel): void
+                        - userChanged(ObservableValue<? extends AUserModel>, AUserModel, AUserModel): void
+                        - updateCatalogueTable: void
+                        - buildCatalogueTable(): void
+                        - buildEditTables: void
+                        + initialize(): void
+                        - activateView(): void
+                        + hasButtons: boolean
+                        + onEdit(): void
+                        - openEdit(CatalogueItemModel): void
+                        + onConfirmEdit(): void
+                        + onAdd(): void
+                        + onCancelAdd(): void
+                        + onConfirmAdd(): void
+                        + cancelStoreDialog(): void
+                        + saveStoreDialog(): void
+                        + cancelSupplierDialog(): void
+                        + saveSupplierDialog(): void
+                        + addSupplier(): void
+                        + addStore(): void
+                        + highlightItem(CatalogueItemModel): void
+                    }
+                    CatalogueViewController --|> AChildEmployeeEditorActionViewController
+                }
+
+                namespace manager {
+                    class ManageEmployeesViewController {
+                        + addMenu: ScrollPane
+                        + addDisplayName: TextField
+                        + addFirstName: TextField
+                        + addContact: TextField
+                        + addStore: TextField
+                        + addPosition: ChoiceBox<String>
+                        + addPermItemAdd: JFXToggleButton
+                        + addPermItemModify: JFXToggleButton
+                        + addPermSaleView: JFXToggleButton
+                        + addPermSaleAdd: JFXToggleButton
+                        + addPermSaleModify: JFXToggleButton
+                        + addPermCustomerView: JFXToggleButton
+                        + addPermCustomerAdd: JFXToggleButton
+                        + addPermCustomerModify: JFXToggleButton
+                        + addPermSupplierManage: JFXToggleButton
+                        + addPermEmployeeManage: JFXToggleButton
+                        + employeeTableView: TableView<EmployeeTable>
+                        + editMenu: ScrollPane
+                        + editEmployeeId: TextField
+                        + editDisplayName: TextField
+                        + editFirstName: TextField
+                        + editContact: TextField
+                        + editStore: TextField
+                        + editPosition: ChoiceBox<String>
+                        + editPermItemAdd: JFXToggleButton
+                        + editPermItemModify: JFXToggleButton
+                        + editPermSaleView: JFXToggleButton
+                        + editPermSaleAdd: JFXToggleButton
+                        + editPermSaleModify: JFXToggleButton
+                        + editPermCustomerView: JFXToggleButton
+                        + editPermCustomerAdd: JFXToggleButton
+                        + editPermCustomerModify: JFXToggleButton
+                        + editPermSupplierManage: JFXToggleButton
+                        + editPermEmployeeManage: JFXToggleButton
+                        - addEmployee: ObjectProperty<EmployeeTable>
+                        - addEmployeeNew: boolean = false
+                        - editEmployee: ObjectProperty<EmployeeTable>
+                        - editEmployeeNew: boolean = false
+                        + ManageEmployeesViewController(ApplicationModel)
+                        # setUserEditable(EmployeePermissions): void
+                        # setAdminEditable(): void
+                        - buildEmployeeTable(): void
+                        + initialize(): void
+                        - activateView(ScrollPane): void
+                        - openEdit(EmployeeTable): void
+                        + hasButtons(): boolean
+                        - refreshTable(): void
+                        + onEdit(): void
+                        + cancelEdit(): void
+                        + confirmEdit(): void
+                        + onAdd(): void
+                        + cancelAdd(ActionEvent): void
+                        + confirmAdd(ActionEvent): void
+                    }
+
+                    class ManageStoresViewController {
+                        - logger: Logger {static}
+                        + toolDrawer: JFXDrawer
+                        + storesView: TableView<StoreModel>
+                        + editMenu: ScrollPane
+                        + editStoreId: TextField
+                        + editStoreName: TextField
+                        + editStoreManager: ChoiceBox<EmployeeNameId>
+                        + editAddressController: AddressViewController
+                        + addMenu: ScrollPane
+                        + addStoreName: TextField
+                        + addStoreManager: ChoiceBox<EmployeeNameId>
+                        + addAddressController: AddressViewController
+                        - editStore: ObjectProperty<StoreModel>
+                        + ManageStoresViewController(ApplicationModel)
+                        # setUserEditable(EmployeePermissions): void
+                        # setAdminEditable(): void
+                        - refreshStoresTable(): void
+                        - refreshStoresTable(): void
+                        - openEdit(): void
+                        + cancelEdit(): void
+                        + confirmEdit(): void
+                        + cancelAdd(): void
+                        + confirmAdd(): void
+                        + initialize(): void
+                        - activateView(ScrollPane): void
+                        + hasButtons(): boolean
+                        + onEdit(): void
+                        + onAdd(): void
+                    }
+
+                }
+
+                namespace sales {
+                    abstract class AChildSalesViewController {
+                        - owner: SalesViewController
+                        + AChildSalesViewController(ApplicationModel)
+                        + getOwner(): SalesViewController
+                        + setOwner(SalesViewController): void
+                    }
+
+                    class NewSaleConfirmViewController {
+                        + itemsTable: TableView<SaleItemModel>
+                        + subtotal: Text
+                        + discount: Text
+                        + gst: Text
+                        + total: Text
+                        + saleTotal: double
+                        + NewSaleConfirmViewController(ApplicationModel)
+                        + initialize(): void
+                        + back(): void
+                        + confirm(): void
+                        + setItems(): void
+                        + getSaleTotal(): double
+                    }
+
+                    class NewSaleCustomerViewController {
+                        + email: TextField
+                        + firstName: TextField
+                        + lastName: TextField
+                        + addressController: AddressViewController
+                        + clubMember: CheckBox
+                        + subjects: ListView<String>
+                        + types: ListView<String>
+                        + NewSaleCustomerViewController(ApplicationModel)
+                        + back(): void
+                        + next(): void
+                        + getCustomer(): CustomerModel
+                    }
+
+                    class NewSaleItemsViewController {
+                        - logger: Logger {static}
+                        + itemsTable: TableView<SaleItemModel>
+                        + itemSearch: ComboBox<CatalogueItemIdNameModel>
+                        + itemQuantity: Spinner<Integer>
+                        + itemDiscount: Spinner<Double>
+                        + customerSearch: ComboBox<CustomerModel>
+                        + items: ObservableList<SaleItemModel>
+                        + NewSaleItemsViewController(ApplicationModel)
+                        + initialize(): void
+                        + addItem(): void
+                        + cancel(): void
+                        + next(): void
+                        + getItems(): ObservableList<SaleItemModel>
+                        + clearItems(): void
+                        + getSelectedCustomer(): CustomerModel
+
+                    }
+
+                    class SalesUtil {
+                        buildSalesTable(TableView<SaleModel>, SalesTableCallback): void
+                        buildItemsTable(TableView<SaleItemModel>): void
+                        loadSaleResult(ObservableList<SaleItemModel>, TableView<SaleItemModel>, Text, Text, Text, Text): double
+                        interface SalesTableCallback
+                    }
+
+                    class SalesViewController {
+                        - logger: Logger {static}
+                        + toolDrawer: JFXDrawer
+                        + sales: TableView<SaleModel>
+                        + parentView: StackPane
+                        + editMenu: ScrollPane
+                        + updateSale: GridPane
+                        + updateSaleController:UpdateSaleViewController
+                        + refundDialog:JFXDialog
+                        + addMenu: ScrollPane
+                        + saleItem: GridPane
+                        + saleCustomer: GridPane
+                        + saleConfirm: GridPane
+                        + saleItemController: NewSaleItemsViewController
+                        + saleCustomerController: NewSaleCustomerViewController
+                        + saleConfirmController: NewSaleConfirmViewController
+                        + SalesViewController(ApplicationModel)
+                        # setUserEditable(EmployeePermissions)
+                        # setAdminEditable(): void
+                        + initialize(): void
+                        - refreshSalesTable(): void
+                        - activateView(Control): void
+                        + hasButtons(): boolean
+                        - openEdit(SalesModel): void
+                        + onEdit(): void
+                        + onAdd(): void
+                        - nextSalePage(GridPane): void
+                        - gotoCustomerPage(): void
+                        - gotoConfirmPage(): void
+                        newSaleCancel(): void
+                        newSaleItemsNext(): void
+                        newSaleCustomerBack(): void
+                        newSaleCustomerNext(): void
+                        newSaleConfirmBack(): void
+                        newSaleConfirm(): void
+                        refundSale(): void
+                        + cancelRefund(): void
+                        + performRefund(): void
+                    }
+
+                    class UpdateSaleViewController {
+                        + itemsTable: TableView<SaleItemModel>
+                        + date: Text
+                        + customer: Text
+                        + subtotal: Text
+                        + discount: Text
+                        + gst: Text
+                        + total: Text
+                        + refundBtn: JFXButton
+                        + UpdateSaleViewController(ApplicationModel)
+                        + initialize(): void
+                        + setSale(): void
+                        + refund(): void
+                    }
+                    AChildEmployeeEditorActionViewController --|> SalesViewController
+                    AChildSalesViewController --|> UpdateSaleViewController
+                    AChildSalesViewController --|> NewSaleConfirmViewController
+                    AChildSalesViewController --|> NewSaleItemsViewController
+                    AChildSalesViewController --|> NewSaleCustomerViewController
+                }
+
+                namespace search {
+                    class SearchViewController {
+                        + parent: StackPane
+                        + searchDialog: JFXDialog
+                        + searchItems: TableView<CatalogueItemModel>
+                        + searchCustomers: TableView<CustomerModel>
+                        + searchWords: TextField
+                        + searchInItems: JFXCheckBox
+                        + searchInCustomers: JFXCheckBox
+                        + SearchViewController(ApplicationModel model)
+                        + initialize(): void
+                        - buildSearchCustomers(): void
+                        - buildSearchItems(): void
+                        + search(): void
+                        + performSearch(): void
+
+
+                    }
+                    SearchViewController --|> AChildEmployeeViewController
+                }
+
+                namespace supplier {
+                    class SupplierContactViewController {
+                        - logger: Logger {static}
+                        + name: TextField
+                        + phone: TextField
+                        + email: TextField
+                        + dialog: JFXDialog
+                        + contactCallback: ContactCallback
+                        + contactModel: SupplierContactModel
+                        + SupplierContactViewController(ApplicationModel)
+                        + getContactModel(): SupplierContactModel
+                        + setContactModel(SupplierContactModel): void
+                        + confirm() void
+                        + cancel(): void
+                        + open(tackPane, ContactCallback): void
+                        + interface ContactCallback(): void
+                    }
+
+                    class SupplierItemViewController {
+
+                    }
+
+                    class SuppliersViewController {
+
+                    }
+                }
+
+                abstract class AChildEmployeeEditorActionViewController {
+
+                }
+
+                abstract class AChildEmployeeViewController {
+
+                }
+
+                class CatalogueViewController {
+
+                }
+
+                class CustomersViewController {
+
+                }
+
+                class EmployeeViewController {
+
+                }
+
+                interface IEditorActionItem {
+
+                }
+
+                class SalesViewController {
+
+                }
+
+                class SearchableComboBoxUtil {
+
+                }
+
+                class SettingsViewController {
+
+                }
+            }
+
+            namespace landing {
+                class AChildLandingViewController {
+
+                }
+
+                class LandingForgotPasswordController {
+
+                }
+
+                class LandingLoginViewController {
+
+                }
+
+                class LandingViewController {
+
+                }
+            }
+
+            class AChildMainViewController {
+
+            }
+
+            class AddressViewController {
+
+            }
+
+            class AViewController {
+
+            }
+
+            class MainFrameViewController {
+
+            }
+        }
+
+        namespace model {
+
+            namespace catalogue {
+
+                class CatalogueItemIdNameModel {
+
+                }
+
+                class CatalogueItemLocationModel {
+
+                }
+
+                class CatalogueItemModel {
+
+                }
+
+                class CatalogueItemSupplierModel {
+
+                }
+            }
+
+            namespace customer {
+                class CustomerModel {
+
+                }
+
+            }
+
+            namespace sales {
+
+                class SaleItemModel {
+
+                }
+
+                class SaleModel {
+
+                }
+
+            }
+
+            namespace store {
+
+                class StoreModel {
+
+                }
+
+            }
+
+            namespace supplier {
+
+                class SupplierModel {
+
+                }
+
+                class SupplierCatalogueItemModel {
+
+                }
+
+                class SupplierContactModel {
+
+                }
+
+                class SupplierItemModel {
+
+                }
+
+                class SupplierModel {
+                    - id: ReadOnlyIntegerProperty
+                    - creditLine: DoubleProperty
+                    - name: StringProperty
+                    - address: ObjectProperty<AddressModel>
+                    - models: ObjectProperty<ObservableList<SupplierItemModel>>
+                    - contactDetails: ObjectProperty<ObservableList<SupplierContactModel>>
+                    - primaryContact: ObjectProperty<SupplierContactModel>
+                    + SupplierModel(int)
+                    - contactsChanged(ObservableList<? extends ObservableList<SupplierContactModel>>,
+                    ObservableList<SupplierContactModel>, ObservableList<SupplierContactModel>: void
+                    - updatePrimary(): void
+                    + getCreditLine(): Double
+                    + setCreditLine(Double): void
+                    + creditLineProperty: DoubleProperty
+                    + getName(): String
+                    + setName(String): void
+                    + nameProperty(): StringProperty
+                    + getAddress(): AddressModel
+                    + setAddress(AddressModel): void
+                    + addressProperty(): ObjectProperty<AddressModel>
+                    + getModels(): ObservableList<SupplierItemModel>
+                    + setModels(ObservableList<SupplierItemModel>): void
+                    + modelsProperty(): ObjectProperty<ObservableList<SupplierItemModel>>
+                    + getContactDetails(): ObservableList<SupplierContactModel>
+                    + setContactDetails(ObservableList<SupplierContactModel>): void
+                    + contactDetailsProperty(): Object<ObservableList<SupplierContactModel>>
+                    + getPrimaryContact(): SupplierContactModel
+                    + primaryContactProperty(): ObjectProperty<SupplierContactModel>
+                    + getId(): int
+                    + idProperty(): ReadOnlyIntegerProperty
+                }
+            }
+
+            namespace user {
+
+
+
+                namespace permissions {
+
+                }
+
+                abstract class UserModel {
+                    - userID: String
+                    - createdTime: Date
+                    - email: StringProperty
+                    - firstName: StringProperty
+                    - lastName: StringProperty
+                    - mobile: StringProperty
+                    - password: StringProperty
+                    - permissions: StringProperty
+                    --
+                    + UserModel()
+                    + UserModel(int, Date, String, String, String, String, String, String)
+                    + UserModel(AUserModel)
+
+                }
+
+                class EmployeeModel {
+
+                }
+
+                class AdminModel {
+
+                }
+
+            }
+
+            class AddressModel {
+
+            }
+
+            class ApplicationModel {
+                    + EmployeeModel: currentEmployee
+                    --
+                    - getCurrentAdmin()
+                    - currentAdminProperty()
+                    - getCurrentEmployee()
+                    setCurrentEmployee()
+                    currentEmployeeProperty()
+                }
+
+        }
+
+        namespace view {
+
+        }
+
+        class Util {
+
+        }
+
+    }
+    class Main {
+        - logger: Logger {static}
+        - model: ApplicationModel
+        --
+        + main(String[]): void {static}
+        - newController(Class<?>): Object
+        + start(Stage): void
+    }
+}
+
 abstract class AViewController
 abstract class AChildMainViewController
 class CatalogueViewController
@@ -29,137 +729,7 @@ EmployeeModel <|-- AdminModel
 Main --* com.app.main.model.ApplicationModel
 Main --* com.app.main.controller.MainFrameViewController
 
-class Main {
-    - logger: Logger {static}
-    - model: ApplicationModel
-    --
-    + main(String[]): void {static}
-    - newController(Class<?>): Object
-    + start(Stage): void
-}
-
-namespace com.app.main.model {
-    class ApplicationModel {
-        + EmployeeModel: currentEmployee
-        --
-        - getCurrentAdmin()
-        - currentAdminProperty()
-        - getCurrentEmployee()
-        setCurrentEmployee()
-        currentEmployeeProperty()
-    }
-
-    abstract class UserModel {
-        - userID: String
-        - createdTime: Date
-        - email: StringProperty
-        - firstName: StringProperty
-        - lastName: StringProperty
-        - mobile: StringProperty
-        - password: StringProperty
-        - permissions: StringProperty
-        --
-        + UserModel()
-        + UserModel(int, Date, String, String, String, String, String, String)
-        + UserModel(AUserModel)
-
-    }
-
-    class EmployeeModel {
-
-    }
-
-    class AdminModel {
-
-    }
-
-    class CatalogueModel {
-        - itemID: String
-        - itemName: StringProperty
-        - modelType: StringProperty
-        - subjectArea: StringProperty
-        - retailPrice: StringProperty
-        - dateFirstStocked: StringProperty
-        - storeStock: MapProperty<ShopModel, Integer>;
-        - description: StringProperty;
-        - supplierItems: MapProperty<SupplierModel, BigInteger>
-        + CatalogueModel()
-        + CatalogueModel(String, String, String, String, String, MapProperty<ShopModel, Integer>, String, MapProperty<SupplierModel, BigInteger>)
-        + CatalogueModel(CatalogueModel)
-        + getItemID(): String
-        + setItemID(String): void
-        + getItemName(): String
-        + setItemName(String): void
-        + itemNameProperty(): StringProperty
-        + getModelType(): String
-        + setModelType(String): void
-        + modelTypeProperty(): StringProperty
-        + getSubjectArea(): String
-        + setSubjectArea(String): void
-        + subjectAreaProperty(): StringProperty
-        + geRetailPrice(): String
-        + setRetailPrice(String): void
-        + retailPriceProperty(): StringProperty
-        + getDateFirstStocked(): String
-        + setDateFirstStocked(String): void
-        + dateFirstStockedProperty():
-        + getStoreStock(): MapProperty<ShopModel, Integer>
-        + setStoreStock(ShopModel shop, Integer quantity): void
-        + getDescription(): String
-        + setDescription(String): void
-        + descriptionProperty(): StringProperty
-        + getSupplierItems():  MapProperty<SupplierModel, BigInteger>
-        + setSupplierItems(SupplierModel supplier, BigInteger price): void
-    }
-
-    class CustomerModel {
-        - customerID: String
-        - createdTime: Date
-        - email: StringProperty
-        - firstName: StringProperty
-        - lastName: StringProperty
-        - address: AddressModel
-        - creditLine: StringProperty
-        - subjectAreas: ObjectProperty<ObservableList<SubjectListCellModel>>
-        - modelTypes: ObjectProperty<ObservableList<SalesModel>>
-        + CustomerModel()
-        + CustomerModel(String, Date, String, String, String, String, String, String, String, String, String, ObjectProperty<ObservableList<SubjectListCellModel>>, ArrayList<String>)
-        + CustomerModel(CustomerModel)
-        + getCustomerID: String
-        + setCustomerID: void
-        + getCreatedTime: Date
-        + getEmail: String
-        + setEmail: void
-        + emailProperty: StringProperty
-        + getFirstName: String
-        + setFirstName: void
-        + firstNameProperty: StringProperty
-        + getLastName: String
-        + setLastName: void
-        + lastNameProperty: StringProperty
-        + getAddress: AddressModel
-        + getCreditLine: String
-        + setCreditLine: void
-        + creditLineProperty: StringProperty
-        + getClubMember: String
-        + setClubMember: void
-        + clubMemberProperty: StringProperty
-    }
-
-    class SalesModel {
-
-    }
-
-    class ShopModel {
-
-    }
-
-    class SupplierModel {
-
-    }
-
-    class AddressModel
-}
+com.app.main.controller.AViewController --* com.app.database.dao.user.UserDAO
 
 
 @enduml

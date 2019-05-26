@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -21,10 +22,24 @@ import org.jetbrains.annotations.NotNull;
 
 public class ManageEmployeesViewController extends AChildEmployeeEditorActionViewController {
     public JFXDrawer toolDrawer;
-    public ScrollPane addMenu;
-    public ScrollPane filterMenu;
-    public ScrollPane searchMenu;
 
+    /* Add Menu */
+    public ScrollPane addMenu;
+    public TextField addDisplayName;
+    public TextField addFirstName;
+    public TextField addContact;
+    public TextField addStore;
+    public ChoiceBox<String> addPosition;
+    public JFXToggleButton addPermItemAdd;
+    public JFXToggleButton addPermItemModify;
+    public JFXToggleButton addPermSaleView;
+    public JFXToggleButton addPermSaleAdd;
+    public JFXToggleButton addPermSaleModify;
+    public JFXToggleButton addPermCustomerView;
+    public JFXToggleButton addPermCustomerAdd;
+    public JFXToggleButton addPermCustomerModify;
+    public JFXToggleButton addPermSupplierManage;
+    public JFXToggleButton addPermEmployeeManage;
     /* Edit Menu */
     public TableView<EmployeeTable> employeeTableView;
     public ScrollPane editMenu;
@@ -44,6 +59,8 @@ public class ManageEmployeesViewController extends AChildEmployeeEditorActionVie
     public JFXToggleButton editPermCustomerModify;
     public JFXToggleButton editPermSupplierManage;
     public JFXToggleButton editPermEmployeeManage;
+    private ObjectProperty<EmployeeTable> addEmployee;
+    private boolean addEmployeeNew = false;
     private ObjectProperty<EmployeeTable> editEmployee;
     private boolean editEmployeeNew = false;
 
@@ -92,6 +109,49 @@ public class ManageEmployeesViewController extends AChildEmployeeEditorActionVie
                 editPermSupplierManage.selectedProperty().bindBidirectional(newValue.manageSupplierProperty());
                 editPermEmployeeManage.selectedProperty().bindBidirectional(newValue.manageEmployeeProperty());
                 editEmployeeNew = true;
+            }
+        });
+
+        addEmployee = new SimpleObjectProperty<>(null);
+        addEmployee.addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null) {
+                addDisplayName.textProperty().unbindBidirectional(oldValue.displayNameProperty());
+                addFirstName.textProperty().unbindBidirectional(oldValue.firstNameProperty());
+                addContact.textProperty().unbindBidirectional(oldValue.contactProperty());
+                addStore.textProperty().unbindBidirectional(oldValue.storeProperty());
+                addPosition.valueProperty().unbindBidirectional(oldValue.storeProperty());
+
+                addPermItemAdd.selectedProperty().unbindBidirectional(oldValue.createItemProperty());
+                addPermItemModify.selectedProperty().unbindBidirectional(oldValue.modifyItemProperty());
+                addPermSaleView.selectedProperty().unbindBidirectional(oldValue.viewSaleProperty());
+                addPermSaleAdd.selectedProperty().unbindBidirectional(oldValue.createSaleProperty());
+                addPermSaleModify.selectedProperty().unbindBidirectional(oldValue.modifySaleProperty());
+                addPermCustomerView.selectedProperty().unbindBidirectional(oldValue.viewCustomerProperty());
+                addPermCustomerAdd.selectedProperty().unbindBidirectional(oldValue.createCustomerProperty());
+                addPermCustomerModify.selectedProperty().unbindBidirectional(oldValue.modifyCustomerProperty());
+                addPermSupplierManage.selectedProperty().unbindBidirectional(oldValue.manageSupplierProperty());
+                addPermEmployeeManage.selectedProperty().unbindBidirectional(oldValue.manageEmployeeProperty());
+                addEmployeeNew = false;
+            }
+
+            if (newValue != null) {
+                addDisplayName.textProperty().bindBidirectional(newValue.displayNameProperty());
+                addFirstName.textProperty().bindBidirectional(newValue.firstNameProperty());
+                addContact.textProperty().bindBidirectional(newValue.contactProperty());
+                addStore.textProperty().bindBidirectional(newValue.storeProperty());
+                addPosition.valueProperty().bindBidirectional(newValue.positionProperty());
+
+                addPermItemAdd.selectedProperty().bindBidirectional(newValue.createItemProperty());
+                addPermItemModify.selectedProperty().bindBidirectional(newValue.modifyItemProperty());
+                addPermSaleView.selectedProperty().bindBidirectional(newValue.viewSaleProperty());
+                addPermSaleAdd.selectedProperty().bindBidirectional(newValue.createSaleProperty());
+                addPermSaleModify.selectedProperty().bindBidirectional(newValue.modifySaleProperty());
+                addPermCustomerView.selectedProperty().bindBidirectional(newValue.viewCustomerProperty());
+                addPermCustomerAdd.selectedProperty().bindBidirectional(newValue.createCustomerProperty());
+                addPermCustomerModify.selectedProperty().bindBidirectional(newValue.modifyCustomerProperty());
+                addPermSupplierManage.selectedProperty().bindBidirectional(newValue.manageSupplierProperty());
+                addPermEmployeeManage.selectedProperty().bindBidirectional(newValue.manageEmployeeProperty());
+                addEmployeeNew = true;
             }
         });
 
@@ -197,6 +257,18 @@ public class ManageEmployeesViewController extends AChildEmployeeEditorActionVie
                     employee.setPermissions(EmployeePermissions.newStockAssistantPermissions());
             }
         });
+
+        addPosition.valueProperty().addListener((observable, oldValue, newValue) -> {
+            EmployeeTable employee = addEmployee.get();
+            if (employee != null && newValue != null && addEmployeeNew) {
+                if (newValue.equals("Manager"))
+                    employee.setPermissions(EmployeePermissions.newManagerPermissions());
+                if (newValue.equals("Sales Assistant"))
+                    employee.setPermissions(EmployeePermissions.newSalesAssitantPermissions());
+                if (newValue.equals("Stock Assistant"))
+                    employee.setPermissions(EmployeePermissions.newStockAssistantPermissions());
+            }
+        });
     }
 
     private void activateView(@NotNull ScrollPane view) {
@@ -244,6 +316,19 @@ public class ManageEmployeesViewController extends AChildEmployeeEditorActionVie
     @Override
     public void onAdd() {
         activateView(addMenu);
+        addEmployee.set(new EmployeeTable(0));
+    }
+
+    public void cancelAdd(ActionEvent event) {
+        addEmployee.set(new EmployeeTable(0));
+        toolDrawer.close();
+    }
+
+    public void confirmAdd(ActionEvent event) {
+        toolDrawer.close();
+        Database.INSTANCE.getUser().insertEmployeeTable(addEmployee.get());
+        addEmployee.set(null);
+        refreshTable();
     }
 }
 

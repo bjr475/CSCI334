@@ -61,6 +61,8 @@ public class UserDAO {
             "    position     = ?,\n" +
             "    permissions  = ?\n" +
             "WHERE id = ?;";
+    private static final String SQL_INSERT_EMPLOYEE_TABLE = "INSERT INTO EMPLOYEE (display_name, first_name, last_name, password, email, store, position, permissions)\n" +
+            "VALUES (?, ?, '', 'test', ?, 1, ?, ?);";
     private static final String SQL_GET_EMPLOYEE_NAME_IDS = "SELECT id, display_name, first_name\n" +
             "FROM EMPLOYEE;";
 
@@ -304,6 +306,22 @@ public class UserDAO {
             logger.error("Failed to load employee names", e);
         }
         return items;
+    }
+
+    public void insertEmployeeTable(EmployeeTable employee) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_INSERT_EMPLOYEE_TABLE)) {
+                statement.setString(1, employee.getDisplayName());
+                statement.setString(2, employee.getFirstName());
+                statement.setString(3, employee.getContact());
+                statement.setString(4, employee.getPosition());
+                EmployeePermissionsResult result = writeEmployeePermissions(employee.getPermissions());
+                statement.setBinaryStream(5, result.stream, result.length);
+                statement.executeUpdate();
+            }
+        } catch (IOException | SQLException e) {
+            logger.error("Failed to write permissions for employee: {}", employee.getEmployeeId(), e);
+        }
     }
 
     class EmployeePermissionsResult {

@@ -21,10 +21,9 @@ public class NewSaleConfirmViewController extends AChildSalesViewController {
         saleTotal = 0.0;
     }
 
-    @Override
-    public void setOwner(SalesViewController owner) {
-        super.setOwner(owner);
-        owner.buildItemsTable(itemsTable);
+
+    public void initialize() {
+        SalesUtil.buildItemsTable(itemsTable);
     }
 
     public void back() {
@@ -36,25 +35,7 @@ public class NewSaleConfirmViewController extends AChildSalesViewController {
     }
 
     public void setItems(ObservableList<SaleItemModel> saleItems) {
-        itemsTable.setItems(saleItems);
-        itemsTable.refresh();
-
-        double basePrice = 0.0;
-        double discountPrice = 0.0;
-        for (SaleItemModel item : saleItems) {
-            double modelPrice = Database.INSTANCE.getModel().getModel(item.getItem().getId()).getPrice() * item.getQuantity();
-            basePrice += modelPrice;
-            discountPrice += (modelPrice * (item.getDiscount() / 100.));
-        }
-        double totalBeforeGST = basePrice - discountPrice;
-        double gstPrice = totalBeforeGST * 0.15;
-        double totalPrice = totalBeforeGST + gstPrice;
-
-        subtotal.setText(Util.formatPrice(basePrice));
-        discount.setText(Util.formatPrice(discountPrice));
-        gst.setText(Util.formatPrice(gstPrice));
-        total.setText(Util.formatPrice(totalPrice));
-        saleTotal = totalPrice;
+        saleTotal = SalesUtil.loadSaleResult(saleItems, itemsTable, subtotal, discount, gst, total);
     }
 
     public double getSaleTotal() {

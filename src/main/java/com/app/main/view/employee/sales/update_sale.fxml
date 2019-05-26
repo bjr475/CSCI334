@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+          fx:controller="com.app.main.controller.employee.sales.UpdateSaleViewController"
+          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8" styleClass="default-background">
+    <Text GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0">View Sale</Text>
+    <TitledPane GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="1" text="Item List">
+        <TableView fx:id="itemsTable"/>
+    </TitledPane>
+    <VBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <HBox>
+            <Text>Transaction Date</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="date" textAlignment="right">transaction-date</Text>
+        </HBox>
+        <HBox>
+            <Text>Customer</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="customer" textAlignment="right">customer-name</Text>
+        </HBox>
+        <HBox>
+            <Text>Subtotal</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="subtotal" textAlignment="right">$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>Discount</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="discount" textAlignment="right">-$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>GST</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="gst" textAlignment="right">-$0.00</Text>
+        </HBox>
+        <HBox>
+            <Text>Total</Text>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Text fx:id="total" textAlignment="right">$0.00</Text>
+        </HBox>
+    </VBox>
+    <HBox spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="3">
+        <Pane HBox.hgrow="ALWAYS"/>
+        <JFXButton styleClass="action-button" onAction="#refund">Perform Refund</JFXButton>
+    </HBox>
+</GridPane>

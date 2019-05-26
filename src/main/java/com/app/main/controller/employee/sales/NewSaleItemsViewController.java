@@ -47,14 +47,9 @@ public class NewSaleItemsViewController extends AChildSalesViewController {
             itemsTable.refresh();
         });
     }
-
-    @Override
-    public void setOwner(SalesViewController owner) {
-        super.setOwner(owner);
-        owner.buildItemsTable(itemsTable);
-    }
-
+    
     public void initialize() {
+        SalesUtil.buildItemsTable(itemsTable);
         SearchableComboBoxUtil.setCatalogueIdModelConverter(itemSearch);
         SearchableComboBoxUtil.createSearchableComboBox(itemSearch, SearchableComboBoxUtil.CATALOGUE_COMPARATOR);
 

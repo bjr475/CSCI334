@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
            fx:controller="com.app.main.controller.employee.sales.SalesViewController">
     <JFXDrawer fx:id="toolDrawer" direction="RIGHT" VBox.vgrow="ALWAYS">
@@ -28,76 +33,15 @@
                 </ScrollPane>
 
                 <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <GridPane alignment="baseline_center" hgap="25" vgap="5">
-                        <padding>
-                            <Insets>
-                                <left>20</left>
-                                <bottom>20</bottom>
-                                <right>20</right>
-                                <top>20</top>
-                            </Insets>
-                        </padding>
-                        <Text GridPane.rowIndex="0">
-                            Edit Sale
-                        </Text>
-
-                        <TitledPane GridPane.rowIndex="1" GridPane.columnSpan="5"
-                                    text="Item List">
-                            <TableView fx:id="editItemTable">
-                                <columns>
-                                    <TableColumn prefWidth="200" text="Item No.">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="200" text="Item Name">
-                                    </TableColumn>
-                                    <TableColumn prefWidth="100" text="Quantity">
-                                    </TableColumn>
-                                </columns>
-                            </TableView>
-                            <HBox>
-                                <Pane HBox.hgrow="ALWAYS"/>
-                                <JFXButton styleClass="action-button">
-                                    Edit Sale Items
-                                </JFXButton>
-                            </HBox>
-                        </TitledPane>
-
-                        <VBox HBox.hgrow="ALWAYS" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                              GridPane.columnSpan="5">
-                            <Label>Customer ID</Label>
-                            <TextField fx:id="editCustomerID"/>
-                        </VBox>
-
-                        <VBox HBox.hgrow="ALWAYS" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                            <CheckBox fx:id="viewOtherDiscount" text="Other Discount"/>
-                            <TextField fx:id="viewOtherDiscountAmount"/>
-                        </VBox>
-
-
-                        <VBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                            <Text textAlignment="left">Subtotal</Text>
-                            <Text textAlignment="left">Discount</Text>
-                            <Text textAlignment="left">GST</Text>
-                            <Text textAlignment="left">Total</Text>
-                        </VBox>
-
-                        <VBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="3" GridPane.rowIndex="4"
-                              GridPane.columnSpan="2">
-                            <Text fx:id="viewSubtotal" textAlignment="right">$0.00</Text>
-                            <Text fx:id="viewDiscount" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="viewGST" textAlignment="right">-$0.00</Text>
-                            <Text fx:id="viewTotal" textAlignment="right">$0.00</Text>
-                        </VBox>
-
-                        <HBox HBox.hgrow="ALWAYS" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="6"
-                              GridPane.columnSpan="5" alignment="center_right">
-                            <JFXButton styleClass="secondary-button" onAction="#onCancelEdit">
-                                Cancel
-                            </JFXButton>
-                            <JFXButton styleClass="action-button" onAction="#onEdit">
-                                Edit
-                            </JFXButton>
-                        </HBox>
-                    </GridPane>
+                    <padding>
+                        <Insets>
+                            <top>8</top>
+                            <bottom>8</bottom>
+                            <left>8</left>
+                            <right>8</right>
+                        </Insets>
+                    </padding>
+                    <fx:include styleClass="default-background" source="update_sale.fxml" fx:id="updateSale"/>
                 </ScrollPane>
 
                 <ScrollPane styleClass="default-background" fx:id="searchMenu">

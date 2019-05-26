@@ -14,17 +14,13 @@ import com.jfoenix.controls.JFXDrawer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -38,14 +34,7 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
 
     /*       Edit menu        */
     public ScrollPane editMenu;
-    public TableView editItemTable;
-    public TextField editCustomerID;
-    public CheckBox viewOtherDiscount;
-    public TextField viewOtherDiscountAmount;
-    public Text viewSubtotal;
-    public Text viewDiscount;
-    public Text viewGST;
-    public Text viewTotal;
+    public UpdateSaleViewController updateSaleController;
 
     /*       Add menu         */
     public ScrollPane addMenu;
@@ -75,43 +64,14 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     protected void setAdminEditable() {
     }
 
-    private void buildSalesTable() {
-        TableColumn<SaleModel, Number> saleNoColumn = new TableColumn<>("Sale No.");
-        saleNoColumn.setCellValueFactory(param -> param.getValue().idProperty());
-        saleNoColumn.setCellFactory(Util::getIdCell);
-        saleNoColumn.setPrefWidth(200);
-        sales.getColumns().add(saleNoColumn);
-        TableColumn<SaleModel, Number> customerNoColumn = new TableColumn<>("Customer No.");
-        customerNoColumn.setCellValueFactory(param -> param.getValue().customerProperty().get().idProperty());
-        customerNoColumn.setCellFactory(Util::getIdCell);
-        customerNoColumn.setPrefWidth(200);
-        sales.getColumns().add(customerNoColumn);
-        TableColumn<SaleModel, Boolean> customerClubColumn = new TableColumn<>("Club Member");
-        customerClubColumn.setCellValueFactory(param -> param.getValue().customerProperty().get().clubMemberProperty());
-        customerClubColumn.setPrefWidth(200);
-        sales.getColumns().add(customerClubColumn);
-        TableColumn<SaleModel, Number> totalColumn = new TableColumn<>("Total");
-        totalColumn.setCellValueFactory(param -> param.getValue().totalProperty());
-        totalColumn.setCellFactory(Util::getPriceCell);
-        totalColumn.setPrefWidth(200);
-        sales.getColumns().add(totalColumn);
-
-        sales.setRowFactory(param -> {
-            TableRow<SaleModel> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2) openEdit(row.getItem());
-            });
-            return row;
-        });
-    }
-
     @FXML
     public void initialize() {
-        buildSalesTable();
+        SalesUtil.buildSalesTable(sales, this::openEdit);
         toolDrawer.setDefaultDrawerSize(600);
         saleItemController.setOwner(this);
         saleConfirmController.setOwner(this);
         saleCustomerController.setOwner(this);
+        updateSaleController.setOwner(this);
 
         nextSalePage(saleItem);
     }
@@ -133,6 +93,7 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
 
     private void openEdit(SaleModel item) {
         if (item != null) {
+            updateSaleController.setSale(item);
             activateView(editMenu);
         }
     }
@@ -140,17 +101,6 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
     @Override
     public void onEdit() {
         openEdit(sales.getSelectionModel().getSelectedItem());
-    }
-
-    public void onCancelEdit() {
-        editMenu.setVvalue(0);
-        AUserModel currentUser = getModel().getCurrentUser();
-        if (currentUser != null && currentUser.getUserType() == AUserModel.UserType.EMPLOYEE) {
-            EmployeeModel employeeModel = (EmployeeModel) currentUser;
-            EmployeePermissions permissions = employeeModel.getPermissions();
-            if (!permissions.isModifySale()) return;
-        }
-        toolDrawer.close();
     }
 
     @Override
@@ -223,28 +173,6 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         saleItemController.clearItems();
         toolDrawer.close();
         nextSalePage(saleItem);
-    }
-
-    void buildItemsTable(@NotNull TableView<SaleItemModel> itemsTable) {
-        TableColumn<SaleItemModel, Number> numberColumn = new TableColumn<>("Item No.");
-        numberColumn.setCellValueFactory(param -> param.getValue().getItem().idProperty());
-        numberColumn.setCellFactory(param -> new TableCell<>() {
-            @Override
-            protected void updateItem(Number item, boolean empty) {
-                if (!empty && item != null) setGraphic(new Label(Util.formatId(item)));
-                else super.updateItem(item, empty);
-            }
-        });
-        itemsTable.getColumns().add(numberColumn);
-        TableColumn<SaleItemModel, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(param -> param.getValue().getItem().nameProperty());
-        itemsTable.getColumns().add(nameColumn);
-        TableColumn<SaleItemModel, Number> quantityColumn = new TableColumn<>("Quantity");
-        quantityColumn.setCellValueFactory(param -> param.getValue().quantityProperty());
-        itemsTable.getColumns().add(quantityColumn);
-        TableColumn<SaleItemModel, Number> discountColumn = new TableColumn<>("Discount");
-        discountColumn.setCellValueFactory(param -> param.getValue().discountProperty());
-        itemsTable.getColumns().add(discountColumn);
     }
 
     @Override

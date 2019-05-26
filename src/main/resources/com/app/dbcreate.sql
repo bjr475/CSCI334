@@ -63,7 +63,10 @@ CREATE TABLE SALE
     customer    INTEGER        NOT NULL REFERENCES CUSTOMER (id),
     employee    INTEGER        NOT NULL REFERENCES EMPLOYEE (id),
     final_price REAL,
-    date        DATETIME                                          DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime'))
+    date        DATETIME                                          DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')),
+    refunded    INTEGER        NOT NULL                           DEFAULT 0,
+
+    CHECK ( refunded IN (0, 1) )
 );
 
 DROP TABLE IF EXISTS SALE_ITEM;

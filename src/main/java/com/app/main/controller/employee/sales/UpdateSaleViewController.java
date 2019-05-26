@@ -4,7 +4,7 @@ import com.app.main.Util;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.sales.SaleItemModel;
 import com.app.main.model.sales.SaleModel;
-import javafx.event.ActionEvent;
+import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +17,7 @@ public class UpdateSaleViewController extends AChildSalesViewController {
     public Text discount;
     public Text gst;
     public Text total;
+    public JFXButton refundBtn;
 
     public UpdateSaleViewController(ApplicationModel model) {
         super(model);
@@ -31,9 +32,10 @@ public class UpdateSaleViewController extends AChildSalesViewController {
         customer.setText(String.format("%s %s", model.getCustomer().getFirstName(), model.getCustomer().getLastName()));
 
         SalesUtil.loadSaleResult(model.getItems(), itemsTable, subtotal, discount, gst, total);
+        refundBtn.setDisable(model.isRefunded());
     }
 
-    public void refund(ActionEvent event) {
-
+    public void refund() {
+        getOwner().refundSale();
     }
 }

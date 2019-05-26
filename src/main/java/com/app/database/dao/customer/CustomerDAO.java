@@ -1,7 +1,7 @@
 package com.app.database.dao.customer;
 
 import com.app.database.Database;
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;

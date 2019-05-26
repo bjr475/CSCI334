@@ -2,6 +2,7 @@ package com.app.main.controller.employee;
 
 import com.app.main.Util;
 import com.app.main.controller.AChildMainViewController;
+import com.app.main.controller.employee.catalogue.CatalogueViewController;
 import com.app.main.controller.employee.manager.ManageEmployeesViewController;
 import com.app.main.controller.employee.manager.ManageStoresViewController;
 import com.app.main.controller.employee.sales.SalesViewController;

@@ -152,7 +152,7 @@
             <content>
                 <StackPane VBox.vgrow="ALWAYS">
                     <VBox fx:id="cataloguePane" styleClass="default-background">
-                        <fx:include source="catalogue.fxml" fx:id="catalogue" VBox.vgrow="ALWAYS"/>
+                        <fx:include source="catalogue/catalogue.fxml" fx:id="catalogue" VBox.vgrow="ALWAYS"/>
                     </VBox>
                     <VBox fx:id="customersPane" styleClass="default-background">
                         <fx:include source="customers.fxml" fx:id="customers" VBox.vgrow="ALWAYS"/>

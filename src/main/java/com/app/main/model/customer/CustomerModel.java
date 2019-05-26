@@ -1,5 +1,6 @@
-package com.app.main.model;
+package com.app.main.model.customer;
 
+import com.app.main.model.AddressModel;
 import com.app.main.model.sales.SaleModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

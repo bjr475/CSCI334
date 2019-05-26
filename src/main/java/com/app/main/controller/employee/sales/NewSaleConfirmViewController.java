@@ -1,7 +1,5 @@
 package com.app.main.controller.employee.sales;
 
-import com.app.database.Database;
-import com.app.main.Util;
 import com.app.main.model.ApplicationModel;
 import com.app.main.model.sales.SaleItemModel;
 import javafx.collections.ObservableList;

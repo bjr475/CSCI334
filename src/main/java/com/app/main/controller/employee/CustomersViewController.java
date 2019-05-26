@@ -4,7 +4,7 @@ import com.app.database.Database;
 import com.app.main.Util;
 import com.app.main.controller.AddressViewController;
 import com.app.main.model.ApplicationModel;
-import com.app.main.model.CustomerModel;
+import com.app.main.model.customer.CustomerModel;
 import com.app.main.model.user.AUserModel;
 import com.app.main.model.user.EmployeeModel;
 import com.app.main.model.user.permissions.EmployeePermissions;

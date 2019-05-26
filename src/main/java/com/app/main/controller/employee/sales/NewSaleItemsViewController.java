@@ -92,8 +92,13 @@ public class NewSaleItemsViewController extends AChildSalesViewController {
         return items;
     }
 
-    public CustomerModel getSelectedCustomer() {
-        return SearchableComboBoxUtil.getComboBoxValue(customerSearch);
+    void clearItems() {
+        items.clear();
+        itemsTable.setItems(items);
+        itemsTable.refresh();
     }
 
+    CustomerModel getSelectedCustomer() {
+        return SearchableComboBoxUtil.getComboBoxValue(customerSearch);
+    }
 }

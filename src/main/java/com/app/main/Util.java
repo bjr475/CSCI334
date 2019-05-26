@@ -9,6 +9,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,6 +87,8 @@ public class Util {
         return null;
     }
 
+    @NotNull
+    @Contract("_ -> new")
     public static <S> TableCell<S, Number> getIdCell(TableColumn<S, Number> param) {
         return new TableCell<>() {
             @Override
@@ -99,6 +102,8 @@ public class Util {
         };
     }
 
+    @NotNull
+    @Contract("_ -> new")
     public static <S> TableCell<S, Number> getPriceCell(TableColumn<S, Number> param) {
         return new TableCell<>() {
             @Override

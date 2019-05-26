@@ -293,13 +293,7 @@ public class SuppliersViewController extends AChildEmployeeEditorActionViewContr
     private void buildSupplierItems(@NotNull TableView<SupplierCatalogueItemModel> catalogueView) {
         TableColumn<SupplierCatalogueItemModel, Number> itemNumber = new TableColumn<>("Item No.");
         itemNumber.setCellValueFactory(param -> param.getValue().getCatalogueItem().itemIdProperty());
-        itemNumber.setCellFactory(param -> new TableCell<>() {
-            @Override
-            protected void updateItem(Number item, boolean empty) {
-                if (!empty && item != null) setGraphic(new Label(Util.formatId(item)));
-                else super.updateItem(item, empty);
-            }
-        });
+        itemNumber.setCellFactory(Util::getIdCell);
         catalogueView.getColumns().add(itemNumber);
         TableColumn<SupplierCatalogueItemModel, String> itemName = new TableColumn<>("Name");
         itemName.setCellValueFactory(param -> param.getValue().getCatalogueItem().nameProperty());

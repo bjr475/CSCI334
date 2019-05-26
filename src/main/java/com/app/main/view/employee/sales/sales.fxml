@@ -11,15 +11,15 @@
         <sidePane>
             <StackPane>
                 <ScrollPane fx:id="addMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
-                    <padding>
-                        <Insets>
-                            <top>8</top>
-                            <bottom>8</bottom>
-                            <left>8</left>
-                            <right>8</right>
-                        </Insets>
-                    </padding>
                     <StackPane>
+                        <padding>
+                            <Insets>
+                                <top>8</top>
+                                <bottom>8</bottom>
+                                <left>8</left>
+                                <right>8</right>
+                            </Insets>
+                        </padding>
                         <fx:include styleClass="default-background" source="new_sale_items.fxml" fx:id="saleItem"/>
                         <fx:include styleClass="default-background" source="new_sale_customer.fxml"
                                     fx:id="saleCustomer"/>
@@ -27,7 +27,7 @@
                     </StackPane>
                 </ScrollPane>
 
-                <ScrollPane styleClass="default-background" fx:id="editMenu" minWidth="540">
+                <ScrollPane fx:id="editMenu" styleClass="default-background" HBox.hgrow="ALWAYS" fitToWidth="true">
                     <GridPane alignment="baseline_center" hgap="25" vgap="5">
                         <padding>
                             <Insets>

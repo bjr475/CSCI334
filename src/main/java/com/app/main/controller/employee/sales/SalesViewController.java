@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -94,6 +95,14 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         totalColumn.setCellFactory(Util::getPriceCell);
         totalColumn.setPrefWidth(200);
         sales.getColumns().add(totalColumn);
+
+        sales.setRowFactory(param -> {
+            TableRow<SaleModel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) openEdit(row.getItem());
+            });
+            return row;
+        });
     }
 
     @FXML
@@ -122,9 +131,15 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
         return true;
     }
 
+    private void openEdit(SaleModel item) {
+        if (item != null) {
+            activateView(editMenu);
+        }
+    }
+
     @Override
     public void onEdit() {
-        activateView(editMenu);
+        openEdit(sales.getSelectionModel().getSelectedItem());
     }
 
     public void onCancelEdit() {
@@ -205,6 +220,7 @@ public class SalesViewController extends AChildEmployeeEditorActionViewControlle
             Database.INSTANCE.getSales().insertSale(customerId, getModel().getCurrentUser().getId(), finalPrice, saleItems);
             refreshSalesTable();
         }
+        saleItemController.clearItems();
         toolDrawer.close();
         nextSalePage(saleItem);
     }

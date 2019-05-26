@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import java.lang.Integer?>
+<GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+          fx:controller="com.app.main.controller.employee.sales.NewSaleItemsViewController"
+          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" vgap="8" hgap="8">
+    <Text GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.columnIndex="0">Add a Sale</Text>
+    <TitledPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Item List">
+        <TableView fx:id="itemsTable"/>
+    </TitledPane>
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.columnIndex="0">
+        <VBox HBox.hgrow="ALWAYS">
+            <Label>Item ID</Label>
+            <ComboBox editable="true" fx:id="itemSearch"/>
+        </VBox>
+        <VBox HBox.hgrow="ALWAYS">
+            <Label>Quantity</Label>
+            <Spinner fx:id="itemQuantity" editable="true">
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory>
+                        <min>1</min>
+                        <max>
+                            <Integer fx:constant="MAX_VALUE"/>
+                        </max>
+                    </SpinnerValueFactory.IntegerSpinnerValueFactory>
+                </valueFactory>
+            </Spinner>
+        </VBox>
+        <VBox HBox.hgrow="ALWAYS">
+            <Label>Discount</Label>
+            <Spinner fx:id="itemDiscount">
+                <valueFactory>
+                    <SpinnerValueFactory.DoubleSpinnerValueFactory>
+                        <min>0.0</min>
+                        <max>100.0</max>
+                        <amountToStepBy>1.0</amountToStepBy>
+                    </SpinnerValueFactory.DoubleSpinnerValueFactory>
+                </valueFactory>
+            </Spinner>
+        </VBox>
+        <VBox>
+            <Label/>
+            <JFXButton buttonType="FLAT" onAction="#addItem">
+                <graphic>
+                    <FontIcon iconLiteral="fa-plus" iconSize="20"/>
+                </graphic>
+            </JFXButton>
+        </VBox>
+    </HBox>
+    <Label GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.columnIndex="0">
+        Customer Search
+    </Label>
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.columnIndex="0" spacing="20">
+        <ComboBox fx:id="customerSearch" promptText="Search by ID or Display Name" editable="true"/>
+    </HBox>
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.columnIndex="0" spacing="20">
+        <Pane HBox.hgrow="ALWAYS"/>
+        <JFXButton onAction="#cancel" styleClass="secondary-button">
+            Cancel
+        </JFXButton>
+        <JFXButton onAction="#next" styleClass="action-button">
+            Next
+        </JFXButton>
+    </HBox>
+</GridPane>

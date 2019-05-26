@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class ModelDAO {
     private static final Logger logger = LogManager.getLogger(ModelDAO.class.getName());
+
     private static final String SQL_GET_MODELS = "SELECT M.id            AS id,\n" +
             "       M.name          AS name,\n" +
             "       M.type          AS type,\n" +
@@ -50,7 +51,10 @@ public class ModelDAO {
     private static final String SQL_SAVE_MODEL = "INSERT INTO MODEL (name, type, price, subject, description)\n" +
             "VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_GET_MODEL = SQL_GET_MODELS + "\nWHERE M.id = ?;";
-    private static final String SQL_GET_ID_NAME_MODEL = "SELECT id, name FROM MODEL;";
+    private static final String SQL_GET_ID_NAME_MODELS = "SELECT M.id   AS id,\n" +
+            "       M.name AS name\n" +
+            "FROM MODEL M";
+    private static final String SQL_GET_ID_NAME_MODEL = SQL_GET_ID_NAME_MODELS + "\nWHERE M.id = ?";
     private final Database database;
 
     @Contract(pure = true)
@@ -132,10 +136,26 @@ public class ModelDAO {
         return null;
     }
 
+    public CatalogueItemIdNameModel getIdNameModel(int model_id) {
+        try (Connection connection = database.openConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_ID_NAME_MODEL)) {
+                statement.setInt(1, model_id);
+                ResultSet result = statement.executeQuery();
+                return new CatalogueItemIdNameModel(
+                        result.getInt("id"),
+                        result.getString("name")
+                );
+            }
+        } catch (SQLException e) {
+            logger.error("Failed to load model with id: {}", model_id, e);
+        }
+        return null;
+    }
+
     public ArrayList<CatalogueItemIdNameModel> getIdNameModels() {
         ArrayList<CatalogueItemIdNameModel> models = new ArrayList<>();
         try (Connection connection = database.openConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_ID_NAME_MODEL)) {
+            try (PreparedStatement statement = connection.prepareStatement(SQL_GET_ID_NAME_MODELS)) {
                 ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     models.add(new CatalogueItemIdNameModel(

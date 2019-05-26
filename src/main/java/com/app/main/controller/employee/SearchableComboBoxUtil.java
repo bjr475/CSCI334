@@ -1,5 +1,6 @@
 package com.app.main.controller.employee;
 
+import com.app.main.model.CustomerModel;
 import com.app.main.model.catalogue.CatalogueItemIdNameModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,13 +24,19 @@ public class SearchableComboBoxUtil {
             return false;
         }
     };
+    public static final SearchableComboBoxUtilComparator<CustomerModel> CUSTOMER_COMPARATOR = (input, object) -> {
+        if (input.contains(object.toString())) return true;
+        try {
+            return input.contains(Integer.toString(object.getId()));
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
 
     public static <T> void createSearchableComboBox(@NotNull ComboBox<T> box, SearchableComboBoxUtilComparator<T> comparator) {
         ObservableList<T> data = box.getItems();
         box.getEditor().focusedProperty().addListener(observable -> {
-            if (box.getSelectionModel().getSelectedIndex() < 0) {
-                box.getEditor().setText(null);
-            }
+            if (box.getSelectionModel().getSelectedIndex() < 0) box.getEditor().setText(null);
         });
         box.addEventHandler(KeyEvent.KEY_PRESSED, t -> box.hide());
         box.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<>() {
@@ -87,7 +94,8 @@ public class SearchableComboBoxUtil {
                     }
                 }
                 String t = boxNotNull() ? "" : box.getEditor().getText();
-                box.setItems(list);
+                if (list.size() == 0) box.setItems(data);
+                else box.setItems(list);
                 box.getEditor().setText(t);
                 if (!moveCaretToPos) caretPos = -1;
                 moveCaret(t.length());
@@ -110,6 +118,7 @@ public class SearchableComboBoxUtil {
                     protected void updateItem(CatalogueItemIdNameModel item, boolean empty) {
                         if (!empty && item != null) {
                             setGraphic(new Label(item.toStringValue()));
+                            if (isSelected()) updateSelected(false);
                         } else {
                             super.updateItem(item, empty);
                         }
@@ -127,6 +136,40 @@ public class SearchableComboBoxUtil {
 
             @Override
             public CatalogueItemIdNameModel fromString(String string) {
+                return box.getItems().stream().filter(
+                        item -> item.toStringValue().equals(string)
+                ).findFirst().orElse(null);
+            }
+        });
+    }
+
+    public static void setCustomerModelConverter(@NotNull ComboBox<CustomerModel> box) {
+        box.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<CustomerModel> call(ListView<CustomerModel> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(CustomerModel item, boolean empty) {
+                        if (!empty && item != null) {
+                            setGraphic(new Label(item.toStringValue()));
+                            if (isSelected()) updateSelected(false);
+                        } else {
+                            super.updateItem(item, empty);
+                        }
+                    }
+                };
+            }
+        });
+
+        box.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(CustomerModel item) {
+                if (item == null) return null;
+                return item.toStringValue();
+            }
+
+            @Override
+            public CustomerModel fromString(String string) {
                 return box.getItems().stream().filter(
                         item -> item.toStringValue().equals(string)
                 ).findFirst().orElse(null);

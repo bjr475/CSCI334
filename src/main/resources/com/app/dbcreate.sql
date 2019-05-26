@@ -59,25 +59,20 @@ CREATE TABLE STORE
 DROP TABLE IF EXISTS SALE;
 CREATE TABLE SALE
 (
-    customer    INTEGER NOT NULL REFERENCES CUSTOMER (id),
-    employee    INTEGER NOT NULL REFERENCES EMPLOYEE (id),
-    discount    REAL     DEFAULT 0,
+    id          INTEGER UNIQUE NOT NULL PRIMARY KEY AUTOINCREMENT DEFAULT 0,
+    customer    INTEGER        NOT NULL REFERENCES CUSTOMER (id),
+    employee    INTEGER        NOT NULL REFERENCES EMPLOYEE (id),
     final_price REAL,
-    date        DATETIME DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime')),
-
-    CONSTRAINT PK_sale PRIMARY KEY (date, customer, employee)
+    date        DATETIME                                          DEFAULT (datetime(CURRENT_TIMESTAMP, 'localtime'))
 );
 
 DROP TABLE IF EXISTS SALE_ITEM;
 CREATE TABLE SALE_ITEM
 (
-    sale_date DATETIME NOT NULL REFERENCES SALE (date),
-    customer  INTEGER  NOT NULL REFERENCES SALE (customer),
-    employee  INTEGER  NOT NULL REFERENCES SALE (employee),
-    model     TEXT     NOT NULL REFERENCES MODEL (id),
-    quantity  INTEGER  NOT NULL DEFAULT 1,
-
-    CONSTRAINT PK_saleItem PRIMARY KEY (sale_date, customer, employee, model)
+    sale_id  INTEGER PRIMARY KEY NOT NULL REFERENCES SALE (id),
+    model_id INTEGER             NOT NULL REFERENCES MODEL (id),
+    quantity INTEGER             NOT NULL DEFAULT 1,
+    discount REAL                         DEFAULT 0
 );
 
 DROP TABLE IF EXISTS MODEL;
@@ -222,5 +217,8 @@ VALUES (4, 1, 20);
 INSERT INTO MODEL_SUPPLIER (model_id, supplier_id, price)
 VALUES (5, 1, 2);
 
-INSERT INTO SALE (customer, employee, discount, final_price)
-VALUES (1, 1, 0, 100);
+INSERT INTO SALE (customer, employee, final_price)
+VALUES (1, 1, 100);
+
+INSERT INTO SALE_ITEM (sale_id, model_id)
+VALUES (1, 1)

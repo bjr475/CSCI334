@@ -1,5 +1,6 @@
 package com.app.main.model;
 
+import com.app.main.model.sales.SaleModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,7 @@ public class CustomerModel {
     private BooleanProperty clubMember;
     private ObjectProperty<Date> createdTime;
     private ObjectProperty<AddressModel> address;
-    private ObjectProperty<ObservableList<SalesModel>> sales;
+    private ObjectProperty<ObservableList<SaleModel>> sales;
     private ObjectProperty<ObservableList<String>> modelTypes;
     private ObjectProperty<ObservableList<String>> subjectAreas;
 
@@ -47,7 +48,7 @@ public class CustomerModel {
         modelTypes = new SimpleObjectProperty<>(FXCollections.observableArrayList());
         subjectAreas = new SimpleObjectProperty<>(FXCollections.observableArrayList());
 
-        customer.sales.get().forEach(sale -> sales.get().add(new SalesModel(sale)));
+        customer.sales.get().forEach(sale -> sales.get().add(new SaleModel(sale)));
         customer.modelTypes.get().forEach(type -> modelTypes.get().add(type));
         customer.subjectAreas.get().forEach(subject -> subjectAreas.get().add(subject));
     }
@@ -158,15 +159,15 @@ public class CustomerModel {
         return address;
     }
 
-    public ObservableList<SalesModel> getSales() {
+    public ObservableList<SaleModel> getSales() {
         return sales.get();
     }
 
-    public void setSales(ObservableList<SalesModel> sales) {
+    public void setSales(ObservableList<SaleModel> sales) {
         this.sales.set(sales);
     }
 
-    public ObjectProperty<ObservableList<SalesModel>> salesProperty() {
+    public ObjectProperty<ObservableList<SaleModel>> salesProperty() {
         return sales;
     }
 
@@ -192,5 +193,9 @@ public class CustomerModel {
 
     public ObjectProperty<ObservableList<String>> subjectAreasProperty() {
         return subjectAreas;
+    }
+
+    public String toStringValue() {
+        return String.format("%d - %s %s", id.get(), firstName.get(), lastName.get());
     }
 }

@@ -291,7 +291,7 @@ namespace com.app {
 
                     ManageEmployeesViewController --|> AChildEmployeeEditorActionViewController
                     ManageStoresViewController --|> AChildEmployeeEditorActionViewController
-
+                    ManageStoresViewController --* AddressViewController
                 }
 
                 namespace sales {

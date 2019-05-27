@@ -289,6 +289,9 @@ namespace com.app {
                         + onAdd(): void
                     }
 
+                    ManageEmployeesViewController --|> AChildEmployeeEditorActionViewController
+                    ManageStoresViewController --|> AChildEmployeeEditorActionViewController
+
                 }
 
                 namespace sales {
@@ -347,13 +350,6 @@ namespace com.app {
 
                     }
 
-                    class SalesUtil {
-                        buildSalesTable(TableView<SaleModel>, SalesTableCallback): void
-                        buildItemsTable(TableView<SaleItemModel>): void
-                        loadSaleResult(ObservableList<SaleItemModel>, TableView<SaleItemModel>, Text, Text, Text, Text): double
-                        interface SalesTableCallback
-                    }
-
                     class SalesViewController {
                         - logger: Logger {static}
                         + toolDrawer: JFXDrawer
@@ -408,11 +404,16 @@ namespace com.app {
                         + setSale(): void
                         + refund(): void
                     }
+
+                    AChildSalesViewController --|> AViewController
                     AChildEmployeeEditorActionViewController --|> SalesViewController
                     AChildSalesViewController --|> UpdateSaleViewController
                     AChildSalesViewController --|> NewSaleConfirmViewController
                     AChildSalesViewController --|> NewSaleItemsViewController
                     AChildSalesViewController --|> NewSaleCustomerViewController
+                    SalesViewController  --* NewSaleItemsViewController
+                    SalesViewController  --* NewSaleCustomerViewController
+                    SalesViewController  --* NewSaleConfirmViewController
                 }
 
                 namespace search {
@@ -430,8 +431,6 @@ namespace com.app {
                         - buildSearchItems(): void
                         + search(): void
                         + performSearch(): void
-
-
                     }
                     SearchViewController --|> AChildEmployeeViewController
                 }
@@ -461,6 +460,9 @@ namespace com.app {
                     class SuppliersViewController {
 
                     }
+                    SupplierContactViewController --|> AViewController
+                    SupplierItemViewController --|> AViewController
+                    SuppliersViewController --|> AChildEmployeeEditorActionViewController
                 }
 
                 abstract class AChildEmployeeEditorActionViewController {
@@ -498,6 +500,11 @@ namespace com.app {
                 class SettingsViewController {
 
                 }
+                AChildEmployeeEditorActionViewController --|> AChildEmployeeViewController
+                AChildEmployeeViewController --|> AViewController
+                CustomersViewController --|> AChildEmployeeEditorActionViewController
+                EmployeeViewController --|> AChildMainViewController
+                SettingsViewController --|> AChildEmployeeViewController
             }
 
             namespace landing {
@@ -516,6 +523,10 @@ namespace com.app {
                 class LandingViewController {
 
                 }
+                AChildLandingViewController --|> AViewController
+                LandingForgotPasswordController --|> AChildLandingViewController
+                LandingLoginViewController --|> AChildLandingViewController
+                LandingViewController --|> AChildMainViewController
             }
 
             class AChildMainViewController {
@@ -533,6 +544,8 @@ namespace com.app {
             class MainFrameViewController {
 
             }
+            AChildMainViewController  --|> AViewController
+            MainFrameViewController --|> AViewController
         }
 
         namespace model {
@@ -584,10 +597,6 @@ namespace com.app {
             }
 
             namespace supplier {
-
-                class SupplierModel {
-
-                }
 
                 class SupplierCatalogueItemModel {
 
